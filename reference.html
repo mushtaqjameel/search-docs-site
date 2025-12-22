@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Reference | Search Platform Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .ref-table {
+            width: 100%;
+            font-size: 0.85rem;
+        }
+        .ref-table th {
+            padding: 10px 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        .ref-table td {
+            padding: 10px 12px;
+        }
+        .compact-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border: 2px solid var(--black);
+        }
+        .print-section {
+            page-break-inside: avoid;
+        }
+        @media print {
+            .no-print { display: none; }
+            .section { padding: 24px 0; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav no-print">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon"><i class="fas fa-magnifying-glass"></i></span>
+                <span>Search Platform</span>
+            </a>
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="sales.html" class="nav-link">Sales</a></li>
+                <li><a href="implementation.html" class="nav-link">Implementation</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="reference.html" class="nav-link active">Reference</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="hero" style="padding: 48px 0;">
+        <div class="container">
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <div>
+                    <h1>Quick Reference</h1>
+                    <p class="hero-subtitle mb-0">Cheat sheets and summaries at a glance</p>
+                </div>
+                <button class="btn btn-secondary no-print" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Features Matrix -->
+    <section class="section print-section">
+        <div class="container">
+            <h2 class="section-title mb-4"><i class="fas fa-clipboard-list"></i> Complete Feature Matrix</h2>
+            
+            <div class="table-container">
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Bucket</th>
+                            <th>Data</th>
+                            <th>Gov</th>
+                            <th>Safe</th>
+                            <th>Day 1?</th>
+                            <th>Typical Inv.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Core Search -->
+                        <tr style="background: rgba(0,204,204,0.1);">
+                            <td><strong>Auto Complete</strong></td>
+                            <td><i class="fas fa-magnifying-glass"></i> Core</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,204,204,0.1);">
+                            <td><strong>Faceted Search</strong></td>
+                            <td><i class="fas fa-magnifying-glass"></i> Core</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,204,204,0.1);">
+                            <td><strong>Visual Filters</strong></td>
+                            <td><i class="fas fa-magnifying-glass"></i> Core</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,204,204,0.1);">
+                            <td><strong>Part Number Normalization</strong></td>
+                            <td><i class="fas fa-magnifying-glass"></i> Core</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,204,204,0.1);">
+                            <td><strong>Voice Search</strong></td>
+                            <td><i class="fas fa-magnifying-glass"></i> Core</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--mvp); color: white;">MVP</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,204,204,0.1);">
+                            <td><strong>Universal Search</strong></td>
+                            <td><i class="fas fa-magnifying-glass"></i> Core</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,204,204,0.1);">
+                            <td><strong>Searchable Certifications</strong></td>
+                            <td><i class="fas fa-magnifying-glass"></i> Core</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        
+                        <!-- Smart Search -->
+                        <tr style="background: rgba(153,51,255,0.1);">
+                            <td><strong>Semantic Search</strong></td>
+                            <td><i class="fas fa-brain"></i> Smart</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(153,51,255,0.1);">
+                            <td><strong>Intelligent Synonyms</strong></td>
+                            <td><i class="fas fa-brain"></i> Smart</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(153,51,255,0.1);">
+                            <td><strong>Intelligent Auto Complete</strong></td>
+                            <td><i class="fas fa-brain"></i> Smart</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(153,51,255,0.1);">
+                            <td><strong>Hybrid Search / ML Ranking</strong></td>
+                            <td><i class="fas fa-brain"></i> Smart</td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--premium); color: white;">PRM</span></td>
+                        </tr>
+                        <tr style="background: rgba(153,51,255,0.1);">
+                            <td><strong>Multi-Layered Relevance</strong></td>
+                            <td><i class="fas fa-brain"></i> Smart</td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--premium); color: white;">PRM</span></td>
+                        </tr>
+                        <tr style="background: rgba(153,51,255,0.1);">
+                            <td><strong>Semantic Intent Router</strong></td>
+                            <td><i class="fas fa-brain"></i> Smart</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        
+                        <!-- Discovery -->
+                        <tr style="background: rgba(255,153,0,0.1);">
+                            <td><strong>Recommendation Engine</strong></td>
+                            <td><i class="fas fa-lightbulb"></i> Discovery</td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot red"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,153,0,0.1);">
+                            <td><strong>Related Searches</strong></td>
+                            <td><i class="fas fa-lightbulb"></i> Discovery</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,153,0,0.1);">
+                            <td><strong>Cross-Brand Equivalents</strong></td>
+                            <td><i class="fas fa-lightbulb"></i> Discovery</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,153,0,0.1);">
+                            <td><strong>Trending Search</strong></td>
+                            <td><i class="fas fa-lightbulb"></i> Discovery</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,153,0,0.1);">
+                            <td><strong>Custom Products (Kitting)</strong></td>
+                            <td><i class="fas fa-lightbulb"></i> Discovery</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,153,0,0.1);">
+                            <td><strong>Recent Search</strong></td>
+                            <td><i class="fas fa-lightbulb"></i> Discovery</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,153,0,0.1);">
+                            <td><strong>Recently Ordered</strong></td>
+                            <td><i class="fas fa-lightbulb"></i> Discovery</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        
+                        <!-- Merchandising -->
+                        <tr style="background: rgba(255,51,51,0.1);">
+                            <td><strong>Curations</strong></td>
+                            <td><i class="fas fa-bullseye"></i> Merch</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,51,51,0.1);">
+                            <td><strong>Configuration Management</strong></td>
+                            <td><i class="fas fa-bullseye"></i> Merch</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,51,51,0.1);">
+                            <td><strong>Query Behaviour Labeller</strong></td>
+                            <td><i class="fas fa-bullseye"></i> Merch</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,51,51,0.1);">
+                            <td><strong>Search Sandbox</strong></td>
+                            <td><i class="fas fa-bullseye"></i> Merch</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,51,51,0.1);">
+                            <td><strong>Search Dashboard</strong></td>
+                            <td><i class="fas fa-bullseye"></i> Merch</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,51,51,0.1);">
+                            <td><strong>AI Enrichment Dashboard</strong></td>
+                            <td><i class="fas fa-bullseye"></i> Merch</td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        
+                        <!-- Recovery -->
+                        <tr style="background: rgba(0,204,102,0.1);">
+                            <td><strong>Zero Results Recovery</strong></td>
+                            <td><i class="fas fa-shield"></i> Recovery</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,204,102,0.1);">
+                            <td><strong>Fallback Search</strong></td>
+                            <td><i class="fas fa-shield"></i> Recovery</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--standard);">STD</span></td>
+                        </tr>
+                        
+                        <!-- Analytics -->
+                        <tr style="background: rgba(0,102,255,0.1);">
+                            <td><strong>Analytics</strong></td>
+                            <td><i class="fas fa-chart-bar"></i> Analytics</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot green"></span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                        <tr style="background: rgba(0,102,255,0.1);">
+                            <td><strong>A/B Testing</strong></td>
+                            <td><i class="fas fa-chart-bar"></i> Analytics</td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><span class="pillar-dot yellow"></span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i></td>
+                            <td><span class="compact-badge" style="background: var(--polished); color: white;">POL</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="flex gap-3 mt-3" style="font-size: 0.85rem;">
+                <span><span class="pillar-dot green"></span> Green = Easy</span>
+                <span><span class="pillar-dot yellow"></span> Yellow = Moderate</span>
+                <span><span class="pillar-dot red"></span> Red = Complex</span>
+                <span class="ml-3"><i class="fas fa-check" style="color: var(--success);"></i> Day 1 | <i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i> Conditional | <i class="fas fa-xmark" style="color: var(--danger);"></i> Needs Data</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Reference Cards -->
+    <section class="section section-alt print-section">
+        <div class="container">
+            <div class="grid grid-3">
+                
+                <!-- Buckets Summary -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-box"></i> The 6 Buckets</h3>
+                    <div class="mb-2" style="padding: 8px; background: var(--bucket-core);">
+                        <strong><i class="fas fa-magnifying-glass"></i> Core Search</strong> — 7 features<br>
+                        <small>Findability fundamentals</small>
+                    </div>
+                    <div class="mb-2" style="padding: 8px; background: var(--bucket-smart); color: white;">
+                        <strong><i class="fas fa-brain"></i> Smart Search</strong> — 6 features<br>
+                        <small>AI understanding & ranking</small>
+                    </div>
+                    <div class="mb-2" style="padding: 8px; background: var(--bucket-discovery);">
+                        <strong><i class="fas fa-lightbulb"></i> Discovery</strong> — 7 features<br>
+                        <small>Cross-sell & reordering</small>
+                    </div>
+                    <div class="mb-2" style="padding: 8px; background: var(--bucket-merchandising); color: white;">
+                        <strong><i class="fas fa-bullseye"></i> Merchandising</strong> — 6 features<br>
+                        <small>Business user control</small>
+                    </div>
+                    <div class="mb-2" style="padding: 8px; background: var(--bucket-recovery);">
+                        <strong><i class="fas fa-shield"></i> Recovery</strong> — 2 features<br>
+                        <small>Never dead-end</small>
+                    </div>
+                    <div style="padding: 8px; background: var(--bucket-analytics); color: white;">
+                        <strong><i class="fas fa-chart-bar"></i> Analytics</strong> — 2 features<br>
+                        <small>Measure & optimize</small>
+                    </div>
+                </div>
+
+                <!-- Three Pillars -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-building-columns"></i> Three Pillars</h3>
+                    <div class="mb-3">
+                        <h4><i class="fas fa-database"></i> Data Dependence</h4>
+                        <p class="mb-0" style="font-size: 0.85rem;">What data does it need?</p>
+                        <small><i class="fas fa-circle" style="color: var(--success);"></i> Basic catalog | <i class="fas fa-circle" style="color: var(--warning);"></i> Rich/behavioral | <i class="fas fa-circle" style="color: var(--danger);"></i> Multiple sources</small>
+                    </div>
+                    <div class="mb-3">
+                        <h4><i class="fas fa-users"></i> Governance Required</h4>
+                        <p class="mb-0" style="font-size: 0.85rem;">How much ongoing attention?</p>
+                        <small><i class="fas fa-circle" style="color: var(--success);"></i> Set & forget | <i class="fas fa-circle" style="color: var(--warning);"></i> Periodic | <i class="fas fa-circle" style="color: var(--danger);"></i> Ongoing</small>
+                    </div>
+                    <div>
+                        <h4><i class="fas fa-shield"></i> Operational Safety</h4>
+                        <p class="mb-0" style="font-size: 0.85rem;">How risky to operate?</p>
+                        <small><i class="fas fa-circle" style="color: var(--success);"></i> Idiot-proof | <i class="fas fa-circle" style="color: var(--warning);"></i> Training needed | <i class="fas fa-circle" style="color: var(--danger);"></i> Expert only</small>
+                    </div>
+                </div>
+
+                <!-- Investment Levels -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-gem"></i> Investment Levels</h3>
+                    <div class="mb-2" style="padding: 8px; background: var(--mvp); color: white;">
+                        <strong><i class="fas fa-wrench"></i> MVP</strong><br>
+                        <small>Make it work, ship fast, client fills gaps</small>
+                    </div>
+                    <div class="mb-2" style="padding: 8px; background: var(--standard);">
+                        <strong><i class="fas fa-gear"></i> Standard</strong><br>
+                        <small>Solid implementation, production-ready</small>
+                    </div>
+                    <div class="mb-2" style="padding: 8px; background: var(--polished); color: white;">
+                        <strong><i class="fas fa-star"></i> Polished</strong><br>
+                        <small>Self-service ready, full UX, docs</small>
+                    </div>
+                    <div style="padding: 8px; background: var(--premium); color: white;">
+                        <strong><i class="fas fa-gem"></i> Premium</strong><br>
+                        <small>Bulletproof, runs itself, white-glove</small>
+                    </div>
+                </div>
+
+                <!-- Personas -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-user"></i> Personas</h3>
+                    <div class="mb-2">
+                        <strong><i class="fas fa-person-running"></i> Rushed Buyer</strong><br>
+                        <small>→ Auto Complete, Recent, Part #</small>
+                    </div>
+                    <div class="mb-2">
+                        <strong><i class="fas fa-magnifying-glass"></i> Exploring Buyer</strong><br>
+                        <small>→ Facets, Recs, Visual Filters</small>
+                    </div>
+                    <div class="mb-2">
+                        <strong><i class="fas fa-wrench"></i> Technical Buyer</strong><br>
+                        <small>→ Semantic, Equivalents, Part #</small>
+                    </div>
+                    <div class="mb-2">
+                        <strong><i class="fas fa-bullseye"></i> Merchandiser</strong><br>
+                        <small>→ Curations, Dashboard, Sandbox</small>
+                    </div>
+                    <div class="mb-2">
+                        <strong><i class="fas fa-chart-line"></i> Business Leader</strong><br>
+                        <small>→ Analytics, Dashboard</small>
+                    </div>
+                    <div>
+                        <strong><i class="fas fa-gear"></i> IT/Ops Leader</strong><br>
+                        <small>→ Config Mgmt, Sandbox, A/B</small>
+                    </div>
+                </div>
+
+                <!-- Problems -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-fire"></i> Problems → Buckets</h3>
+                    <div class="mb-1"><small><i class="fas fa-face-frown"></i> Can't find products → <i class="fas fa-magnifying-glass"></i> Core</small></div>
+                    <div class="mb-1"><small><i class="fas fa-circle-question"></i> Doesn't understand → <i class="fas fa-brain"></i> Smart</small></div>
+                    <div class="mb-1"><small><i class="fas fa-arrow-down-wide-short"></i> Wrong order → <i class="fas fa-brain"></i> Smart</small></div>
+                    <div class="mb-1"><small><i class="fas fa-dollar-sign"></i> No cross-sell → <i class="fas fa-lightbulb"></i> Discovery</small></div>
+                    <div class="mb-1"><small><i class="fas fa-stopwatch"></i> Slow reorder → <i class="fas fa-lightbulb"></i> Discovery</small></div>
+                    <div class="mb-1"><small><i class="fas fa-ban"></i> Zero results → <i class="fas fa-shield"></i> Recovery</small></div>
+                    <div class="mb-1"><small><i class="fas fa-lock"></i> No control → <i class="fas fa-bullseye"></i> Merchandising</small></div>
+                    <div><small><i class="fas fa-eye"></i> No visibility → <i class="fas fa-chart-bar"></i> Analytics</small></div>
+                </div>
+
+                <!-- Support Tiers -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-handshake"></i> Support Tiers</h3>
+                    <div class="mb-2">
+                        <strong>Tier 1: Self-Service</strong><br>
+                        <small>Low risk + High capacity = Standard support</small>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Tier 2: Guided</strong><br>
+                        <small>Low risk + Low capacity = Docs + guardrails</small>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Tier 3: Partnership</strong><br>
+                        <small>High risk + High capacity = Monthly check-ins</small>
+                    </div>
+                    <div>
+                        <strong>Tier 4: Managed</strong><br>
+                        <small>High risk + Low capacity = We operate</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day 1 vs Later -->
+    <section class="section print-section">
+        <div class="container">
+            <h2 class="section-title mb-4"><i class="fas fa-calendar"></i> Phasing Quick Reference</h2>
+
+            <div class="grid grid-3">
+                <div class="card" style="border-top: 6px solid var(--success);">
+                    <h3><i class="fas fa-check"></i> Day 1 Ready</h3>
+                    <p style="font-size: 0.85rem;">Work immediately with basic catalog:</p>
+                    <ul style="font-size: 0.85rem;">
+                        <li>Auto Complete</li>
+                        <li>Part Number Normalization</li>
+                        <li>Basic Facets</li>
+                        <li>Recent Search</li>
+                        <li>Curations</li>
+                        <li>Search Sandbox</li>
+                        <li>Configuration Management</li>
+                        <li>Search Dashboard</li>
+                        <li>Zero Results Recovery</li>
+                        <li>Analytics (grows over time)</li>
+                    </ul>
+                </div>
+                
+                <div class="card" style="border-top: 6px solid var(--warning);">
+                    <h3><i class="fas fa-clock"></i> Day 30-60</h3>
+                    <p style="font-size: 0.85rem;">After behavioral data accumulates:</p>
+                    <ul style="font-size: 0.85rem;">
+                        <li>Trending Search</li>
+                        <li>Related Searches</li>
+                        <li>Query Behaviour Labeller</li>
+                        <li>Intelligent Synonyms</li>
+                        <li>A/B Testing</li>
+                    </ul>
+                </div>
+                
+                <div class="card" style="border-top: 6px solid var(--danger);">
+                    <h3><i class="fas fa-chart-bar"></i> Day 90+ / When Data Ready</h3>
+                    <p style="font-size: 0.85rem;">Require specific integrations:</p>
+                    <ul style="font-size: 0.85rem;">
+                        <li>ML Ranking (90+ days behavioral)</li>
+                        <li>Recommendations (orders + users)</li>
+                        <li>Intelligent Auto Complete</li>
+                        <li>Cross-Brand Equivalents (relationships)</li>
+                        <li>Recently Ordered (orders)</li>
+                        <li>Multi-Layered Relevance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Principles -->
+    <section class="section section-alt print-section">
+        <div class="container">
+            <h2 class="section-title mb-4"><i class="fas fa-bullseye"></i> Key Principles</h2>
+
+            <div class="grid grid-2">
+                <div class="card card-accent">
+                    <h4><i class="fas fa-database"></i> Data is the Ceiling</h4>
+                    <p class="mb-0">Don't over-invest when data quality caps value. Fix data first, or accept lower investment level.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-users"></i> Capacity Determines Approach</h4>
+                    <p class="mb-0">Low capacity = more self-service investment needed. High capacity = they can fill gaps.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-scale-balanced"></i> Right-Size to Conditions</h4>
+                    <p class="mb-0">Match investment to what's achievable. Premium investment with poor data = wasted effort.</p>
+                </div>
+                <div class="card card-accent">
+                    <h4><i class="fas fa-file-pen"></i> Document Assumptions</h4>
+                    <p class="mb-0">Put data quality and capacity assumptions in SOW. Be explicit about what's expected.</p>
+                </div>
+                <div class="card card-accent">
+                    <h4><i class="fas fa-arrows-rotate"></i> Plan for Iteration</h4>
+                    <p class="mb-0">MVP now, upgrade later is a valid strategy. Launch, learn, improve.</p>
+                </div>
+                <div class="card">
+                    <h4><i class="fas fa-bullseye"></i> B2B ≠ B2C</h4>
+                    <p class="mb-0">80% of orders are repeats. Optimize for reordering, not just discovery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Glossary -->
+    <section class="section print-section">
+        <div class="container">
+            <h2 class="section-title mb-4"><i class="fas fa-book"></i> Glossary</h2>
+            
+            <div class="grid grid-2">
+                <div class="card-flat">
+                    <dl>
+                        <dt><strong>ELSER</strong></dt>
+                        <dd class="mb-2">Elastic Learned Sparse Encoder — semantic search model</dd>
+                        
+                        <dt><strong>Facets</strong></dt>
+                        <dd class="mb-2">Filter options based on product attributes (brand, size, etc.)</dd>
+                        
+                        <dt><strong>Curations</strong></dt>
+                        <dd class="mb-2">Manual merchandising rules — pin, boost, bury, redirect</dd>
+                        
+                        <dt><strong>Zero Results</strong></dt>
+                        <dd class="mb-2">Search returning no products — critical to recover from</dd>
+                        
+                        <dt><strong>Behavioral Data</strong></dt>
+                        <dd class="mb-2">Search logs, clicks, conversions — accumulated over time</dd>
+                    </dl>
+                </div>
+                <div class="card-flat">
+                    <dl>
+                        <dt><strong>Cross-Reference</strong></dt>
+                        <dd class="mb-2">Mapping between equivalent products across brands</dd>
+                        
+                        <dt><strong>Kitting</strong></dt>
+                        <dd class="mb-2">Bundling products together as custom assemblies</dd>
+                        
+                        <dt><strong>ML Ranking</strong></dt>
+                        <dd class="mb-2">Machine learning to optimize result ordering</dd>
+                        
+                        <dt><strong>AI Enrichment</strong></dt>
+                        <dd class="mb-2">Using AI to generate missing product content</dd>
+                        
+                        <dt><strong>Governance</strong></dt>
+                        <dd class="mb-2">Ongoing attention needed to maintain feature quality</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer no-print">
+        <div class="container">
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <p class="mb-0">Search Platform Documentation Hub</p>
+                <div class="flex gap-2">
+                    <a href="features.html" class="btn btn-outline btn-sm">Features</a>
+                    <a href="tools.html" class="btn btn-secondary btn-sm">Tools</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

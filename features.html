@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features | Search Platform Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon"><i class="fas fa-search"></i></span>
+                <span>Search Platform</span>
+            </a>
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="features.html" class="nav-link active">Features</a></li>
+                <li><a href="sales.html" class="nav-link">Sales</a></li>
+                <li><a href="implementation.html" class="nav-link">Implementation</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="reference.html" class="nav-link">Reference</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="hero" style="padding: 48px 0;">
+        <div class="container">
+            <h1>Feature Explorer</h1>
+            <p class="hero-subtitle mb-0">30 features across 6 buckets — filter, search, and explore</p>
+        </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section style="background: var(--white); border-bottom: 3px solid var(--black); padding: 20px 0;">
+        <div class="container">
+            <div class="flex flex-wrap gap-3 items-center justify-between">
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn active" onclick="filterBucket('all')" data-bucket="all">All</button>
+                    <button class="filter-btn" onclick="filterBucket('core')" data-bucket="core"><i class="fas fa-magnifying-glass"></i> Core</button>
+                    <button class="filter-btn" onclick="filterBucket('smart')" data-bucket="smart"><i class="fas fa-brain"></i> Smart</button>
+                    <button class="filter-btn" onclick="filterBucket('discovery')" data-bucket="discovery"><i class="fas fa-lightbulb"></i> Discovery</button>
+                    <button class="filter-btn" onclick="filterBucket('merchandising')" data-bucket="merchandising"><i class="fas fa-bullseye"></i> Merchandising</button>
+                    <button class="filter-btn" onclick="filterBucket('recovery')" data-bucket="recovery"><i class="fas fa-shield"></i> Recovery</button>
+                    <button class="filter-btn" onclick="filterBucket('analytics')" data-bucket="analytics"><i class="fas fa-chart-bar"></i> Analytics</button>
+                </div>
+                <input type="text" class="search-input" placeholder="Search features..." style="max-width: 250px;" onkeyup="searchFeatures(this.value)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features List -->
+    <section class="section">
+        <div class="container">
+            
+            <!-- Core Search & Findability -->
+            <div class="bucket-section" data-bucket="core">
+                <div class="flex items-center gap-3 mb-4">
+                    <span style="font-size: 2.5rem;"><i class="fas fa-magnifying-glass"></i></span>
+                    <div>
+                        <h2 class="mb-0">Core Search & Findability</h2>
+                        <p class="mb-0" style="color: var(--gray);">Get to products fast — 6 features</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2" id="features-core">
+                    <!-- Auto Complete -->
+                    <div class="feature-card" data-feature="autocomplete" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Auto Complete</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-core);">Core Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Predictive suggestions as buyers type, reducing keystrokes and guiding to products faster.</p>
+                            <p><strong>B2B Value:</strong> Critical for part numbers, SKUs, and technical terms. Reduces typos and speeds up known-item search.</p>
+                            <p><strong>Data Required:</strong> Basic Catalog (titles, SKUs)</p>
+                            <p><strong>Implementation:</strong> Day 1 feature, works immediately with catalog data.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faceted Search -->
+                    <div class="feature-card" data-feature="faceted" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Faceted Search</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-core);">Core Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Dynamic filters based on product attributes (brand, size, material, voltage, etc.).</p>
+                            <p><strong>B2B Value:</strong> Essential for large catalogs. Lets technical buyers narrow by specs. Shows category depth.</p>
+                            <p><strong>Data Required:</strong> Rich Catalog (structured attributes, consistent categorization)</p>
+                            <p><strong>Implementation:</strong> Quality depends on attribute consistency. May need data cleanup first.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Filters -->
+                    <div class="feature-card" data-feature="visual" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Visual Filters</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-core);">Core Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Image-based filter selection (color swatches, shape selectors, visual size comparison).</p>
+                            <p><strong>B2B Value:</strong> Helpful for products where visual identification matters — fittings, connectors, finishes.</p>
+                            <p><strong>Data Required:</strong> Product Images + Mapped Attributes</p>
+                            <p><strong>Implementation:</strong> Requires image assets and attribute mapping. Consider for high-visual categories.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Part Number Normalization -->
+                    <div class="feature-card" data-feature="partnumber" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Part Number Normalization</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-core);">Core Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Handles part number format variations — dashes, spaces, prefixes, leading zeros.</p>
+                            <p><strong>B2B Value:</strong> Critical for industrial buyers who search by part numbers. "ABC-123" = "ABC123" = "ABC 123".</p>
+                            <p><strong>Data Required:</strong> Basic Catalog (part numbers/SKUs)</p>
+                            <p><strong>Implementation:</strong> Day 1 feature. Configure normalization rules based on industry patterns.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voice Search -->
+                    <div class="feature-card" data-feature="voice" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Voice Search</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-core);">Core Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Speak to search — voice input for hands-free or mobile scenarios.</p>
+                            <p><strong>B2B Value:</strong> Useful for field workers, warehouse staff, or anyone with hands occupied.</p>
+                            <p><strong>Data Required:</strong> Basic Catalog</p>
+                            <p><strong>Implementation:</strong> Browser-based speech recognition. Consider accent/terminology training.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-mvp">Typical: MVP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Universal Search -->
+                    <div class="feature-card" data-feature="universal" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Universal Search</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-core);">Core Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Search across multiple content types — products, documents, support articles, categories.</p>
+                            <p><strong>B2B Value:</strong> Single search box for everything. Buyers find spec sheets, installation guides, and products together.</p>
+                            <p><strong>Data Required:</strong> Multiple Content Types (products, content, documents)</p>
+                            <p><strong>Implementation:</strong> Requires content indexing strategy. Consider result blending/ranking.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Smart Search & Relevance -->
+            <div class="bucket-section mt-4" data-bucket="smart">
+                <div class="flex items-center gap-3 mb-4">
+                    <span style="font-size: 2.5rem;"><i class="fas fa-brain"></i></span>
+                    <div>
+                        <h2 class="mb-0">Smart Search & Relevance</h2>
+                        <p class="mb-0" style="color: var(--gray);">AI that understands and ranks — 6 features</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2" id="features-smart">
+                    <!-- Semantic Search -->
+                    <div class="feature-card" data-feature="semantic" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Semantic Search</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-smart); color: white;">Smart Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Understand meaning, not just keywords. "cordless drill" matches "battery-powered drill".</p>
+                            <p><strong>B2B Value:</strong> Bridges vocabulary gaps. Buyers use different terms than your catalog.</p>
+                            <p><strong>Data Required:</strong> Rich Catalog (detailed descriptions). Performance improves with better content.</p>
+                            <p><strong>Implementation:</strong> ELSER/BERT models. Quality tied directly to description richness.</p>
+                            <div class="alert alert-warning mt-3">
+                                <span class="alert-icon"><i class="fas fa-triangle-exclamation"></i></span>
+                                <div><strong>Key Insight:</strong> Sparse descriptions = gimmick feature. Rich descriptions = game-changer.</div>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intelligent Synonyms -->
+                    <div class="feature-card" data-feature="synonyms" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Intelligent Synonyms</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot red" title="Governance: Red"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-smart); color: white;">Smart Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Learn and apply industry-specific terminology mappings. Auto-discovers synonyms from behavior.</p>
+                            <p><strong>B2B Value:</strong> Every industry has jargon. "saw blade" vs "circular blade" vs "cutting disc".</p>
+                            <p><strong>Data Required:</strong> Behavioral Data (search logs, click patterns)</p>
+                            <p><strong>Implementation:</strong> Needs monitoring. Bad synonyms can hurt results. Governance required.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intelligent Auto Complete -->
+                    <div class="feature-card" data-feature="intelligentauto" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Intelligent Auto Complete</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot red" title="Governance: Red"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-smart); color: white;">Smart Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Context-aware, personalized suggestions based on user history and behavior patterns.</p>
+                            <p><strong>B2B Value:</strong> Shows relevant suggestions first. Electrician sees electrical, plumber sees plumbing.</p>
+                            <p><strong>Data Required:</strong> Behavioral + User Data</p>
+                            <p><strong>Implementation:</strong> Builds over time. Cold start with catalog, improves with behavior.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hybrid Search / ML Ranking -->
+                    <div class="feature-card" data-feature="mlranking" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Hybrid Search / ML Ranking</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot red" title="Data: Red"></span>
+                                <span class="pillar-dot red" title="Governance: Red"></span>
+                                <span class="pillar-dot red" title="Safety: Red"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-smart); color: white;">Smart Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Blend keyword + semantic + behavioral signals. Machine learning optimizes ranking.</p>
+                            <p><strong>B2B Value:</strong> Best products rise to top based on what actually converts, not just text match.</p>
+                            <p><strong>Data Required:</strong> Behavioral + Transactional (90+ days ideal)</p>
+                            <p><strong>Implementation:</strong> Expert feature. Requires monitoring, testing, ongoing tuning.</p>
+                            <div class="alert alert-danger mt-3">
+                                <span class="alert-icon"><i class="fas fa-circle-exclamation"></i></span>
+                                <div><strong>High Complexity:</strong> All three pillars are red. Consider managed support or phase for later.</div>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-premium">Typical: PREMIUM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Layered Relevance Funnel -->
+                    <div class="feature-card" data-feature="relevancefunnel" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Multi-Layered Relevance Funnel</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot red" title="Data: Red"></span>
+                                <span class="pillar-dot red" title="Governance: Red"></span>
+                                <span class="pillar-dot red" title="Safety: Red"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-smart); color: white;">Smart Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Complex ranking strategies combining business rules, personalization, and ML.</p>
+                            <p><strong>B2B Value:</strong> Ultimate control over what appears first — margin, inventory, strategic products.</p>
+                            <p><strong>Data Required:</strong> All data types</p>
+                            <p><strong>Implementation:</strong> Most complex feature. Requires expert configuration and ongoing management.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-premium">Typical: PREMIUM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Semantic Intent Router -->
+                    <div class="feature-card" data-feature="intentrouter" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Semantic Intent Router</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-smart); color: white;">Smart Search</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Detect what the buyer actually wants — product, category, support, or navigation.</p>
+                            <p><strong>B2B Value:</strong> "Milwaukee" → brand page. "M18 drill" → product. "warranty" → support.</p>
+                            <p><strong>Data Required:</strong> Rich Catalog + Behavioral patterns</p>
+                            <p><strong>Implementation:</strong> Configure intent rules and destinations. Train on common patterns.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discovery & Reordering -->
+            <div class="bucket-section mt-4" data-bucket="discovery">
+                <div class="flex items-center gap-3 mb-4">
+                    <span style="font-size: 2.5rem;"><i class="fas fa-lightbulb"></i></span>
+                    <div>
+                        <h2 class="mb-0">Discovery & Reordering</h2>
+                        <p class="mb-0" style="color: var(--gray);">Suggest, cross-sell, speed up repeats — 8 features</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2" id="features-discovery">
+                    <!-- Recommendation Engine -->
+                    <div class="feature-card" data-feature="recommendations" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Recommendation Engine</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot red" title="Data: Red"></span>
+                                <span class="pillar-dot red" title="Governance: Red"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-discovery);">Discovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Personalized product suggestions — "frequently bought together", "you may also need".</p>
+                            <p><strong>B2B Value:</strong> Increase basket size. Surface accessories, consumables, related parts.</p>
+                            <p><strong>Data Required:</strong> Behavioral + Transactional + User</p>
+                            <p><strong>Implementation:</strong> Cold start challenge. Can bootstrap with rules, improves with behavior.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Searches -->
+                    <div class="feature-card" data-feature="related" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Related Searches</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-discovery);">Discovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Suggest alternative query paths when buyers might be stuck or exploring.</p>
+                            <p><strong>B2B Value:</strong> Help buyers discover they searched too narrowly or broadly.</p>
+                            <p><strong>Data Required:</strong> Behavioral Data (search sequences)</p>
+                            <p><strong>Implementation:</strong> Learns from search patterns. Safe, low-governance feature.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cross-Brand Equivalents -->
+                    <div class="feature-card" data-feature="equivalents" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Cross-Brand Equivalents</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-discovery);">Discovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Show alternative brands and substitutes. "If you're looking for X, consider Y."</p>
+                            <p><strong>B2B Value:</strong> Capture sales when primary brand is out of stock. Help price-conscious buyers.</p>
+                            <p><strong>Data Required:</strong> Relationship Data (cross-references, equivalents mapping)</p>
+                            <p><strong>Implementation:</strong> Requires relationship data. Can use AI to suggest, human to verify.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trending Search -->
+                    <div class="feature-card" data-feature="trending" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Trending Search</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-discovery);">Discovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Show what's popular now — trending searches, hot products.</p>
+                            <p><strong>B2B Value:</strong> Social proof. Helps buyers see what others are buying. Market signals.</p>
+                            <p><strong>Data Required:</strong> Behavioral Data (recent search/purchase patterns)</p>
+                            <p><strong>Implementation:</strong> Low governance. Updates automatically based on behavior.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Products (Kitting) -->
+                    <div class="feature-card" data-feature="kitting" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Custom Products (Kitting)</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-discovery);">Discovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Build bundles and assemblies. Job kits, project packages, custom configurations.</p>
+                            <p><strong>B2B Value:</strong> "Everything you need for X job" — increases order value, reduces buyer effort.</p>
+                            <p><strong>Data Required:</strong> Relationship Data (kit compositions, compatible products)</p>
+                            <p><strong>Implementation:</strong> Requires relationship mapping. Can be curated or rule-based.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Search -->
+                    <div class="feature-card" data-feature="recent" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Recent Search</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-discovery);">Discovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Show user's recent searches for quick repeat access.</p>
+                            <p><strong>B2B Value:</strong> Critical for B2B. Buyers research today, order tomorrow. Fast return path.</p>
+                            <p><strong>Data Required:</strong> User Data (session/account tracking)</p>
+                            <p><strong>Implementation:</strong> Day 1 feature. Simple, high value, no governance needed.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Ordered Section -->
+                    <div class="feature-card" data-feature="recentlyordered" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Recently Ordered Section</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-discovery);">Discovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> One-click reorder from purchase history. "Buy again" functionality.</p>
+                            <p><strong>B2B Value:</strong> 80% of B2B orders are repeats. This is THE feature for efficiency.</p>
+                            <p><strong>Data Required:</strong> User + Transactional Data</p>
+                            <p><strong>Implementation:</strong> Requires order history integration. High value, relatively simple.</p>
+                            <div class="alert alert-success mt-3">
+                                <span class="alert-icon"><i class="fas fa-lightbulb"></i></span>
+                                <div><strong>B2B Gold:</strong> This feature alone can transform repeat purchase efficiency.</div>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Merchandising & Control -->
+            <div class="bucket-section mt-4" data-bucket="merchandising">
+                <div class="flex items-center gap-3 mb-4">
+                    <span style="font-size: 2.5rem;"><i class="fas fa-bullseye"></i></span>
+                    <div>
+                        <h2 class="mb-0">Merchandising & Control</h2>
+                        <p class="mb-0" style="color: var(--gray);">Business users shape results — 6 features</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2" id="features-merchandising">
+                    <!-- Curations -->
+                    <div class="feature-card" data-feature="curations" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Curations</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-merchandising); color: white;">Merchandising</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Pin, boost, bury, redirect — merchandiser control over search results.</p>
+                            <p><strong>B2B Value:</strong> Promote high-margin items, feature seasonal products, manage campaigns.</p>
+                            <p><strong>Data Required:</strong> Basic Catalog</p>
+                            <p><strong>Implementation:</strong> Needs training. Can break things if misused. Requires governance.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Configuration Management -->
+                    <div class="feature-card" data-feature="config" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Configuration Management</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-merchandising); color: white;">Merchandising</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Version control for search settings. Track changes, rollback, audit trail.</p>
+                            <p><strong>B2B Value:</strong> Safety net for changes. Know who changed what, when. Easy recovery.</p>
+                            <p><strong>Data Required:</strong> None (platform tool)</p>
+                            <p><strong>Implementation:</strong> Platform capability. Essential for governance.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Query Behaviour Labeller -->
+                    <div class="feature-card" data-feature="querylabeller" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Query Behaviour Labeller</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-merchandising); color: white;">Merchandising</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Classify and understand search patterns — navigational, transactional, informational.</p>
+                            <p><strong>B2B Value:</strong> Know how buyers search to inform merchandising and content strategy.</p>
+                            <p><strong>Data Required:</strong> Behavioral Data</p>
+                            <p><strong>Implementation:</strong> Analytical tool. Informs other features and decisions.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Sandbox -->
+                    <div class="feature-card" data-feature="sandbox" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Search Sandbox</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-merchandising); color: white;">Merchandising</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Test search changes safely before deploying to production.</p>
+                            <p><strong>B2B Value:</strong> Experiment without risk. Try configurations, preview results.</p>
+                            <p><strong>Data Required:</strong> None (platform tool)</p>
+                            <p><strong>Implementation:</strong> Essential for safe operations. All three pillars green.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Dashboard -->
+                    <div class="feature-card" data-feature="dashboard" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Search Dashboard</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-merchandising); color: white;">Merchandising</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Real-time performance visibility — top searches, zero results, conversion metrics.</p>
+                            <p><strong>B2B Value:</strong> Know what's working. Identify problems quickly. Data-driven decisions.</p>
+                            <p><strong>Data Required:</strong> Behavioral Data</p>
+                            <p><strong>Implementation:</strong> Builds over time as data accumulates. Essential for optimization.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Enrichment Dashboard -->
+                    <div class="feature-card" data-feature="aienrichment" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">AI Enrichment Dashboard</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot green" title="Data: Green"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-merchandising); color: white;">Merchandising</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Review and approve AI-generated content before publishing.</p>
+                            <p><strong>B2B Value:</strong> Human-in-the-loop for quality control. Trust but verify AI outputs.</p>
+                            <p><strong>Data Required:</strong> AI-generated content queue</p>
+                            <p><strong>Implementation:</strong> Part of AI Enrichment pipeline. Confidence scoring + approval workflow.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recovery & Resilience -->
+            <div class="bucket-section mt-4" data-bucket="recovery">
+                <div class="flex items-center gap-3 mb-4">
+                    <span style="font-size: 2.5rem;"><i class="fas fa-shield"></i></span>
+                    <div>
+                        <h2 class="mb-0">Recovery & Resilience</h2>
+                        <p class="mb-0" style="color: var(--gray);">Never lose a sale — 2 features</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2" id="features-recovery">
+                    <!-- Zero Results Recovery -->
+                    <div class="feature-card" data-feature="zeroresults" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Zero Results Recovery</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-recovery);">Recovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Always show something relevant — suggestions, related products, categories.</p>
+                            <p><strong>B2B Value:</strong> Zero results = lost sale. Never dead-end the buyer.</p>
+                            <p><strong>Data Required:</strong> Rich Catalog (for intelligent suggestions)</p>
+                            <p><strong>Implementation:</strong> Configure fallback strategies. Test thoroughly.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fallback Search -->
+                    <div class="feature-card" data-feature="fallback" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Fallback Search</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot green" title="Governance: Green"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-recovery);">Recovery</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Graceful degradation when primary search fails or returns poor results.</p>
+                            <p><strong>B2B Value:</strong> Resilience. If semantic fails, fall back to keyword. Always return results.</p>
+                            <p><strong>Data Required:</strong> Rich Catalog</p>
+                            <p><strong>Implementation:</strong> Configure fallback chain. Automatic, low governance.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-standard">Typical: STANDARD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics & Optimization -->
+            <div class="bucket-section mt-4" data-bucket="analytics">
+                <div class="flex items-center gap-3 mb-4">
+                    <span style="font-size: 2.5rem;"><i class="fas fa-chart-bar"></i></span>
+                    <div>
+                        <h2 class="mb-0">Analytics & Optimization</h2>
+                        <p class="mb-0" style="color: var(--gray);">Measure, learn, improve — 2 features</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-2" id="features-analytics">
+                    <!-- Analytics -->
+                    <div class="feature-card" data-feature="analytics" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">Analytics</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot green" title="Safety: Green"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-analytics); color: white;">Analytics</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Deep-dive search performance metrics, reports, and insights.</p>
+                            <p><strong>B2B Value:</strong> Understand search health. Find opportunities. Prove ROI.</p>
+                            <p><strong>Data Required:</strong> Behavioral Data (accumulates over time)</p>
+                            <p><strong>Implementation:</strong> Value increases over time. Essential for optimization.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- A/B Testing -->
+                    <div class="feature-card" data-feature="abtesting" onclick="toggleFeature(this)">
+                        <div class="feature-card-header">
+                            <span class="feature-card-title">A/B Testing</span>
+                            <div class="feature-card-pillars">
+                                <span class="pillar-dot yellow" title="Data: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Governance: Yellow"></span>
+                                <span class="pillar-dot yellow" title="Safety: Yellow"></span>
+                            </div>
+                            <span class="feature-card-expand">▼</span>
+                        </div>
+                        <span class="feature-card-bucket" style="background: var(--bucket-analytics); color: white;">Analytics</span>
+                        <div class="feature-card-content">
+                            <p><strong>What It Does:</strong> Run controlled experiments to measure impact of search changes.</p>
+                            <p><strong>B2B Value:</strong> Data-driven decisions. Know what actually improves conversion.</p>
+                            <p><strong>Data Required:</strong> Behavioral Data (sufficient traffic for significance)</p>
+                            <p><strong>Implementation:</strong> Requires traffic volume. Training needed for proper use.</p>
+                            <div class="flex gap-2 mt-3">
+                                <span class="inv-badge inv-polished">Typical: POLISHED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <p class="mb-0">Search Platform Documentation Hub</p>
+                <div class="flex gap-2">
+                    <a href="index.html" class="btn btn-outline btn-sm">Home</a>
+                    <a href="tools.html" class="btn btn-secondary btn-sm">Assessment Tool</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Feature card toggle
+        function toggleFeature(card) {
+            card.classList.toggle('expanded');
+        }
+
+        // Filter by bucket
+        function filterBucket(bucket) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.bucket === bucket) btn.classList.add('active');
+            });
+
+            // Show/hide sections
+            document.querySelectorAll('.bucket-section').forEach(section => {
+                if (bucket === 'all' || section.dataset.bucket === bucket) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Search features
+        function searchFeatures(query) {
+            const q = query.toLowerCase();
+            document.querySelectorAll('.feature-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(q) ? 'block' : 'none';
+            });
+
+            // Show all bucket sections when searching
+            if (q) {
+                document.querySelectorAll('.bucket-section').forEach(section => {
+                    section.style.display = 'block';
+                });
+            }
+        }
+
+        // Check URL params for initial filter
+        const urlParams = new URLSearchParams(window.location.search);
+        const bucketParam = urlParams.get('bucket');
+        if (bucketParam) {
+            filterBucket(bucketParam);
+        }
+
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true, theme: 'base' });
+    </script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Playbook | Search Platform Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon"><i class="fas fa-magnifying-glass"></i></span>
+                <span>Search Platform</span>
+            </a>
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="sales.html" class="nav-link active">Sales</a></li>
+                <li><a href="implementation.html" class="nav-link">Implementation</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="reference.html" class="nav-link">Reference</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="hero" style="padding: 48px 0;">
+        <div class="container">
+            <h1>Sales Playbook</h1>
+            <p class="hero-subtitle mb-0">Personas, problems, discovery questions, and conversation frameworks</p>
+        </div>
+    </section>
+
+    <!-- Tabs -->
+    <section style="background: var(--white); border-bottom: 3px solid var(--black);">
+        <div class="container">
+            <div class="tabs" style="border-bottom: none; margin-bottom: 0;">
+                <div class="tab active" onclick="showTab('personas')"><i class="fas fa-user"></i> Personas</div>
+                <div class="tab" onclick="showTab('problems')"><i class="fas fa-fire"></i> Problems</div>
+                <div class="tab" onclick="showTab('discovery')"><i class="fas fa-circle-question"></i> Discovery</div>
+                <div class="tab" onclick="showTab('conversation')"><i class="fas fa-comments"></i> Conversations</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personas Tab -->
+    <section class="section tab-content active" id="tab-personas">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Know Your Personas</h2>
+                <p class="section-subtitle">Six key stakeholders you'll encounter in B2B search conversations</p>
+            </div>
+
+            <!-- Buyer Personas -->
+            <h3 class="mb-3"><i class="fas fa-cart-shopping"></i> Buyer Personas</h3>
+            <div class="grid grid-3 mb-4">
+                <div class="persona-card">
+                    <div class="persona-icon"><i class="fas fa-person-running"></i></div>
+                    <div class="persona-name">The Rushed Buyer</div>
+                    <div class="persona-quote">"I know what I need, get me there NOW"</div>
+                    <p><strong>What they care about:</strong> Speed, accuracy, minimal clicks</p>
+                    <p class="mb-2"><strong>Lead with:</strong></p>
+                    <ul class="persona-features">
+                        <li>Auto Complete</li>
+                        <li>Part Number Normalization</li>
+                        <li>Recent Search</li>
+                        <li>Recently Ordered</li>
+                        <li>Voice Search</li>
+                    </ul>
+                    <p class="mt-3"><strong>Opening question:</strong></p>
+                    <div class="alert alert-info">
+                        <div>"How quickly can your repeat buyers reorder?"</div>
+                    </div>
+                </div>
+
+                <div class="persona-card" style="background: var(--secondary);">
+                    <div class="persona-icon"><i class="fas fa-magnifying-glass"></i></div>
+                    <div class="persona-name">The Exploring Buyer</div>
+                    <div class="persona-quote">"Show me my options, I'm comparing"</div>
+                    <p><strong>What they care about:</strong> Options, alternatives, inspiration</p>
+                    <p class="mb-2"><strong>Lead with:</strong></p>
+                    <ul class="persona-features">
+                        <li>Faceted Search</li>
+                        <li>Visual Filters</li>
+                        <li>Recommendations</li>
+                        <li>Related Searches</li>
+                        <li>Trending Search</li>
+                    </ul>
+                    <p class="mt-3"><strong>Opening question:</strong></p>
+                    <div class="alert alert-info">
+                        <div>"How do buyers discover products they didn't know you carried?"</div>
+                    </div>
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-icon"><i class="fas fa-wrench"></i></div>
+                    <div class="persona-name">The Technical Buyer</div>
+                    <div class="persona-quote">"I need the exact spec, the right part"</div>
+                    <p><strong>What they care about:</strong> Precision, specs, alternatives, compliance</p>
+                    <p class="mb-2"><strong>Lead with:</strong></p>
+                    <ul class="persona-features">
+                        <li>Semantic Search</li>
+                        <li>Cross-Brand Equivalents</li>
+                        <li>Part Number Normalization</li>
+                        <li>Custom Products (Kitting)</li>
+                        <li>Searchable Certifications</li>
+                    </ul>
+                    <p class="mt-3"><strong>Opening question:</strong></p>
+                    <div class="alert alert-info">
+                        <div>"How do you handle part number variations and cross-references?"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Internal Personas -->
+            <h3 class="mb-3"><i class="fas fa-building"></i> Internal Stakeholders</h3>
+            <div class="grid grid-3">
+                <div class="persona-card">
+                    <div class="persona-icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="persona-name">The Merchandiser</div>
+                    <div class="persona-quote">"I need to shape what buyers see"</div>
+                    <p><strong>What they care about:</strong> Control, visibility, content quality</p>
+                    <p class="mb-2"><strong>Lead with:</strong></p>
+                    <ul class="persona-features">
+                        <li>Curations</li>
+                        <li>Search Dashboard</li>
+                        <li>Query Behaviour Labeller</li>
+                        <li>Search Sandbox</li>
+                        <li>AI Enrichment Dashboard</li>
+                    </ul>
+                    <p class="mt-3"><strong>Opening question:</strong></p>
+                    <div class="alert alert-info">
+                        <div>"Who controls what buyers see in search results? How do you test changes?"</div>
+                    </div>
+                </div>
+
+                <div class="persona-card" style="background: var(--secondary);">
+                    <div class="persona-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="persona-name">The Business Leader</div>
+                    <div class="persona-quote">"I need to see the ROI"</div>
+                    <p><strong>What they care about:</strong> Revenue, conversion, ROI</p>
+                    <p class="mb-2"><strong>Lead with:</strong></p>
+                    <ul class="persona-features">
+                        <li>Analytics</li>
+                        <li>Search Dashboard</li>
+                        <li>Recommendations (basket size)</li>
+                    </ul>
+                    <p class="mt-3"><strong>Opening question:</strong></p>
+                    <div class="alert alert-info">
+                        <div>"How do you measure search's impact on revenue?"</div>
+                    </div>
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-icon"><i class="fas fa-gear"></i></div>
+                    <div class="persona-name">The IT/Ops Leader</div>
+                    <div class="persona-quote">"I need it stable, secure, manageable"</div>
+                    <p><strong>What they care about:</strong> Stability, governance, testing</p>
+                    <p class="mb-2"><strong>Lead with:</strong></p>
+                    <ul class="persona-features">
+                        <li>Configuration Management</li>
+                        <li>Search Sandbox</li>
+                        <li>A/B Testing</li>
+                        <li>AI Enrichment Dashboard</li>
+                    </ul>
+                    <p class="mt-3"><strong>Opening question:</strong></p>
+                    <div class="alert alert-info">
+                        <div>"How do you test and deploy search changes safely? Who approves AI content?"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Persona Flow Diagram -->
+            <div class="mermaid-container mt-4">
+                <h3 class="mb-3">Persona to Feature Mapping</h3>
+<pre class="mermaid">
+flowchart LR
+RUSHED[Rushed Buyer] --> CORE[Core Search]
+EXPLORING[Exploring Buyer] --> DISCOVERY[Discovery]
+TECHNICAL[Technical Buyer] --> SMART[Smart Search]
+MERCH[Merchandiser] --> CONTROL[Merchandising]
+LEADER[Leader] --> ANALYTICS[Analytics]
+IT[IT Ops] --> GOVERNANCE[Configuration]
+style RUSHED fill:#00cccc
+style EXPLORING fill:#ff9900
+style TECHNICAL fill:#9933ff,color:#fff
+style MERCH fill:#ff3333,color:#fff
+style LEADER fill:#0066ff,color:#fff
+style IT fill:#00cc66
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Tab -->
+    <section class="section tab-content" id="tab-problems">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Problems We Solve</h2>
+                <p class="section-subtitle">Map client pain points to solutions</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-face-frown"></i></div>
+                    <div>
+                        <div class="problem-title">"Buyers can't find products"</div>
+                        <div class="problem-quote">"Our catalog is huge, people get lost"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Core Search & Findability</p>
+                        <p class="mb-0"><strong>Features:</strong> Auto Complete, Faceted Search, Visual Filters, Universal Search</p>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="background: var(--secondary);">
+                    <div class="problem-icon"><i class="fas fa-circle-question"></i></div>
+                    <div>
+                        <div class="problem-title">"Search doesn't understand us"</div>
+                        <div class="problem-quote">"Buyers use jargon, abbreviations, part numbers"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Smart Search & Relevance</p>
+                        <p class="mb-0"><strong>Features:</strong> Semantic Search, Intelligent Synonyms, Part Number Normalization</p>
+                    </div>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-arrow-down-wide-short"></i></div>
+                    <div>
+                        <div class="problem-title">"Right products, wrong order"</div>
+                        <div class="problem-quote">"Good products are buried on page 5"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Smart Search & Relevance</p>
+                        <p class="mb-0"><strong>Features:</strong> Hybrid Search/ML Ranking, Multi-Layered Relevance, Curations</p>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="background: var(--secondary);">
+                    <div class="problem-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <div>
+                        <div class="problem-title">"Missing cross-sell opportunities"</div>
+                        <div class="problem-quote">"Buyers get what they searched, nothing more"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Discovery & Reordering</p>
+                        <p class="mb-0"><strong>Features:</strong> Recommendations, Related Searches, Cross-Brand Equivalents</p>
+                    </div>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-stopwatch"></i></div>
+                    <div>
+                        <div class="problem-title">"Reordering is too slow"</div>
+                        <div class="problem-quote">"80% of orders are repeats, takes too long"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Discovery & Reordering</p>
+                        <p class="mb-0"><strong>Features:</strong> Recent Search, Recently Ordered, Auto Complete</p>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="background: var(--secondary);">
+                    <div class="problem-icon"><i class="fas fa-ban"></i></div>
+                    <div>
+                        <div class="problem-title">"Zero results = lost sale"</div>
+                        <div class="problem-quote">"Dead ends send them to Amazon"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Recovery & Resilience</p>
+                        <p class="mb-0"><strong>Features:</strong> Zero Results Recovery, Fallback Search</p>
+                    </div>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon"><i class="fas fa-lock"></i></div>
+                    <div>
+                        <div class="problem-title">"Merchandisers have no control"</div>
+                        <div class="problem-quote">"IT owns search, business can't influence"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Merchandising & Control</p>
+                        <p class="mb-0"><strong>Features:</strong> Curations, Search Sandbox, Search Dashboard, AI Enrichment Dashboard</p>
+                    </div>
+                </div>
+
+                <div class="problem-card" style="background: var(--secondary);">
+                    <div class="problem-icon"><i class="fas fa-eye"></i></div>
+                    <div>
+                        <div class="problem-title">"No visibility into search"</div>
+                        <div class="problem-quote">"We don't know what's working"</div>
+                        <p class="mt-2"><strong>Bucket:</strong> Analytics & Merchandising</p>
+                        <p class="mb-0"><strong>Features:</strong> Analytics, Search Dashboard, Query Behaviour Labeller</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem Flow Diagram -->
+            <div class="mermaid-container mt-4">
+                <h3 class="mb-3">Problem to Solution Flow</h3>
+<pre class="mermaid">
+flowchart LR
+P1[Cant find] --> B1[Core]
+P2[No understand] --> B2[Smart]
+P3[Bad relevance] --> B2
+P4[No cross sell] --> B3[Discovery]
+P5[Slow reorder] --> B3
+P6[Dead ends] --> B4[Recovery]
+P7[No control] --> B5[Merchandising]
+P8[No visibility] --> B6[Analytics]
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discovery Tab -->
+    <section class="section tab-content" id="tab-discovery">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Discovery Questions</h2>
+                <p class="section-subtitle">Questions to uncover needs and qualify opportunities</p>
+            </div>
+
+            <div class="grid grid-2">
+                <!-- Findability -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-magnifying-glass"></i> Findability</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "How long does it take your average buyer to find what they need?"</li>
+                        <li class="mb-2">• "What's your site search usage rate?"</li>
+                        <li class="mb-2">• "How do buyers typically search — keywords, part numbers, descriptions?"</li>
+                        <li class="mb-2">• "How large is your catalog? How many SKUs?"</li>
+                    </ul>
+                </div>
+
+                <!-- Understanding -->
+                <div class="card card-accent">
+                    <h3 class="mb-3"><i class="fas fa-brain"></i> Understanding</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "What percentage of searches use part numbers vs. descriptions?"</li>
+                        <li class="mb-2">• "Do buyers use industry jargon your catalog doesn't?"</li>
+                        <li class="mb-2">• "What happens when someone searches for a brand name?"</li>
+                        <li class="mb-2">• "How do you handle abbreviations and misspellings?"</li>
+                    </ul>
+                </div>
+
+                <!-- Relevance -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-chart-bar"></i> Relevance</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "Do your merchandisers feel they can influence what appears first?"</li>
+                        <li class="mb-2">• "How do you promote high-margin or strategic products?"</li>
+                        <li class="mb-2">• "Are the right products appearing at the top of results?"</li>
+                        <li class="mb-2">• "How do you handle seasonal or promotional content?"</li>
+                    </ul>
+                </div>
+
+                <!-- Cross-sell -->
+                <div class="card card-accent">
+                    <h3 class="mb-3"><i class="fas fa-lightbulb"></i> Cross-sell</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "What's your current attach rate or basket size?"</li>
+                        <li class="mb-2">• "How do you suggest related products today?"</li>
+                        <li class="mb-2">• "Do you show accessories, consumables, or frequently bought together?"</li>
+                        <li class="mb-2">• "What happens when the primary brand is out of stock?"</li>
+                    </ul>
+                </div>
+
+                <!-- Reordering -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-arrows-rotate"></i> Reordering</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "What percentage of your orders are repeat purchases?"</li>
+                        <li class="mb-2">• "How do repeat buyers currently reorder?"</li>
+                        <li class="mb-2">• "Do you surface purchase history in search?"</li>
+                        <li class="mb-2">• "How many clicks to reorder a previous item?"</li>
+                    </ul>
+                </div>
+
+                <!-- Zero Results -->
+                <div class="card card-accent">
+                    <h3 class="mb-3"><i class="fas fa-ban"></i> Zero Results</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "What's your zero-result rate?"</li>
+                        <li class="mb-2">• "What do buyers see when search returns nothing?"</li>
+                        <li class="mb-2">• "Where do those buyers go after hitting a dead end?"</li>
+                        <li class="mb-2">• "Do you track abandonment from zero results?"</li>
+                    </ul>
+                </div>
+
+                <!-- Control -->
+                <div class="card">
+                    <h3 class="mb-3"><i class="fas fa-bullseye"></i> Control</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "Who makes changes to search today? IT or business?"</li>
+                        <li class="mb-2">• "How long does a search change take to implement?"</li>
+                        <li class="mb-2">• "Can merchandisers test changes before going live?"</li>
+                        <li class="mb-2">• "How do you handle campaigns and promotions in search?"</li>
+                    </ul>
+                </div>
+
+                <!-- Visibility -->
+                <div class="card card-accent">
+                    <h3 class="mb-3"><i class="fas fa-chart-line"></i> Visibility</h3>
+                    <ul style="list-style: none;">
+                        <li class="mb-2">• "How do you measure search performance today?"</li>
+                        <li class="mb-2">• "Do you know your top searches? Your failed searches?"</li>
+                        <li class="mb-2">• "Can you see search-to-conversion rates?"</li>
+                        <li class="mb-2">• "How do you identify optimization opportunities?"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Qualifying Questions -->
+            <div class="card mt-4" style="background: var(--black); color: var(--white);">
+                <h3 class="mb-3"><i class="fas fa-bullseye"></i> Qualifying Questions</h3>
+                <div class="grid grid-2" style="gap: 32px;">
+                    <div>
+                        <h4 style="color: var(--secondary);">Data Readiness</h4>
+                        <ul style="list-style: none;">
+                            <li class="mb-2">• "How detailed are your product descriptions?"</li>
+                            <li class="mb-2">• "Do you have structured attributes for most products?"</li>
+                            <li class="mb-2">• "Do you have search analytics or click data?"</li>
+                            <li class="mb-2">• "Can you connect user accounts to search behavior?"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--secondary);">Capacity & Timeline</h4>
+                        <ul style="list-style: none;">
+                            <li class="mb-2">• "Who will manage search day-to-day?"</li>
+                            <li class="mb-2">• "What's your timeline for this project?"</li>
+                            <li class="mb-2">• "What's your budget range?"</li>
+                            <li class="mb-2">• "Are there hard launch dates we need to hit?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversation Tab -->
+    <section class="section tab-content" id="tab-conversation">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Conversation Frameworks</h2>
+                <p class="section-subtitle">How to structure discovery and sales conversations</p>
+            </div>
+
+            <!-- Sales Flow -->
+            <div class="mermaid-container">
+                <h3 class="mb-3">Sales Conversation Flow</h3>
+<pre class="mermaid">
+flowchart LR
+D[DISCOVERY] --> S[SOLUTION]
+S --> SC[SCOPING]
+SC --> P[PROPOSAL]
+style D fill:#00cccc
+style S fill:#ffff00
+style SC fill:#9933ff,color:#fff
+style P fill:#ff3333,color:#fff
+</pre>
+            </div>
+
+            <!-- Conversation Examples -->
+            <h3 class="mt-4 mb-3">Example Conversations</h3>
+            
+            <div class="card mb-3">
+                <h4 style="color: var(--primary);">Scenario: "Our search is broken"</h4>
+                <div class="mt-3" style="background: var(--muted); padding: 20px; border-left: 4px solid var(--primary);">
+                    <p><strong>Client:</strong> "Our search is broken. Buyers complain they can't find things."</p>
+                    <p><strong>You:</strong> "That's a common pain point. Let me understand better — when buyers search, are they using part numbers, descriptions, or brand names mostly?"</p>
+                    <p><strong>Client:</strong> "Mix of everything. Part numbers, product names, sometimes just categories."</p>
+                    <p><strong>You:</strong> "And when they search for a part number with spaces or dashes, does it still find the right product?"</p>
+                    <p><strong>Client:</strong> "Actually, no. That's a big complaint."</p>
+                    <p><strong>You:</strong> "That's a common issue — Part Number Normalization solves it. 'ABC-123' and 'ABC123' would both match. What's your zero-result rate? Do you track when searches return nothing?"</p>
+                </div>
+                <div class="mt-3">
+                    <strong>Features surfaced:</strong> Part Number Normalization, Auto Complete, Zero Results Recovery
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <h4 style="color: var(--accent);">Scenario: "We want to increase basket size"</h4>
+                <div class="mt-3" style="background: var(--muted); padding: 20px; border-left: 4px solid var(--accent);">
+                    <p><strong>Client:</strong> "We want to increase average order value. Cross-selling is weak."</p>
+                    <p><strong>You:</strong> "What's your current attach rate for accessories and consumables?"</p>
+                    <p><strong>Client:</strong> "Low. Buyers find what they searched for and check out."</p>
+                    <p><strong>You:</strong> "Do you show 'frequently bought together' or 'you may also need' anywhere?"</p>
+                    <p><strong>Client:</strong> "No, we don't have that capability."</p>
+                    <p><strong>You:</strong> "A Recommendation Engine learns from purchase patterns and surfaces relevant add-ons. What about when a brand is out of stock — do you suggest alternatives?"</p>
+                    <p><strong>Client:</strong> "No, they just see out of stock."</p>
+                    <p><strong>You:</strong> "That's a missed opportunity. Cross-Brand Equivalents can say 'This brand isn't available, but here's a compatible alternative.' Do you have cross-reference data?"</p>
+                </div>
+                <div class="mt-3">
+                    <strong>Features surfaced:</strong> Recommendation Engine, Cross-Brand Equivalents, Related Searches
+                </div>
+            </div>
+
+            <div class="card">
+                <h4 style="color: var(--success);">Scenario: "Our merchandisers are frustrated"</h4>
+                <div class="mt-3" style="background: var(--muted); padding: 20px; border-left: 4px solid var(--success);">
+                    <p><strong>Client:</strong> "Our merchandising team can't do anything with search. It's all IT."</p>
+                    <p><strong>You:</strong> "How long does it take to make a search change today?"</p>
+                    <p><strong>Client:</strong> "Weeks. We have to file a ticket and wait."</p>
+                    <p><strong>You:</strong> "So if you want to promote a seasonal item or run a campaign, you can't do it quickly?"</p>
+                    <p><strong>Client:</strong> "Exactly. By the time it's live, the promotion is over."</p>
+                    <p><strong>You:</strong> "Curations give merchandisers direct control — pin products, boost results, create promotional placements. All through a dashboard, no code. With a Search Sandbox, they can preview changes before going live."</p>
+                    <p><strong>Client:</strong> "That would be a game-changer."</p>
+                </div>
+                <div class="mt-3">
+                    <strong>Features surfaced:</strong> Curations, Search Sandbox, Configuration Management, Search Dashboard
+                </div>
+            </div>
+
+            <!-- Objection Handling -->
+            <h3 class="mt-4 mb-3">Common Objections</h3>
+            <div class="grid grid-2">
+                <div class="alert alert-warning">
+                    <div class="alert-icon"><i class="fas fa-comment"></i></div>
+                    <div>
+                        <div class="alert-title">"Our data isn't ready"</div>
+                        <p class="mb-0">Response: "That's where AI Enrichment helps. We can generate missing descriptions and attributes, with human review before publishing. Let's assess what you have and identify the fastest path forward."</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <div class="alert-icon"><i class="fas fa-comment"></i></div>
+                    <div>
+                        <div class="alert-title">"We don't have budget for everything"</div>
+                        <p class="mb-0">Response: "We don't have to do everything at once. We can start with high-impact, low-complexity features and add more over time. What are your must-haves for launch?"</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <div class="alert-icon"><i class="fas fa-comment"></i></div>
+                    <div>
+                        <div class="alert-title">"We need this live in 6 weeks"</div>
+                        <p class="mb-0">Response: "Tight timelines mean we focus on MVP for some features and polish later. Let's identify what must be perfect at launch vs. what can iterate."</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <div class="alert-icon"><i class="fas fa-comment"></i></div>
+                    <div>
+                        <div class="alert-title">"We don't have anyone to manage search"</div>
+                        <p class="mb-0">Response: "Two options: we invest more in self-service features with strong guardrails, or we include ongoing managed support. Which fits better with your model?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <p class="mb-0">Search Platform Documentation Hub</p>
+                <div class="flex gap-2">
+                    <a href="features.html" class="btn btn-outline btn-sm">Features</a>
+                    <a href="tools.html" class="btn btn-secondary btn-sm">Assessment Tool</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Tab switching
+        function showTab(tabId) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#ffff00',
+                primaryBorderColor: '#000000',
+                lineColor: '#000000',
+                fontSize: '14px'
+            }
+        });
+    </script>
+</body>
+</html>

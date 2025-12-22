@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools | Search Platform Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        /* Calculator Specific Styles */
+        .calc-section {
+            display: none;
+        }
+        .calc-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .calc-progress {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 32px;
+        }
+        
+        .calc-step {
+            flex: 1;
+            height: 8px;
+            background: var(--muted);
+            border: 2px solid var(--black);
+        }
+        
+        .calc-step.active {
+            background: var(--secondary);
+        }
+        
+        .calc-step.complete {
+            background: var(--success);
+        }
+        
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+        
+        .option-btn {
+            padding: 16px;
+            background: var(--white);
+            border: 3px solid var(--black);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s ease;
+        }
+        
+        .option-btn:hover {
+            background: var(--muted);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+        
+        .option-btn.selected {
+            background: var(--secondary);
+            box-shadow: 4px 4px 0 var(--black);
+        }
+        
+        .option-btn h4 {
+            margin-bottom: 4px;
+        }
+        
+        .option-btn p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin: 0;
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .result-card {
+            background: var(--white);
+            border: 3px solid var(--black);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .result-card h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 900;
+        }
+        
+        .feature-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--white);
+            border: 2px solid var(--black);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        
+        .feature-checkbox:hover {
+            background: var(--muted);
+        }
+        
+        .feature-checkbox.selected {
+            background: var(--secondary);
+        }
+        
+        .feature-checkbox input {
+            display: none;
+        }
+        
+        .checkbox-mark {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .feature-checkbox.selected .checkbox-mark {
+            background: var(--black);
+            color: var(--white);
+        }
+        
+        /* Quadrant Styles */
+        .quadrant-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 3px solid var(--black);
+            margin: 24px 0;
+        }
+        
+        .quadrant-cell {
+            padding: 24px;
+            border: 1px solid var(--black);
+        }
+        
+        .quadrant-cell h4 {
+            margin-bottom: 8px;
+        }
+        
+        .q-tl { background: var(--secondary); }
+        .q-tr { background: #d4ffd4; }
+        .q-bl { background: #ffd4d4; }
+        .q-br { background: var(--muted); }
+        
+        .quadrant-axis {
+            text-align: center;
+            padding: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .result-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .quadrant-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon"><i class="fas fa-magnifying-glass"></i></span>
+                <span>Search Platform</span>
+            </a>
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="sales.html" class="nav-link">Sales</a></li>
+                <li><a href="implementation.html" class="nav-link">Implementation</a></li>
+                <li><a href="tools.html" class="nav-link active">Tools</a></li>
+                <li><a href="reference.html" class="nav-link">Reference</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="hero" style="padding: 48px 0;">
+        <div class="container">
+            <h1>Interactive Tools</h1>
+            <p class="hero-subtitle mb-0">Assessment calculator and strategic decision frameworks</p>
+        </div>
+    </section>
+
+    <!-- Tabs -->
+    <section style="background: var(--white); border-bottom: 3px solid var(--black);">
+        <div class="container">
+            <div class="tabs" style="border-bottom: none; margin-bottom: 0;">
+                <div class="tab active" onclick="showTab('calculator')"><i class="fas fa-calculator"></i> Assessment Calculator</div>
+                <div class="tab" onclick="showTab('quadrants')"><i class="fas fa-chart-bar"></i> Decision Quadrants</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Tab -->
+    <section class="section tab-content active" id="tab-calculator">
+        <div class="container-narrow">
+            
+            <!-- Progress Bar -->
+            <div class="calc-progress">
+                <div class="calc-step active" data-step="1"></div>
+                <div class="calc-step" data-step="2"></div>
+                <div class="calc-step" data-step="3"></div>
+                <div class="calc-step" data-step="4"></div>
+                <div class="calc-step" data-step="5"></div>
+            </div>
+
+            <!-- Step 1: Client Profile -->
+            <div class="calc-section active" id="calc-step-1">
+                <div class="card">
+                    <h2 class="mb-2"><i class="fas fa-user"></i> Client Profile</h2>
+                    <p class="mb-4" style="color: var(--gray);">Tell us about the client's business context</p>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">Industry</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'industry')" data-value="industrial">
+                                <h4><i class="fas fa-industry"></i> Industrial / MRO</h4>
+                                <p>Parts, tools, equipment</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'industry')" data-value="electrical">
+                                <h4><i class="fas fa-bolt"></i> Electrical</h4>
+                                <p>Components & supplies</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'industry')" data-value="hvac">
+                                <h4><i class="fas fa-snowflake"></i> HVAC / Plumbing</h4>
+                                <p>Mechanical systems</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'industry')" data-value="other">
+                                <h4><i class="fas fa-box"></i> Other B2B</h4>
+                                <p>Other distribution</p>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="mb-2">Catalog Size</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'catalogSize')" data-value="small">
+                                <h4>Small</h4>
+                                <p>Under 10K SKUs</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'catalogSize')" data-value="medium">
+                                <h4>Medium</h4>
+                                <p>10K - 100K SKUs</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'catalogSize')" data-value="large">
+                                <h4>Large</h4>
+                                <p>100K - 500K SKUs</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'catalogSize')" data-value="enterprise">
+                                <h4>Enterprise</h4>
+                                <p>500K+ SKUs</p>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="mb-2">Timeline Pressure</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'timeline')" data-value="flexible">
+                                <h4><i class="fas fa-seedling"></i> Flexible</h4>
+                                <p>Phased approach OK</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'timeline')" data-value="moderate">
+                                <h4><i class="fas fa-calendar-days"></i> Moderate</h4>
+                                <p>Target date, some flex</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'timeline')" data-value="tight">
+                                <h4><i class="fas fa-bolt"></i> Tight</h4>
+                                <p>Hard launch date</p>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-lg" onclick="nextStep(2)">Continue →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Data Maturity -->
+            <div class="calc-section" id="calc-step-2">
+                <div class="card">
+                    <h2 class="mb-2"><i class="fas fa-database"></i> Data Maturity</h2>
+                    <p class="mb-4" style="color: var(--gray);">Assess their data readiness</p>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">Product Descriptions</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')" data-value="rich">
+                                <h4><i class="fas fa-circle" style="color: var(--success);"></i> Rich</h4>
+                                <p>Detailed, application-focused</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')" data-value="basic">
+                                <h4><i class="fas fa-circle" style="color: var(--warning);"></i> Basic</h4>
+                                <p>1-2 sentences, boilerplate</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')" data-value="sparse">
+                                <h4><i class="fas fa-circle" style="color: var(--danger);"></i> Sparse</h4>
+                                <p>Titles only or missing</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">Product Attributes</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'dataAttributes')" data-value="rich">
+                                <h4><i class="fas fa-circle" style="color: var(--success);"></i> Comprehensive</h4>
+                                <p>Detailed specs, consistent</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataAttributes')" data-value="basic">
+                                <h4><i class="fas fa-circle" style="color: var(--warning);"></i> Partial</h4>
+                                <p>Some attributes, gaps</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataAttributes')" data-value="sparse">
+                                <h4><i class="fas fa-circle" style="color: var(--danger);"></i> Minimal</h4>
+                                <p>Few or none</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">Behavioral Data</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'dataBehavioral')" data-value="rich">
+                                <h4><i class="fas fa-circle" style="color: var(--success);"></i> Comprehensive</h4>
+                                <p>Full analytics, 90+ days</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataBehavioral')" data-value="basic">
+                                <h4><i class="fas fa-circle" style="color: var(--warning);"></i> Some</h4>
+                                <p>Basic analytics, limited</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataBehavioral')" data-value="sparse">
+                                <h4><i class="fas fa-circle" style="color: var(--danger);"></i> None</h4>
+                                <p>No analytics or new platform</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">User & Order Data</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'dataUser')" data-value="rich">
+                                <h4><i class="fas fa-circle" style="color: var(--success);"></i> Full</h4>
+                                <p>Accounts + order history</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataUser')" data-value="basic">
+                                <h4><i class="fas fa-circle" style="color: var(--warning);"></i> Partial</h4>
+                                <p>Some user data</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'dataUser')" data-value="sparse">
+                                <h4><i class="fas fa-circle" style="color: var(--danger);"></i> Anonymous</h4>
+                                <p>No user tracking</p>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline" onclick="prevStep(1)">← Back</button>
+                        <button class="btn btn-primary btn-lg" onclick="nextStep(3)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Capacity -->
+            <div class="calc-section" id="calc-step-3">
+                <div class="card">
+                    <h2 class="mb-2"><i class="fas fa-users"></i> Client Capacity</h2>
+                    <p class="mb-4" style="color: var(--gray);">Their ability to manage search</p>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">Who manages search day-to-day?</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'teamCapacity')" data-value="dedicated">
+                                <h4><i class="fas fa-user-tie"></i> Dedicated</h4>
+                                <p>Full-time person or team</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'teamCapacity')" data-value="parttime">
+                                <h4><i class="fas fa-user"></i> Part-Time</h4>
+                                <p>Shared responsibility</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'teamCapacity')" data-value="none">
+                                <h4><i class="fas fa-circle-question"></i> No One</h4>
+                                <p>Not identified</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">Technical expertise</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')" data-value="technical">
+                                <h4><i class="fas fa-wrench"></i> Technical</h4>
+                                <p>APIs, data, configs</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')" data-value="merchandiser">
+                                <h4><i class="fas fa-shopping-bag"></i> Merchandisers</h4>
+                                <p>Business users, dashboards</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')" data-value="basic">
+                                <h4><i class="fas fa-mobile-screen"></i> Non-Technical</h4>
+                                <p>Needs simple interfaces</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2">Review frequency</h4>
+                        <div class="option-grid">
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="weekly">
+                                <h4><i class="fas fa-calendar-week"></i> Weekly+</h4>
+                                <p>Regular attention</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="monthly">
+                                <h4><i class="fas fa-calendar-days"></i> Monthly</h4>
+                                <p>Periodic reviews</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="quarterly">
+                                <h4><i class="fas fa-calendar"></i> Quarterly</h4>
+                                <p>Occasional attention</p>
+                            </button>
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="never">
+                                <h4><i class="fas fa-ban"></i> Rarely</h4>
+                                <p>Set and forget</p>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline" onclick="prevStep(2)">← Back</button>
+                        <button class="btn btn-primary btn-lg" onclick="nextStep(4)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Features -->
+            <div class="calc-section" id="calc-step-4">
+                <div class="card">
+                    <h2 class="mb-2"><i class="fas fa-star"></i> Feature Selection</h2>
+                    <p class="mb-4" style="color: var(--gray);">Select features client is interested in</p>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2"><i class="fas fa-magnifying-glass"></i> Core Search</h4>
+                        <div class="grid grid-3" style="gap: 8px;">
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="autocomplete">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Auto Complete</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="faceted">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Faceted Search</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="partnumber">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Part Number</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="certifications">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Searchable Certifications</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="mb-2"><i class="fas fa-brain"></i> Smart Search</h4>
+                        <div class="grid grid-3" style="gap: 8px;">
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="semantic">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Semantic Search</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="synonyms">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Intelligent Synonyms</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="mlranking">
+                                <span class="checkbox-mark">✓</span>
+                                <span>ML Ranking</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2"><i class="fas fa-lightbulb"></i> Discovery</h4>
+                        <div class="grid grid-3" style="gap: 8px;">
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="recommendations">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Recommendations</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="recentlyordered">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Recently Ordered</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="equivalents">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Cross-Brand Equiv.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2"><i class="fas fa-bullseye"></i> Merchandising</h4>
+                        <div class="grid grid-3" style="gap: 8px;">
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="curations">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Curations</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="dashboard">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Search Dashboard</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="sandbox">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Search Sandbox</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="mb-2"><i class="fas fa-chart-bar"></i> Analytics & Recovery</h4>
+                        <div class="grid grid-3" style="gap: 8px;">
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="analytics">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Analytics</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="abtesting">
+                                <span class="checkbox-mark">✓</span>
+                                <span>A/B Testing</span>
+                            </label>
+                            <label class="feature-checkbox" onclick="toggleFeature(this)">
+                                <input type="checkbox" data-feature="zeroresults">
+                                <span class="checkbox-mark">✓</span>
+                                <span>Zero Results Recovery</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline" onclick="prevStep(3)">← Back</button>
+                        <button class="btn btn-primary btn-lg" onclick="calculateResults()">Calculate Results →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Results -->
+            <div class="calc-section" id="calc-step-5">
+                <div class="card">
+                    <h2 class="mb-2"><i class="fas fa-chart-line"></i> Assessment Results</h2>
+                    <p class="mb-4" style="color: var(--gray);">Recommendations based on your inputs</p>
+                    
+                    <div class="result-grid" id="results-summary">
+                        <!-- Filled by JS -->
+                    </div>
+                    
+                    <div id="results-alerts" class="mb-4">
+                        <!-- Filled by JS -->
+                    </div>
+                    
+                    <div id="results-recommendations" class="mb-4">
+                        <!-- Filled by JS -->
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline" onclick="prevStep(4)">← Back</button>
+                        <button class="btn btn-secondary" onclick="resetCalculator()"><i class="fas fa-arrows-rotate"></i> Start Over</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quadrants Tab -->
+    <section class="section tab-content" id="tab-quadrants">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Decision Quadrants</h2>
+                <p class="section-subtitle">Four strategic frameworks for implementation decisions</p>
+            </div>
+
+            <div class="grid grid-2">
+                <!-- Quadrant 1: Data Quality × Client Capacity -->
+                <div class="card">
+                    <h3 class="mb-2">1. Data Quality × Capacity</h3>
+                    <p style="color: var(--gray);">Question: "How should we deliver this feature?"</p>
+
+                    <div class="quadrant-container">
+                        <div class="quadrant-cell q-tl">
+                            <h4>AUTOMATE</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Rich Data + Low Capacity<br>→ Premium investment, full self-service</p>
+                        </div>
+                        <div class="quadrant-cell q-tr">
+                            <h4>EMPOWER</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Rich Data + High Capacity<br>→ Standard investment, give them tools</p>
+                        </div>
+                        <div class="quadrant-cell q-bl">
+                            <h4><i class="fas fa-triangle-exclamation"></i> DANGER ZONE</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Poor Data + Low Capacity<br>→ Fix data first or we manage</p>
+                        </div>
+                        <div class="quadrant-cell q-br">
+                            <h4>ITERATE</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Poor Data + High Capacity<br>→ MVP now, they fill gaps later</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between" style="font-size: 0.8rem; color: var(--gray);">
+                        <span>← Low Capacity</span>
+                        <span>High Capacity →</span>
+                    </div>
+                </div>
+
+                <!-- Quadrant 2: Importance × Data Quality -->
+                <div class="card">
+                    <h3 class="mb-2">2. Importance × Data</h3>
+                    <p style="color: var(--gray);">Question: "Should we even build this feature?"</p>
+                    
+                    <div class="quadrant-container">
+                        <div class="quadrant-cell q-bl" style="background: #ffcc00;">
+                            <h4>FIX DATA FIRST</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Important + Poor Data<br>→ Invest in AI Enrichment</p>
+                        </div>
+                        <div class="quadrant-cell q-tr">
+                            <h4>INVEST HEAVILY</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Important + Rich Data<br>→ Premium/Polished</p>
+                        </div>
+                        <div class="quadrant-cell q-bl">
+                            <h4>SKIP</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Nice-to-have + Poor Data<br>→ Remove from scope</p>
+                        </div>
+                        <div class="quadrant-cell q-br" style="background: #d4e5ff;">
+                            <h4>OPPORTUNISTIC</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Nice-to-have + Rich Data<br>→ MVP if time permits</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between" style="font-size: 0.8rem; color: var(--gray);">
+                        <span>← Poor Data</span>
+                        <span>Rich Data →</span>
+                    </div>
+                </div>
+
+                <!-- Quadrant 3: Effort × Value -->
+                <div class="card">
+                    <h3 class="mb-2">3. Effort × Value</h3>
+                    <p style="color: var(--gray);">Question: "What should we build first?"</p>
+
+                    <div class="quadrant-container">
+                        <div class="quadrant-cell q-tr">
+                            <h4><i class="fas fa-check"></i> QUICK WINS</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Value + Low Effort<br>→ Do first, high ROI</p>
+                        </div>
+                        <div class="quadrant-cell q-tl">
+                            <h4>STRATEGIC</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Value + High Effort<br>→ Worth it, plan carefully</p>
+                        </div>
+                        <div class="quadrant-cell q-br">
+                            <h4>FILL-INS</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Low Value + Low Effort<br>→ Only if time permits</p>
+                        </div>
+                        <div class="quadrant-cell q-bl">
+                            <h4><i class="fas fa-xmark"></i> AVOID</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Low Value + High Effort<br>→ Don't build</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between" style="font-size: 0.8rem; color: var(--gray);">
+                        <span>← Low Effort</span>
+                        <span>High Effort →</span>
+                    </div>
+                </div>
+
+                <!-- Quadrant 4: Risk × Capacity -->
+                <div class="card">
+                    <h3 class="mb-2">4. Risk × Capacity</h3>
+                    <p style="color: var(--gray);">Question: "How should we support this?"</p>
+                    
+                    <div class="quadrant-container">
+                        <div class="quadrant-cell q-bl" style="background: #9933ff; color: white;">
+                            <h4>MANAGED</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Risk + Low Capacity<br>→ Tier 4: We operate for them</p>
+                        </div>
+                        <div class="quadrant-cell q-tl">
+                            <h4>GUIDED</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Risk + High Capacity<br>→ Tier 3: Monthly check-ins</p>
+                        </div>
+                        <div class="quadrant-cell q-br">
+                            <h4>SELF-SERVE</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Low Risk + Low Capacity<br>→ Tier 2: Docs + guardrails</p>
+                        </div>
+                        <div class="quadrant-cell q-tr">
+                            <h4>HANDS-OFF</h4>
+                            <p class="mb-0" style="font-size: 0.85rem;">Low Risk + High Capacity<br>→ Tier 1: Standard support</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between" style="font-size: 0.8rem; color: var(--gray);">
+                        <span>← Low Capacity</span>
+                        <span>High Capacity →</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Guide -->
+            <div class="card mt-4" style="background: var(--secondary);">
+                <h3 class="mb-3"><i class="fas fa-clipboard-list"></i> How to Use These Quadrants</h3>
+                <div class="grid grid-2">
+                    <div>
+                        <h4>Recommended Sequence</h4>
+                        <ol>
+                            <li class="mb-1"><strong>Quadrant 2</strong> — Should we build it?</li>
+                            <li class="mb-1"><strong>Quadrant 3</strong> — When should we build it?</li>
+                            <li class="mb-1"><strong>Quadrant 1</strong> — How should we deliver it?</li>
+                            <li class="mb-1"><strong>Quadrant 4</strong> — How should we support it?</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h4>Example Walkthrough</h4>
+                        <p class="mb-1"><strong>Feature:</strong> Recommendation Engine</p>
+                        <p class="mb-1">Q2: Important + Poor Data → Fix Data First</p>
+                        <p class="mb-1">Q3: High Value + High Effort → Strategic</p>
+                        <p class="mb-1">Q1: Rich Data + Low Capacity → Automate</p>
+                        <p class="mb-0">Q4: High Risk + Low Capacity → Managed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investment Flow -->
+            <div class="mermaid-container mt-4">
+                <h3 class="mb-3">Complete Investment Decision Flow</h3>
+<pre class="mermaid">
+flowchart TD
+START[Feature Request] --> Q2{Should we build it}
+Q2 --> INVEST[Important Rich: INVEST]
+Q2 --> FIXDATA[Important Poor: FIX DATA]
+Q2 --> SKIP[Nice Poor: SKIP]
+Q2 --> OPP[Nice Rich: OPPORTUNISTIC]
+INVEST --> Q3{When to build}
+FIXDATA --> ENRICH[AI Enrichment Pipeline]
+ENRICH --> Q3
+OPP --> Q3
+Q3 --> NOW[Quick Win: BUILD NOW]
+Q3 --> PLAN[Strategic: PLAN]
+Q3 --> LATER[Low Value: LATER]
+NOW --> Q1{How to deliver}
+PLAN --> Q1
+LATER --> Q1
+Q1 --> LEVEL[Investment Level]
+LEVEL --> Q4{How to support}
+Q4 --> TIER[Support Tier]
+TIER --> SOW[Add to SOW]
+style START fill:#ffff00
+style SKIP fill:#ff3333,color:#fff
+style SOW fill:#00cc66
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <p class="mb-0">Search Platform Documentation Hub</p>
+                <div class="flex gap-2">
+                    <a href="features.html" class="btn btn-outline btn-sm">Features</a>
+                    <a href="implementation.html" class="btn btn-secondary btn-sm">Implementation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // State
+        let assessmentData = {
+            industry: null,
+            catalogSize: null,
+            timeline: null,
+            dataDescriptions: null,
+            dataAttributes: null,
+            dataBehavioral: null,
+            dataUser: null,
+            teamCapacity: null,
+            technicalLevel: null,
+            reviewFrequency: null,
+            selectedFeatures: []
+        };
+
+        // Navigation
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+
+            if (tabId === 'quadrants') {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+        }
+
+        // Calculator functions
+        function selectOption(btn, field) {
+            // Remove selected from siblings
+            btn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            assessmentData[field] = btn.dataset.value;
+        }
+
+        function toggleFeature(label) {
+            label.classList.toggle('selected');
+            const checkbox = label.querySelector('input');
+            const feature = checkbox.dataset.feature;
+            
+            if (label.classList.contains('selected')) {
+                if (!assessmentData.selectedFeatures.includes(feature)) {
+                    assessmentData.selectedFeatures.push(feature);
+                }
+            } else {
+                assessmentData.selectedFeatures = assessmentData.selectedFeatures.filter(f => f !== feature);
+            }
+        }
+
+        function nextStep(step) {
+            document.querySelectorAll('.calc-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('calc-step-' + step).classList.add('active');
+            
+            document.querySelectorAll('.calc-step').forEach((s, i) => {
+                s.classList.remove('active', 'complete');
+                if (i + 1 < step) s.classList.add('complete');
+                if (i + 1 === step) s.classList.add('active');
+            });
+        }
+
+        function prevStep(step) {
+            nextStep(step);
+        }
+
+        function calculateDataScore() {
+            const scores = { rich: 3, basic: 2, sparse: 1 };
+            const fields = ['dataDescriptions', 'dataAttributes', 'dataBehavioral', 'dataUser'];
+            let total = 0, count = 0;
+            
+            fields.forEach(f => {
+                if (assessmentData[f]) {
+                    total += scores[assessmentData[f]];
+                    count++;
+                }
+            });
+            
+            return count > 0 ? total / count : 1;
+        }
+
+        function calculateCapacityScore() {
+            let score = 0;
+            
+            if (assessmentData.teamCapacity === 'dedicated') score += 3;
+            else if (assessmentData.teamCapacity === 'parttime') score += 2;
+            else score += 1;
+            
+            if (assessmentData.technicalLevel === 'technical') score += 3;
+            else if (assessmentData.technicalLevel === 'merchandiser') score += 2;
+            else score += 1;
+            
+            if (assessmentData.reviewFrequency === 'weekly') score += 3;
+            else if (assessmentData.reviewFrequency === 'monthly') score += 2.5;
+            else if (assessmentData.reviewFrequency === 'quarterly') score += 1.5;
+            else score += 1;
+            
+            return score / 3;
+        }
+
+        function calculateSupportTier() {
+            const capacityScore = calculateCapacityScore();
+            const hasComplexFeatures = assessmentData.selectedFeatures.some(f => 
+                ['mlranking', 'recommendations', 'synonyms'].includes(f)
+            );
+            
+            if (hasComplexFeatures && capacityScore < 1.5) return { tier: 4, name: 'Managed Service' };
+            if (hasComplexFeatures) return { tier: 3, name: 'Partnership' };
+            if (capacityScore < 2) return { tier: 2, name: 'Guided' };
+            return { tier: 1, name: 'Self-Service' };
+        }
+
+        function calculateResults() {
+            nextStep(5);
+            
+            const dataScore = calculateDataScore();
+            const capacityScore = calculateCapacityScore();
+            const supportTier = calculateSupportTier();
+            const featureCount = assessmentData.selectedFeatures.length;
+            
+            // Summary cards
+            document.getElementById('results-summary').innerHTML = `
+                <div class="result-card" style="border-left: 6px solid ${dataScore >= 2.5 ? 'var(--success)' : dataScore >= 1.5 ? 'var(--warning)' : 'var(--danger)'};">
+                    <h4>Data Maturity</h4>
+                    <div class="result-value"><i class="fas fa-circle" style="color: ${dataScore >= 2.5 ? 'var(--success)' : dataScore >= 1.5 ? 'var(--warning)' : 'var(--danger)'};"></i></div>
+                    <p class="mb-0">${dataScore.toFixed(1)} / 3.0</p>
+                </div>
+                <div class="result-card" style="border-left: 6px solid ${capacityScore >= 2.5 ? 'var(--success)' : capacityScore >= 1.5 ? 'var(--warning)' : 'var(--danger)'};">
+                    <h4>Capacity</h4>
+                    <div class="result-value"><i class="fas fa-circle" style="color: ${capacityScore >= 2.5 ? 'var(--success)' : capacityScore >= 1.5 ? 'var(--warning)' : 'var(--danger)'};"></i></div>
+                    <p class="mb-0">${capacityScore.toFixed(1)} / 3.0</p>
+                </div>
+                <div class="result-card" style="border-left: 6px solid var(--accent);">
+                    <h4>Support Tier</h4>
+                    <div class="result-value">${supportTier.tier}</div>
+                    <p class="mb-0">${supportTier.name}</p>
+                </div>
+                <div class="result-card" style="border-left: 6px solid var(--primary);">
+                    <h4>Features</h4>
+                    <div class="result-value">${featureCount}</div>
+                    <p class="mb-0">selected</p>
+                </div>
+            `;
+            
+            // Alerts
+            let alerts = '';
+            if (dataScore < 1.5) {
+                alerts += `<div class="alert alert-danger mb-2">
+                    <div class="alert-icon"><i class="fas fa-circle-exclamation"></i></div>
+                    <div>
+                        <div class="alert-title">Data Gaps Detected</div>
+                        <p class="mb-0">Consider AI Enrichment before implementing advanced features.</p>
+                    </div>
+                </div>`;
+            }
+            if (capacityScore < 1.5 && assessmentData.selectedFeatures.some(f => ['mlranking', 'recommendations', 'synonyms'].includes(f))) {
+                alerts += `<div class="alert alert-danger mb-2">
+                    <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                    <div>
+                        <div class="alert-title">Capacity Risk</div>
+                        <p class="mb-0">Selected features need ongoing attention. Consider managed service.</p>
+                    </div>
+                </div>`;
+            }
+            if (dataScore >= 2 && capacityScore >= 2 && featureCount > 0) {
+                alerts += `<div class="alert alert-success mb-2">
+                    <div class="alert-icon"><i class="fas fa-circle-check"></i></div>
+                    <div>
+                        <div class="alert-title">Good Conditions</div>
+                        <p class="mb-0">Data and capacity support the selected features.</p>
+                    </div>
+                </div>`;
+            }
+            document.getElementById('results-alerts').innerHTML = alerts;
+
+            // Recommendations
+            document.getElementById('results-recommendations').innerHTML = `
+                <div class="card" style="background: var(--secondary);">
+                    <h4><i class="fas fa-lightbulb"></i> Recommendations</h4>
+                    <ul>
+                        ${dataScore < 2 ? '<li>Consider AI Enrichment to improve data quality</li>' : ''}
+                        ${assessmentData.timeline === 'tight' ? '<li>Phase advanced features (ML ranking, recommendations) for post-launch</li>' : ''}
+                        ${capacityScore < 1.5 ? '<li>Invest in self-service UX and strong guardrails</li>' : ''}
+                        <li>Support Model: <strong>${supportTier.name}</strong> (Tier ${supportTier.tier})</li>
+                        <li>Start with Core Search features, then layer intelligence</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function resetCalculator() {
+            assessmentData = {
+                industry: null,
+                catalogSize: null,
+                timeline: null,
+                dataDescriptions: null,
+                dataAttributes: null,
+                dataBehavioral: null,
+                dataUser: null,
+                teamCapacity: null,
+                technicalLevel: null,
+                reviewFrequency: null,
+                selectedFeatures: []
+            };
+            
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.feature-checkbox').forEach(f => f.classList.remove('selected'));
+            nextStep(1);
+        }
+
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#ffff00',
+                primaryBorderColor: '#000000',
+                lineColor: '#000000'
+            }
+        });
+    </script>
+</body>
+</html>

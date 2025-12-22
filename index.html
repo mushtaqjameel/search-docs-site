@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Platform Hub | B2B Search Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon"><i class="fas fa-magnifying-glass"></i></span>
+                <span>Search Platform</span>
+            </a>
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="sales.html" class="nav-link">Sales</a></li>
+                <li><a href="implementation.html" class="nav-link">Implementation</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="reference.html" class="nav-link">Reference</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">B2B Search Excellence</div>
+                <h1>Search Platform Documentation Hub</h1>
+                <p class="hero-subtitle">
+                    Everything you need to sell, scope, and implement B2B search solutions. 
+                    30 features, 6 buckets, endless possibilities.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                    <a href="features.html" class="btn btn-primary btn-lg">Explore Features →</a>
+                    <a href="tools.html" class="btn btn-secondary btn-lg">Assessment Tool</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-4">
+                <div class="stat-card">
+                    <div class="stat-value">30</div>
+                    <div class="stat-label">Features</div>
+                </div>
+                <div class="stat-card" style="background: var(--secondary);">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">Buckets</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Pillars</div>
+                </div>
+                <div class="stat-card" style="background: var(--primary); color: white;">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Investment Levels</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buckets Overview -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The 6 Feature Buckets</h2>
+                <p class="section-subtitle">Every search capability organized by what it does for your business</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <a href="features.html?bucket=core" class="bucket-card bucket-core">
+                    <div class="bucket-card-icon"><i class="fas fa-magnifying-glass"></i></div>
+                    <div class="bucket-card-title">Core Search & Findability</div>
+                    <div class="bucket-card-count">7 features</div>
+                    <p class="mt-2" style="font-size: 0.9rem;">Get to products fast. Navigation, filtering, and discovery fundamentals.</p>
+                </a>
+
+                <a href="features.html?bucket=smart" class="bucket-card bucket-smart">
+                    <div class="bucket-card-icon"><i class="fas fa-brain"></i></div>
+                    <div class="bucket-card-title">Smart Search & Relevance</div>
+                    <div class="bucket-card-count">6 features</div>
+                    <p class="mt-2" style="font-size: 0.9rem;">AI that understands intent and ranks results intelligently.</p>
+                </a>
+
+                <a href="features.html?bucket=discovery" class="bucket-card bucket-discovery">
+                    <div class="bucket-card-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="bucket-card-title">Discovery & Reordering</div>
+                    <div class="bucket-card-count">7 features</div>
+                    <p class="mt-2" style="font-size: 0.9rem;">Cross-sell, recommend, and speed up repeat purchases.</p>
+                </a>
+
+                <a href="features.html?bucket=merchandising" class="bucket-card bucket-merchandising">
+                    <div class="bucket-card-icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="bucket-card-title">Merchandising & Control</div>
+                    <div class="bucket-card-count">6 features</div>
+                    <p class="mt-2" style="font-size: 0.9rem;">Business users shape search results and monitor performance.</p>
+                </a>
+
+                <a href="features.html?bucket=recovery" class="bucket-card bucket-recovery">
+                    <div class="bucket-card-icon"><i class="fas fa-shield"></i></div>
+                    <div class="bucket-card-title">Recovery & Resilience</div>
+                    <div class="bucket-card-count">2 features</div>
+                    <p class="mt-2" style="font-size: 0.9rem;">Never dead-end a search. Always provide relevant results.</p>
+                </a>
+
+                <a href="features.html?bucket=analytics" class="bucket-card bucket-analytics">
+                    <div class="bucket-card-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="bucket-card-title">Analytics & Optimization</div>
+                    <div class="bucket-card-count">2 features</div>
+                    <p class="mt-2" style="font-size: 0.9rem;">Measure, learn, and continuously improve search performance.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Three Pillars -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The Three Pillars</h2>
+                <p class="section-subtitle">Every feature rated across three dimensions that determine success</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card">
+                    <div style="font-size: 3rem; margin-bottom: 16px;"><i class="fas fa-database"></i></div>
+                    <h3>Data Dependence</h3>
+                    <p class="mt-2">What data does this feature need to perform well?</p>
+                    <div class="mt-3">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="pillar-dot green"></span>
+                            <span><strong>Green:</strong> Works with basic catalog</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="pillar-dot yellow"></span>
+                            <span><strong>Yellow:</strong> Needs rich data or behavioral</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="pillar-dot red"></span>
+                            <span><strong>Red:</strong> Requires multiple data sources</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-accent">
+                    <div style="font-size: 3rem; margin-bottom: 16px;"><i class="fas fa-users"></i></div>
+                    <h3>Governance Required</h3>
+                    <p class="mt-2">How much ongoing attention does this feature need?</p>
+                    <div class="mt-3">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="pillar-dot green"></span>
+                            <span><strong>Green:</strong> Set and forget</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="pillar-dot yellow"></span>
+                            <span><strong>Yellow:</strong> Periodic review needed</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="pillar-dot red"></span>
+                            <span><strong>Red:</strong> Ongoing attention required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="font-size: 3rem; margin-bottom: 16px;"><i class="fas fa-shield"></i></div>
+                    <h3>Operational Safety</h3>
+                    <p class="mt-2">How risky is this feature to operate?</p>
+                    <div class="mt-3">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="pillar-dot green"></span>
+                            <span><strong>Green:</strong> Idiot-proof, safe to hand off</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="pillar-dot yellow"></span>
+                            <span><strong>Yellow:</strong> Training needed</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="pillar-dot red"></span>
+                            <span><strong>Red:</strong> Expert supervision required</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Quick Access</h2>
+                <p class="section-subtitle">Jump to what you need</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <a href="tools.html" class="card" style="text-decoration: none; color: inherit;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span style="font-size: 2rem;"><i class="fas fa-calculator"></i></span>
+                        <div>
+                            <h3>Assessment Calculator</h3>
+                            <p class="mb-0" style="color: var(--gray);">Interactive client assessment tool</p>
+                        </div>
+                    </div>
+                    <p>Complete assessment with data maturity, capacity scoring, and feature recommendations.</p>
+                    <span class="btn btn-primary btn-sm mt-2">Launch Tool →</span>
+                </a>
+
+                <a href="sales.html" class="card" style="text-decoration: none; color: inherit;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span style="font-size: 2rem;"><i class="fas fa-bullseye"></i></span>
+                        <div>
+                            <h3>Sales Playbook</h3>
+                            <p class="mb-0" style="color: var(--gray);">Personas, problems, discovery questions</p>
+                        </div>
+                    </div>
+                    <p>Everything you need for client conversations — personas, pain points, and objection handling.</p>
+                    <span class="btn btn-secondary btn-sm mt-2">View Playbook →</span>
+                </a>
+
+                <a href="implementation.html" class="card" style="text-decoration: none; color: inherit;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span style="font-size: 2rem;"><i class="fas fa-clipboard-list"></i></span>
+                        <div>
+                            <h3>Data Requirements</h3>
+                            <p class="mb-0" style="color: var(--gray);">What data each feature needs</p>
+                        </div>
+                    </div>
+                    <p>Comprehensive data dependency matrix with Pay Now / Pay Later / AI Enrichment paths.</p>
+                    <span class="btn btn-outline btn-sm mt-2">View Matrix →</span>
+                </a>
+
+                <a href="implementation.html#investment" class="card" style="text-decoration: none; color: inherit;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <span style="font-size: 2rem;"><i class="fas fa-gem"></i></span>
+                        <div>
+                            <h3>Investment Levels</h3>
+                            <p class="mb-0" style="color: var(--gray);">MVP to Premium framework</p>
+                        </div>
+                    </div>
+                    <p>Determine the right investment level for each feature based on data, capacity, and timeline.</p>
+                    <span class="btn btn-accent btn-sm mt-2">Learn More →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Is This For -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Who Is This For?</h2>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 16px;"><i class="fas fa-briefcase"></i></div>
+                    <h3>Sales Teams</h3>
+                    <p class="mt-2">Discovery questions, persona mapping, objection handling, and pitch frameworks.</p>
+                    <a href="sales.html" class="btn btn-outline btn-sm mt-2">Sales Playbook →</a>
+                </div>
+
+                <div class="card card-accent text-center">
+                    <div style="font-size: 3rem; margin-bottom: 16px;"><i class="fas fa-gear"></i></div>
+                    <h3>Implementation</h3>
+                    <p class="mt-2">Data requirements, phasing guides, investment levels, and SOW templates.</p>
+                    <a href="implementation.html" class="btn btn-outline btn-sm mt-2">Tech Guide →</a>
+                </div>
+
+                <div class="card text-center">
+                    <div style="font-size: 3rem; margin-bottom: 16px;"><i class="fas fa-chart-line"></i></div>
+                    <h3>Leadership</h3>
+                    <p class="mt-2">Quick reference, ROI frameworks, and strategic decision tools.</p>
+                    <a href="reference.html" class="btn btn-outline btn-sm mt-2">Quick Ref →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background: var(--black); color: var(--white);">
+        <div class="container text-center">
+            <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Ready to Get Started?</h2>
+            <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 32px;">
+                Run a complete client assessment in under 10 minutes.
+            </p>
+            <a href="tools.html" class="btn btn-secondary btn-lg">Launch Assessment Calculator →</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="grid grid-4">
+                <div>
+                    <h4 style="margin-bottom: 16px;">Search Platform Hub</h4>
+                    <p style="opacity: 0.8;">Complete documentation for B2B search implementation.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 16px;">Documentation</h4>
+                    <ul style="list-style: none; opacity: 0.8;">
+                        <li class="mb-1"><a href="features.html">Features</a></li>
+                        <li class="mb-1"><a href="implementation.html">Implementation</a></li>
+                        <li class="mb-1"><a href="reference.html">Reference</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 16px;">Sales</h4>
+                    <ul style="list-style: none; opacity: 0.8;">
+                        <li class="mb-1"><a href="sales.html#personas">Personas</a></li>
+                        <li class="mb-1"><a href="sales.html#problems">Problems</a></li>
+                        <li class="mb-1"><a href="sales.html#discovery">Discovery</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 16px;">Tools</h4>
+                    <ul style="list-style: none; opacity: 0.8;">
+                        <li class="mb-1"><a href="tools.html">Assessment Calculator</a></li>
+                        <li class="mb-1"><a href="tools.html#quadrants">Decision Quadrants</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4" style="padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.2); opacity: 0.6;">
+                <p class="mb-0">Search Platform Documentation Hub — Built for B2B Excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

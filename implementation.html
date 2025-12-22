@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation Guide | Search Platform Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="nav-logo-icon"><i class="fas fa-search"></i></span>
+                <span>Search Platform</span>
+            </a>
+            <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="features.html" class="nav-link">Features</a></li>
+                <li><a href="sales.html" class="nav-link">Sales</a></li>
+                <li><a href="implementation.html" class="nav-link active">Implementation</a></li>
+                <li><a href="tools.html" class="nav-link">Tools</a></li>
+                <li><a href="reference.html" class="nav-link">Reference</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="hero" style="padding: 48px 0;">
+        <div class="container">
+            <h1>Implementation Guide</h1>
+            <p class="hero-subtitle mb-0">Data requirements, investment levels, and phasing strategies</p>
+        </div>
+    </section>
+
+    <!-- Tabs -->
+    <section style="background: var(--white); border-bottom: 3px solid var(--black);">
+        <div class="container">
+            <div class="tabs" style="border-bottom: none; margin-bottom: 0;">
+                <div class="tab active" onclick="showTab('data')"><i class="fas fa-table-cells"></i> Data Matrix</div>
+                <div class="tab" onclick="showTab('investment')"><i class="fas fa-gem"></i> Investment</div>
+                <div class="tab" onclick="showTab('phasing')"><i class="fas fa-calendar-days"></i> Phasing</div>
+                <div class="tab" onclick="showTab('remediation')"><i class="fas fa-wrench"></i> Data Remediation</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Matrix Tab -->
+    <section class="section tab-content active" id="tab-data">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Data Dependency Matrix</h2>
+                <p class="section-subtitle">What data each feature needs to perform well</p>
+            </div>
+
+            <!-- Data Pillars -->
+            <div class="grid grid-6 mb-4">
+                <div class="card text-center" style="background: #e8f8f5;">
+                    <div style="font-size: 2rem;"><i class="fas fa-box"></i></div>
+                    <h4>Catalog</h4>
+                    <p class="mb-0" style="font-size: 0.8rem;">Products & attributes</p>
+                </div>
+                <div class="card text-center" style="background: #fef9e7;">
+                    <div style="font-size: 2rem;"><i class="fas fa-user"></i></div>
+                    <h4>User</h4>
+                    <p class="mb-0" style="font-size: 0.8rem;">Accounts & preferences</p>
+                </div>
+                <div class="card text-center" style="background: #f5eef8;">
+                    <div style="font-size: 2rem;"><i class="fas fa-chart-line"></i></div>
+                    <h4>Behavioral</h4>
+                    <p class="mb-0" style="font-size: 0.8rem;">Searches & clicks</p>
+                </div>
+                <div class="card text-center" style="background: #fadbd8;">
+                    <div style="font-size: 2rem;"><i class="fas fa-dollar-sign"></i></div>
+                    <h4>Transactional</h4>
+                    <p class="mb-0" style="font-size: 0.8rem;">Orders & history</p>
+                </div>
+                <div class="card text-center" style="background: #d6eaf8;">
+                    <div style="font-size: 2rem;"><i class="fas fa-link"></i></div>
+                    <h4>Relationships</h4>
+                    <p class="mb-0" style="font-size: 0.8rem;">Cross-references</p>
+                </div>
+                <div class="card text-center" style="background: #d5f5e3;">
+                    <div style="font-size: 2rem;"><i class="fas fa-gear"></i></div>
+                    <h4>Configuration</h4>
+                    <p class="mb-0" style="font-size: 0.8rem;">Rules & settings</p>
+                </div>
+            </div>
+
+            <!-- Data Matrix Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Primary Data</th>
+                            <th>Data Quality Impact</th>
+                            <th>Day 1 Viable?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Auto Complete</strong></td>
+                            <td>Basic Catalog</td>
+                            <td><span class="pillar-badge green">Low</span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i> Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Faceted Search</strong></td>
+                            <td>Rich Catalog (Attributes)</td>
+                            <td><span class="pillar-badge yellow">Medium</span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i> If attributes exist</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Semantic Search</strong></td>
+                            <td>Rich Catalog (Descriptions)</td>
+                            <td><span class="pillar-badge red">High</span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i> Quality = Description quality</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intelligent Synonyms</strong></td>
+                            <td>Behavioral Data</td>
+                            <td><span class="pillar-badge yellow">Medium</span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i> Needs 30+ days behavior</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ML Ranking</strong></td>
+                            <td>Behavioral + Transactional</td>
+                            <td><span class="pillar-badge red">High</span></td>
+                            <td><i class="fas fa-xmark" style="color: var(--danger);"></i> Needs 90+ days behavior</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recommendations</strong></td>
+                            <td>Behavioral + Transactional + User</td>
+                            <td><span class="pillar-badge red">High</span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i> Can bootstrap with rules</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cross-Brand Equivalents</strong></td>
+                            <td>Relationship Data</td>
+                            <td><span class="pillar-badge yellow">Medium</span></td>
+                            <td><i class="fas fa-triangle-exclamation" style="color: var(--warning);"></i> If cross-refs exist</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recently Ordered</strong></td>
+                            <td>User + Transactional</td>
+                            <td><span class="pillar-badge yellow">Medium</span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i> If order history accessible</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Curations</strong></td>
+                            <td>Basic Catalog</td>
+                            <td><span class="pillar-badge green">Low</span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i> Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Analytics</strong></td>
+                            <td>Behavioral Data</td>
+                            <td><span class="pillar-badge yellow">Medium</span></td>
+                            <td><i class="fas fa-check" style="color: var(--success);"></i> Value grows over time</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Data Quality Impact Diagram -->
+            <div class="mermaid-container mt-4">
+                <h3 class="mb-3">Data Quality to Feature Performance</h3>
+<pre class="mermaid">
+flowchart LR
+POOR[Poor Data] --> MVP[MVP Max]
+ADEQUATE[Adequate Data] --> STANDARD[Standard Max]
+RICH[Rich Data] --> PREMIUM[Premium Possible]
+style POOR fill:#ff3333,color:#fff
+style ADEQUATE fill:#ffcc00
+style RICH fill:#00cc66
+style MVP fill:#999999,color:#fff
+style STANDARD fill:#00cc66
+style PREMIUM fill:#9933ff,color:#fff
+</pre>
+            </div>
+
+            <div class="alert alert-info mt-4">
+                <div class="alert-icon"><i class="fas fa-lightbulb"></i></div>
+                <div>
+                    <div class="alert-title">Core Principle</div>
+                    <p class="mb-0"><strong>Data quality sets the ceiling.</strong> Don't over-invest in polishing features when data bottlenecks limit what's achievable. Fix the data first, or accept lower investment level.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Tab -->
+    <section class="section tab-content" id="tab-investment">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Investment Levels</h2>
+                <p class="section-subtitle">Match investment to what's achievable and needed</p>
+            </div>
+
+            <!-- Investment Levels -->
+            <div class="grid grid-4 mb-4">
+                <div class="card" style="background: #999; color: white;">
+                    <h3><i class="fas fa-wrench"></i> MVP</h3>
+                    <p><strong>Make it work, ship fast</strong></p>
+                    <ul style="list-style: none; font-size: 0.9rem;">
+                        <li>• Minimal time investment</li>
+                        <li>• High manual work expected</li>
+                        <li>• Client fills gaps</li>
+                        <li>• Iterate after launch</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: var(--success);">
+                    <h3><i class="fas fa-gear"></i> Standard</h3>
+                    <p><strong>Solid implementation</strong></p>
+                    <ul style="list-style: none; font-size: 0.9rem;">
+                        <li>• Moderate time investment</li>
+                        <li>• Medium manual work</li>
+                        <li>• Core functionality complete</li>
+                        <li>• Production-ready</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: var(--accent); color: white;">
+                    <h3><i class="fas fa-star"></i> Polished</h3>
+                    <p><strong>Self-service ready</strong></p>
+                    <ul style="list-style: none; font-size: 0.9rem;">
+                        <li>• Significant time investment</li>
+                        <li>• Low manual work</li>
+                        <li>• Full UX and guardrails</li>
+                        <li>• Documentation complete</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: var(--premium); color: white;">
+                    <h3><i class="fas fa-gem"></i> Premium</h3>
+                    <p><strong>Bulletproof, white-glove</strong></p>
+                    <ul style="list-style: none; font-size: 0.9rem;">
+                        <li>• High time investment</li>
+                        <li>• Minimal manual work</li>
+                        <li>• Extensively tested</li>
+                        <li>• Runs itself</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Investment Decision Flow -->
+            <div class="mermaid-container">
+                <h3 class="mb-3">Investment Decision Flow</h3>
+<pre class="mermaid">
+flowchart TD
+START[Feature Selected] --> DATA{Data Quality}
+DATA --> CEILING1[Poor: STANDARD max]
+DATA --> CEILING2[Adequate: POLISHED max]
+DATA --> CEILING3[Rich: PREMIUM possible]
+CEILING1 --> IMPORTANCE{Importance}
+CEILING2 --> IMPORTANCE
+CEILING3 --> IMPORTANCE
+IMPORTANCE --> BASE_HIGH[Critical: POLISHED]
+IMPORTANCE --> BASE_MED[Important: STANDARD]
+IMPORTANCE --> BASE_LOW[Nice: MVP]
+BASE_HIGH --> CAPACITY{Client Capacity}
+BASE_MED --> CAPACITY
+BASE_LOW --> CAPACITY
+CAPACITY --> ADJUST_UP[Low: Up 1 Level]
+CAPACITY --> ADJUST_DOWN[High: Down 1 Level]
+CAPACITY --> NO_ADJUST[Medium: Stay]
+ADJUST_UP --> FINAL[Final Level]
+ADJUST_DOWN --> FINAL
+NO_ADJUST --> FINAL
+style START fill:#ffff00
+style FINAL fill:#00cc66
+</pre>
+            </div>
+
+            <!-- Investment Matrix -->
+            <h3 class="mt-4 mb-3">Quick Reference Matrix</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature Importance</th>
+                            <th>Low Capacity</th>
+                            <th>Medium Capacity</th>
+                            <th>High Capacity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong><i class="fas fa-star"></i> Critical</strong></td>
+                            <td><span class="inv-badge inv-premium">PREMIUM</span></td>
+                            <td><span class="inv-badge inv-polished">POLISHED</span></td>
+                            <td><span class="inv-badge inv-polished">POLISHED</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Important</strong></td>
+                            <td><span class="inv-badge inv-polished">POLISHED</span></td>
+                            <td><span class="inv-badge inv-standard">STANDARD</span></td>
+                            <td><span class="inv-badge inv-standard">STANDARD</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nice-to-have</strong></td>
+                            <td><span class="inv-badge inv-standard">STANDARD</span></td>
+                            <td><span class="inv-badge inv-mvp">MVP</span></td>
+                            <td><span class="inv-badge inv-mvp">MVP</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-warning mt-4">
+                <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                <div>
+                    <div class="alert-title">Remember the Ceiling</div>
+                    <p class="mb-0">The matrix above assumes adequate data. If data is poor, cap the investment regardless of importance. Premium investment with poor data = wasted effort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phasing Tab -->
+    <section class="section tab-content" id="tab-phasing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Implementation Phasing</h2>
+                <p class="section-subtitle">When to enable each feature based on data availability</p>
+            </div>
+
+            <!-- Timeline Diagram -->
+            <div class="mermaid-container">
+                <h3 class="mb-3">Feature Unlock Timeline</h3>
+<pre class="mermaid">
+flowchart LR
+DAY1[DAY 1: Auto Complete, Part Numbers, Facets] --> DAY30[DAY 30: Analytics, Trending, Related]
+DAY30 --> DAY60[DAY 60: Synonyms, Semantic, Testing]
+REL[When Relationships: Equivalents, Kitting]
+USER[When User Data: Reorder, Recommendations, ML]
+style DAY1 fill:#00cc66
+style DAY30 fill:#ffcc00
+style DAY60 fill:#ff9900
+style REL fill:#0066ff,color:#fff
+style USER fill:#9933ff,color:#fff
+</pre>
+            </div>
+
+            <!-- Phase Details -->
+            <div class="grid grid-2 mt-4">
+                <div class="card" style="border-left: 6px solid var(--success);">
+                    <h3><i class="fas fa-calendar-day"></i> Day 1 Features</h3>
+                    <p>Work immediately with basic catalog data:</p>
+                    <ul>
+                        <li><strong>Auto Complete</strong> — Titles and SKUs</li>
+                        <li><strong>Part Number Normalization</strong> — Pattern matching</li>
+                        <li><strong>Basic Facets</strong> — Category/brand filtering</li>
+                        <li><strong>Search Sandbox</strong> — Testing tool</li>
+                        <li><strong>Curations</strong> — Manual merchandising</li>
+                        <li><strong>Configuration Management</strong> — Settings control</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left: 6px solid var(--warning);">
+                    <h3><i class="fas fa-calendar-week"></i> Day 30 Features</h3>
+                    <p>Unlock after behavioral data accumulates:</p>
+                    <ul>
+                        <li><strong>Analytics Dashboard</strong> — Search insights</li>
+                        <li><strong>Trending Search</strong> — Popular queries</li>
+                        <li><strong>Related Searches</strong> — Query suggestions</li>
+                        <li><strong>Zero Results Recovery</strong> — Better with patterns</li>
+                        <li><strong>Query Behaviour Labeller</strong> — Pattern analysis</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left: 6px solid var(--accent);">
+                    <h3><i class="fas fa-calendar-check"></i> Day 60-90 Features</h3>
+                    <p>Require significant behavioral data:</p>
+                    <ul>
+                        <li><strong>Intelligent Synonyms</strong> — Learned mappings</li>
+                        <li><strong>Semantic Search</strong> — Better with enriched content</li>
+                        <li><strong>A/B Testing</strong> — Needs traffic volume</li>
+                        <li><strong>Fallback Search</strong> — Tuned to patterns</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left: 6px solid var(--premium);">
+                    <h3><i class="fas fa-link"></i> When Data Connected</h3>
+                    <p>Dependent on specific integrations:</p>
+                    <ul>
+                        <li><strong>Relationships:</strong> Cross-Brand Equivalents, Kitting</li>
+                        <li><strong>User + Orders:</strong> Recently Ordered, Recommendations</li>
+                        <li><strong>Full Stack:</strong> ML Ranking, Intelligent Auto Complete</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Remediation Tab -->
+    <section class="section tab-content" id="tab-remediation">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Data Remediation</h2>
+                <p class="section-subtitle">Three paths when data has gaps</p>
+            </div>
+
+            <!-- Three Paths -->
+            <div class="grid grid-3 mb-4">
+                <div class="card" style="border-top: 6px solid var(--success);">
+                    <h3><i class="fas fa-dollar-sign"></i> Pay Now</h3>
+                    <p><strong>Fix data first, then implement</strong></p>
+                    <ul>
+                        <li>Higher upfront investment</li>
+                        <li>Better outcomes long-term</li>
+                        <li>Features perform at full potential</li>
+                        <li>No technical debt</li>
+                    </ul>
+                    <p class="mt-3"><strong>Best when:</strong> Budget available, timeline flexible, data gaps are fixable</p>
+                </div>
+
+                <div class="card" style="border-top: 6px solid var(--warning);">
+                    <h3><i class="fas fa-clock"></i> Pay Later</h3>
+                    <p><strong>Launch with gaps, fix when issues arise</strong></p>
+                    <ul>
+                        <li>Lower upfront cost</li>
+                        <li>Risk documented in SOW</li>
+                        <li>Features may underperform</li>
+                        <li>Expect iteration</li>
+                    </ul>
+                    <p class="mt-3"><strong>Best when:</strong> Tight timeline, budget constrained, gaps are manageable</p>
+                </div>
+
+                <div class="card" style="border-top: 6px solid var(--accent);">
+                    <h3><i class="fas fa-robot"></i> AI Enrichment</h3>
+                    <p><strong>Generate missing data with AI</strong></p>
+                    <ul>
+                        <li>Faster than manual</li>
+                        <li>Human-in-the-loop approval</li>
+                        <li>Works for generatable content</li>
+                        <li>Quality depends on source</li>
+                    </ul>
+                    <p class="mt-3"><strong>Best when:</strong> Descriptions/attributes missing, images available, approval process in place</p>
+                </div>
+            </div>
+
+            <!-- AI Enrichment Flow -->
+            <div class="mermaid-container">
+                <h3 class="mb-3">AI Enrichment Pipeline</h3>
+<pre class="mermaid">
+flowchart LR
+SOURCE[Source Data] --> AI[AI Generation]
+AI --> CONFIDENCE{Confidence Score}
+CONFIDENCE --> AUTO[High: Auto Approve]
+CONFIDENCE --> REVIEW[Medium: Human Review]
+CONFIDENCE --> MANUAL[Low: Manual Write]
+AUTO --> FEATURE[Feature Unlocked]
+REVIEW --> FEATURE
+MANUAL --> FEATURE
+style SOURCE fill:#ffff00
+style AI fill:#0066ff,color:#fff
+style FEATURE fill:#00cc66
+</pre>
+            </div>
+
+            <!-- What Can Be Generated -->
+            <h3 class="mt-4 mb-3">What Can AI Generate?</h3>
+            <div class="grid grid-2">
+                <div class="card" style="background: #d4ffd4;">
+                    <h4><i class="fas fa-check" style="color: var(--success);"></i> Generatable</h4>
+                    <ul>
+                        <li><strong>Product descriptions</strong> — From images + titles + specs</li>
+                        <li><strong>Attribute extraction</strong> — From unstructured text</li>
+                        <li><strong>Category suggestions</strong> — From product content</li>
+                        <li><strong>Search keywords</strong> — Synonyms and variants</li>
+                        <li><strong>Short descriptions</strong> — Summaries from long content</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="background: #ffd4d4;">
+                    <h4><i class="fas fa-xmark" style="color: var(--danger);"></i> Not Generatable</h4>
+                    <ul>
+                        <li><strong>Pricing</strong> — Business data</li>
+                        <li><strong>Inventory levels</strong> — Real-time data</li>
+                        <li><strong>Cross-references</strong> — Requires industry knowledge</li>
+                        <li><strong>Order history</strong> — Transactional data</li>
+                        <li><strong>User behavior</strong> — Must be collected</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Decision Flow -->
+            <div class="mermaid-container mt-4">
+                <h3 class="mb-3">Data Remediation Decision Tree</h3>
+<pre class="mermaid">
+flowchart TD
+START[Data Gap Identified] --> TYPE{What type of data}
+TYPE --> GENERABLE{Descriptions: Can AI generate}
+TYPE --> COLLECT[Behavioral: Must Collect]
+TYPE --> SOURCE{Relationships: Source available}
+GENERABLE --> AI[Yes: AI Enrichment]
+GENERABLE --> MANUAL[No: Manual Entry]
+SOURCE --> IMPORT[Yes: Import]
+SOURCE --> BUILD[No: Build Manually]
+COLLECT --> WAIT[Launch Without]
+style START fill:#ff3333,color:#fff
+style AI fill:#0066ff,color:#fff
+style COLLECT fill:#ffcc00
+style WAIT fill:#00cc66
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <p class="mb-0">Search Platform Documentation Hub</p>
+                <div class="flex gap-2">
+                    <a href="features.html" class="btn btn-outline btn-sm">Features</a>
+                    <a href="tools.html" class="btn btn-secondary btn-sm">Assessment Tool</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Tab switching
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+
+            // Re-render mermaid diagrams
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+
+        // Check for hash in URL
+        if (window.location.hash === '#investment') {
+            document.querySelectorAll('.tab')[1].click();
+        }
+
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#ffff00',
+                primaryBorderColor: '#000000',
+                lineColor: '#000000'
+            }
+        });
+    </script>
+</body>
+</html>
