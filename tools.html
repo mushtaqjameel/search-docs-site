@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,38 +14,39 @@
         .calc-section {
             display: none;
         }
+
         .calc-section.active {
             display: block;
             animation: fadeIn 0.3s ease;
         }
-        
+
         .calc-progress {
             display: flex;
             gap: 4px;
             margin-bottom: 32px;
         }
-        
+
         .calc-step {
             flex: 1;
             height: 8px;
             background: var(--muted);
             border: 2px solid var(--black);
         }
-        
+
         .calc-step.active {
             background: var(--secondary);
         }
-        
+
         .calc-step.complete {
             background: var(--success);
         }
-        
+
         .option-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 12px;
         }
-        
+
         .option-btn {
             padding: 16px;
             background: var(--white);
@@ -53,54 +55,54 @@
             text-align: left;
             transition: all 0.15s ease;
         }
-        
+
         .option-btn:hover {
             background: var(--muted);
             transform: translate(-2px, -2px);
             box-shadow: 4px 4px 0 var(--black);
         }
-        
+
         .option-btn.selected {
             background: var(--secondary);
             box-shadow: 4px 4px 0 var(--black);
         }
-        
+
         .option-btn h4 {
             margin-bottom: 4px;
         }
-        
+
         .option-btn p {
             font-size: 0.85rem;
             color: var(--gray);
             margin: 0;
         }
-        
+
         .result-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
             margin-bottom: 32px;
         }
-        
+
         .result-card {
             background: var(--white);
             border: 3px solid var(--black);
             padding: 20px;
             text-align: center;
         }
-        
+
         .result-card h4 {
             font-size: 0.8rem;
             text-transform: uppercase;
             color: var(--gray);
             margin-bottom: 8px;
         }
-        
+
         .result-value {
             font-size: 2rem;
             font-weight: 900;
         }
-        
+
         .feature-checkbox {
             display: flex;
             align-items: center;
@@ -111,19 +113,19 @@
             cursor: pointer;
             transition: all 0.15s ease;
         }
-        
+
         .feature-checkbox:hover {
             background: var(--muted);
         }
-        
+
         .feature-checkbox.selected {
             background: var(--secondary);
         }
-        
+
         .feature-checkbox input {
             display: none;
         }
-        
+
         .checkbox-mark {
             width: 24px;
             height: 24px;
@@ -133,12 +135,12 @@
             justify-content: center;
             font-weight: bold;
         }
-        
+
         .feature-checkbox.selected .checkbox-mark {
             background: var(--black);
             color: var(--white);
         }
-        
+
         /* Quadrant Styles */
         .quadrant-container {
             display: grid;
@@ -147,38 +149,51 @@
             border: 3px solid var(--black);
             margin: 24px 0;
         }
-        
+
         .quadrant-cell {
             padding: 24px;
             border: 1px solid var(--black);
         }
-        
+
         .quadrant-cell h4 {
             margin-bottom: 8px;
         }
-        
-        .q-tl { background: var(--secondary); }
-        .q-tr { background: #d4ffd4; }
-        .q-bl { background: #ffd4d4; }
-        .q-br { background: var(--muted); }
-        
+
+        .q-tl {
+            background: var(--secondary);
+        }
+
+        .q-tr {
+            background: #d4ffd4;
+        }
+
+        .q-bl {
+            background: #ffd4d4;
+        }
+
+        .q-br {
+            background: var(--muted);
+        }
+
         .quadrant-axis {
             text-align: center;
             padding: 8px;
             font-weight: 700;
             font-size: 0.9rem;
         }
-        
+
         @media (max-width: 768px) {
             .result-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .quadrant-container {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="nav">
@@ -211,8 +226,10 @@
     <section style="background: var(--white); border-bottom: 3px solid var(--black);">
         <div class="container">
             <div class="tabs" style="border-bottom: none; margin-bottom: 0;">
-                <div class="tab active" onclick="showTab('calculator')"><i class="fas fa-calculator"></i> Assessment Calculator</div>
-                <div class="tab" onclick="showTab('quadrants')"><i class="fas fa-chart-bar"></i> Decision Quadrants</div>
+                <div class="tab active" onclick="showTab('calculator')"><i class="fas fa-calculator"></i> Assessment
+                    Calculator</div>
+                <div class="tab" onclick="showTab('quadrants')"><i class="fas fa-chart-bar"></i> Decision Quadrants
+                </div>
             </div>
         </div>
     </section>
@@ -220,7 +237,7 @@
     <!-- Calculator Tab -->
     <section class="section tab-content active" id="tab-calculator">
         <div class="container-narrow">
-            
+
             <!-- Progress Bar -->
             <div class="calc-progress">
                 <div class="calc-step active" data-step="1"></div>
@@ -257,7 +274,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="mb-2">Catalog Size</h4>
                         <div class="option-grid">
@@ -273,13 +290,14 @@
                                 <h4>Large</h4>
                                 <p>100K - 500K SKUs</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'catalogSize')" data-value="enterprise">
+                            <button class="option-btn" onclick="selectOption(this, 'catalogSize')"
+                                data-value="enterprise">
                                 <h4>Enterprise</h4>
                                 <p>500K+ SKUs</p>
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="mb-2">Timeline Pressure</h4>
                         <div class="option-grid">
@@ -297,7 +315,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <button class="btn btn-primary btn-lg" onclick="nextStep(2)">Continue →</button>
                 </div>
             </div>
@@ -311,15 +329,18 @@
                     <div class="mb-4">
                         <h4 class="mb-2">Product Descriptions</h4>
                         <div class="option-grid">
-                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')" data-value="rich">
+                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')"
+                                data-value="rich">
                                 <h4><i class="fas fa-circle" style="color: var(--success);"></i> Rich</h4>
                                 <p>Detailed, application-focused</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')" data-value="basic">
+                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')"
+                                data-value="basic">
                                 <h4><i class="fas fa-circle" style="color: var(--warning);"></i> Basic</h4>
                                 <p>1-2 sentences, boilerplate</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')" data-value="sparse">
+                            <button class="option-btn" onclick="selectOption(this, 'dataDescriptions')"
+                                data-value="sparse">
                                 <h4><i class="fas fa-circle" style="color: var(--danger);"></i> Sparse</h4>
                                 <p>Titles only or missing</p>
                             </button>
@@ -333,11 +354,13 @@
                                 <h4><i class="fas fa-circle" style="color: var(--success);"></i> Comprehensive</h4>
                                 <p>Detailed specs, consistent</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'dataAttributes')" data-value="basic">
+                            <button class="option-btn" onclick="selectOption(this, 'dataAttributes')"
+                                data-value="basic">
                                 <h4><i class="fas fa-circle" style="color: var(--warning);"></i> Partial</h4>
                                 <p>Some attributes, gaps</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'dataAttributes')" data-value="sparse">
+                            <button class="option-btn" onclick="selectOption(this, 'dataAttributes')"
+                                data-value="sparse">
                                 <h4><i class="fas fa-circle" style="color: var(--danger);"></i> Minimal</h4>
                                 <p>Few or none</p>
                             </button>
@@ -351,11 +374,13 @@
                                 <h4><i class="fas fa-circle" style="color: var(--success);"></i> Comprehensive</h4>
                                 <p>Full analytics, 90+ days</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'dataBehavioral')" data-value="basic">
+                            <button class="option-btn" onclick="selectOption(this, 'dataBehavioral')"
+                                data-value="basic">
                                 <h4><i class="fas fa-circle" style="color: var(--warning);"></i> Some</h4>
                                 <p>Basic analytics, limited</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'dataBehavioral')" data-value="sparse">
+                            <button class="option-btn" onclick="selectOption(this, 'dataBehavioral')"
+                                data-value="sparse">
                                 <h4><i class="fas fa-circle" style="color: var(--danger);"></i> None</h4>
                                 <p>No analytics or new platform</p>
                             </button>
@@ -379,7 +404,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="flex gap-2">
                         <button class="btn btn-outline" onclick="prevStep(1)">← Back</button>
                         <button class="btn btn-primary btn-lg" onclick="nextStep(3)">Continue →</button>
@@ -396,11 +421,13 @@
                     <div class="mb-4">
                         <h4 class="mb-2">Who manages search day-to-day?</h4>
                         <div class="option-grid">
-                            <button class="option-btn" onclick="selectOption(this, 'teamCapacity')" data-value="dedicated">
+                            <button class="option-btn" onclick="selectOption(this, 'teamCapacity')"
+                                data-value="dedicated">
                                 <h4><i class="fas fa-user-tie"></i> Dedicated</h4>
                                 <p>Full-time person or team</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'teamCapacity')" data-value="parttime">
+                            <button class="option-btn" onclick="selectOption(this, 'teamCapacity')"
+                                data-value="parttime">
                                 <h4><i class="fas fa-user"></i> Part-Time</h4>
                                 <p>Shared responsibility</p>
                             </button>
@@ -414,15 +441,18 @@
                     <div class="mb-4">
                         <h4 class="mb-2">Technical expertise</h4>
                         <div class="option-grid">
-                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')" data-value="technical">
+                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')"
+                                data-value="technical">
                                 <h4><i class="fas fa-wrench"></i> Technical</h4>
                                 <p>APIs, data, configs</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')" data-value="merchandiser">
+                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')"
+                                data-value="merchandiser">
                                 <h4><i class="fas fa-shopping-bag"></i> Merchandisers</h4>
                                 <p>Business users, dashboards</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')" data-value="basic">
+                            <button class="option-btn" onclick="selectOption(this, 'technicalLevel')"
+                                data-value="basic">
                                 <h4><i class="fas fa-mobile-screen"></i> Non-Technical</h4>
                                 <p>Needs simple interfaces</p>
                             </button>
@@ -432,25 +462,29 @@
                     <div class="mb-4">
                         <h4 class="mb-2">Review frequency</h4>
                         <div class="option-grid">
-                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="weekly">
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')"
+                                data-value="weekly">
                                 <h4><i class="fas fa-calendar-week"></i> Weekly+</h4>
                                 <p>Regular attention</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="monthly">
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')"
+                                data-value="monthly">
                                 <h4><i class="fas fa-calendar-days"></i> Monthly</h4>
                                 <p>Periodic reviews</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="quarterly">
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')"
+                                data-value="quarterly">
                                 <h4><i class="fas fa-calendar"></i> Quarterly</h4>
                                 <p>Occasional attention</p>
                             </button>
-                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')" data-value="never">
+                            <button class="option-btn" onclick="selectOption(this, 'reviewFrequency')"
+                                data-value="never">
                                 <h4><i class="fas fa-ban"></i> Rarely</h4>
                                 <p>Set and forget</p>
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="flex gap-2">
                         <button class="btn btn-outline" onclick="prevStep(2)">← Back</button>
                         <button class="btn btn-primary btn-lg" onclick="nextStep(4)">Continue →</button>
@@ -489,7 +523,7 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="mb-2"><i class="fas fa-brain"></i> Smart Search</h4>
                         <div class="grid grid-3" style="gap: 8px;">
@@ -573,7 +607,7 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <div class="flex gap-2">
                         <button class="btn btn-outline" onclick="prevStep(3)">← Back</button>
                         <button class="btn btn-primary btn-lg" onclick="calculateResults()">Calculate Results →</button>
@@ -586,22 +620,23 @@
                 <div class="card">
                     <h2 class="mb-2"><i class="fas fa-chart-line"></i> Assessment Results</h2>
                     <p class="mb-4" style="color: var(--gray);">Recommendations based on your inputs</p>
-                    
+
                     <div class="result-grid" id="results-summary">
                         <!-- Filled by JS -->
                     </div>
-                    
+
                     <div id="results-alerts" class="mb-4">
                         <!-- Filled by JS -->
                     </div>
-                    
+
                     <div id="results-recommendations" class="mb-4">
                         <!-- Filled by JS -->
                     </div>
-                    
+
                     <div class="flex gap-2">
                         <button class="btn btn-outline" onclick="prevStep(4)">← Back</button>
-                        <button class="btn btn-secondary" onclick="resetCalculator()"><i class="fas fa-arrows-rotate"></i> Start Over</button>
+                        <button class="btn btn-secondary" onclick="resetCalculator()"><i
+                                class="fas fa-arrows-rotate"></i> Start Over</button>
                     </div>
                 </div>
             </div>
@@ -625,19 +660,23 @@
                     <div class="quadrant-container">
                         <div class="quadrant-cell q-tl">
                             <h4>AUTOMATE</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Rich Data + Low Capacity<br>→ Premium investment, full self-service</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Rich Data + Low Capacity<br>→ Premium
+                                investment, full self-service</p>
                         </div>
                         <div class="quadrant-cell q-tr">
                             <h4>EMPOWER</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Rich Data + High Capacity<br>→ Standard investment, give them tools</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Rich Data + High Capacity<br>→ Standard
+                                investment, give them tools</p>
                         </div>
                         <div class="quadrant-cell q-bl">
                             <h4><i class="fas fa-triangle-exclamation"></i> DANGER ZONE</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Poor Data + Low Capacity<br>→ Fix data first or we manage</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Poor Data + Low Capacity<br>→ Fix data first or
+                                we manage</p>
                         </div>
                         <div class="quadrant-cell q-br">
                             <h4>ITERATE</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Poor Data + High Capacity<br>→ MVP now, they fill gaps later</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Poor Data + High Capacity<br>→ MVP now, they
+                                fill gaps later</p>
                         </div>
                     </div>
                     <div class="flex justify-between" style="font-size: 0.8rem; color: var(--gray);">
@@ -650,11 +689,12 @@
                 <div class="card">
                     <h3 class="mb-2">2. Importance × Data</h3>
                     <p style="color: var(--gray);">Question: "Should we even build this feature?"</p>
-                    
+
                     <div class="quadrant-container">
                         <div class="quadrant-cell q-bl" style="background: #ffcc00;">
                             <h4>FIX DATA FIRST</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Important + Poor Data<br>→ Invest in AI Enrichment</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Important + Poor Data<br>→ Invest in AI
+                                Enrichment</p>
                         </div>
                         <div class="quadrant-cell q-tr">
                             <h4>INVEST HEAVILY</h4>
@@ -662,11 +702,13 @@
                         </div>
                         <div class="quadrant-cell q-bl">
                             <h4>SKIP</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Nice-to-have + Poor Data<br>→ Remove from scope</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Nice-to-have + Poor Data<br>→ Remove from scope
+                            </p>
                         </div>
                         <div class="quadrant-cell q-br" style="background: #d4e5ff;">
                             <h4>OPPORTUNISTIC</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Nice-to-have + Rich Data<br>→ MVP if time permits</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Nice-to-have + Rich Data<br>→ MVP if time
+                                permits</p>
                         </div>
                     </div>
                     <div class="flex justify-between" style="font-size: 0.8rem; color: var(--gray);">
@@ -683,15 +725,18 @@
                     <div class="quadrant-container">
                         <div class="quadrant-cell q-tr">
                             <h4><i class="fas fa-check"></i> QUICK WINS</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">High Value + Low Effort<br>→ Do first, high ROI</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Value + Low Effort<br>→ Do first, high ROI
+                            </p>
                         </div>
                         <div class="quadrant-cell q-tl">
                             <h4>STRATEGIC</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">High Value + High Effort<br>→ Worth it, plan carefully</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Value + High Effort<br>→ Worth it, plan
+                                carefully</p>
                         </div>
                         <div class="quadrant-cell q-br">
                             <h4>FILL-INS</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Low Value + Low Effort<br>→ Only if time permits</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Low Value + Low Effort<br>→ Only if time permits
+                            </p>
                         </div>
                         <div class="quadrant-cell q-bl">
                             <h4><i class="fas fa-xmark"></i> AVOID</h4>
@@ -708,23 +753,27 @@
                 <div class="card">
                     <h3 class="mb-2">4. Risk × Capacity</h3>
                     <p style="color: var(--gray);">Question: "How should we support this?"</p>
-                    
+
                     <div class="quadrant-container">
                         <div class="quadrant-cell q-bl" style="background: #9933ff; color: white;">
                             <h4>MANAGED</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">High Risk + Low Capacity<br>→ Tier 4: We operate for them</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Risk + Low Capacity<br>→ Tier 4: We operate
+                                for them</p>
                         </div>
                         <div class="quadrant-cell q-tl">
                             <h4>GUIDED</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">High Risk + High Capacity<br>→ Tier 3: Monthly check-ins</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">High Risk + High Capacity<br>→ Tier 3: Monthly
+                                check-ins</p>
                         </div>
                         <div class="quadrant-cell q-br">
                             <h4>SELF-SERVE</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Low Risk + Low Capacity<br>→ Tier 2: Docs + guardrails</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Low Risk + Low Capacity<br>→ Tier 2: Docs +
+                                guardrails</p>
                         </div>
                         <div class="quadrant-cell q-tr">
                             <h4>HANDS-OFF</h4>
-                            <p class="mb-0" style="font-size: 0.85rem;">Low Risk + High Capacity<br>→ Tier 1: Standard support</p>
+                            <p class="mb-0" style="font-size: 0.85rem;">Low Risk + High Capacity<br>→ Tier 1: Standard
+                                support</p>
                         </div>
                     </div>
                     <div class="flex justify-between" style="font-size: 0.8rem; color: var(--gray);">
@@ -761,7 +810,7 @@
             <!-- Investment Flow -->
             <div class="mermaid-container mt-4">
                 <h3 class="mb-3">Complete Investment Decision Flow</h3>
-<pre class="mermaid">
+                <pre class="mermaid">
 flowchart TD
 START[Feature Request] --> Q2{Should we build it}
 Q2 --> INVEST[Important Rich: INVEST]
@@ -793,12 +842,38 @@ style SOW fill:#00cc66
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="flex justify-between items-center flex-wrap gap-3">
-                <p class="mb-0">Search Platform Documentation Hub</p>
-                <div class="flex gap-2">
-                    <a href="features.html" class="btn btn-outline btn-sm">Features</a>
-                    <a href="implementation.html" class="btn btn-secondary btn-sm">Implementation</a>
+            <div class="grid grid-4">
+                <div>
+                    <h4 style="margin-bottom: 16px;">Search Platform Hub</h4>
+                    <p style="opacity: 0.8;">Complete documentation for B2B search implementation.</p>
                 </div>
+                <div>
+                    <h4 style="margin-bottom: 16px;">Documentation</h4>
+                    <ul style="list-style: none; opacity: 0.8;">
+                        <li class="mb-1"><a href="features.html">Features</a></li>
+                        <li class="mb-1"><a href="implementation.html">Implementation</a></li>
+                        <li class="mb-1"><a href="reference.html">Reference</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 16px;">Sales</h4>
+                    <ul style="list-style: none; opacity: 0.8;">
+                        <li class="mb-1"><a href="sales.html#personas">Personas</a></li>
+                        <li class="mb-1"><a href="sales.html#problems">Problems</a></li>
+                        <li class="mb-1"><a href="sales.html#discovery">Discovery</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 16px;">Tools</h4>
+                    <ul style="list-style: none; opacity: 0.8;">
+                        <li class="mb-1"><a href="tools.html">Assessment Calculator</a></li>
+                        <li class="mb-1"><a href="tools.html#quadrants">Decision Quadrants</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4"
+                style="padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.2); opacity: 0.6;">
+                <p class="mb-0">Search Platform Documentation Hub — Built for B2B Excellence</p>
             </div>
         </div>
     </footer>
@@ -827,7 +902,7 @@ style SOW fill:#00cc66
         function showTab(tabId) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             event.target.classList.add('active');
-            
+
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
 
@@ -848,7 +923,7 @@ style SOW fill:#00cc66
             label.classList.toggle('selected');
             const checkbox = label.querySelector('input');
             const feature = checkbox.dataset.feature;
-            
+
             if (label.classList.contains('selected')) {
                 if (!assessmentData.selectedFeatures.includes(feature)) {
                     assessmentData.selectedFeatures.push(feature);
@@ -861,7 +936,7 @@ style SOW fill:#00cc66
         function nextStep(step) {
             document.querySelectorAll('.calc-section').forEach(s => s.classList.remove('active'));
             document.getElementById('calc-step-' + step).classList.add('active');
-            
+
             document.querySelectorAll('.calc-step').forEach((s, i) => {
                 s.classList.remove('active', 'complete');
                 if (i + 1 < step) s.classList.add('complete');
@@ -877,42 +952,42 @@ style SOW fill:#00cc66
             const scores = { rich: 3, basic: 2, sparse: 1 };
             const fields = ['dataDescriptions', 'dataAttributes', 'dataBehavioral', 'dataUser'];
             let total = 0, count = 0;
-            
+
             fields.forEach(f => {
                 if (assessmentData[f]) {
                     total += scores[assessmentData[f]];
                     count++;
                 }
             });
-            
+
             return count > 0 ? total / count : 1;
         }
 
         function calculateCapacityScore() {
             let score = 0;
-            
+
             if (assessmentData.teamCapacity === 'dedicated') score += 3;
             else if (assessmentData.teamCapacity === 'parttime') score += 2;
             else score += 1;
-            
+
             if (assessmentData.technicalLevel === 'technical') score += 3;
             else if (assessmentData.technicalLevel === 'merchandiser') score += 2;
             else score += 1;
-            
+
             if (assessmentData.reviewFrequency === 'weekly') score += 3;
             else if (assessmentData.reviewFrequency === 'monthly') score += 2.5;
             else if (assessmentData.reviewFrequency === 'quarterly') score += 1.5;
             else score += 1;
-            
+
             return score / 3;
         }
 
         function calculateSupportTier() {
             const capacityScore = calculateCapacityScore();
-            const hasComplexFeatures = assessmentData.selectedFeatures.some(f => 
+            const hasComplexFeatures = assessmentData.selectedFeatures.some(f =>
                 ['mlranking', 'recommendations', 'synonyms'].includes(f)
             );
-            
+
             if (hasComplexFeatures && capacityScore < 1.5) return { tier: 4, name: 'Managed Service' };
             if (hasComplexFeatures) return { tier: 3, name: 'Partnership' };
             if (capacityScore < 2) return { tier: 2, name: 'Guided' };
@@ -921,12 +996,12 @@ style SOW fill:#00cc66
 
         function calculateResults() {
             nextStep(5);
-            
+
             const dataScore = calculateDataScore();
             const capacityScore = calculateCapacityScore();
             const supportTier = calculateSupportTier();
             const featureCount = assessmentData.selectedFeatures.length;
-            
+
             // Summary cards
             document.getElementById('results-summary').innerHTML = `
                 <div class="result-card" style="border-left: 6px solid ${dataScore >= 2.5 ? 'var(--success)' : dataScore >= 1.5 ? 'var(--warning)' : 'var(--danger)'};">
@@ -950,7 +1025,7 @@ style SOW fill:#00cc66
                     <p class="mb-0">selected</p>
                 </div>
             `;
-            
+
             // Alerts
             let alerts = '';
             if (dataScore < 1.5) {
@@ -1011,7 +1086,7 @@ style SOW fill:#00cc66
                 reviewFrequency: null,
                 selectedFeatures: []
             };
-            
+
             document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
             document.querySelectorAll('.feature-checkbox').forEach(f => f.classList.remove('selected'));
             nextStep(1);
@@ -1025,4 +1100,5 @@ style SOW fill:#00cc66
         });
     </script>
 </body>
+
 </html>
