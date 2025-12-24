@@ -1,0 +1,342 @@
+import { Tabs, Callout, Steps } from 'nextra/components'
+import Mermaid from '../components/Mermaid'
+import { AlertTriangle, CheckCircle, XCircle, TrendingUp, DollarSign, Clock, Layout, GitMerge, BarChart, Shield, Users, Target } from 'lucide-react'
+
+# Strategy Guide
+
+Core decision-making frameworks for search scoping, investment, and implementation.
+
+<Tabs items={['Prioritization', 'Quadrants', 'Flowcharts']}>
+  
+  <Tabs.Tab>
+    ## Feature Investment Prioritization
+    *Smart Prioritization: How Much to Invest in Each Feature*
+
+    ### Overview
+    Not every feature deserves the same level of polish. We have limited time and budget per engagement. This framework helps determine **how much to invest** in each feature based on what's actually achievable and valuable.
+
+    <Callout type="info" emoji="💡">
+        **Core Principle:** Match investment to the ceiling of what's achievable given data quality, client capacity, and feature importance. Don't over-polish when data is the bottleneck. Don't under-invest when the client can't do manual work.
+    </Callout>
+
+    ### The Investment Levels
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+        <div className="p-6 rounded-xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
+            <h3 className="font-bold text-lg mb-1">MVP</h3>
+            <p className="text-sm font-bold mb-3 text-neutral-500">Make it work, ship fast</p>
+            <ul className="text-xs list-disc pl-4 space-y-1 opacity-80">
+                <li>Minimal time investment</li>
+                <li>High manual work expected</li>
+                <li>Client fills gaps</li>
+            </ul>
+        </div>
+        <div className="p-6 rounded-xl bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800">
+            <h3 className="font-bold text-lg mb-1 text-green-800 dark:text-green-300">Standard</h3>
+            <p className="text-sm font-bold mb-3 text-green-600 dark:text-green-400">Solid implementation</p>
+             <ul className="text-xs list-disc pl-4 space-y-1 opacity-80">
+                <li>Moderate time investment</li>
+                <li>Core functionality complete</li>
+                <li>Production-ready</li>
+            </ul>
+        </div>
+        <div className="p-6 rounded-xl bg-cyan-100 dark:bg-cyan-900/30 border border-cyan-200 dark:border-cyan-800">
+            <h3 className="font-bold text-lg mb-1 text-cyan-800 dark:text-cyan-300">Polished</h3>
+            <p className="text-sm font-bold mb-3 text-cyan-600 dark:text-cyan-400">Self-service ready</p>
+             <ul className="text-xs list-disc pl-4 space-y-1 opacity-80">
+                <li>Significant time investment</li>
+                <li>Full UX and guardrails</li>
+                <li>Documentation complete</li>
+            </ul>
+        </div>
+         <div className="p-6 rounded-xl bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800">
+            <h3 className="font-bold text-lg mb-1 text-purple-800 dark:text-purple-300">Premium</h3>
+            <p className="text-sm font-bold mb-3 text-purple-600 dark:text-purple-400">Bulletproof, white-glove</p>
+             <ul className="text-xs list-disc pl-4 space-y-1 opacity-80">
+                <li>High time investment</li>
+                <li>Minimal manual work</li>
+                <li>Runs itself</li>
+            </ul>
+        </div>
+    </div>
+
+    ### The Decision Framework
+
+    #### Step 1: Assess the Ceiling (Data Quality)
+    **Data quality sets the maximum value a feature can deliver.** No amount of polish overcomes bad data.
+
+    <Mermaid chart={`
+    flowchart TD
+    START([Assess Data Quality]) --> QUALITY{What's the<br>data quality<br>for this feature?}
+    
+    QUALITY -->|🔴 Poor| POOR
+    QUALITY -->|🟡 Adequate| ADEQUATE
+    QUALITY -->|🟢 Rich| RICH
+    
+    subgraph POOR_BOX["🔴 POOR DATA"]
+        POOR[Feature is bottlenecked]
+        POOR --> POOR_MAX[MAX INVESTMENT:<br>MVP or Standard]
+        POOR_MAX --> POOR_FOCUS[Focus: Make it work<br>Improve when data does]
+    end
+    
+    subgraph ADEQUATE_BOX["🟡 ADEQUATE DATA"]
+        ADEQUATE[Feature can perform reasonably]
+        ADEQUATE --> ADEQUATE_MAX[MAX INVESTMENT:<br>Standard or Polished]
+        ADEQUATE_MAX --> ADEQUATE_FOCUS[Focus: Solid implementation<br>Room for optimization]
+    end
+    
+    subgraph RICH_BOX["🟢 RICH DATA"]
+        RICH[Feature can shine]
+        RICH --> RICH_MAX[MAX INVESTMENT:<br>Polished or Premium]
+        RICH_MAX --> RICH_FOCUS[Focus: Investment pays off<br>Go for excellence]
+    end
+    
+    style POOR_BOX fill:#FFE6E6,color:#333
+    style ADEQUATE_BOX fill:#FFFDE6,color:#333
+    style RICH_BOX fill:#E6FFE6,color:#333
+    style POOR fill:#FFB6C1,stroke:none
+    style ADEQUATE fill:#FFD700,stroke:none
+    style RICH fill:#90EE90,stroke:none
+    `} />
+
+    #### Step 2: Apply the Matrix (Importance vs Capacity)
+
+    <Mermaid chart={`
+    flowchart TD
+    subgraph MATRIX["📊 INVESTMENT MATRIX"]
+        direction TB
+        
+        subgraph ROW1["⭐ CRITICAL - Core to Business"]
+            CRIT_LOW["LOW CAPACITY<br>─────────────<br>💎 PREMIUM<br>Must be bulletproof"]
+            CRIT_HIGH["HIGH CAPACITY<br>─────────────<br>✨ POLISHED<br>Solid, they help"]
+        end
+        
+        subgraph ROW2["⭐ IMPORTANT - Key Value"]
+            IMP_LOW["LOW CAPACITY<br>─────────────<br>✨ POLISHED<br>Good self-service"]
+            IMP_HIGH["HIGH CAPACITY<br>─────────────<br>⚙️ STANDARD<br>They can tune it"]
+        end
+        
+        subgraph ROW3["⭐ NICE-TO-HAVE - Secondary"]
+            NICE_LOW["LOW CAPACITY<br>─────────────<br>⚙️ STANDARD<br>Good enough"]
+            NICE_HIGH["HIGH CAPACITY<br>─────────────<br>🔧 MVP<br>Make it work, ship"]
+        end
+    end
+    
+    style CRIT_LOW fill:#DDA0DD,stroke:none
+    style CRIT_HIGH fill:#87CEEB,stroke:none
+    style IMP_LOW fill:#87CEEB,stroke:none
+    style IMP_HIGH fill:#C5E8B7,stroke:none
+    style NICE_LOW fill:#C5E8B7,stroke:none
+    style NICE_HIGH fill:#E8E8E8,stroke:none
+    `} />
+
+    ### 30-Second Assessment
+    1. **Data ceiling?** Poor = Standard max. Adequate = Polished max. Rich = Premium possible.
+    2. **Importance?** Critical = Polished baseline. Important = Standard. Nice-to-have = MVP.
+    3. **Capacity?** Low = +1 level (needs self-service). High = -1 level (they fill gaps).
+    4. **Apply ceiling** — never exceed what data supports.
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## Strategic Quadrants
+    *Strategic Decision Tools for Feature Scoping*
+
+    These four quadrants help make strategic decisions about feature investment.
+
+    <Callout type="info" emoji="🔗">
+         Looking for the interactive tool? Go to [Interactive Tools > Decision Quadrants](/tools?tab=Decisions).
+    </Callout>
+
+    ### 1. Data Quality × Client Capacity
+    **Question: "How should we deliver this feature?"**
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+        <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded border border-green-100 dark:border-green-800">
+            <h4 className="font-bold flex items-center gap-2 text-green-800 dark:text-green-300"><TrendingUp size={20}/> Automate</h4>
+            <p className="text-xs font-bold uppercase mb-2 text-green-600 dark:text-green-400">Rich Data + Low Capacity</p>
+            <p className="text-sm">Invest in **Premium**. Build full self-service because they can't help manually.</p>
+        </div>
+        <div className="p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded border border-cyan-100 dark:border-cyan-800">
+             <h4 className="font-bold flex items-center gap-2 text-cyan-800 dark:text-cyan-300"><Users size={20}/> Empower</h4>
+            <p className="text-xs font-bold uppercase mb-2 text-cyan-600 dark:text-cyan-400">Rich Data + High Capacity</p>
+            <p className="text-sm">Invest in **Standard**. Give them the tools; they can tune it themselves.</p>
+        </div>
+        <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded border border-red-100 dark:border-red-800">
+             <h4 className="font-bold flex items-center gap-2 text-red-800 dark:text-red-300"><AlertTriangle size={20}/> Danger Zone</h4>
+            <p className="text-xs font-bold uppercase mb-2 text-red-600 dark:text-red-400">Poor Data + Low Capacity</p>
+            <p className="text-sm">**Fix Data First**. Nothing works here. Consider Managed Service.</p>
+        </div>
+        <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-100 dark:border-yellow-800">
+             <h4 className="font-bold flex items-center gap-2 text-yellow-800 dark:text-yellow-300"><Clock size={20}/> Iterate</h4>
+            <p className="text-xs font-bold uppercase mb-2 text-yellow-600 dark:text-yellow-400">Poor Data + High Capacity</p>
+            <p className="text-sm">Invest in **MVP**. Ship fast, they fill gaps. Upgrade when data improves.</p>
+        </div>
+    </div>
+
+    ### 2. Importance × Data Quality
+    **Question: "Should we even build this feature?"**
+
+    <Mermaid chart={`
+    flowchart TB
+    subgraph QUADRANT["FEATURE IMPORTANCE × DATA QUALITY"]
+        direction TB
+        subgraph TOP["⭐ HIGH IMPORTANCE"]
+            direction LR
+            subgraph TL["POOR DATA"]
+                TL_TITLE["🔧 FIX DATA FIRST"]
+                TL_WHY["Priority: CRITICAL"]
+            end
+            subgraph TR["RICH DATA"]
+                TR_TITLE["💎 INVEST HEAVILY"]
+                TR_WHY["Priority: DO NOW"]
+            end
+        end
+        subgraph BOTTOM["☆ LOW IMPORTANCE"]
+            direction LR
+            subgraph BL["POOR DATA"]
+                BL_TITLE["⏭️ SKIP"]
+                BL_WHY["Priority: DON'T BOTHER"]
+            end
+            subgraph BR["RICH DATA"]
+                BR_TITLE["🎁 OPPORTUNISTIC"]
+                BR_WHY["Priority: IF TIME PERMITS"]
+            end
+        end
+    end
+    style TL fill:#FFD700
+    style TR fill:#90EE90
+    style BL fill:#FFB6C1
+    style BR fill:#87CEEB
+    `} />
+
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## Decision Flowcharts
+    *Visual Decision Tools for Conversations*
+
+    ### Data Readiness Decision Tree
+    Use during discovery to determine the path forward.
+
+    <Mermaid chart={`
+    flowchart TD
+    START([Client Data Assessment]) --> ASSESS{Readiness Score?}
+    ASSESS -->|🟢 Ready| GREEN[Implement as-is]
+    ASSESS -->|🟡 Needs Work| YELLOW{Budget/Time?}
+    ASSESS -->|🔴 Major Gaps| RED{Budget/Time?}
+    
+    YELLOW -->|Yes| PAYNOW_Y[💰 Pay Now Path]
+    YELLOW -->|No| AI_CHECK_Y{Generatable?}
+    AI_CHECK_Y -->|Yes| AI_Y[🤖 AI Enrichment]
+    AI_CHECK_Y -->|No| PHASE_Y[📋 Phase/Reduce Scope]
+    
+    RED -->|Yes| PAYNOW_R[💰 Pay Now Path]
+    RED -->|No| AI_CHECK_R{Generatable?}
+    AI_CHECK_R -->|Yes| AI_R[🤖 AI Enrichment]
+    AI_CHECK_R -->|No| PAYLATER[⏰ Pay Later Path]
+    
+    style GREEN fill:#90EE90
+    style PAYNOW_Y fill:#FFD700
+    style AI_Y fill:#87CEEB
+    style PAYLATER fill:#FFB6C1
+    `} />
+
+    ### AI Enrichment Decision Flow
+    Determine if AI is the right solution for data gaps.
+
+    <Mermaid chart={`
+    flowchart TD
+    START([Data Gap]) --> GAPTYPE{Type?}
+    GAPTYPE -->|Desc/Attr/Rel| GEN[✅ Generatable]
+    GAPTYPE -->|Images/User/Trans| NOTGEN[❌ Not Generatable]
+    
+    GEN --> CAPACITY{Approval Capacity?}
+    CAPACITY -->|Internal| INT[Client Reviews]
+    CAPACITY -->|Limited| HYBRID[We Assist]
+    CAPACITY -->|None| MANAGED[Managed Service]
+    
+    NOTGEN --> ALT{Alternative?}
+    ALT -->|Images| PHOTO[Manual Photo]
+    ALT -->|History| WAIT[Wait to Accumulate]
+    
+    style GEN fill:#90EE90
+    style NOTGEN fill:#FFB6C1
+    style INT fill:#E6F3FF
+    style MANAGED fill:#FFE6E6
+    `} />
+
+    ### Feature Risk Matrix
+    Combine the 3 Pillars to assess risk.
+
+    <Mermaid chart={`
+    flowchart TD
+    START([Feature X]) --> STEP1
+    
+    subgraph PILLAR1["📊 Data Dependence"]
+        STEP1{Data Available?} -->|🟢 Yes| D_LOW[Risk: Low]
+        STEP1 -->|🔴 No| D_HIGH[Risk: High]
+    end
+    
+    D_LOW --> STEP2
+    D_HIGH --> STEP2
+    
+    subgraph PILLAR2["👥 Governance"]
+        STEP2{Capacity?} -->|🟢 Yes| G_LOW[Risk: Low]
+        STEP2 -->|🔴 No| G_HIGH[Risk: High]
+    end
+    
+    G_LOW --> STEP3
+    G_HIGH --> STEP3
+    
+    subgraph PILLAR3["🛡️ Safety"]
+        STEP3{Safe?} -->|🟢 Yes| S_LOW[Risk: Low]
+        STEP3 -->|🔴 No| S_HIGH[Risk: High]
+    end
+    
+    S_LOW --> COMBINE
+    S_HIGH --> COMBINE
+    
+    COMBINE([Count Red Flags]) --> COUNT{Reds?}
+    COUNT -->|0-1| PROCEED[✅ Standard]
+    COUNT -->|2+| CAUTION[⚠️ Add Safeguards]
+    
+    style D_LOW fill:#90EE90
+    style D_HIGH fill:#FFB6C1
+    style PROCEED fill:#90EE90
+    style CAUTION fill:#FFD700
+    `} />
+
+    ### Implementation Phasing
+    <Mermaid chart={`
+    flowchart TD
+    START([Timeline]) --> DAY1
+    
+    subgraph P1["📅 DAY 1"]
+        DAY1[Launch Ready] --> F1[Auto Complete]
+        DAY1 --> F2[Recent Search]
+        DAY1 --> F3[Basic Facets]
+    end
+    
+    P1 --> P2
+    
+    subgraph P2["📅 DAY 30"]
+        DAY30[Behavioral Start] --> F4[Trending Search]
+        DAY30 --> F5[Analytics]
+    end
+    
+    P2 --> P3
+    
+    subgraph P3["📅 DAY 60-90"]
+        DAY60[ML Features] --> F6[Intelligent Synonyms]
+        DAY60 --> F7[Semantic Search]
+        DAY60 --> F8[ML Ranking]
+    end
+    
+    style P1 fill:#E6F3FF
+    style P2 fill:#E6FFE6
+    style P3 fill:#FFFDE6
+    `} />
+
+  </Tabs.Tab>
+</Tabs>

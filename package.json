@@ -1,0 +1,26 @@
+{
+    "name": "search-platform-hub",
+    "version": "0.1.0",
+    "description": "B2B Search Platform Documentation Hub",
+    "scripts": {
+        "dev": "next dev --webpack",
+        "build": "next build --webpack",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@tailwindcss/postcss": "^4.1.18",
+        "lucide-react": "^0.562.0",
+        "mermaid": "^10.9.5",
+        "next": "^16.1.1",
+        "nextra": "^4.6.1",
+        "nextra-theme-docs": "^4.6.1",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.23",
+        "postcss": "^8.5.6",
+        "tailwindcss": "^4.1.18",
+        "typescript": "^5.9.3"
+    }
+}
