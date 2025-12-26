@@ -19,6 +19,6 @@ export default {
         type: 'separator',
         title: 'Tools & Reference'
     },
-    tools: 'Assessment Calculator',
+    tools: 'Scope Generator',
     reference: 'Quick Reference'
 }

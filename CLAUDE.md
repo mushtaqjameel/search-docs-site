@@ -4,53 +4,64 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a static website documentation hub for a B2B Search Platform. It contains sales materials, feature documentation, implementation guides, and interactive assessment tools for search solutions.
+This is a Nextra-based documentation site for a B2B Search Platform. It contains sales materials, feature documentation, implementation guides, and interactive tools for search solutions.
 
 ## Structure
 
-- **index.html** - Homepage with overview of features, buckets, and navigation
-- **features.html** - Detailed feature documentation (30 features across 6 buckets)
-- **sales.html** - Sales playbook with personas, discovery questions, and objection handling
-- **implementation.html** - Technical implementation guides and data requirements
-- **tools.html** - Interactive assessment calculator and decision quadrants
-- **reference.html** - Quick reference documentation and cheat sheets
-- **styles.css** - Neo-Brutalism design system with CSS custom properties
-- **docs/** - Source markdown documents
+- **content/** - MDX content pages
+  - `index.mdx` - Homepage
+  - `features.mdx` - Feature explorer (30 features)
+  - `sales.mdx` - Sales playbook
+  - `implementation.mdx` - Implementation guides
+  - `tools.mdx` - Interactive scope generator and decision tools
+  - `reference.mdx` - Quick reference
+  - `strategy.mdx` - Strategy frameworks
+- **components/** - React components
+  - `SearchScopeGenerator.jsx` - Main interactive tool for generating implementation scope
+  - `FeaturesList.jsx` - Feature catalog with filtering
+  - `DecisionQuadrants.jsx` - Strategic decision frameworks
+  - `Hero.jsx`, `Stats.jsx`, etc. - UI components
+- **app/** - Next.js app directory
+- **theme.config.jsx** - Nextra theme configuration
 
 ## Development
 
-This is a purely static site with no build process. To develop:
-- Open any HTML file directly in a browser
-- Use a local server for testing: `python3 -m http.server 8000` or similar
+```bash
+npm install
+npm run dev
+```
 
-## External Dependencies
+Site runs at http://localhost:3000
 
-- **Google Fonts**: Inter font family
-- **Font Awesome 6.5.1**: Icon library (loaded from CDN)
-- **Mermaid.js**: Flowchart diagrams (loaded from CDN)
+## Key Components
 
-## Design System
+### SearchScopeGenerator (Primary Interactive Tool)
+Located at `/components/SearchScopeGenerator.jsx`. This tool:
+- Walks through client assessment (profile, data readiness, capacity)
+- Accounts for AI enrichment as a data remediation path
+- Generates phased implementation scope (Day 1, Day 30, Day 60-90)
+- Recommends investment levels per feature
+- Suggests support tier based on capacity
 
-The site uses a Neo-Brutalism design aesthetic defined in `styles.css`:
-- Bold borders (3px), box shadows for depth
-- Primary palette: red (#ff3333), yellow (#ffff00), blue (#0066ff)
-- Six bucket colors for feature categories (core, smart, discovery, merchandising, recovery, analytics)
-- Investment level colors: MVP (gray), Standard (green), Polished (blue), Premium (purple)
-- Pillar rating system: green (easy), yellow (moderate), red (complex)
+### FeaturesList
+Complete feature catalog with:
+- 30 features across 6 buckets
+- Three pillar ratings (data, governance, safety)
+- Filtering and search
+- Expandable detail cards
 
 ## Key Concepts
 
-- **6 Buckets**: Feature categories (Core Search, Smart Search, Discovery, Merchandising, Recovery, Analytics)
-- **3 Pillars**: Rating dimensions (Data Dependence, Governance Required, Operational Safety)
+- **6 Buckets**: Core Search (7), Smart Search (6), Discovery (7), Merchandising (6), Recovery (2), Analytics (2)
+- **3 Pillars**: Data Dependence, Governance Required, Operational Safety (green/yellow/red)
 - **4 Investment Levels**: MVP, Standard, Polished, Premium
-- **30 Features**: Individual search capabilities rated across all pillars
 - **4 Support Tiers**: Self-Service, Guided, Partnership, Managed
+- **Implementation Phases**: Day 1, Day 30, Day 60-90
 
-## Feature Distribution
+## Tech Stack
 
-- Core Search & Findability: 6 features
-- Smart Search & Relevance: 6 features
-- Discovery & Reordering: 8 features
-- Merchandising & Control: 6 features
-- Recovery & Resilience: 2 features
-- Analytics & Optimization: 2 features
+- Next.js 15 + Nextra
+- React 19
+- Tailwind CSS
+- Lucide React icons
+- Mermaid.js for diagrams
