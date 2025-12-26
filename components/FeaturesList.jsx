@@ -1046,8 +1046,8 @@ const MermaidChart = ({ chart, id }) => {
     return <div ref={containerRef} className="mermaid-container overflow-x-auto" />;
 };
 
-// Bucket Overview Component
-const BucketOverview = ({ bucketKey }) => {
+// Bucket Overview Component - Collapsible
+const BucketOverview = ({ bucketKey, isExpanded, onToggle }) => {
     const details = bucketDetails[bucketKey];
     const info = bucketInfo[bucketKey];
     const Icon = info.icon;
@@ -1055,61 +1055,78 @@ const BucketOverview = ({ bucketKey }) => {
     if (!details) return null;
 
     return (
-        <div className="bucket-overview mb-8 rounded-xl border-2 overflow-hidden" style={{ borderColor: info.color }}>
-            {/* Header */}
-            <div className="p-6" style={{ background: `linear-gradient(135deg, ${info.color}15, ${info.color}05)` }}>
-                <div className="flex items-center gap-3 mb-2">
+        <div className="bucket-overview mb-6 rounded-xl border-2 overflow-hidden transition-all" style={{ borderColor: info.color }}>
+            {/* Header - Always visible, clickable to toggle */}
+            <button
+                onClick={onToggle}
+                className="w-full p-4 flex items-center justify-between cursor-pointer hover:opacity-90 transition-opacity"
+                style={{ background: `linear-gradient(135deg, ${info.color}20, ${info.color}10)` }}
+            >
+                <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg" style={{ background: info.color }}>
-                        <Icon size={24} className="text-white" />
+                        <Icon size={20} className="text-white" />
                     </div>
-                    <div>
-                        <h2 className="text-2xl font-bold">{details.title}</h2>
-                        <p className="text-neutral-500 dark:text-neutral-400 italic">{details.tagline}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 p-6">
-                {/* Left: Description & Value Props */}
-                <div className="space-y-4">
-                    <div>
-                        <h3 className="font-bold text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2">
-                            <Info size={16} style={{ color: info.color }} /> What This Bucket Does
-                        </h3>
-                        <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                            {details.description}
-                        </p>
-                    </div>
-
-                    <div className="p-4 rounded-lg bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
-                        <h3 className="font-bold text-red-700 dark:text-red-300 mb-2 flex items-center gap-2">
-                            <AlertTriangle size={16} /> The Problem It Solves
-                        </h3>
-                        <p className="text-red-600 dark:text-red-400 text-sm">
-                            {details.whatItSolves}
-                        </p>
-                    </div>
-
-                    <div>
-                        <h3 className="font-bold text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2">
-                            <CheckCircle size={16} className="text-green-500" /> Key Value Props
-                        </h3>
-                        <ul className="space-y-1">
-                            {details.keyValueProps.map((prop, i) => (
-                                <li key={i} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
-                                    <CheckCircle size={14} className="text-green-500 mt-0.5 shrink-0" />
-                                    <span>{prop}</span>
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="text-left">
+                        <h2 className="text-lg font-bold">{details.title}</h2>
+                        <p className="text-neutral-500 dark:text-neutral-400 text-sm italic">{details.tagline}</p>
                     </div>
                 </div>
-
-                {/* Right: Mermaid Chart */}
-                <div className="flex items-center justify-center p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg">
-                    <MermaidChart chart={details.chart} id={bucketKey} />
+                <div className="flex items-center gap-2 text-sm font-medium" style={{ color: info.color }}>
+                    {isExpanded ? 'Hide Details' : 'Show Details'}
+                    {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                 </div>
-            </div>
+            </button>
+
+            {/* Expandable Content */}
+            {isExpanded && (
+                <div className="p-6 border-t" style={{ borderColor: `${info.color}30` }}>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {/* Left: Description & Value Props */}
+                        <div className="space-y-4">
+                            <div>
+                                <h3 className="font-bold text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2">
+                                    <Info size={16} style={{ color: info.color }} /> What This Bucket Does
+                                </h3>
+                                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                                    {details.description}
+                                </p>
+                            </div>
+
+                            {/* Changed from red/warning to bucket color - this is what we SOLVE */}
+                            <div className="p-4 rounded-lg border" style={{
+                                background: `${info.color}10`,
+                                borderColor: `${info.color}30`
+                            }}>
+                                <h3 className="font-bold mb-2 flex items-center gap-2" style={{ color: info.color }}>
+                                    <Target size={16} /> The Problem We Solve
+                                </h3>
+                                <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+                                    {details.whatItSolves}
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 className="font-bold text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2">
+                                    <CheckCircle size={16} className="text-green-500" /> Key Value Props
+                                </h3>
+                                <ul className="space-y-1">
+                                    {details.keyValueProps.map((prop, i) => (
+                                        <li key={i} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                            <CheckCircle size={14} className="text-green-500 mt-0.5 shrink-0" />
+                                            <span>{prop}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Right: Mermaid Chart */}
+                        <div className="flex items-center justify-center p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg min-h-[200px]">
+                            <MermaidChart chart={details.chart} id={bucketKey} />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
@@ -1120,6 +1137,7 @@ export default function FeaturesList() {
     const [expanded, setExpanded] = useState({});
     const [modalFeature, setModalFeature] = useState(null);
     const [linkCopied, setLinkCopied] = useState(false);
+    const [bucketOverviewExpanded, setBucketOverviewExpanded] = useState(false);
     const featureRefs = useRef({});
 
     // Parse URL params for initial filter and feature deep linking
@@ -1148,6 +1166,11 @@ export default function FeaturesList() {
             }
         }
     }, []);
+
+    // Reset bucket overview when filter changes
+    useEffect(() => {
+        setBucketOverviewExpanded(false);
+    }, [filter]);
 
     const toggleExpand = (id) => {
         setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
@@ -1212,7 +1235,11 @@ export default function FeaturesList() {
 
             {/* Bucket Overview - show when a specific bucket is filtered */}
             {filter !== 'all' && !search && (
-                <BucketOverview bucketKey={filter} />
+                <BucketOverview
+                    bucketKey={filter}
+                    isExpanded={bucketOverviewExpanded}
+                    onToggle={() => setBucketOverviewExpanded(!bucketOverviewExpanded)}
+                />
             )}
 
             {/* Grid */}
