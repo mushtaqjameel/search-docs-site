@@ -1,0 +1,24 @@
+export default {
+    index: {
+        title: 'Getting Started',
+        type: 'page'
+    },
+    '###-sales': {
+        type: 'separator',
+        title: 'Sales & Discovery'
+    },
+    features: 'Feature Explorer',
+    sales: 'Sales Playbook',
+    '###-impl': {
+        type: 'separator',
+        title: 'Implementation'
+    },
+    implementation: 'Implementation Guide',
+    strategy: 'Strategy Guide',
+    '###-tools': {
+        type: 'separator',
+        title: 'Tools & Reference'
+    },
+    tools: 'Assessment Calculator',
+    reference: 'Quick Reference'
+}

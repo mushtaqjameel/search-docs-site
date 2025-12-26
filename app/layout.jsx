@@ -15,14 +15,18 @@ export default async function RootLayout({ children }) {
     return (
         <html lang="en" suppressHydrationWarning>
             <Head />
-            <body className="antialiased">
+            <body className="antialiased" suppressHydrationWarning>
                 <Layout
                     navbar={
                         <Navbar
-                            logo={<span className="font-extrabold text-lg">Search Platform Hub</span>}
+                            logo={
+                                <span className="font-extrabold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                                    🔎 Search Platform Hub
+                                </span>
+                            }
                         />
                     }
-                    footer={<Footer>© {new Date().getFullYear()} Search Platform Team</Footer>}
+                    footer={<Footer>Search Platform Team · B2B Excellence</Footer>}
                     pageMap={pageMap}
                 >
                     {children}

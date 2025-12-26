@@ -112,9 +112,9 @@ export default function AssessmentCalculator() {
     const OptionBtn = ({ label, icon, sub, active, onClick }) => (
         <button
             onClick={onClick}
-            className={`p-4 text-left border-2 rounded-lg transition-all ${active ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-neutral-200 dark:border-neutral-800 hover:border-primary-300'}`}
+            className={`p-4 text-left border-2 rounded-lg transition-all ${active ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20' : 'border-neutral-200 dark:border-neutral-800 hover:border-indigo-300'}`}
         >
-            <div className={`font-bold mb-1 flex items-center gap-2 ${active ? 'text-primary-600 dark:text-primary-400' : ''}`}>
+            <div className={`font-bold mb-1 flex items-center gap-2 ${active ? 'text-indigo-600 dark:text-indigo-400' : ''}`}>
                 {icon} {label}
             </div>
             <div className="text-sm opacity-70">{sub}</div>
@@ -127,7 +127,7 @@ export default function AssessmentCalculator() {
             {/* Progress Bar */}
             <div className="flex gap-2 mb-8">
                 {[1, 2, 3, 4, 5].map(s => (
-                    <div key={s} className={`h-2 flex-1 rounded-full transition-all ${s <= step ? 'bg-primary-500' : 'bg-neutral-200 dark:bg-neutral-800'}`}></div>
+                    <div key={s} className={`h-2 flex-1 rounded-full transition-all ${s <= step ? 'bg-indigo-500' : 'bg-neutral-200 dark:bg-neutral-800'}`}></div>
                 ))}
             </div>
 
@@ -158,7 +158,7 @@ export default function AssessmentCalculator() {
                             </div>
                         </div>
                         <div className="mt-8 flex justify-end">
-                            <button onClick={() => setStep(2)} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
+                            <button onClick={() => setStep(2)} className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 Continue <ArrowRight size={18} />
                             </button>
                         </div>
@@ -200,7 +200,7 @@ export default function AssessmentCalculator() {
                             <button onClick={() => setStep(1)} className="px-6 py-2 border border-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 <ArrowLeft size={18} /> Back
                             </button>
-                            <button onClick={() => setStep(3)} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
+                            <button onClick={() => setStep(3)} className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 Continue <ArrowRight size={18} />
                             </button>
                         </div>
@@ -242,7 +242,7 @@ export default function AssessmentCalculator() {
                             <button onClick={() => setStep(2)} className="px-6 py-2 border border-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 <ArrowLeft size={18} /> Back
                             </button>
-                            <button onClick={() => setStep(4)} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
+                            <button onClick={() => setStep(4)} className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 Continue <ArrowRight size={18} />
                             </button>
                         </div>
@@ -259,9 +259,9 @@ export default function AssessmentCalculator() {
                                 <button
                                     key={f.id}
                                     onClick={() => toggleFeature(f.id)}
-                                    className={`p-3 rounded-lg border-2 text-left flex items-center gap-3 transition-all ${data.selectedFeatures.includes(f.id) ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20' : 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800'}`}
+                                    className={`p-3 rounded-lg border-2 text-left flex items-center gap-3 transition-all ${data.selectedFeatures.includes(f.id) ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20' : 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800'}`}
                                 >
-                                    <div className={`w-6 h-6 rounded flex items-center justify-center border ${data.selectedFeatures.includes(f.id) ? 'bg-primary-500 border-primary-500 text-white' : 'border-neutral-300 dark:border-neutral-700'}`}>
+                                    <div className={`w-6 h-6 rounded flex items-center justify-center border ${data.selectedFeatures.includes(f.id) ? 'bg-indigo-500 border-indigo-500 text-white' : 'border-neutral-300 dark:border-neutral-700'}`}>
                                         {data.selectedFeatures.includes(f.id) && <Check size={14} strokeWidth={4} />}
                                     </div>
                                     <span className="font-medium text-sm">{f.name}</span>
@@ -273,7 +273,7 @@ export default function AssessmentCalculator() {
                             <button onClick={() => setStep(3)} className="px-6 py-2 border border-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 <ArrowLeft size={18} /> Back
                             </button>
-                            <button onClick={calculateResults} className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors shadow-lg shadow-primary-500/20">
+                            <button onClick={calculateResults} className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors shadow-lg shadow-indigo-500/20">
                                 Calculate Results <ArrowRight size={18} />
                             </button>
                         </div>
@@ -295,9 +295,9 @@ export default function AssessmentCalculator() {
                                 <div className="text-2xl font-black">{results.capacityScore} <span className="text-sm font-normal text-neutral-400">/ 3</span></div>
                                 <div className={`text-xs font-bold px-2 py-0.5 rounded-full inline-block mt-1 ${results.capacityScore >= 2.5 ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>{results.clientCapacity}</div>
                             </div>
-                            <div className="p-4 border rounded-xl text-center bg-primary-50 dark:bg-primary-900/20 col-span-2 border-primary-200 dark:border-primary-800">
-                                <div className="text-xs uppercase font-bold text-primary-600 mb-1">Recommended Support</div>
-                                <div className="text-2xl font-black text-primary-700 dark:text-primary-300">{results.supportTier.name}</div>
+                            <div className="p-4 border rounded-xl text-center bg-indigo-50 dark:bg-indigo-900/20 col-span-2 border-indigo-200 dark:border-indigo-800">
+                                <div className="text-xs uppercase font-bold text-indigo-600 mb-1">Recommended Support</div>
+                                <div className="text-2xl font-black text-indigo-700 dark:text-indigo-300">{results.supportTier.name}</div>
                                 <div className="text-xs font-bold opacity-75 mt-1">Tier {results.supportTier.tier}</div>
                             </div>
                         </div>

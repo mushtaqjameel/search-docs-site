@@ -7,7 +7,7 @@ import { AlertTriangle, Check, X, ClipboardList } from 'lucide-react'
 export default function DecisionQuadrants() {
     return (
         <div className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
 
                 {/* Quadrant 1: Data Quality x Capacity */}
                 <div className="p-6 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
