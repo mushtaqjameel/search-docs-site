@@ -10,7 +10,7 @@ This is a Nextra-based documentation site for a B2B Search Platform. It contains
 
 - **content/** - MDX content pages
   - `index.mdx` - Homepage
-  - `features.mdx` - Feature explorer (33 features)
+  - `features.mdx` - Feature explorer (31 features)
   - `sales.mdx` - Sales playbook
   - `implementation.mdx` - Implementation guides
   - `tools.mdx` - Interactive scope generator and decision tools
@@ -45,14 +45,14 @@ Located at `/components/SearchScopeGenerator.jsx`. This tool:
 
 ### FeaturesList
 Complete feature catalog with:
-- 33 features across 6 buckets
+- 31 features across 6 buckets
 - Three pillar ratings (data, governance, safety)
 - Filtering and search
 - Expandable detail cards
 
 ## Key Concepts
 
-- **6 Buckets**: Core Search (8), AI Search (6), Discovery (8), Merchandising (6), Recovery (2), Analytics (3)
+- **6 Buckets**: Core Search (8), AI Search (6), Discovery (8), Merchandising (6), Recovery (2), Analytics (1)
 - **3 Pillars**: Data Dependence, Governance Required, Operational Safety (green/yellow/red)
 - **4 Investment Levels**: MVP, Standard, Polished, Premium
 - **4 Support Tiers**: Self-Service, Guided, Partnership, Managed

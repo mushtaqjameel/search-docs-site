@@ -817,83 +817,6 @@ const features = [
             implementationNotes: 'Value increases over time as data accumulates. Start with basic metrics Day 1, add sophisticated analysis as behavioral data grows. Essential for proving ROI.'
         }
     },
-    {
-        id: 'abtesting',
-        bucket: 'analytics',
-        title: 'A/B Testing Framework',
-        pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' },
-        desc: 'Controlled experimentation platform for statistically rigorous comparison of search configurations, ranking algorithms, and UI variations.',
-        value: 'Search optimization without measurement is just guessing. Make data-driven decisions with statistical confidence.',
-        dataRequired: 'Behavioral Data (click-through, conversions), Transactional Data (revenue attribution)',
-        implementation: 'Define variants, allocate traffic, collect data, analyze with statistical rigor. Requires sufficient traffic volume.',
-        badge: 'POLISHED',
-        personas: ['Merchandiser', 'Analyst', 'IT/Ops'],
-        problemsSolved: ['Guesswork optimization', 'Validating changes', 'Measuring impact'],
-        fullContent: {
-            whatItSolves: 'Did that synonym change improve conversions? Is the new ranking model better? A/B testing provides the statistical rigor to answer definitively — preventing false positives (thinking something worked when it didn\'t) and false negatives (abandoning changes that would have helped).',
-            keyValueProps: [
-                'Experiment setup: define variants (control vs treatment), success metrics (CTR, conversion, revenue), traffic allocation',
-                'Random assignment: users consistently assigned via stable hashing (same user sees same experience)',
-                'Statistical analysis: significance, confidence intervals, effect sizes',
-                'Multi-Armed Bandit: automatically shift traffic toward winning variants',
-                'Segment analysis: break down results by user segment, device, or category',
-                'Guardrail metrics: monitor for negative side effects (revenue up but satisfaction down)',
-                'Sequential testing: get valid results faster with continuous monitoring',
-                'Holdout groups: persistent control for long-term impact measurement'
-            ],
-            useCases: [
-                'Compare two ranking algorithms with 50/50 traffic split, measure conversion lift with 95% confidence',
-                'Test new auto-complete suggestions against current implementation',
-                'Validate that ML ranking model outperforms rule-based approach before full rollout',
-                'Run multi-variant test of search result layouts to optimize engagement'
-            ],
-            b2bContext: 'For B2B distributors, even small conversion improvements translate to significant revenue. A 2% improvement on $10M in search-attributed revenue is $200K. A/B testing ensures you capture these gains with confidence, not luck.',
-            otherRequirements: [
-                'Integration with Analytics for unified reporting',
-                'Connection to Search Sandbox for experiment setup',
-                'Configuration Management for promoting winners to production'
-            ],
-            implementationNotes: 'Requires sufficient traffic volume for statistical significance — typically 1000+ searches per variant. Start with high-impact, low-risk experiments. Document learnings for organizational knowledge building.'
-        }
-    },
-    {
-        id: 'interleaving',
-        bucket: 'analytics',
-        title: 'Interleaving Testing',
-        pillars: { data: 'yellow', gov: 'yellow', safe: 'green' },
-        desc: 'Highly sensitive ranking comparison that detects quality differences 10-100x faster than traditional A/B testing.',
-        value: 'Detect ranking improvements in hours instead of weeks. Catch 1-2% gains that A/B testing would miss.',
-        dataRequired: 'Behavioral Data (click patterns within sessions)',
-        implementation: 'Results from two algorithms interleaved on same page. User clicks indicate which algorithm surfaces better results.',
-        badge: 'POLISHED',
-        personas: ['Analyst', 'IT/Ops'],
-        problemsSolved: ['Slow experimentation', 'Small sample sizes', 'Detecting subtle improvements'],
-        fullContent: {
-            whatItSolves: 'Traditional A/B testing compares behavior between separate experiences, requiring large sample sizes to detect small differences. Interleaving makes the comparison within a single session — the user sees results from both algorithms mixed together, and their clicks directly indicate which algorithm surfaces more relevant results.',
-            keyValueProps: [
-                'Sample efficiency: detect with 1K-10K queries vs 100K+ for traditional A/B',
-                'Time to decision: hours to days vs weeks to months',
-                'Sensitivity: catches 1-2% gains that A/B testing misses',
-                'Team Draft method: alternating selection from ranked lists preserving position fairness',
-                'Balanced Interleaving: equal representation in top positions for head-to-head comparison',
-                'Probabilistic Interleaving: randomized selection with position weighting to reduce bias'
-            ],
-            useCases: [
-                'Quickly validate ML ranking model before committing to full A/B test',
-                'Compare semantic search configurations to find optimal settings',
-                'Test relevance tuning changes during development cycle',
-                'Evaluate impact of new synonym mappings on result quality'
-            ],
-            b2bContext: 'For B2B sites with lower traffic than consumer sites, interleaving is especially valuable — you can get signal on ranking changes without waiting months for statistical significance. Validate ranking improvements quickly, then run A/B test for business metric confirmation.',
-            otherRequirements: [
-                'Only measures ranking quality (not UI/UX changes)',
-                'Requires sufficient click volume per query',
-                'Works best for head queries with multiple relevant results',
-                'Should be followed by A/B test for business metric validation'
-            ],
-            implementationNotes: 'Recommended workflow: (1) Interleaving to quickly identify promising ranking changes (hours/days), (2) A/B Test to validate business impact (weeks), (3) Rollout via Configuration Management. This two-stage approach maximizes learning velocity while ensuring business outcomes are measured.'
-        }
-    }
 ];
 
 const bucketInfo = {
@@ -902,7 +825,7 @@ const bucketInfo = {
     discovery: { icon: Lightbulb, label: 'Discovery', color: '#ff9900', desc: 'Suggest & cross-sell — 8 features' },
     merchandising: { icon: Target, label: 'Merchandising', color: '#ff3333', desc: 'Business user control — 6 features' },
     recovery: { icon: Shield, label: 'Recovery', color: '#00cc66', desc: 'Never lose a sale — 2 features' },
-    analytics: { icon: BarChart, label: 'Analytics', color: '#0066ff', desc: 'Measure & optimize — 3 features' }
+    analytics: { icon: BarChart, label: 'Analytics', color: '#0066ff', desc: 'Measure & optimize — 1 feature' }
 };
 
 // Extended bucket details with mermaid charts and descriptions
@@ -1055,24 +978,19 @@ const bucketDetails = {
     analytics: {
         title: 'Analytics & Optimization',
         tagline: 'Measure, learn, improve',
-        description: 'Understand search performance with deep-dive analytics. Run controlled experiments to validate changes. Make data-driven optimization decisions with statistical confidence. Prove ROI on search investments.',
-        whatItSolves: 'No visibility into search performance. You can\'t improve what you can\'t measure. Teams don\'t know what\'s working or where to focus optimization efforts. Changes are made on gut feel, not data.',
+        description: 'Understand search performance with deep-dive analytics. Measure conversion impact of changes, identify opportunities, and make data-driven optimization decisions. Prove ROI on search investments.',
+        whatItSolves: 'No visibility into search performance. You can\'t improve what you can\'t measure. Teams don\'t know what\'s working or where to focus optimization efforts.',
         keyValueProps: [
             'Deep-dive analytics and reporting',
-            'A/B testing for statistically rigorous experimentation',
-            'Interleaving for rapid ranking comparison (10-100x faster)',
             'Measure conversion impact of changes',
+            'Identify optimization opportunities',
             'Prove ROI on search investments'
         ],
         chart: `flowchart TD
     BUCKET["📊 ANALYTICS & OPTIMIZATION\\n<i>Measure, learn, improve</i>"]
     BUCKET --> F1["Analytics\\nPerformance metrics & reports"]
-    BUCKET --> F2["A/B Testing\\nControlled experimentation"]
-    BUCKET --> F3["Interleaving\\nRapid ranking comparison"]
     style BUCKET fill:#0066ff,color:#fff
-    style F1 fill:#e6f0ff
-    style F2 fill:#e6f0ff
-    style F3 fill:#e6f0ff`
+    style F1 fill:#e6f0ff`
     }
 };
 
