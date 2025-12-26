@@ -1,5 +1,6 @@
 import { Tabs, Callout, Steps } from 'nextra/components'
 import Mermaid from '../components/Mermaid'
+import DiagramWithHelp from '../components/DiagramWithHelp'
 import { Box, User, TrendingUp, DollarSign, Link as LinkIcon, Settings, Calendar, AlertTriangle, CheckCircle, XCircle, Clock, Cpu, CalendarDays, CalendarCheck } from 'lucide-react'
 
 # Implementation Guide
@@ -293,6 +294,75 @@ Data requirements, investment levels, and phasing strategies.
     style AI fill:#0066ff,color:#fff,stroke:none
     style FEATURE fill:#00cc66,stroke:none
     `} />
+
+    <DiagramWithHelp
+      title="Human-in-the-Loop Workflow"
+      introduction="Critical for AI-assisted content generation. Shows how generated content flows through confidence-based routing to appropriate approval queues. The feedback loop ensures continuous improvement."
+      example={{
+        title: "Electrical Components Catalog Enrichment",
+        context: "25,000 SKUs need descriptions. AI generates, humans validate.",
+        steps: [
+          { action: "AI generates descriptions from images + specs", outcome: "Content created for all 25k products", result: "green" },
+          { action: "High confidence (18k items, 72%)", outcome: "Auto-approved, spot-check 5% sample", result: "green" },
+          { action: "Medium confidence (5k items, 20%)", outcome: "Human review queue - 2-3 min each", result: "yellow" },
+          { action: "Low confidence (2k items, 8%)", outcome: "AI draft as starting point, human rewrite", result: "red" },
+          { action: "Feedback loop", outcome: "Edits improve future generations", result: "green" }
+        ],
+        conclusion: "Estimate: 18k auto-approved in day 1. 5k need ~200 review hours over 2 weeks. 2k need dedicated writing time. Total: 3-4 weeks for full catalog."
+      }}
+    >
+      <Mermaid chart={`
+      flowchart TD
+      subgraph GENERATE["🤖 AI GENERATION"]
+          direction LR
+          INPUT[Product Data<br>Images, Specs, Titles] --> GEN[AI Model]
+          GEN --> OUTPUT[Generated Content<br>Descriptions, Attributes]
+      end
+
+      OUTPUT --> SCORE{Confidence<br>Score?}
+
+      subgraph HIGH["✅ HIGH CONFIDENCE (85%+)"]
+          SCORE -->|High| AUTO_Q[Auto-approve Queue]
+          AUTO_Q --> SPOT[Spot Check<br>Sample 5-10%]
+          SPOT -->|OK| PUBLISH_H[Publish]
+          SPOT -->|Issues| FLAG[Flag for<br>Model Review]
+      end
+
+      subgraph MEDIUM["🟡 MEDIUM CONFIDENCE (60-85%)"]
+          SCORE -->|Medium| REVIEW_Q[Human Review Queue]
+          REVIEW_Q --> REVIEWER{Reviewer<br>Action?}
+          REVIEWER -->|Approve| PUBLISH_M[Publish]
+          REVIEWER -->|Edit| EDIT[Edit + Publish]
+          REVIEWER -->|Reject| REGEN[Regenerate<br>or Manual]
+      end
+
+      subgraph LOW["🔴 LOW CONFIDENCE (<60%)"]
+          SCORE -->|Low| MANUAL_Q[Manual Queue]
+          MANUAL_Q --> DRAFT[AI Draft as<br>Starting Point]
+          DRAFT --> REWRITE[Human Rewrite]
+          REWRITE --> PUBLISH_L[Publish]
+      end
+
+      subgraph FEEDBACK["📊 FEEDBACK LOOP"]
+          PUBLISH_H --> METRICS[Track Quality<br>Metrics]
+          PUBLISH_M --> METRICS
+          EDIT --> METRICS
+          PUBLISH_L --> METRICS
+          METRICS --> IMPROVE[Improve Model<br>Thresholds]
+          IMPROVE --> GEN
+      end
+
+      style GENERATE fill:#E3F2FD,stroke:#2196F3
+      style HIGH fill:#E8F5E9,stroke:#4CAF50
+      style MEDIUM fill:#FFF9E6,stroke:#FF9800
+      style LOW fill:#FFEBEE,stroke:#F44336
+      style FEEDBACK fill:#F3E5F5,stroke:#9C27B0
+      `} />
+    </DiagramWithHelp>
+
+    <Callout type="info" emoji="👥">
+        **Capacity Planning:** Budget 2-5 minutes per medium-confidence item for human review. High-volume catalogs (100k+ products) may need staged rollout or dedicated review team.
+    </Callout>
 
     ### What Can AI Generate?
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">

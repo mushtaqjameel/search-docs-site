@@ -1,6 +1,7 @@
 import { Tabs, Callout, Steps } from 'nextra/components'
 import Mermaid from '../components/Mermaid'
-import { AlertTriangle, CheckCircle, XCircle, TrendingUp, DollarSign, Clock, Layout, GitMerge, BarChart, Shield, Users, Target } from 'lucide-react'
+import DiagramWithHelp from '../components/DiagramWithHelp'
+import { AlertTriangle, CheckCircle, XCircle, TrendingUp, DollarSign, Clock, Layout, GitMerge, BarChart, Shield, Users, Target, Lightbulb } from 'lucide-react'
 
 # Strategy Guide
 
@@ -58,6 +59,17 @@ Core decision-making frameworks for search scoping, investment, and implementati
                 <li>Runs itself</li>
             </ul>
         </div>
+    </div>
+
+    #### What Each Level Includes
+
+    <div className="overflow-x-auto my-6">
+    | Level | Data Handling | UX/UI | Documentation | Monitoring | Rollback |
+    |-------|--------------|-------|---------------|------------|----------|
+    | **MVP** | Works with existing data | Functional only | Inline comments | Console logs | Manual redeploy |
+    | **Standard** | Basic validation | Clean, consistent | Setup guide + FAQ | Error alerts | Feature flag |
+    | **Polished** | Guardrails + warnings | Self-service friendly | Full docs + training | Dashboards | One-click rollback |
+    | **Premium** | Auto-healing + enrichment | White-glove UX | Video walkthroughs | Proactive alerts | Auto-recovery |
     </div>
 
     ### The Decision Framework
@@ -136,6 +148,132 @@ Core decision-making frameworks for search scoping, investment, and implementati
     3. **Capacity?** Low = +1 level (needs self-service). High = -1 level (they fill gaps).
     4. **Apply ceiling** — never exceed what data supports.
 
+    ---
+
+    ### Secondary Factors
+
+    After the primary matrix, consider these tie-breakers:
+
+    <div className="overflow-x-auto my-6">
+    | Factor | ↑ Push Higher | ↓ Push Lower |
+    |--------|---------------|--------------|
+    | **Timeline** | Plenty of time | Tight deadline |
+    | **Budget** | Healthy margin | Tight budget |
+    | **Reusability** | First implementation (template for future clients) | One-off customization |
+    | **Visibility** | Demo feature, high exposure | Backend, rarely seen |
+    </div>
+
+    ### Pillar-Specific Investment Guidance
+
+    Use the 3 Pillars to refine investment within each level:
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+        <div className="p-4 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800">
+            <h4 className="font-bold text-indigo-800 dark:text-indigo-300">Data Dependence</h4>
+            <p className="text-xs text-indigo-600 dark:text-indigo-400 mt-2">If data pillar is RED:</p>
+            <ul className="text-xs mt-1 space-y-1 text-indigo-700 dark:text-indigo-300">
+                <li>Add data validation layer</li>
+                <li>Build graceful degradation</li>
+                <li>Create "missing data" UX</li>
+            </ul>
+        </div>
+        <div className="p-4 rounded-lg bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-800">
+            <h4 className="font-bold text-violet-800 dark:text-violet-300">Governance Required</h4>
+            <p className="text-xs text-violet-600 dark:text-violet-400 mt-2">If governance pillar is RED:</p>
+            <ul className="text-xs mt-1 space-y-1 text-violet-700 dark:text-violet-300">
+                <li>Add approval workflows</li>
+                <li>Build audit logging</li>
+                <li>Create review dashboards</li>
+            </ul>
+        </div>
+        <div className="p-4 rounded-lg bg-fuchsia-50 dark:bg-fuchsia-900/20 border border-fuchsia-200 dark:border-fuchsia-800">
+            <h4 className="font-bold text-fuchsia-800 dark:text-fuchsia-300">Operational Safety</h4>
+            <p className="text-xs text-fuchsia-600 dark:text-fuchsia-400 mt-2">If safety pillar is RED:</p>
+            <ul className="text-xs mt-1 space-y-1 text-fuchsia-700 dark:text-fuchsia-300">
+                <li>Add guardrails and limits</li>
+                <li>Build rollback capability</li>
+                <li>Create monitoring alerts</li>
+            </ul>
+        </div>
+    </div>
+
+    ---
+
+    ### Worked Examples
+
+    <Callout type="info">
+    These examples show how to apply the framework in real scenarios.
+    </Callout>
+
+    <div className="space-y-4 my-6">
+        <details className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
+            <summary className="font-bold cursor-pointer">Example 1: Semantic Search for Industrial Distributor</summary>
+            <div className="mt-3 space-y-2 text-sm">
+                <div><strong>Data:</strong> Rich catalog with good descriptions</div>
+                <div><strong>Importance:</strong> Critical (core search experience)</div>
+                <div><strong>Capacity:</strong> Low (no dedicated search person)</div>
+                <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
+                    <strong>Assessment:</strong> Data ceiling = Premium OK. Critical + Low Capacity = Premium.
+                </div>
+                <div className="font-bold text-purple-600 dark:text-purple-400">→ Result: Premium (self-service, bulletproof)</div>
+            </div>
+        </details>
+
+        <details className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
+            <summary className="font-bold cursor-pointer">Example 2: Synonym Management for E-commerce</summary>
+            <div className="mt-3 space-y-2 text-sm">
+                <div><strong>Data:</strong> Limited search logs (new site)</div>
+                <div><strong>Importance:</strong> Important (helps relevance)</div>
+                <div><strong>Capacity:</strong> High (merchandising team available)</div>
+                <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
+                    <strong>Assessment:</strong> Data ceiling = Standard max. Important + High Capacity = Standard.
+                </div>
+                <div className="font-bold text-green-600 dark:text-green-400">→ Result: Standard (they can manage it)</div>
+            </div>
+        </details>
+
+        <details className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
+            <summary className="font-bold cursor-pointer">Example 3: AI-Powered Recommendations</summary>
+            <div className="mt-3 space-y-2 text-sm">
+                <div><strong>Data:</strong> Poor (no behavioral history)</div>
+                <div><strong>Importance:</strong> Nice-to-have (not core)</div>
+                <div><strong>Capacity:</strong> Medium</div>
+                <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
+                    <strong>Assessment:</strong> Data ceiling = MVP max. Nice-to-have = MVP anyway.
+                </div>
+                <div className="font-bold text-neutral-600 dark:text-neutral-400">→ Result: MVP (or defer until data improves)</div>
+            </div>
+        </details>
+
+        <details className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
+            <summary className="font-bold cursor-pointer">Example 4: Curations for Luxury Retailer</summary>
+            <div className="mt-3 space-y-2 text-sm">
+                <div><strong>Data:</strong> Adequate (good products, some gaps in metadata)</div>
+                <div><strong>Importance:</strong> Critical (brand experience)</div>
+                <div><strong>Capacity:</strong> Low (small team, many responsibilities)</div>
+                <div><strong>Secondary:</strong> High visibility (homepage feature)</div>
+                <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
+                    <strong>Assessment:</strong> Data ceiling = Polished max. Critical + Low = would be Premium, but capped at Polished. High visibility pushes to top of Polished.
+                </div>
+                <div className="font-bold text-cyan-600 dark:text-cyan-400">→ Result: Polished (with extra UX polish for visibility)</div>
+            </div>
+        </details>
+
+        <details className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
+            <summary className="font-bold cursor-pointer">Example 5: Analytics Dashboard</summary>
+            <div className="mt-3 space-y-2 text-sm">
+                <div><strong>Data:</strong> Rich (full behavioral data)</div>
+                <div><strong>Importance:</strong> Important (but not customer-facing)</div>
+                <div><strong>Capacity:</strong> High (data team will own it)</div>
+                <div><strong>Secondary:</strong> Low visibility (internal tool)</div>
+                <div className="pt-2 border-t border-neutral-200 dark:border-neutral-700">
+                    <strong>Assessment:</strong> Data ceiling = Premium OK. Important + High = Standard. Low visibility confirms Standard.
+                </div>
+                <div className="font-bold text-green-600 dark:text-green-400">→ Result: Standard (functional, they customize)</div>
+            </div>
+        </details>
+    </div>
+
   </Tabs.Tab>
 
   <Tabs.Tab>
@@ -150,65 +288,140 @@ Core decision-making frameworks for search scoping, investment, and implementati
 
     ### 1. Data Quality × Client Capacity
     **Question: "How should we deliver this feature?"**
-    
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-        <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded border border-green-100 dark:border-green-800">
-            <h4 className="font-bold flex items-center gap-2 text-green-800 dark:text-green-300"><TrendingUp size={20}/> Automate</h4>
-            <p className="text-xs font-bold uppercase mb-2 text-green-600 dark:text-green-400">Rich Data + Low Capacity</p>
-            <p className="text-sm">Invest in **Premium**. Build full self-service because they can't help manually.</p>
-        </div>
-        <div className="p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded border border-cyan-100 dark:border-cyan-800">
-             <h4 className="font-bold flex items-center gap-2 text-cyan-800 dark:text-cyan-300"><Users size={20}/> Empower</h4>
-            <p className="text-xs font-bold uppercase mb-2 text-cyan-600 dark:text-cyan-400">Rich Data + High Capacity</p>
-            <p className="text-sm">Invest in **Standard**. Give them the tools; they can tune it themselves.</p>
-        </div>
-        <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded border border-red-100 dark:border-red-800">
-             <h4 className="font-bold flex items-center gap-2 text-red-800 dark:text-red-300"><AlertTriangle size={20}/> Danger Zone</h4>
-            <p className="text-xs font-bold uppercase mb-2 text-red-600 dark:text-red-400">Poor Data + Low Capacity</p>
-            <p className="text-sm">**Fix Data First**. Nothing works here. Consider Managed Service.</p>
-        </div>
-        <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-100 dark:border-yellow-800">
-             <h4 className="font-bold flex items-center gap-2 text-yellow-800 dark:text-yellow-300"><Clock size={20}/> Iterate</h4>
-            <p className="text-xs font-bold uppercase mb-2 text-yellow-600 dark:text-yellow-400">Poor Data + High Capacity</p>
-            <p className="text-sm">Invest in **MVP**. Ship fast, they fill gaps. Upgrade when data improves.</p>
-        </div>
-    </div>
+
+    <Mermaid chart={`
+    quadrantChart
+        title How to Deliver This Feature
+        x-axis Poor Data --> Rich Data
+        y-axis Low Capacity --> High Capacity
+        quadrant-1 EMPOWER - Standard
+        quadrant-2 ITERATE - MVP
+        quadrant-3 DANGER ZONE
+        quadrant-4 AUTOMATE - Premium
+    `} />
+
+    | Quadrant | Condition | Investment | Action |
+    |----------|-----------|------------|--------|
+    | **Automate** | Rich Data + Low Capacity | Premium | Build full self-service, they can't help manually |
+    | **Empower** | Rich Data + High Capacity | Standard | Give them tools, they tune it themselves |
+    | **Iterate** | Poor Data + High Capacity | MVP | Ship fast, they fill gaps, upgrade when data improves |
+    | **Danger Zone** | Poor Data + Low Capacity | Fix Data First | Nothing works here, consider Managed Service |
 
     ### 2. Importance × Data Quality
     **Question: "Should we even build this feature?"**
 
     <Mermaid chart={`
-    flowchart TB
-    subgraph QUADRANT["FEATURE IMPORTANCE × DATA QUALITY"]
-        direction TB
-        subgraph TOP["⭐ HIGH IMPORTANCE"]
-            direction LR
-            subgraph TL["POOR DATA"]
-                TL_TITLE["🔧 FIX DATA FIRST"]
-                TL_WHY["Priority: CRITICAL"]
-            end
-            subgraph TR["RICH DATA"]
-                TR_TITLE["💎 INVEST HEAVILY"]
-                TR_WHY["Priority: DO NOW"]
-            end
-        end
-        subgraph BOTTOM["☆ LOW IMPORTANCE"]
-            direction LR
-            subgraph BL["POOR DATA"]
-                BL_TITLE["⏭️ SKIP"]
-                BL_WHY["Priority: DON'T BOTHER"]
-            end
-            subgraph BR["RICH DATA"]
-                BR_TITLE["🎁 OPPORTUNISTIC"]
-                BR_WHY["Priority: IF TIME PERMITS"]
-            end
-        end
-    end
-    style TL fill:#FFD700
-    style TR fill:#90EE90
-    style BL fill:#FFB6C1
-    style BR fill:#87CEEB
+    quadrantChart
+        title Should We Build This Feature
+        x-axis Poor Data --> Rich Data
+        y-axis Low Importance --> High Importance
+        quadrant-1 INVEST HEAVILY
+        quadrant-2 FIX DATA FIRST
+        quadrant-3 SKIP
+        quadrant-4 OPPORTUNISTIC
     `} />
+
+    | Quadrant | Condition | Priority | Action |
+    |----------|-----------|----------|--------|
+    | **Invest Heavily** | High Importance + Rich Data | Do Now | Perfect conditions, invest fully for maximum impact |
+    | **Fix Data First** | High Importance + Poor Data | Critical | Feature matters but data is blocking, fix data first |
+    | **Opportunistic** | Low Importance + Rich Data | If Time Permits | Data supports it but not critical, quick win if budget allows |
+    | **Skip** | Low Importance + Poor Data | Don't Bother | Not important and data won't support it, remove from scope |
+
+    ### 3. Effort × Value
+    **Question: "When should we build this feature?"**
+
+    <Mermaid chart={`
+    quadrantChart
+        title When to Build This Feature
+        x-axis Low Effort --> High Effort
+        y-axis Low Value --> High Value
+        quadrant-1 STRATEGIC
+        quadrant-2 QUICK WINS
+        quadrant-3 FILL-INS
+        quadrant-4 AVOID
+    `} />
+
+    | Quadrant | Condition | Priority | Action |
+    |----------|-----------|----------|--------|
+    | **Quick Wins** | High Value + Low Effort | Do Now | Maximum ROI, these should be in every engagement |
+    | **Strategic** | High Value + High Effort | Plan Carefully | Worth it but requires investment, phase if needed |
+    | **Fill-ins** | Low Value + Low Effort | If Time Permits | Nice to have, add to polish phase |
+    | **Avoid** | Low Value + High Effort | Don't Build | Poor ROI, only if client insists and pays |
+
+    ### 4. Risk × Client Capacity
+    **Question: "How do we support this feature ongoing?"**
+
+    <Mermaid chart={`
+    quadrantChart
+        title How to Support This Feature
+        x-axis Low Capacity --> High Capacity
+        y-axis Low Risk --> High Risk
+        quadrant-1 GUIDED
+        quadrant-2 MANAGED
+        quadrant-3 SELF-SERVE
+        quadrant-4 HANDS-OFF
+    `} />
+
+    | Quadrant | Condition | Support Tier | Action |
+    |----------|-----------|--------------|--------|
+    | **Managed** | High Risk + Low Capacity | Tier 4 | We operate, retainer model, they can't run safely |
+    | **Guided** | High Risk + High Capacity | Tier 3 | Monthly check-ins, consultation hours, risky but capable |
+    | **Self-Serve** | Low Risk + Low Capacity | Tier 2 | Docs + guardrails, quarterly reviews, safe but need help |
+    | **Hands-Off** | Low Risk + High Capacity | Tier 1 | Standard support, they own it, minimal involvement |
+
+    #### Support Tier Reference
+
+    | Position | What It Means | Action |
+    | --- | --- | --- |
+    | **MANAGED** (High Risk + Low Capacity) | They can't operate safely | Tier 4 — We manage for them, retainer model |
+    | **GUIDED** (High Risk + High Capacity) | Risky but they're capable | Tier 3 — Monthly check-ins, consultation hours |
+    | **SELF-SERVE** (Low Risk + Low Capacity) | Safe but they need help | Tier 2 — Strong docs, guardrails, quarterly reviews |
+    | **HANDS-OFF** (Low Risk + High Capacity) | Safe and capable | Tier 1 — Standard support, they own it |
+
+    ---
+
+    ## Using the Quadrants Together
+
+    ### Recommended Sequence
+
+    <Mermaid chart={`
+    flowchart LR
+        Q2[/"1️⃣ Importance × Data<br>Should we build it?"/] --> Q3[/"2️⃣ Effort × Value<br>Build it when?"/]
+        Q3 --> Q1[/"3️⃣ Data × Capacity<br>How to build it?"/]
+        Q1 --> Q4[/"4️⃣ Risk × Capacity<br>How to support it?"/]
+
+        style Q2 fill:#FFD700
+        style Q3 fill:#87CEEB
+        style Q1 fill:#90EE90
+        style Q4 fill:#DDA0DD
+    `} />
+
+    ### Example Walkthrough
+
+    **Feature:** Semantic Search for a client with sparse data and no dedicated team
+
+    | Quadrant | Position | Result |
+    | --- | --- | --- |
+    | **Importance × Data** | Important + Poor Data | FIX DATA FIRST — need AI Enrichment |
+    | **Effort × Value** | High Value + High Effort | STRATEGIC — plan carefully |
+    | **Data × Capacity** | (After enrichment) Rich + Low | AUTOMATE — invest in self-service |
+    | **Risk × Capacity** | Low Risk + Low | SELF-SERVE — Tier 2 support |
+
+    **Conclusion:** Invest in AI Enrichment first. Then build Polished Semantic Search with strong self-service UX. Include Tier 2 support (quarterly reviews).
+
+    ---
+
+    ### Quick Reference
+
+    | Quadrant | Axes | Key Insight |
+    | --- | --- | --- |
+    | **Data × Capacity** | Data Quality vs. Client Capacity | Determines build approach |
+    | **Importance × Data** | Feature Importance vs. Data Quality | Determines if we should build |
+    | **Effort × Value** | Effort vs. Value | Determines when to build |
+    | **Risk × Capacity** | Risk vs. Client Capacity | Determines support model |
+
+    *Use these quadrants during discovery and scoping to make strategic investment decisions.*
 
   </Tabs.Tab>
 
@@ -216,127 +429,320 @@ Core decision-making frameworks for search scoping, investment, and implementati
     ## Decision Flowcharts
     *Visual Decision Tools for Conversations*
 
-    ### Data Readiness Decision Tree
-    Use during discovery to determine the path forward.
+    <DiagramWithHelp
+      title="Data Readiness Decision Tree"
+      introduction="Use this during discovery calls to assess data gaps for each feature you're considering. It helps determine whether to proceed as-is, remediate the data first, or defer the feature to a later phase."
+      example={{
+        title: "Semantic Search for Industrial Distributor",
+        context: "Client wants semantic search but has sparse product descriptions.",
+        steps: [
+          { action: "Check: Required data available?", outcome: "Partial - only titles, no rich descriptions", result: "yellow" },
+          { action: "Gap Size?", outcome: "Medium - 60% of catalog missing descriptions", result: "yellow" },
+          { action: "AI Generatable?", outcome: "Yes - can generate from images + specs", result: "green" },
+          { action: "Follow AI Enrichment path", outcome: "Generate + Review workflow", result: "green" }
+        ],
+        conclusion: "Proceed with AI Enrichment. Estimate 2-3 weeks for generation + human review before semantic search can perform well."
+      }}
+    >
+      <Mermaid chart={`
+      flowchart TD
+      START([Feature X: Assess Data]) --> CHECK{Required Data<br>Available?}
 
-    <Mermaid chart={`
-    flowchart TD
-    START([Client Data Assessment]) --> ASSESS{Readiness Score?}
-    ASSESS -->|🟢 Ready| GREEN[Implement as-is]
-    ASSESS -->|🟡 Needs Work| YELLOW{Budget/Time?}
-    ASSESS -->|🔴 Major Gaps| RED{Budget/Time?}
-    
-    YELLOW -->|Yes| PAYNOW_Y[💰 Pay Now Path]
-    YELLOW -->|No| AI_CHECK_Y{Generatable?}
-    AI_CHECK_Y -->|Yes| AI_Y[🤖 AI Enrichment]
-    AI_CHECK_Y -->|No| PHASE_Y[📋 Phase/Reduce Scope]
-    
-    RED -->|Yes| PAYNOW_R[💰 Pay Now Path]
-    RED -->|No| AI_CHECK_R{Generatable?}
-    AI_CHECK_R -->|Yes| AI_R[🤖 AI Enrichment]
-    AI_CHECK_R -->|No| PAYLATER[⏰ Pay Later Path]
-    
-    style GREEN fill:#90EE90
-    style PAYNOW_Y fill:#FFD700
-    style AI_Y fill:#87CEEB
-    style PAYLATER fill:#FFB6C1
-    `} />
+      CHECK -->|🟢 Complete| QUALITY{Data Quality?}
+      CHECK -->|🟡 Partial| GAP{Gap Size?}
+      CHECK -->|🔴 Missing| CRITICAL{Feature Critical?}
 
-    ### AI Enrichment Decision Flow
-    Determine if AI is the right solution for data gaps.
+      subgraph READY["✅ DATA READY PATH"]
+          QUALITY -->|Rich| RICH[Premium Investment<br>Full capability]
+          QUALITY -->|Adequate| ADEQUATE[Standard Investment<br>Core functionality]
+          QUALITY -->|Poor| POOR[MVP Investment<br>Fix data in parallel]
+      end
 
-    <Mermaid chart={`
-    flowchart TD
-    START([Data Gap]) --> GAPTYPE{Type?}
-    GAPTYPE -->|Desc/Attr/Rel| GEN[✅ Generatable]
-    GAPTYPE -->|Images/User/Trans| NOTGEN[❌ Not Generatable]
-    
-    GEN --> CAPACITY{Approval Capacity?}
-    CAPACITY -->|Internal| INT[Client Reviews]
-    CAPACITY -->|Limited| HYBRID[We Assist]
-    CAPACITY -->|None| MANAGED[Managed Service]
-    
-    NOTGEN --> ALT{Alternative?}
-    ALT -->|Images| PHOTO[Manual Photo]
-    ALT -->|History| WAIT[Wait to Accumulate]
-    
-    style GEN fill:#90EE90
-    style NOTGEN fill:#FFB6C1
-    style INT fill:#E6F3FF
-    style MANAGED fill:#FFE6E6
-    `} />
+      subgraph REMEDIATION["🔧 REMEDIATION PATH"]
+          GAP -->|Small| FIX_SMALL[Quick Fix<br>Manual entry or cleanup]
+          GAP -->|Medium| ASSESS_AI{AI Generatable?}
+          GAP -->|Large| FIX_LARGE[Major Effort<br>Pay Now or Pay Later]
 
-    ### Feature Risk Matrix
-    Combine the 3 Pillars to assess risk.
+          ASSESS_AI -->|Yes| AI_PATH[AI Enrichment<br>Generate + Review]
+          ASSESS_AI -->|No| MANUAL[Manual Entry<br>or External Source]
+      end
 
-    <Mermaid chart={`
-    flowchart TD
-    START([Feature X]) --> STEP1
-    
-    subgraph PILLAR1["📊 Data Dependence"]
-        STEP1{Data Available?} -->|🟢 Yes| D_LOW[Risk: Low]
-        STEP1 -->|🔴 No| D_HIGH[Risk: High]
-    end
-    
-    D_LOW --> STEP2
-    D_HIGH --> STEP2
-    
-    subgraph PILLAR2["👥 Governance"]
-        STEP2{Capacity?} -->|🟢 Yes| G_LOW[Risk: Low]
-        STEP2 -->|🔴 No| G_HIGH[Risk: High]
-    end
-    
-    G_LOW --> STEP3
-    G_HIGH --> STEP3
-    
-    subgraph PILLAR3["🛡️ Safety"]
-        STEP3{Safe?} -->|🟢 Yes| S_LOW[Risk: Low]
-        STEP3 -->|🔴 No| S_HIGH[Risk: High]
-    end
-    
-    S_LOW --> COMBINE
-    S_HIGH --> COMBINE
-    
-    COMBINE([Count Red Flags]) --> COUNT{Reds?}
-    COUNT -->|0-1| PROCEED[✅ Standard]
-    COUNT -->|2+| CAUTION[⚠️ Add Safeguards]
-    
-    style D_LOW fill:#90EE90
-    style D_HIGH fill:#FFB6C1
-    style PROCEED fill:#90EE90
-    style CAUTION fill:#FFD700
-    `} />
+      subgraph DEFER["⏸️ DEFER PATH"]
+          CRITICAL -->|Yes| BLOCK[Blocker<br>Fix before proceeding]
+          CRITICAL -->|No| PHASE[Phase 2+<br>Launch without]
+      end
 
-    ### Implementation Phasing
-    <Mermaid chart={`
-    flowchart TD
-    START([Timeline]) --> DAY1
-    
-    subgraph P1["📅 DAY 1"]
-        DAY1[Launch Ready] --> F1[Auto Complete]
-        DAY1 --> F2[Recent Search]
-        DAY1 --> F3[Basic Facets]
-    end
-    
-    P1 --> P2
-    
-    subgraph P2["📅 DAY 30"]
-        DAY30[Behavioral Start] --> F4[Trending Search]
-        DAY30 --> F5[Analytics]
-    end
-    
-    P2 --> P3
-    
-    subgraph P3["📅 DAY 60-90"]
-        DAY60[ML Features] --> F6[Intelligent Synonyms]
-        DAY60 --> F7[Semantic Search]
-        DAY60 --> F8[ML Ranking]
-    end
-    
-    style P1 fill:#E6F3FF
-    style P2 fill:#E6FFE6
-    style P3 fill:#FFFDE6
-    `} />
+      RICH --> IMPLEMENT([Proceed to Implementation])
+      ADEQUATE --> IMPLEMENT
+      POOR --> IMPLEMENT
+      FIX_SMALL --> IMPLEMENT
+      AI_PATH --> IMPLEMENT
+      MANUAL --> IMPLEMENT
+      FIX_LARGE --> IMPLEMENT
+      PHASE --> IMPLEMENT
+      BLOCK --> REMEDIATION
+
+      style READY fill:#E6FFE6,stroke:#4CAF50
+      style REMEDIATION fill:#FFF9E6,stroke:#FF9800
+      style DEFER fill:#FFE6E6,stroke:#F44336
+      style IMPLEMENT fill:#E3F2FD,stroke:#2196F3
+      `} />
+    </DiagramWithHelp>
+
+    <DiagramWithHelp
+      title="AI Enrichment Decision Flow"
+      introduction="When you've identified a data gap, use this to determine if AI can help fill it and what approval process to use. Not all data types can be AI-generated — this diagram helps set realistic expectations."
+      example={{
+        title: "Missing Product Descriptions for Fastener Catalog",
+        context: "Client has 50,000 fasteners with only part numbers and specs, no searchable descriptions.",
+        steps: [
+          { action: "Data type?", outcome: "Descriptions needed", result: "green" },
+          { action: "Can AI generate?", outcome: "Yes - from images + spec sheets", result: "green" },
+          { action: "Expected confidence?", outcome: "Medium (70%) - technical products need review", result: "yellow" },
+          { action: "Client review capacity?", outcome: "Low - no dedicated team", result: "red" },
+          { action: "Approval model", outcome: "Managed Service - we review and approve", result: "yellow" }
+        ],
+        conclusion: "AI Enrichment is viable. Use Managed Service model where we handle review. Budget 3-4 weeks for full catalog enrichment."
+      }}
+    >
+      <Mermaid chart={`
+      flowchart TD
+      START([Data Gap Identified]) --> TYPE{What type<br>of data?}
+
+      subgraph GENERATABLE["✅ AI CAN GENERATE"]
+          TYPE -->|Descriptions| DESC[Product Descriptions<br>From images + specs]
+          TYPE -->|Attributes| ATTR[Attribute Extraction<br>From unstructured text]
+          TYPE -->|Categories| CAT[Category Suggestions<br>From product content]
+          TYPE -->|Keywords| KEY[Search Keywords<br>Synonyms and variants]
+      end
+
+      subgraph NOT_GENERATABLE["❌ AI CANNOT GENERATE"]
+          TYPE -->|Images| IMG[Need Photography<br>or Manufacturer Assets]
+          TYPE -->|Pricing| PRICE[Business Data<br>Must be provided]
+          TYPE -->|Inventory| INV[Real-time Data<br>Integration required]
+          TYPE -->|Cross-refs| XREF[Industry Knowledge<br>Manual or import]
+          TYPE -->|History| HIST[Transactional Data<br>Must accumulate]
+      end
+
+      DESC --> CONFIDENCE
+      ATTR --> CONFIDENCE
+      CAT --> CONFIDENCE
+      KEY --> CONFIDENCE
+
+      CONFIDENCE{AI Confidence<br>Level?} -->|High 85%+| AUTO[Auto-Approve<br>Spot-check sample]
+      CONFIDENCE -->|Medium 60-85%| REVIEW[Human Review<br>Approve/Edit/Reject]
+      CONFIDENCE -->|Low <60%| MANUAL_WRITE[Manual Write<br>AI as starting point]
+
+      AUTO --> CAPACITY{Client Review<br>Capacity?}
+      REVIEW --> CAPACITY
+      MANUAL_WRITE --> CAPACITY
+
+      CAPACITY -->|High: Internal team| SELF[Self-Service<br>We train, they review]
+      CAPACITY -->|Medium: Some bandwidth| HYBRID[Hybrid<br>We assist with review]
+      CAPACITY -->|Low: No bandwidth| MANAGED[Managed Service<br>We review + approve]
+
+      IMG --> ALT([Alternative Sources])
+      PRICE --> ALT
+      INV --> ALT
+      XREF --> ALT
+      HIST --> ALT
+
+      style GENERATABLE fill:#E6FFE6,stroke:#4CAF50
+      style NOT_GENERATABLE fill:#FFE6E6,stroke:#F44336
+      style AUTO fill:#C8E6C9
+      style REVIEW fill:#FFF9C4
+      style MANUAL_WRITE fill:#FFCDD2
+      style SELF fill:#E3F2FD
+      style HYBRID fill:#F3E5F5
+      style MANAGED fill:#FCE4EC
+      `} />
+    </DiagramWithHelp>
+
+    <DiagramWithHelp
+      title="Feature Risk Matrix"
+      introduction="Use the 3 Pillars (Data Dependence, Governance Required, Operational Safety) to assess overall feature risk. Count the HIGH flags to determine what safeguards are needed before implementation."
+      example={{
+        title: "ML Ranking for E-commerce Client",
+        context: "Client wants ML-based search ranking but has limited technical team.",
+        steps: [
+          { action: "Data Dependence: Data exists?", outcome: "Partial - some behavioral data, needs 90+ days", result: "yellow" },
+          { action: "Governance Required: Oversight needed?", outcome: "Continuous - model drift requires monitoring", result: "red" },
+          { action: "Operational Safety: Risk if wrong?", outcome: "Damaging - bad rankings hurt revenue directly", result: "red" }
+        ],
+        conclusion: "2 HIGH flags = HIGH RISK. Recommend staged rollout with A/B testing, approval gates for model updates, and training for their team before full deployment."
+      }}
+    >
+      <Mermaid chart={`
+      flowchart TD
+      START([Evaluate Feature]) --> ASSESS
+
+      subgraph ASSESS["📊 ASSESS ALL THREE PILLARS"]
+          direction LR
+
+          subgraph P1["Data Dependence"]
+              D1{Data exists?}
+              D1 -->|🟢 Yes, quality| DL[LOW]
+              D1 -->|🟡 Partial| DM[MED]
+              D1 -->|🔴 Missing| DH[HIGH]
+          end
+
+          subgraph P2["Governance Required"]
+              G1{Oversight needed?}
+              G1 -->|🟢 Set and forget| GL[LOW]
+              G1 -->|🟡 Periodic review| GM[MED]
+              G1 -->|🔴 Continuous| GH[HIGH]
+          end
+
+          subgraph P3["Operational Safety"]
+              S1{Risk if wrong?}
+              S1 -->|🟢 Minimal| SL[LOW]
+              S1 -->|🟡 Recoverable| SM[MED]
+              S1 -->|🔴 Damaging| SH[HIGH]
+          end
+      end
+
+      DL --> COUNT
+      DM --> COUNT
+      DH --> COUNT
+      GL --> COUNT
+      GM --> COUNT
+      GH --> COUNT
+      SL --> COUNT
+      SM --> COUNT
+      SH --> COUNT
+
+      COUNT([Count Risk Levels]) --> TOTAL{Total<br>HIGH flags?}
+
+      TOTAL -->|0| SAFE[🟢 LOW RISK<br>Standard implementation<br>Minimal guardrails]
+      TOTAL -->|1| CAUTION[🟡 MODERATE RISK<br>Add monitoring<br>Review cycles]
+      TOTAL -->|2| WARNING[🟠 HIGH RISK<br>Staged rollout<br>Approval gates<br>Training required]
+      TOTAL -->|3| DANGER[🔴 MAXIMUM RISK<br>POC first<br>Heavy safeguards<br>Consider deferring]
+
+      style P1 fill:#E3F2FD,stroke:#2196F3
+      style P2 fill:#F3E5F5,stroke:#9C27B0
+      style P3 fill:#FFF3E0,stroke:#FF9800
+      style SAFE fill:#C8E6C9,stroke:#4CAF50
+      style CAUTION fill:#FFF9C4,stroke:#FFC107
+      style WARNING fill:#FFE0B2,stroke:#FF9800
+      style DANGER fill:#FFCDD2,stroke:#F44336
+      `} />
+    </DiagramWithHelp>
+
+    <DiagramWithHelp
+      title="Feature Unlock Paths"
+      introduction="Shows when features become available based on data accumulation. Use this to set expectations about what's possible at launch vs. what needs time to mature. Critical for phasing conversations."
+      example={{
+        title: "New Client Launch Timeline",
+        context: "Client launching search in 6 weeks, wants 'everything'.",
+        steps: [
+          { action: "Day 0 (Launch)", outcome: "Auto Complete, Part Numbers, Facets, Curations ready", result: "green" },
+          { action: "Day 30", outcome: "Analytics meaningful, Trending Search activates", result: "green" },
+          { action: "Day 60", outcome: "Intelligent Synonyms learns from patterns", result: "yellow" },
+          { action: "When ERP integrated", outcome: "Recently Ordered, Recommendations unlock", result: "yellow" }
+        ],
+        conclusion: "Set expectations: Core features at launch, behavioral features after 30 days, ML features after 60-90 days. Integrations unlock additional capabilities on their own timeline."
+      }}
+    >
+      <Mermaid chart={`
+      flowchart LR
+      subgraph DAY0["📦 DAY 0: CATALOG ONLY"]
+          direction TB
+          CAT[Catalog Data] --> AC[Auto Complete]
+          CAT --> PN[Part Number Norm]
+          CAT --> FS[Faceted Search]
+          CAT --> CUR[Curations]
+          CAT --> SB[Search Sandbox]
+      end
+
+      subgraph DAY30["📈 DAY 30: BEHAVIORAL"]
+          direction TB
+          BEH[Search Logs<br>Click Data] --> AN[Analytics]
+          BEH --> TS[Trending Search]
+          BEH --> RS[Related Searches]
+          BEH --> ZR[Zero Results<br>Insights]
+      end
+
+      subgraph DAY60["🧠 DAY 60-90: LEARNING"]
+          direction TB
+          LEARN[Patterns<br>Accumulated] --> SYN[Intelligent<br>Synonyms]
+          LEARN --> SEM[Semantic Search<br>Tuned]
+          LEARN --> AB[A/B Testing<br>Traffic ready]
+      end
+
+      subgraph INTEGRATION["🔗 WHEN INTEGRATED"]
+          direction TB
+          INT[External Data] --> XB[Cross-Brand<br>Equivalents]
+          INT --> RO[Recently<br>Ordered]
+          INT --> REC[Recommendations]
+          INT --> ML[ML Ranking]
+      end
+
+      DAY0 --> DAY30
+      DAY30 --> DAY60
+      DAY60 --> INTEGRATION
+
+      style DAY0 fill:#E3F2FD,stroke:#2196F3
+      style DAY30 fill:#E8F5E9,stroke:#4CAF50
+      style DAY60 fill:#FFF3E0,stroke:#FF9800
+      style INTEGRATION fill:#F3E5F5,stroke:#9C27B0
+      `} />
+    </DiagramWithHelp>
+
+    <DiagramWithHelp
+      title="Consultation Scoping Flow"
+      introduction="Determines the right engagement model based on data readiness and client capacity. Use during sales to set expectations about support level and ongoing involvement."
+      example={{
+        title: "Mid-Size Distributor Engagement",
+        context: "Client has decent catalog data but no dedicated search person.",
+        steps: [
+          { action: "Data Readiness?", outcome: "Gaps exist - descriptions sparse, no behavioral data yet", result: "yellow" },
+          { action: "Client Capacity?", outcome: "Medium - marketing can spend 5hrs/week", result: "yellow" },
+          { action: "Combined assessment", outcome: "Medium risk + Medium capacity", result: "yellow" }
+        ],
+        conclusion: "Tier 2: Guided engagement. Plan for weekly check-ins, co-managed dashboard access, and office hours for questions. Budget for ongoing consultation hours."
+      }}
+    >
+      <Mermaid chart={`
+      flowchart TD
+      START([New Engagement]) --> ASSESS1{Data<br>Readiness?}
+
+      ASSESS1 -->|🟢 Rich, clean| DATA_GOOD
+      ASSESS1 -->|🟡 Gaps exist| DATA_MED
+      ASSESS1 -->|🔴 Major gaps| DATA_BAD
+
+      DATA_GOOD[Low Data Risk] --> ASSESS2{Client<br>Capacity?}
+      DATA_MED[Medium Data Risk] --> ASSESS2
+      DATA_BAD[High Data Risk] --> ASSESS2
+
+      ASSESS2 -->|High: Dedicated team| CAP_HIGH
+      ASSESS2 -->|Medium: Part-time| CAP_MED
+      ASSESS2 -->|Low: No bandwidth| CAP_LOW
+
+      subgraph TIER1["TIER 1: SELF-SERVICE"]
+          CAP_HIGH[High Capacity] --> T1[Minimal consultation<br>Documentation + training<br>Async support]
+      end
+
+      subgraph TIER2["TIER 2: GUIDED"]
+          CAP_MED[Medium Capacity] --> T2[Regular check-ins<br>Co-managed<br>Office hours]
+      end
+
+      subgraph TIER3["TIER 3: PARTNERSHIP"]
+          direction TB
+          DATA_MED --> T3_CHECK{Combined<br>risk?}
+          T3_CHECK -->|Manageable| T3[Joint ownership<br>Shared responsibilities<br>Weekly syncs]
+      end
+
+      subgraph TIER4["TIER 4: MANAGED"]
+          CAP_LOW --> T4[We own it<br>Client approves<br>Full service]
+          DATA_BAD --> T4
+      end
+
+      style TIER1 fill:#E8F5E9,stroke:#4CAF50
+      style TIER2 fill:#E3F2FD,stroke:#2196F3
+      style TIER3 fill:#FFF3E0,stroke:#FF9800
+      style TIER4 fill:#FCE4EC,stroke:#E91E63
+      `} />
+    </DiagramWithHelp>
 
   </Tabs.Tab>
 </Tabs>

@@ -1,4 +1,4 @@
-import { Tabs, Callout } from 'nextra/components'
+import { Tabs } from 'nextra/components'
 import SearchScopeGenerator from '../components/SearchScopeGenerator'
 import DecisionQuadrants from '../components/DecisionQuadrants'
 
@@ -7,24 +7,6 @@ Scope generator and strategic decision frameworks for search implementations.
 
 <Tabs items={['Scope Generator', 'Decision Quadrants']}>
   <Tabs.Tab>
-    ## Search Scope Generator
-
-    Walk through a guided assessment to generate a complete implementation scope. This tool evaluates:
-
-    - **Client context** — Industry, timeline, pain points
-    - **Data readiness** — Catalog, behavioral, relationships, AI enrichment potential
-    - **Client capacity** — Team ownership, technical level, review frequency
-
-    The generator outputs:
-    - Recommended features by implementation phase (Day 1 → Day 90)
-    - Investment levels per feature (MVP, Standard, Polished, Premium)
-    - Support tier recommendation
-    - Risk flags and AI enrichment opportunities
-
-    <Callout type="info" emoji="💡">
-      Unlike traditional assessments, this tool recognizes that **AI enrichment can fill data gaps** — missing descriptions and attributes are no longer blockers if the client is open to AI-generated content with human review.
-    </Callout>
-
     <SearchScopeGenerator />
   </Tabs.Tab>
   <Tabs.Tab>

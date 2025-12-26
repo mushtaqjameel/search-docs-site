@@ -15,6 +15,7 @@ export default {
     },
     implementation: 'Implementation Guide',
     strategy: 'Strategy Guide',
+    estimation: 'Estimation Framework',
     '###-tools': {
         type: 'separator',
         title: 'Tools & Reference'

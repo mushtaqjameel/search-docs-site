@@ -1,0 +1,300 @@
+import { Tabs, Callout, Steps } from 'nextra/components'
+import Mermaid from '../components/Mermaid'
+import DiagramWithHelp from '../components/DiagramWithHelp'
+import { Layers, Users, Clock, Box, Lightbulb, Target, CheckCircle, AlertTriangle } from 'lucide-react'
+
+# Estimation Framework
+
+A 3-dimensional model for classifying, scoping, and communicating feature complexity.
+
+<Callout type="info">
+**Why This Matters:** A feature that takes 6 months can look identical to a 3-month version built elsewhere. The difference is depth, flexibility, and long-term leverage. This framework makes those differences visible and explainable.
+</Callout>
+
+## The Philosophy: Platform Thinking
+
+We build a **platform**, not one-off features:
+
+- Multiple clients with different catalogs, taxonomies, and data quality
+- Varying feature needs per client
+- Independent deployment and configuration
+- Build once, sell many times
+
+This means every task must be evaluated for **reusability** and separated into appropriate layers.
+
+<div className="my-8 p-6 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl border border-indigo-200 dark:border-indigo-800">
+<h3 className="font-bold text-lg mb-2 flex items-center gap-2"><Box size={20} /> The Cube Beats the Line</h3>
+<p className="text-sm">Instead of treating a feature as a single timeline ("6 months"), we bucket it across multiple levels of depth and maturity. This shifts the conversation from <strong>time spent</strong> to <strong>surface area covered</strong>. A cube beats a line every time when explaining why two similar-looking things are not the same.</p>
+</div>
+
+<Tabs items={['The 3 Dimensions', 'The Matrix', 'Example: Image Search', 'How to Use']}>
+
+<Tabs.Tab>
+## The 3 Dimensions
+
+Every task is classified across three dimensions:
+
+### Dimension 1: Layer (What TYPE of work?)
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+<div className="p-5 rounded-xl bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
+<h4 className="font-bold flex items-center gap-2 text-purple-800 dark:text-purple-300"><Layers size={18} /> Platform</h4>
+<p className="text-sm mt-2 text-purple-700 dark:text-purple-400">Backend services, APIs, models, pipelines, data processing</p>
+<p className="text-xs mt-2 text-purple-600 dark:text-purple-500">Examples: Embedding service, ES index, search API, product pipeline</p>
+</div>
+<div className="p-5 rounded-xl bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800">
+<h4 className="font-bold flex items-center gap-2 text-cyan-800 dark:text-cyan-300"><Target size={18} /> Integration</h4>
+<p className="text-sm mt-2 text-cyan-700 dark:text-cyan-400">Frontend components, UI wiring, client-facing touchpoints</p>
+<p className="text-xs mt-2 text-cyan-600 dark:text-cyan-500">Examples: Upload UI, results display, camera capture, filters</p>
+</div>
+</div>
+
+### Dimension 2: Scope (WHO can reuse it?)
+
+<div className="overflow-x-auto my-6">
+| Scope | Definition | Reusability | Examples |
+|-------|------------|-------------|----------|
+| **Universal** | Works for any client in any industry | Build once, use everywhere | CLIP embedding, ES KNN, basic similarity |
+| **Industry-Specific** | Works for any client in the SAME industry | Build for first client, sell to others in industry | Thread pitch detection, fastener OCR, wood grain matching |
+| **Client-Specific** | Only works for THIS client | Billable per client | Config values, UI wiring, custom workflows |
+</div>
+
+### Dimension 3: Priority (WHEN do we build it?)
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+<div className="p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+<h4 className="font-bold text-green-800 dark:text-green-300">Essential</h4>
+<p className="text-xs uppercase font-bold text-green-600 dark:text-green-400 mb-2">Phase 1 (MVP)</p>
+<p className="text-sm text-green-700 dark:text-green-400">Must exist for the feature to function at all</p>
+<p className="text-xs mt-2 text-green-600 dark:text-green-500">Examples: Upload, embed, search, display results</p>
+</div>
+<div className="p-5 rounded-xl bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800">
+<h4 className="font-bold text-yellow-800 dark:text-yellow-300">Enhanced</h4>
+<p className="text-xs uppercase font-bold text-yellow-600 dark:text-yellow-400 mb-2">Phase 2</p>
+<p className="text-sm text-yellow-700 dark:text-yellow-400">Improves quality, UX, operations, analytics</p>
+<p className="text-xs mt-2 text-yellow-600 dark:text-yellow-500">Examples: Quality detection, confidence display, dashboards</p>
+</div>
+<div className="p-5 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+<h4 className="font-bold text-red-800 dark:text-red-300">Specialized</h4>
+<p className="text-xs uppercase font-bold text-red-600 dark:text-red-400 mb-2">Phase 3+</p>
+<p className="text-sm text-red-700 dark:text-red-400">Complex, requires POC/research, may not build</p>
+<p className="text-xs mt-2 text-red-600 dark:text-red-500">Examples: ML feedback loops, object detection, fine-tuning</p>
+</div>
+</div>
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+## The Full Matrix
+
+<DiagramWithHelp
+  title="The Estimation Cube"
+  introduction="Every feature task can be classified across three dimensions: Layer (what type of work), Scope (who can reuse it), and Priority (when do we build it). This cube helps explain why similar-looking features have different costs and timelines."
+  example={{
+    title: "Breaking Down Image Search",
+    context: "Client asks for 'image search' - sounds simple but involves multiple cube cells.",
+    steps: [
+      { action: "CLIP Embedding Service", outcome: "Platform + Universal + Essential = Core investment, reusable", result: "green" },
+      { action: "Basic Similarity Search", outcome: "Platform + Universal + Essential = Core investment", result: "green" },
+      { action: "Upload UI Component", outcome: "Integration + Universal + Essential = Reusable UI", result: "green" },
+      { action: "Thread Pitch Detection", outcome: "Platform + Industry + Enhanced = Industrial only", result: "yellow" },
+      { action: "Fine-tuned Embeddings", outcome: "Platform + Industry + Specialized = Research required", result: "red" }
+    ],
+    conclusion: "Image search spans 5+ cube cells. MVP (first 3) = 6 weeks. Adding industry features = +4 weeks. Specialized = POC first. Now the 3-month vs 6-month quote makes sense."
+  }}
+>
+  <Mermaid chart={`
+  flowchart TD
+      subgraph CUBE["THE ESTIMATION CUBE"]
+          direction TB
+
+          subgraph LAYER["LAYER (Type of Work)"]
+              direction LR
+              PLATFORM["Platform<br>Backend, APIs, Models"]
+              INTEGRATION["Integration<br>Frontend, UI, Touchpoints"]
+          end
+
+          subgraph SCOPE["SCOPE (Reusability)"]
+              direction LR
+              UNIVERSAL["Universal<br>Any client, any industry"]
+              INDUSTRY["Industry-Specific<br>Same industry clients"]
+              CLIENT["Client-Specific<br>This client only"]
+          end
+
+          subgraph PRIORITY["PRIORITY (When)"]
+              direction LR
+              ESSENTIAL["Essential<br>MVP - Must have"]
+              ENHANCED["Enhanced<br>Phase 2 - Quality"]
+              SPECIALIZED["Specialized<br>Phase 3+ - Research"]
+          end
+      end
+
+      style PLATFORM fill:#DDA0DD
+      style INTEGRATION fill:#87CEEB
+      style UNIVERSAL fill:#90EE90
+      style INDUSTRY fill:#FFD700
+      style CLIENT fill:#FFB6C1
+      style ESSENTIAL fill:#C5E8B7
+      style ENHANCED fill:#FFFACD
+      style SPECIALIZED fill:#F08080
+  `} />
+</DiagramWithHelp>
+
+### Reading the Matrix
+
+Each feature requirement maps to a **cell in the cube**:
+
+| Layer | Scope | Priority | What it means |
+|-------|-------|----------|---------------|
+| Platform | Universal | Essential | **Must build first.** Core infrastructure. Build once, use for every client. |
+| Platform | Industry | Enhanced | Valuable add-on for specific verticals. Build for first client, sell to others. |
+| Integration | Client | Essential | Required for this client's launch. Billable integration work. |
+| Platform | Universal | Specialized | Research/POC territory. High value if proven, but risky. |
+
+### Investment Implications
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+<div className="p-4 bg-green-50 dark:bg-green-900/20 rounded border border-green-200 dark:border-green-800">
+<h4 className="font-bold text-green-800 dark:text-green-300">High Investment Justification</h4>
+<ul className="text-sm mt-2 space-y-1 text-green-700 dark:text-green-400">
+<li>Platform + Universal + Essential = Core infrastructure</li>
+<li>Platform + Industry + Essential = Market differentiator</li>
+</ul>
+</div>
+<div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800">
+<h4 className="font-bold text-yellow-800 dark:text-yellow-300">Scope-Limited Investment</h4>
+<ul className="text-sm mt-2 space-y-1 text-yellow-700 dark:text-yellow-400">
+<li>Integration + Client + Essential = Bill directly to client</li>
+<li>Any + Any + Specialized = POC first, then decide</li>
+</ul>
+</div>
+</div>
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+## Example: Image Search Feature
+
+Image search can look "simple" to clients, but the scope ranges from 3 weeks to 6+ months depending on depth.
+
+### The Naive View (A Line)
+
+> "Add image search" = 6 months
+
+This doesn't explain:
+- Why it takes so long
+- What's included vs. excluded
+- Why another vendor quoted 3 months
+- What can be cut if needed
+
+### The Cube View (Dimensionality)
+
+<div className="overflow-x-auto my-6">
+| Requirement | Layer | Scope | Priority | Notes |
+|-------------|-------|-------|----------|-------|
+| CLIP embedding service | Platform | Universal | Essential | Build once, use for all clients |
+| Elasticsearch KNN index | Platform | Universal | Essential | Core search infrastructure |
+| Basic similarity search | Platform | Universal | Essential | The MVP feature |
+| Upload UI component | Integration | Universal | Essential | Reusable upload interface |
+| Results display | Integration | Client | Essential | Client-specific styling |
+| Quality detection (blur, etc.) | Platform | Universal | Enhanced | Better UX, phase 2 |
+| Confidence scoring | Platform | Universal | Enhanced | Trust indicators |
+| Thread pitch detection | Platform | Industry | Enhanced | Industrial tool distribution only |
+| Fastener head recognition | Platform | Industry | Enhanced | Industrial tool distribution only |
+| Wood grain matching | Platform | Industry | Enhanced | Lumber/woodworking only |
+| ML feedback loop | Platform | Universal | Specialized | Requires POC, significant effort |
+| Object detection for parts | Platform | Industry | Specialized | Research required |
+| Fine-tuned embeddings | Platform | Industry | Specialized | Domain-specific training |
+</div>
+
+### What This Reveals
+
+1. **MVP is clear**: CLIP + ES + basic similarity + upload = working image search
+2. **Industry features are optional**: Auto parts client doesn't need thread pitch detection
+3. **Specialized items are research**: Don't promise these without POC
+4. **6 months includes everything**: A 3-month quote probably skips Enhanced + Specialized
+
+<Callout type="warning">
+The 6-month estimate includes industry-specific features and specialized research that may not apply to every client. An auto parts distributor doesn't need wood grain matching.
+</Callout>
+
+</Tabs.Tab>
+
+<Tabs.Tab>
+## How to Use This Framework
+
+<Steps>
+### Map the Requirements
+
+For each feature request, break it into discrete requirements and classify each:
+- **Layer**: Is this backend infrastructure or client-facing integration?
+- **Scope**: Universal, industry-specific, or client-specific?
+- **Priority**: Essential for MVP, enhanced for quality, or specialized/research?
+
+### Define the MVP
+
+All **Essential** items across both layers = MVP. This is non-negotiable for a working feature.
+
+### Phase the Rest
+
+- **Enhanced** items by client priority and value
+- **Specialized** items only with POC validation and explicit sign-off
+
+### Communicate Dimensionality
+
+Instead of "6 months", show the cube:
+
+> "The MVP is 6 weeks (Essential tier). Adding quality detection and confidence scoring is +3 weeks (Enhanced). Industry-specific features like thread detection are +4 weeks and only relevant if you're in industrial distribution. Fine-tuned embeddings require a 2-week POC first."
+
+This lets the client:
+- Understand what they're paying for
+- Make informed trade-offs
+- See why your quote differs from competitors
+- Trust your expertise
+
+</Steps>
+
+### The Conversation Shift
+
+| Old Conversation | New Conversation |
+|------------------|------------------|
+| "This takes 6 months" | "Here's the surface area we're covering" |
+| "Why so long?" | "Which dimensions matter to you?" |
+| "Can you do it faster?" | "Which layers can we defer?" |
+| "Competitor quoted 3 months" | "Let's compare what's included" |
+
+<div className="my-8 p-6 bg-neutral-100 dark:bg-neutral-800 rounded-xl">
+<h3 className="font-bold text-lg mb-2">Key Insight</h3>
+<p>This framework is NOT the same as the 3 Pillars (Data Dependence, Governance, Safety). Those assess <strong>feature readiness</strong> for a client. This framework assesses <strong>estimation and scoping</strong> for our internal planning and client communication.</p>
+</div>
+
+</Tabs.Tab>
+
+</Tabs>
+
+## Quick Reference
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+<div className="p-4 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-center">
+<Layers className="mx-auto mb-2 text-purple-600" size={32} />
+<h4 className="font-bold">Layer</h4>
+<p className="text-sm text-purple-700 dark:text-purple-400">Platform vs Integration</p>
+<p className="text-xs mt-1 text-purple-600">What TYPE of work?</p>
+</div>
+<div className="p-4 rounded-lg bg-cyan-100 dark:bg-cyan-900/30 text-center">
+<Users className="mx-auto mb-2 text-cyan-600" size={32} />
+<h4 className="font-bold">Scope</h4>
+<p className="text-sm text-cyan-700 dark:text-cyan-400">Universal → Industry → Client</p>
+<p className="text-xs mt-1 text-cyan-600">WHO can reuse it?</p>
+</div>
+<div className="p-4 rounded-lg bg-orange-100 dark:bg-orange-900/30 text-center">
+<Clock className="mx-auto mb-2 text-orange-600" size={32} />
+<h4 className="font-bold">Priority</h4>
+<p className="text-sm text-orange-700 dark:text-orange-400">Essential → Enhanced → Specialized</p>
+<p className="text-xs mt-1 text-orange-600">WHEN do we build it?</p>
+</div>
+</div>
+
+---
+
+*Use this framework alongside the [Strategy Guide](/strategy) for investment prioritization and the [Scope Generator](/tools) for client-specific recommendations.*

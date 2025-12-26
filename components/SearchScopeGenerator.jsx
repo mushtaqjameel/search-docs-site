@@ -9,52 +9,53 @@ import {
     Brain, Lightbulb, Shield, BarChart, Search,
     HelpCircle, BookOpen, Wrench, GraduationCap,
     DollarSign, MessageSquare, FlaskConical, Settings,
-    FileSearch, Layers, X
+    FileSearch, Layers, X, Copy, Download, CheckCheck
 } from 'lucide-react'
 
 // Complete feature data from the site content
+// Estimation dimensions: layer (platform/integration), scope (universal/industry/client), priority (essential/enhanced/specialized)
 const FEATURES = [
     // Core Search (7)
-    { id: 'autocomplete', title: 'Auto Complete', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Predictive suggestions as buyers type' },
-    { id: 'faceted', title: 'Faceted Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'critical', desc: 'Dynamic filters based on product attributes' },
-    { id: 'visual', title: 'Visual Filters', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'catalog_rich', importance: 'nice', desc: 'Image-based filter selection' },
-    { id: 'partnumber', title: 'Part Number Normalization', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Handles part number format variations' },
-    { id: 'voice', title: 'Voice Search', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'MVP', dataRequired: 'catalog', importance: 'nice', desc: 'Voice input for hands-free scenarios' },
-    { id: 'universal', title: 'Universal Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'content', importance: 'important', desc: 'Search across products, docs, articles' },
-    { id: 'certifications', title: 'Searchable Certifications', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'important', desc: 'Filter by technical certifications' },
+    { id: 'autocomplete', title: 'Auto Complete', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Predictive suggestions as buyers type', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'faceted', title: 'Faceted Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'critical', desc: 'Dynamic filters based on product attributes', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'visual', title: 'Visual Filters', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'catalog_rich', importance: 'nice', desc: 'Image-based filter selection', layer: 'integration', scope: 'universal', priority: 'enhanced' },
+    { id: 'partnumber', title: 'Part Number Normalization', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Handles part number format variations', layer: 'platform', scope: 'industry', priority: 'essential' },
+    { id: 'voice', title: 'Voice Search', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'MVP', dataRequired: 'catalog', importance: 'nice', desc: 'Voice input for hands-free scenarios', layer: 'integration', scope: 'universal', priority: 'enhanced' },
+    { id: 'universal', title: 'Universal Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'content', importance: 'important', desc: 'Search across products, docs, articles', layer: 'platform', scope: 'client', priority: 'enhanced' },
+    { id: 'certifications', title: 'Searchable Certifications', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'important', desc: 'Filter by technical certifications', layer: 'platform', scope: 'industry', priority: 'essential' },
 
     // Smart Search (6)
-    { id: 'semantic', title: 'Semantic Search', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'descriptions', importance: 'important', desc: 'Understand meaning, not just keywords', aiEnrichable: true },
-    { id: 'synonyms', title: 'Intelligent Synonyms', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'important', desc: 'Learn industry-specific terminology' },
-    { id: 'intelligentauto', title: 'Intelligent Auto Complete', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral_user', importance: 'nice', desc: 'Context-aware personalized suggestions' },
-    { id: 'mlranking', title: 'ML Ranking', bucket: 'smart', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'behavioral_trans', importance: 'important', desc: 'Machine learning optimizes ranking' },
-    { id: 'relevancefunnel', title: 'Multi-Layered Relevance', bucket: 'smart', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'all', importance: 'nice', desc: 'Complex ranking with business rules' },
-    { id: 'intentrouter', title: 'Semantic Intent Router', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'nice', desc: 'Detect what buyer actually wants' },
+    { id: 'semantic', title: 'Semantic Search', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'descriptions', importance: 'important', desc: 'Understand meaning, not just keywords', aiEnrichable: true, layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'synonyms', title: 'Intelligent Synonyms', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'important', desc: 'Learn industry-specific terminology', layer: 'platform', scope: 'industry', priority: 'enhanced' },
+    { id: 'intelligentauto', title: 'Intelligent Auto Complete', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral_user', importance: 'nice', desc: 'Context-aware personalized suggestions', layer: 'platform', scope: 'universal', priority: 'enhanced' },
+    { id: 'mlranking', title: 'ML Ranking', bucket: 'smart', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'behavioral_trans', importance: 'important', desc: 'Machine learning optimizes ranking', layer: 'platform', scope: 'universal', priority: 'specialized' },
+    { id: 'relevancefunnel', title: 'Multi-Layered Relevance', bucket: 'smart', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'all', importance: 'nice', desc: 'Complex ranking with business rules', layer: 'platform', scope: 'client', priority: 'specialized' },
+    { id: 'intentrouter', title: 'Semantic Intent Router', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'nice', desc: 'Detect what buyer actually wants', layer: 'platform', scope: 'universal', priority: 'enhanced' },
 
     // Discovery (7)
-    { id: 'recommendations', title: 'Recommendation Engine', bucket: 'discovery', pillars: { data: 'red', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral_trans_user', importance: 'critical', desc: 'Personalized product suggestions' },
-    { id: 'related', title: 'Related Searches', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'important', desc: 'Suggest alternative query paths' },
-    { id: 'equivalents', title: 'Cross-Brand Equivalents', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'relationships', importance: 'important', desc: 'Show alternative brands/substitutes' },
-    { id: 'trending', title: 'Trending Search', bucket: 'discovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'nice', desc: 'Show what\'s popular now' },
-    { id: 'kitting', title: 'Custom Products (Kitting)', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'relationships', importance: 'nice', desc: 'Build bundles and assemblies' },
-    { id: 'recent', title: 'Recent Search', bucket: 'discovery', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'user', importance: 'critical', desc: 'Show user\'s recent searches' },
-    { id: 'recentlyordered', title: 'Recently Ordered', bucket: 'discovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'user_trans', importance: 'critical', desc: 'One-click reorder from history' },
+    { id: 'recommendations', title: 'Recommendation Engine', bucket: 'discovery', pillars: { data: 'red', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral_trans_user', importance: 'critical', desc: 'Personalized product suggestions', layer: 'platform', scope: 'universal', priority: 'enhanced' },
+    { id: 'related', title: 'Related Searches', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'important', desc: 'Suggest alternative query paths', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'equivalents', title: 'Cross-Brand Equivalents', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'relationships', importance: 'important', desc: 'Show alternative brands/substitutes', layer: 'platform', scope: 'industry', priority: 'enhanced' },
+    { id: 'trending', title: 'Trending Search', bucket: 'discovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'nice', desc: 'Show what\'s popular now', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'kitting', title: 'Custom Products (Kitting)', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'relationships', importance: 'nice', desc: 'Build bundles and assemblies', layer: 'platform', scope: 'industry', priority: 'enhanced' },
+    { id: 'recent', title: 'Recent Search', bucket: 'discovery', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'user', importance: 'critical', desc: 'Show user\'s recent searches', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'recentlyordered', title: 'Recently Ordered', bucket: 'discovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'user_trans', importance: 'critical', desc: 'One-click reorder from history', layer: 'integration', scope: 'client', priority: 'essential' },
 
     // Merchandising (6)
-    { id: 'curations', title: 'Curations', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'catalog', importance: 'critical', desc: 'Pin, boost, bury, redirect results' },
-    { id: 'config', title: 'Configuration Management', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'none', importance: 'critical', desc: 'Version control for search settings' },
-    { id: 'querylabeller', title: 'Query Behaviour Labeller', bucket: 'merchandising', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'nice', desc: 'Classify search patterns' },
-    { id: 'sandbox', title: 'Search Sandbox', bucket: 'merchandising', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'none', importance: 'critical', desc: 'Test changes safely before deploy' },
-    { id: 'dashboard', title: 'Search Dashboard', bucket: 'merchandising', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'critical', desc: 'Real-time performance visibility' },
-    { id: 'aienrichment', title: 'AI Enrichment Dashboard', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'ai_content', importance: 'important', desc: 'Review and approve AI content' },
+    { id: 'curations', title: 'Curations', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'catalog', importance: 'critical', desc: 'Pin, boost, bury, redirect results', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'config', title: 'Configuration Management', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'none', importance: 'critical', desc: 'Version control for search settings', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'querylabeller', title: 'Query Behaviour Labeller', bucket: 'merchandising', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'nice', desc: 'Classify search patterns', layer: 'platform', scope: 'universal', priority: 'enhanced' },
+    { id: 'sandbox', title: 'Search Sandbox', bucket: 'merchandising', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'none', importance: 'critical', desc: 'Test changes safely before deploy', layer: 'integration', scope: 'universal', priority: 'essential' },
+    { id: 'dashboard', title: 'Search Dashboard', bucket: 'merchandising', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'critical', desc: 'Real-time performance visibility', layer: 'integration', scope: 'universal', priority: 'essential' },
+    { id: 'aienrichment', title: 'AI Enrichment Dashboard', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'ai_content', importance: 'important', desc: 'Review and approve AI content', layer: 'integration', scope: 'universal', priority: 'essential' },
 
     // Recovery (2)
-    { id: 'zeroresults', title: 'Zero Results Recovery', bucket: 'recovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Never dead-end the buyer' },
-    { id: 'fallback', title: 'Fallback Search', bucket: 'recovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'important', desc: 'Graceful degradation when search fails' },
+    { id: 'zeroresults', title: 'Zero Results Recovery', bucket: 'recovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Never dead-end the buyer', layer: 'platform', scope: 'universal', priority: 'essential' },
+    { id: 'fallback', title: 'Fallback Search', bucket: 'recovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'important', desc: 'Graceful degradation when search fails', layer: 'platform', scope: 'universal', priority: 'essential' },
 
     // Analytics (2)
-    { id: 'analytics', title: 'Analytics', bucket: 'analytics', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'critical', desc: 'Deep search performance metrics' },
-    { id: 'abtesting', title: 'A/B Testing', bucket: 'analytics', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'nice', desc: 'Controlled experiments for changes' },
+    { id: 'analytics', title: 'Analytics', bucket: 'analytics', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'critical', desc: 'Deep search performance metrics', layer: 'integration', scope: 'universal', priority: 'essential' },
+    { id: 'abtesting', title: 'A/B Testing', bucket: 'analytics', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'nice', desc: 'Controlled experiments for changes', layer: 'platform', scope: 'universal', priority: 'enhanced' },
 ]
 
 const BUCKET_INFO = {
@@ -74,6 +75,7 @@ const INVESTMENT_COLORS = {
 }
 
 export default function SearchScopeGenerator() {
+    const [launched, setLaunched] = useState(false)
     const [step, setStep] = useState(1)
     const [data, setData] = useState({
         // Step 1: Client Profile
@@ -111,6 +113,7 @@ export default function SearchScopeGenerator() {
     })
 
     const [expandedPhases, setExpandedPhases] = useState({ day1: true, day30: true, day60: true, day90: true })
+    const [copied, setCopied] = useState(false)
 
     const updateData = (key, value) => {
         setData(prev => ({ ...prev, [key]: value }))
@@ -343,6 +346,51 @@ export default function SearchScopeGenerator() {
             day90: scoredFeatures.filter(f => f.phase === 'day90'),
         }
 
+        // Work Breakdown Analysis (Estimation Framework dimensions)
+        const includedFeatures = scoredFeatures.filter(f => f.recommendation !== 'exclude')
+        const totalIncluded = includedFeatures.length || 1
+
+        // By Scope (Universal / Industry / Client)
+        const byScope = {
+            universal: includedFeatures.filter(f => f.scope === 'universal').length,
+            industry: includedFeatures.filter(f => f.scope === 'industry').length,
+            client: includedFeatures.filter(f => f.scope === 'client').length,
+        }
+        const scopePercent = {
+            universal: Math.round((byScope.universal / totalIncluded) * 100),
+            industry: Math.round((byScope.industry / totalIncluded) * 100),
+            client: Math.round((byScope.client / totalIncluded) * 100),
+        }
+
+        // By Layer (Platform / Integration)
+        const byLayer = {
+            platform: includedFeatures.filter(f => f.layer === 'platform').length,
+            integration: includedFeatures.filter(f => f.layer === 'integration').length,
+        }
+        const layerPercent = {
+            platform: Math.round((byLayer.platform / totalIncluded) * 100),
+            integration: Math.round((byLayer.integration / totalIncluded) * 100),
+        }
+
+        // By Priority (Essential / Enhanced / Specialized)
+        const byPriority = {
+            essential: includedFeatures.filter(f => f.priority === 'essential').length,
+            enhanced: includedFeatures.filter(f => f.priority === 'enhanced').length,
+            specialized: includedFeatures.filter(f => f.priority === 'specialized').length,
+        }
+        const priorityPercent = {
+            essential: Math.round((byPriority.essential / totalIncluded) * 100),
+            enhanced: Math.round((byPriority.enhanced / totalIncluded) * 100),
+            specialized: Math.round((byPriority.specialized / totalIncluded) * 100),
+        }
+
+        const workBreakdown = {
+            byScope, scopePercent,
+            byLayer, layerPercent,
+            byPriority, priorityPercent,
+            totalIncluded,
+        }
+
         return {
             dataScore,
             effectiveDataScore,
@@ -352,6 +400,7 @@ export default function SearchScopeGenerator() {
             consultationTier,
             canUseAI,
             byPhase,
+            workBreakdown,
             dataQuality: effectiveDataScore >= 7 ? 'Rich' : effectiveDataScore >= 4 ? 'Adequate' : 'Gaps',
             capacityLevel: capacityScore >= 7 ? 'High' : capacityScore >= 4 ? 'Medium' : 'Low',
         }
@@ -367,6 +416,125 @@ export default function SearchScopeGenerator() {
             teamOwnership: null, teamRole: null, opsAnalytics: null, opsFeedback: null, opsQueryTuning: null,
             opsABTesting: null, opsContentUpdates: null, pastExperience: null, searchConceptComfort: null, wantsOngoingConsultation: null,
         })
+    }
+
+    // Generate markdown summary for sharing
+    const generateMarkdownSummary = () => {
+        const featuresByRec = (features, rec) => features.filter(f => f.recommendation === rec)
+
+        let md = `# Search Implementation Scope\n\n`
+        md += `Generated: ${new Date().toLocaleDateString()}\n\n`
+
+        // Summary
+        md += `## Summary\n\n`
+        md += `| Metric | Value |\n|--------|-------|\n`
+        md += `| Data Readiness | ${results.dataQuality} (${results.effectiveDataScore.toFixed(1)}/10)${results.canUseAI ? ' +AI' : ''} |\n`
+        md += `| Capacity | ${results.capacityLevel} (${results.capacityScore.toFixed(1)}/10) |\n`
+        md += `| Support Tier | ${results.supportTier.name} |\n`
+        md += `| Consultation Load | ${results.consultationTier.level} |\n\n`
+
+        // Client Profile
+        md += `## Client Profile\n\n`
+        md += `- **Industry:** ${data.industry || 'Not specified'}\n`
+        md += `- **Timeline:** ${data.timeline || 'Not specified'}\n`
+        md += `- **Pain Points:** ${data.priorities.length > 0 ? data.priorities.join(', ') : 'None selected'}\n\n`
+
+        // Remediation Approach
+        if (data.remediationApproach) {
+            md += `## Remediation Approach\n\n`
+            if (data.remediationApproach === 'pay_now') md += `**Pay Now:** Fix data before launch\n\n`
+            else if (data.remediationApproach === 'pay_later') md += `**Pay Later:** Launch with gaps, iterate post-launch\n\n`
+            else if (data.remediationApproach === 'ai') md += `**AI Enrichment:** Generate missing content with AI (${data.aiApprovalCapacity || 'approval TBD'})\n\n`
+        }
+
+        // Alerts/Notes
+        const alerts = []
+        if (results.canUseAI) alerts.push('AI Enrichment Path - Include AI Enrichment Dashboard and approval workflow')
+        if (data.remediationApproach === 'pay_later') alerts.push('Pay Later - Document data gaps and feature limitations in SOW')
+        if (data.dataProblemAwareness === 'unknown') alerts.push('Discovery Phase Needed - Budget time for data audit and gap analysis')
+        if (results.consultationTier.level === 'High') alerts.push('Training Investment Required - Include training sessions and consultation hours')
+
+        if (alerts.length > 0) {
+            md += `## Notes & Alerts\n\n`
+            alerts.forEach(a => { md += `- ${a}\n` })
+            md += `\n`
+        }
+
+        // Features by Phase
+        const formatFeature = (f) => {
+            let line = `- **${f.title}** [${f.investment}]`
+            if (f.reason) line += ` - ${f.reason}`
+            if (f.needsAI) line += ` (AI Enrichment)`
+            if (f.payNowPayLater === 'pay_later') line += ` (Pay Later)`
+            if (f.consultationNote) line += ` *${f.consultationNote}*`
+            return line
+        }
+
+        md += `## Implementation Phases\n\n`
+
+        // Day 1
+        md += `### Day 1 - Launch Ready\n\n`
+        const day1Include = featuresByRec(results.byPhase.day1, 'include')
+        const day1Limited = featuresByRec(results.byPhase.day1, 'limited')
+        const day1Caution = featuresByRec(results.byPhase.day1, 'caution')
+
+        if (day1Include.length > 0) {
+            md += `**Include:**\n`
+            day1Include.forEach(f => { md += formatFeature(f) + '\n' })
+        }
+        if (day1Limited.length > 0) {
+            md += `\n**Limited (data gaps):**\n`
+            day1Limited.forEach(f => { md += formatFeature(f) + '\n' })
+        }
+        if (day1Caution.length > 0) {
+            md += `\n**Caution (needs safeguards):**\n`
+            day1Caution.forEach(f => { md += formatFeature(f) + '\n' })
+        }
+        md += `\n`
+
+        // Day 30
+        md += `### Day 30 - Behavioral Starts\n\n`
+        const day30All = results.byPhase.day30
+        if (day30All.length > 0) {
+            day30All.forEach(f => { md += formatFeature(f) + '\n' })
+        }
+        md += `\n`
+
+        // Day 60-90
+        md += `### Day 60-90 - Advanced Features\n\n`
+        const day60All = [...results.byPhase.day60, ...results.byPhase.day90]
+        if (day60All.length > 0) {
+            day60All.forEach(f => { md += formatFeature(f) + '\n' })
+        }
+        md += `\n`
+
+        md += `---\n*Generated with Search Scope Generator*\n`
+
+        return md
+    }
+
+    const copyToClipboard = async () => {
+        const markdown = generateMarkdownSummary()
+        try {
+            await navigator.clipboard.writeText(markdown)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
+        } catch (err) {
+            console.error('Failed to copy:', err)
+        }
+    }
+
+    const downloadMarkdown = () => {
+        const markdown = generateMarkdownSummary()
+        const blob = new Blob([markdown], { type: 'text/markdown' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `search-scope-${new Date().toISOString().split('T')[0]}.md`
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
     }
 
     const OptionBtn = ({ label, sub, active, onClick, icon, small = false }) => (
@@ -499,6 +667,89 @@ export default function SearchScopeGenerator() {
 
     const TOTAL_STEPS = 5
 
+    // Intro screen before launching
+    if (!launched) {
+        return (
+            <div className="py-8">
+                <div className="max-w-3xl mx-auto text-center mb-8">
+                    <h2 className="text-3xl font-bold mb-4">Search Scope Generator</h2>
+                    <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-6">
+                        Walk through a guided assessment to generate a complete implementation scope in under 10 minutes.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="p-6 border rounded-xl bg-neutral-50 dark:bg-neutral-900">
+                        <div className="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
+                            <Briefcase className="text-indigo-600" size={24} />
+                        </div>
+                        <h3 className="font-bold mb-2">Client Context</h3>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400">Industry, timeline, pain points</p>
+                    </div>
+                    <div className="p-6 border rounded-xl bg-neutral-50 dark:bg-neutral-900">
+                        <div className="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
+                            <Database className="text-indigo-600" size={24} />
+                        </div>
+                        <h3 className="font-bold mb-2">Data Readiness</h3>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400">Catalog, behavioral, relationships, AI enrichment potential</p>
+                    </div>
+                    <div className="p-6 border rounded-xl bg-neutral-50 dark:bg-neutral-900">
+                        <div className="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
+                            <Users className="text-indigo-600" size={24} />
+                        </div>
+                        <h3 className="font-bold mb-2">Client Capacity</h3>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400">Team ownership, technical level, review frequency</p>
+                    </div>
+                </div>
+
+                <div className="max-w-2xl mx-auto mb-8 p-6 border rounded-xl bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+                    <h4 className="font-bold flex items-center gap-2 text-blue-800 dark:text-blue-300 mb-2">
+                        <Cpu size={20} /> AI Enrichment Aware
+                    </h4>
+                    <p className="text-sm text-blue-700 dark:text-blue-400">
+                        Unlike traditional assessments, this tool recognizes that <strong>AI enrichment can fill data gaps</strong> —
+                        missing descriptions and attributes are no longer blockers if the client is open to AI-generated content with human review.
+                    </p>
+                </div>
+
+                <div className="max-w-2xl mx-auto mb-8 p-6 border rounded-xl bg-neutral-100 dark:bg-neutral-800">
+                    <h4 className="font-bold mb-3">The generator outputs:</h4>
+                    <ul className="space-y-2 text-sm">
+                        <li className="flex items-start gap-2">
+                            <CheckCircle size={16} className="text-green-500 mt-0.5 shrink-0" />
+                            <span>Recommended features by implementation phase (Day 1 → Day 90)</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle size={16} className="text-green-500 mt-0.5 shrink-0" />
+                            <span>Investment levels per feature (MVP, Standard, Polished, Premium)</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle size={16} className="text-green-500 mt-0.5 shrink-0" />
+                            <span>Support tier recommendation based on client capacity</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle size={16} className="text-green-500 mt-0.5 shrink-0" />
+                            <span>Consultation load and training requirements</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                            <CheckCircle size={16} className="text-green-500 mt-0.5 shrink-0" />
+                            <span>Risk flags, Pay Now/Pay Later recommendations, and AI enrichment opportunities</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="text-center">
+                    <button
+                        onClick={() => setLaunched(true)}
+                        className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors text-lg flex items-center gap-2 mx-auto"
+                    >
+                        Launch Scope Generator <ArrowRight size={20} />
+                    </button>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="fixed inset-0 z-50 bg-white dark:bg-neutral-950 overflow-auto">
             {/* Header */}
@@ -517,9 +768,9 @@ export default function SearchScopeGenerator() {
                                 />
                             ))}
                         </div>
-                        <a href="/tools" className="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">
+                        <button onClick={() => setLaunched(false)} className="p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors">
                             <X size={20} />
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1017,6 +1268,135 @@ export default function SearchScopeGenerator() {
                             )}
                         </div>
 
+                        {/* Work Breakdown - Estimation Framework */}
+                        <div className="mb-8 p-6 border rounded-xl bg-neutral-50 dark:bg-neutral-900">
+                            <h3 className="font-bold text-xl mb-2 flex items-center gap-2">
+                                <Layers size={20} className="text-indigo-500" /> Work Breakdown
+                            </h3>
+                            <p className="text-sm text-neutral-500 mb-6">How the implementation work is distributed across estimation dimensions.</p>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                {/* By Scope */}
+                                <div>
+                                    <h4 className="font-bold text-sm mb-3 flex items-center gap-2">
+                                        <Users size={16} /> Scope (Reusability)
+                                    </h4>
+                                    <div className="space-y-2">
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Universal (any client)</span>
+                                                <span className="font-bold">{results.workBreakdown.scopePercent.universal}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.scopePercent.universal}%` }} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Industry-specific</span>
+                                                <span className="font-bold">{results.workBreakdown.scopePercent.industry}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-yellow-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.scopePercent.industry}%` }} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Client-specific</span>
+                                                <span className="font-bold">{results.workBreakdown.scopePercent.client}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-pink-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.scopePercent.client}%` }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-xs text-neutral-500 mt-2 italic">
+                                        {results.workBreakdown.scopePercent.universal >= 60 ? 'Mostly reusable platform work.' :
+                                         results.workBreakdown.scopePercent.client >= 30 ? 'Significant client customization.' :
+                                         'Mix of platform and industry work.'}
+                                    </p>
+                                </div>
+
+                                {/* By Layer */}
+                                <div>
+                                    <h4 className="font-bold text-sm mb-3 flex items-center gap-2">
+                                        <Layers size={16} /> Layer (Type of Work)
+                                    </h4>
+                                    <div className="space-y-2">
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Platform (backend, APIs)</span>
+                                                <span className="font-bold">{results.workBreakdown.layerPercent.platform}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-purple-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.layerPercent.platform}%` }} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Integration (UI, touchpoints)</span>
+                                                <span className="font-bold">{results.workBreakdown.layerPercent.integration}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-cyan-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.layerPercent.integration}%` }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-xs text-neutral-500 mt-2 italic">
+                                        {results.workBreakdown.layerPercent.platform >= 70 ? 'Backend-heavy implementation.' :
+                                         results.workBreakdown.layerPercent.integration >= 40 ? 'Significant UI/integration work.' :
+                                         'Balanced platform and integration.'}
+                                    </p>
+                                </div>
+
+                                {/* By Priority */}
+                                <div>
+                                    <h4 className="font-bold text-sm mb-3 flex items-center gap-2">
+                                        <Target size={16} /> Priority (When)
+                                    </h4>
+                                    <div className="space-y-2">
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Essential (MVP)</span>
+                                                <span className="font-bold">{results.workBreakdown.priorityPercent.essential}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.priorityPercent.essential}%` }} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Enhanced (Phase 2)</span>
+                                                <span className="font-bold">{results.workBreakdown.priorityPercent.enhanced}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-yellow-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.priorityPercent.enhanced}%` }} />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1">
+                                                <span>Specialized (Research)</span>
+                                                <span className="font-bold">{results.workBreakdown.priorityPercent.specialized}%</span>
+                                            </div>
+                                            <div className="h-3 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                                                <div className="h-full bg-red-500 rounded-full transition-all" style={{ width: `${results.workBreakdown.priorityPercent.specialized}%` }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="text-xs text-neutral-500 mt-2 italic">
+                                        {results.workBreakdown.priorityPercent.essential >= 60 ? 'Core MVP focus.' :
+                                         results.workBreakdown.priorityPercent.specialized >= 15 ? 'Includes research/POC work.' :
+                                         'Mix of MVP and enhancements.'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-700 text-xs text-neutral-500">
+                                <strong>What this means:</strong> Universal work is build-once infrastructure. Industry-specific is reusable for similar clients. Client-specific is billable customization.
+                                <a href="/estimation" className="ml-2 text-indigo-600 dark:text-indigo-400 hover:underline">Learn more →</a>
+                            </div>
+                        </div>
+
                         {/* Feature Phases */}
                         <h3 className="font-bold text-xl mb-4">Implementation Phases</h3>
 
@@ -1024,13 +1404,33 @@ export default function SearchScopeGenerator() {
                         <PhaseSection phase="day30" label="Day 30 - Behavioral Starts" features={results.byPhase.day30} icon={Clock} color="#eab308" />
                         <PhaseSection phase="day60" label="Day 60-90 - Advanced Features" features={[...results.byPhase.day60, ...results.byPhase.day90]} icon={Brain} color="#9333ff" />
 
-                        <div className="mt-8 flex justify-center gap-4">
+                        {/* Share Buttons */}
+                        <div className="mt-8 p-4 border rounded-xl bg-neutral-50 dark:bg-neutral-900">
+                            <h4 className="font-bold mb-3 text-center">Share Implementation Scope</h4>
+                            <div className="flex justify-center gap-3">
+                                <button
+                                    onClick={copyToClipboard}
+                                    className="px-4 py-2 border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg font-medium flex items-center gap-2 transition-colors"
+                                >
+                                    {copied ? <CheckCheck size={18} className="text-green-500" /> : <Copy size={18} />}
+                                    {copied ? 'Copied!' : 'Copy as Markdown'}
+                                </button>
+                                <button
+                                    onClick={downloadMarkdown}
+                                    className="px-4 py-2 border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg font-medium flex items-center gap-2 transition-colors"
+                                >
+                                    <Download size={18} /> Download .md
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="mt-6 flex justify-center gap-4">
                             <button onClick={reset} className="px-6 py-3 border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 <RefreshCw size={18} /> Start Over
                             </button>
-                            <a href="/tools" className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
+                            <button onClick={() => { reset(); setLaunched(false); }} className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-bold flex items-center gap-2 transition-colors">
                                 Done
-                            </a>
+                            </button>
                         </div>
                     </div>
                 )}
