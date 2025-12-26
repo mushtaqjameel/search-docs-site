@@ -52,7 +52,7 @@ Complete feature catalog with:
 
 ## Key Concepts
 
-- **6 Buckets**: Core Search (7), Smart Search (6), Discovery (7), Merchandising (6), Recovery (2), Analytics (2)
+- **6 Buckets**: Core Search (8), AI Search (6), Discovery (7), Merchandising (6), Recovery (2), Analytics (2)
 - **3 Pillars**: Data Dependence, Governance Required, Operational Safety (green/yellow/red)
 - **4 Investment Levels**: MVP, Standard, Polished, Premium
 - **4 Support Tiers**: Self-Service, Guided, Partnership, Managed

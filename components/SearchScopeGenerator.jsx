@@ -15,7 +15,7 @@ import {
 // Complete feature data from the site content
 // Estimation dimensions: layer (platform/integration), scope (universal/industry/client), priority (essential/enhanced/specialized)
 const FEATURES = [
-    // Core Search (7)
+    // Core Search (8)
     { id: 'autocomplete', title: 'Auto Complete', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Predictive suggestions as buyers type', layer: 'platform', scope: 'universal', priority: 'essential' },
     { id: 'faceted', title: 'Faceted Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'critical', desc: 'Dynamic filters based on product attributes', layer: 'platform', scope: 'universal', priority: 'essential' },
     { id: 'visual', title: 'Visual Filters', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'catalog_rich', importance: 'nice', desc: 'Image-based filter selection', layer: 'integration', scope: 'universal', priority: 'enhanced' },
@@ -24,12 +24,13 @@ const FEATURES = [
     { id: 'universal', title: 'Universal Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'content', importance: 'important', desc: 'Search across products, docs, articles', layer: 'platform', scope: 'client', priority: 'enhanced' },
     { id: 'certifications', title: 'Searchable Certifications', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'important', desc: 'Filter by technical certifications', layer: 'platform', scope: 'industry', priority: 'essential' },
 
-    // Smart Search (6)
+    // AI Search (6)
+    { id: 'imagesearch', title: 'Image Search', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'catalog_rich', importance: 'important', desc: 'Upload photo to find matching products', layer: 'integration', scope: 'universal', priority: 'enhanced' },
     { id: 'semantic', title: 'Semantic Search', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'descriptions', importance: 'important', desc: 'Understand meaning, not just keywords', aiEnrichable: true, layer: 'platform', scope: 'universal', priority: 'essential' },
     { id: 'synonyms', title: 'Intelligent Synonyms', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'important', desc: 'Learn industry-specific terminology', layer: 'platform', scope: 'industry', priority: 'enhanced' },
     { id: 'intelligentauto', title: 'Intelligent Auto Complete', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral_user', importance: 'nice', desc: 'Context-aware personalized suggestions', layer: 'platform', scope: 'universal', priority: 'enhanced' },
     { id: 'mlranking', title: 'ML Ranking', bucket: 'smart', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'behavioral_trans', importance: 'important', desc: 'Machine learning optimizes ranking', layer: 'platform', scope: 'universal', priority: 'specialized' },
-    { id: 'relevancefunnel', title: 'Multi-Layered Relevance', bucket: 'smart', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'all', importance: 'nice', desc: 'Complex ranking with business rules', layer: 'platform', scope: 'client', priority: 'specialized' },
+    { id: 'relevancefunnel', title: 'Multi-Layered Relevance', bucket: 'core', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'all', importance: 'nice', desc: 'Complex ranking with business rules', layer: 'platform', scope: 'client', priority: 'specialized' },
     { id: 'intentrouter', title: 'Semantic Intent Router', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'nice', desc: 'Detect what buyer actually wants', layer: 'platform', scope: 'universal', priority: 'enhanced' },
 
     // Discovery (7)
@@ -60,7 +61,7 @@ const FEATURES = [
 
 const BUCKET_INFO = {
     core: { icon: Search, label: 'Core Search', color: '#00cccc' },
-    smart: { icon: Brain, label: 'Smart Search', color: '#9933ff' },
+    smart: { icon: Brain, label: 'AI Search', color: '#9933ff' },
     discovery: { icon: Lightbulb, label: 'Discovery', color: '#ff9900' },
     merchandising: { icon: Target, label: 'Merchandising', color: '#ff3333' },
     recovery: { icon: Shield, label: 'Recovery', color: '#00cc66' },

@@ -146,7 +146,7 @@ const features = [
     },
     {
         id: 'imagesearch',
-        bucket: 'core',
+        bucket: 'smart',
         title: 'Image Search',
         pillars: { data: 'yellow', gov: 'yellow', safe: 'green' },
         desc: 'Upload a photo to find visually similar products using computer vision.',
@@ -332,7 +332,7 @@ const features = [
     },
     {
         id: 'relevancefunnel',
-        bucket: 'smart',
+        bucket: 'core',
         title: 'Multi-Layered Relevance Funnel',
         pillars: { data: 'red', gov: 'red', safe: 'red' },
         desc: 'Complex ranking strategies combining business rules, personalization, and ML.',
@@ -775,7 +775,7 @@ const features = [
 
 const bucketInfo = {
     core: { icon: Search, label: 'Core Search', color: '#00cccc', desc: 'Get to products fast — 8 features' },
-    smart: { icon: Brain, label: 'Smart Search', color: '#9933ff', desc: 'AI that understands & ranks — 6 features' },
+    smart: { icon: Brain, label: 'AI Search', color: '#9933ff', desc: 'AI that understands & ranks — 6 features' },
     discovery: { icon: Lightbulb, label: 'Discovery', color: '#ff9900', desc: 'Suggest & cross-sell — 7 features' },
     merchandising: { icon: Target, label: 'Merchandising', color: '#ff3333', desc: 'Business user control — 6 features' },
     recovery: { icon: Shield, label: 'Recovery', color: '#00cc66', desc: 'Never lose a sale — 2 features' },

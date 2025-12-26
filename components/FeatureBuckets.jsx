@@ -2,8 +2,8 @@ import { Search, Brain, Lightbulb, Target, Shield, BarChart } from 'lucide-react
 import Link from 'next/link'
 
 const buckets = [
-    { id: 'core', icon: Search, label: 'Core Search', count: '7 features', bgColor: 'bg-cyan-100', iconColor: '#0891b2', desc: 'Get to products fast. Navigation, filtering, and discovery fundamentals.' },
-    { id: 'smart', icon: Brain, label: 'Smart Search', count: '6 features', bgColor: 'bg-purple-100', iconColor: '#9333ea', desc: 'AI that understands intent and ranks results intelligently.' },
+    { id: 'core', icon: Search, label: 'Core Search', count: '8 features', bgColor: 'bg-cyan-100', iconColor: '#0891b2', desc: 'Get to products fast. Navigation, filtering, and discovery fundamentals.' },
+    { id: 'smart', icon: Brain, label: 'AI Search', count: '6 features', bgColor: 'bg-purple-100', iconColor: '#9333ea', desc: 'AI that understands intent and ranks results intelligently.' },
     { id: 'discovery', icon: Lightbulb, label: 'Discovery', count: '7 features', bgColor: 'bg-amber-100', iconColor: '#d97706', desc: 'Cross-sell, recommend, and speed up repeat purchases.' },
     { id: 'merchandising', icon: Target, label: 'Merchandising', count: '6 features', bgColor: 'bg-red-100', iconColor: '#dc2626', desc: 'Business users shape search results and monitor performance.' },
     { id: 'recovery', icon: Shield, label: 'Recovery', count: '2 features', bgColor: 'bg-green-100', iconColor: '#16a34a', desc: 'Never dead-end a search. Always provide relevant results.' },
