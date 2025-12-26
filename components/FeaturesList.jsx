@@ -549,6 +549,37 @@ const features = [
             implementationNotes: 'Requires order history integration. Consider showing frequency ("You order this every 3 weeks"), quantity suggestions, and easy re-order with quantity adjustment.'
         }
     },
+    {
+        id: 'complementary',
+        bucket: 'discovery',
+        title: 'Complementary Products',
+        pillars: { data: 'yellow', gov: 'yellow', safe: 'green' },
+        desc: 'Surface products often bought together based on aggregate purchase patterns. "Often Bought Together" displays.',
+        value: 'Increase basket size by showing what other buyers purchased with this item. Data-driven cross-sell.',
+        dataRequired: 'Transactional Data (purchase history, co-occurrence patterns)',
+        implementation: 'Requires transaction history analysis. Can start with curated bundles, improve with behavioral data.',
+        badge: 'POLISHED',
+        personas: ['Exploring Buyer', 'Technical Buyer'],
+        problemsSolved: ['Missing cross-sell', 'Incomplete orders'],
+        fullContent: {
+            whatItSolves: 'Buyers often forget related items they need for a job. They buy the motor but forget the mounting hardware, capacitor, or VFD. This leads to incomplete orders, return trips, and frustrated customers.',
+            keyValueProps: [
+                'Show "Often Bought Together" based on real purchase data',
+                'Increase average order value by 10-20%',
+                'Reduce incomplete orders and return trips',
+                'Surface accessories, consumables, and related parts automatically',
+                'Build bundles based on what actually sells together'
+            ],
+            useCases: [
+                'Buyer views a motor → sees mounting hardware, capacitors, and VFDs that others purchased',
+                'Electrician adds wire → sees connectors, conduit, and boxes commonly bought together',
+                'HVAC tech orders a compressor → sees refrigerant, fittings, and gauges as complements',
+                'Plumber views a water heater → sees expansion tanks, connectors, and venting kits'
+            ],
+            b2bContext: 'Unlike Recommendation Engine (personalized to the user), Complementary Products shows what ALL buyers typically purchase together. It\'s aggregate intelligence: "85% of buyers who purchased this motor also bought these mounting brackets." This is job-completion data, not personalization.',
+            implementationNotes: 'Requires transaction history to identify co-purchase patterns. Cold start with curated product relationships (merchandiser-defined bundles), then enhance with actual purchase data. Consider confidence thresholds — only show "often bought together" when the pattern is strong.'
+        }
+    },
 
     // Merchandising
     {
@@ -776,7 +807,7 @@ const features = [
 const bucketInfo = {
     core: { icon: Search, label: 'Core Search', color: '#00cccc', desc: 'Get to products fast — 8 features' },
     smart: { icon: Brain, label: 'AI Search', color: '#9933ff', desc: 'AI that understands & ranks — 6 features' },
-    discovery: { icon: Lightbulb, label: 'Discovery', color: '#ff9900', desc: 'Suggest & cross-sell — 7 features' },
+    discovery: { icon: Lightbulb, label: 'Discovery', color: '#ff9900', desc: 'Suggest & cross-sell — 8 features' },
     merchandising: { icon: Target, label: 'Merchandising', color: '#ff3333', desc: 'Business user control — 6 features' },
     recovery: { icon: Shield, label: 'Recovery', color: '#00cc66', desc: 'Never lose a sale — 2 features' },
     analytics: { icon: BarChart, label: 'Analytics', color: '#0066ff', desc: 'Measure & optimize — 1 feature' }
