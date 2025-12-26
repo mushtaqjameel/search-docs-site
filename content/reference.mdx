@@ -1,0 +1,240 @@
+import { Tabs, Cards, Callout } from 'nextra/components'
+import { Check, X, AlertTriangle, Box, Brain, Lightbulb, Target, Shield, BarChart, Database, Users, Gem, User, Handshake, Clock, Calendar } from 'lucide-react'
+
+# Quick Reference
+Cheat sheets and summaries at a glance.
+
+## Quick Reference Cards
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-6">
+
+    {/* Buckets */}
+    <div className="p-4 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><Box size={18} /> The 6 Buckets</h3>
+        <div className="space-y-2 text-sm">
+            <div className="p-2 bg-cyan-50 dark:bg-cyan-900/20 rounded border-l-4 border-cyan-500">
+                <strong>Core Search</strong> — 7 features<br/>
+                <span className="text-xs opacity-75">Findability fundamentals</span>
+            </div>
+            <div className="p-2 bg-purple-50 dark:bg-purple-900/20 rounded border-l-4 border-purple-500">
+                <strong>Smart Search</strong> — 6 features<br/>
+                <span className="text-xs opacity-75">AI understanding & ranking</span>
+            </div>
+            <div className="p-2 bg-orange-50 dark:bg-orange-900/20 rounded border-l-4 border-orange-500">
+                <strong>Discovery</strong> — 7 features<br/>
+                <span className="text-xs opacity-75">Cross-sell & reordering</span>
+            </div>
+            <div className="p-2 bg-red-50 dark:bg-red-900/20 rounded border-l-4 border-red-500">
+                <strong>Merchandising</strong> — 6 features<br/>
+                <span className="text-xs opacity-75">Business user control</span>
+            </div>
+            <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded border-l-4 border-green-500">
+                <strong>Recovery</strong> — 2 features<br/>
+                <span className="text-xs opacity-75">Never dead-end</span>
+            </div>
+            <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded border-l-4 border-blue-500">
+                <strong>Analytics</strong> — 2 features<br/>
+                <span className="text-xs opacity-75">Measure & optimize</span>
+            </div>
+        </div>
+    </div>
+
+    {/* Three Pillars */}
+    <div className="p-4 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><Database size={18} /> Three Pillars</h3>
+        <div className="space-y-4 text-sm">
+            <div>
+                <strong className="block mb-1">Data Dependence</strong>
+                <div className="flex gap-2 text-xs">
+                    <span className="w-2 h-2 rounded-full bg-green-500 mt-1"></span> Basic
+                    <span className="w-2 h-2 rounded-full bg-yellow-500 mt-1"></span> Rich
+                    <span className="w-2 h-2 rounded-full bg-red-500 mt-1"></span> Multiple
+                </div>
+            </div>
+            <div>
+                <strong className="block mb-1">Governance Required</strong>
+                <div className="flex gap-2 text-xs">
+                    <span className="w-2 h-2 rounded-full bg-green-500 mt-1"></span> Low
+                    <span className="w-2 h-2 rounded-full bg-yellow-500 mt-1"></span> Periodic
+                    <span className="w-2 h-2 rounded-full bg-red-500 mt-1"></span> Ongoing
+                </div>
+            </div>
+            <div>
+                <strong className="block mb-1">Operational Safety</strong>
+                <div className="flex gap-2 text-xs">
+                    <span className="w-2 h-2 rounded-full bg-green-500 mt-1"></span> Safe
+                    <span className="w-2 h-2 rounded-full bg-yellow-500 mt-1"></span> Trained
+                    <span className="w-2 h-2 rounded-full bg-red-500 mt-1"></span> Expert
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {/* Investment Levels */}
+    <div className="p-4 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><Gem size={18} /> Investment Levels</h3>
+        <div className="space-y-2 text-sm">
+            <div className="p-2 bg-neutral-100 dark:bg-neutral-800 rounded">
+                <strong>MVP</strong><br/>
+                <span className="text-xs opacity-75">Make it work, ship fast</span>
+            </div>
+            <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded">
+                <strong>Standard</strong><br/>
+                <span className="text-xs opacity-75">Solid implementation</span>
+            </div>
+            <div className="p-2 bg-cyan-50 dark:bg-cyan-900/20 rounded">
+                <strong>Polished</strong><br/>
+                <span className="text-xs opacity-75">Self-service ready</span>
+            </div>
+            <div className="p-2 bg-purple-50 dark:bg-purple-900/20 rounded">
+                <strong>Premium</strong><br/>
+                <span className="text-xs opacity-75">Bulletproof, white-glove</span>
+            </div>
+        </div>
+    </div>
+
+    {/* Personas */}
+    <div className="p-4 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><User size={18} /> Personas</h3>
+        <div className="space-y-2 text-sm">
+            <div><span className="font-bold">Rushed Buyer</span> <span className="text-xs opacity-75">→ Auto Complete, Part #</span></div>
+            <div><span className="font-bold">Exploring Buyer</span> <span className="text-xs opacity-75">→ Facets, Recs</span></div>
+            <div><span className="font-bold">Technical Buyer</span> <span className="text-xs opacity-75">→ Semantic, Specs</span></div>
+            <div className="border-t pt-2 mt-2"><span className="font-bold">Merchandiser</span> <span className="text-xs opacity-75">→ Curations, Sandbox</span></div>
+            <div><span className="font-bold">Business Leader</span> <span className="text-xs opacity-75">→ Analytics, ROI</span></div>
+            <div><span className="font-bold">IT/Ops Leader</span> <span className="text-xs opacity-75">→ Config, Stability</span></div>
+        </div>
+    </div>
+
+    {/* Problems */}
+    <div className="p-4 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><AlertTriangle size={18} /> Problems → Solutions</h3>
+        <div className="space-y-2 text-sm">
+            <div>Can't find products → <strong className="text-cyan-600">Core</strong></div>
+            <div>Doesn't understand → <strong className="text-purple-600">Smart</strong></div>
+            <div>Wrong order → <strong className="text-purple-600">Smart</strong></div>
+            <div>No cross-sell → <strong className="text-orange-600">Discovery</strong></div>
+            <div>Slow reorder → <strong className="text-orange-600">Discovery</strong></div>
+            <div>Zero results → <strong className="text-green-600">Recovery</strong></div>
+            <div>No control → <strong className="text-red-600">Merchandising</strong></div>
+            <div>No visibility → <strong className="text-blue-600">Analytics</strong></div>
+        </div>
+    </div>
+
+    {/* Support Tiers */}
+    <div className="p-4 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><Handshake size={18} /> Support Tiers</h3>
+        <div className="space-y-3 text-sm">
+            <div>
+                <strong>Tier 1: Self-Service</strong><br/>
+                <span className="text-xs opacity-75">Low risk + High capacity</span>
+            </div>
+            <div>
+                <strong>Tier 2: Guided</strong><br/>
+                <span className="text-xs opacity-75">Low risk + Low capacity</span>
+            </div>
+            <div>
+                <strong>Tier 3: Partnership</strong><br/>
+                <span className="text-xs opacity-75">High risk + High capacity</span>
+            </div>
+            <div>
+                <strong>Tier 4: Managed</strong><br/>
+                <span className="text-xs opacity-75">High risk + Low capacity</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+## Complete Feature Matrix
+
+| Feature | Bucket | Data | Gov | Safe | Day 1? | Typ. Inv. |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Auto Complete** | 🟦 Core | 🟢 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Faceted Search** | 🟦 Core | 🟡 | 🟡 | 🟡 | ⚠️ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Visual Filters** | 🟦 Core | 🟡 | 🟡 | 🟡 | ⚠️ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Part Number Norm** | 🟦 Core | 🟢 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Voice Search** | 🟦 Core | 🟢 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-gray-200 text-gray-800 rounded text-xs font-bold">MVP</span> |
+| **Universal Search** | 🟦 Core | 🟡 | 🟡 | 🟡 | ⚠️ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Certifications** | 🟦 Core | 🟡 | 🟡 | 🟢 | ⚠️ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Semantic Search** | 🟪 Smart | 🟡 | 🟡 | 🟡 | ⚠️ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Intelligent Synonyms** | 🟪 Smart | 🟡 | 🔴 | 🟡 | ❌ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Intelligent Auto Complete** | 🟪 Smart | 🟡 | 🔴 | 🟡 | ❌ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **ML Ranking** | 🟪 Smart | 🔴 | 🔴 | 🔴 | ❌ | <span className="px-1 bg-purple-100 text-purple-800 rounded text-xs font-bold">PRM</span> |
+| **Multi-Layered Relevance** | 🟪 Smart | 🔴 | 🔴 | 🔴 | ❌ | <span className="px-1 bg-purple-100 text-purple-800 rounded text-xs font-bold">PRM</span> |
+| **Recommendations** | 🟧 Discovery | 🔴 | 🔴 | 🟡 | ⚠️ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Related Searches** | 🟧 Discovery | 🟡 | 🟡 | 🟢 | ❌ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Cross-Brand Equiv** | 🟧 Discovery | 🟡 | 🟡 | 🟡 | ⚠️ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Trending Search** | 🟧 Discovery | 🟡 | 🟢 | 🟢 | ❌ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Custom Products** | 🟧 Discovery | 🟡 | 🟡 | 🟡 | ⚠️ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Recent Search** | 🟧 Discovery | 🟢 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Recently Ordered** | 🟧 Discovery | 🟡 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Curations** | 🟥 Merch | 🟢 | 🟡 | 🟡 | ✅ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **Config Mgmt** | 🟥 Merch | 🟢 | 🟡 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Query Labeller** | 🟥 Merch | 🟡 | 🟡 | 🟢 | ❌ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Search Sandbox** | 🟥 Merch | 🟢 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Search Dashboard** | 🟥 Merch | 🟡 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Zero Results Recovery** | 🟩 Recovery | 🟡 | 🟡 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Fallback Search** | 🟩 Recovery | 🟡 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
+| **Analytics** | 🟦 Analytics | 🟡 | 🟡 | 🟢 | ✅ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+| **A/B Testing** | 🟦 Analytics | 🟡 | 🟡 | 🟡 | ❌ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+
+<div className="flex gap-4 text-xs mt-4 text-gray-500">
+    <span>🟢 Green = Simple</span>
+    <span>🟡 Yellow = Moderate</span>
+    <span>🔴 Red = Complex</span>
+    <span>✅ Day 1 Ready</span>
+    <span>⚠️ Conditional</span>
+    <span>❌ Needs Data</span>
+</div>
+
+## Key Principles
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+    <div className="p-4 rounded-lg bg-cyan-50 dark:bg-cyan-900/20">
+        <strong className="block mb-1 text-cyan-700 dark:text-cyan-300">Data is the Ceiling</strong>
+        <p className="text-sm">Don't over-invest when data quality caps value. Fix data first, or accept lower investment level.</p>
+    </div>
+    <div className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900">
+        <strong className="block mb-1">Capacity Determines Approach</strong>
+        <p className="text-sm">Low capacity = more self-service investment needed. High capacity = they can fill gaps.</p>
+    </div>
+    <div className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900">
+        <strong className="block mb-1">Right-Size to Conditions</strong>
+        <p className="text-sm">Match investment to what's achievable. Premium investment with poor data = wasted effort.</p>
+    </div>
+    <div className="p-4 rounded-lg bg-cyan-50 dark:bg-cyan-900/20">
+        <strong className="block mb-1 text-cyan-700 dark:text-cyan-300">Document Assumptions</strong>
+        <p className="text-sm">Put data quality and capacity assumptions in SOW. Be explicit about what's expected.</p>
+    </div>
+    <div className="p-4 rounded-lg bg-cyan-50 dark:bg-cyan-900/20">
+        <strong className="block mb-1 text-cyan-700 dark:text-cyan-300">Plan for Iteration</strong>
+        <p className="text-sm">MVP now, upgrade later is a valid strategy. Launch, learn, improve.</p>
+    </div>
+    <div className="p-4 rounded-lg bg-neutral-50 dark:bg-neutral-900">
+        <strong className="block mb-1">B2B ≠ B2C</strong>
+        <p className="text-sm">80% of orders are repeats. Optimize for reordering, not just discovery.</p>
+    </div>
+</div>
+
+## Glossary
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        <dl className="space-y-4">
+            <div><dt className="font-bold">ELSER</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Elastic Learned Sparse Encoder — semantic search model</dd></div>
+            <div><dt className="font-bold">Facets</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Filter options based on product attributes (brand, size, etc.)</dd></div>
+            <div><dt className="font-bold">Curations</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Manual merchandising rules — pin, boost, bury, redirect</dd></div>
+            <div><dt className="font-bold">Zero Results</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Search returning no products — critical to recover from</dd></div>
+            <div><dt className="font-bold">Behavioral Data</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Search logs, clicks, conversions — accumulated over time</dd></div>
+        </dl>
+    </div>
+    <div>
+        <dl className="space-y-4">
+            <div><dt className="font-bold">Cross-Reference</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Mapping between equivalent products across brands</dd></div>
+            <div><dt className="font-bold">Kitting</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Bundling products together as custom assemblies</dd></div>
+            <div><dt className="font-bold">ML Ranking</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Machine learning to optimize result ordering</dd></div>
+            <div><dt className="font-bold">AI Enrichment</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Using AI to generate missing product content</dd></div>
+            <div><dt className="font-bold">Governance</dt><dd className="text-sm text-gray-600 dark:text-gray-400">Ongoing attention needed to maintain feature quality</dd></div>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,494 @@
+import { Tabs, Callout, Steps, Cards } from 'nextra/components'
+import Mermaid from '../components/Mermaid'
+import { ShoppingCart, Building, PersonStanding, Search, PenTool, Target, TrendingUp, Settings, Frown, HelpCircle, ArrowDownWideNarrow, DollarSign, Clock, Ban, Lock, Eye, MessageSquare, AlertTriangle } from 'lucide-react'
+
+# Sales Playbook
+
+Personas, problems, discovery questions, and conversation frameworks.
+
+<Tabs items={['Personas', 'Problems', 'Discovery', 'Conversations']}>
+  
+  <Tabs.Tab>
+    ## Know Your Personas
+    Six key stakeholders you'll encounter in B2B search conversations.
+
+    ### Buyer Personas
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+        <div className="p-6 rounded-xl bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-100 dark:border-cyan-800">
+            <div className="mb-3 text-cyan-600 dark:text-cyan-400"><PersonStanding size={32} /></div>
+            <h3 className="font-bold text-lg mb-1">The Rushed Buyer</h3>
+            <div className="italic text-sm opacity-80 mb-3">"I know what I need, get me there NOW"</div>
+            <p className="text-sm mb-2"><strong>What they care about:</strong> Speed, accuracy, minimal clicks</p>
+            <p className="text-sm mb-1"><strong>Lead with:</strong></p>
+            <ul className="text-xs list-disc pl-4 space-y-1 opacity-80 mb-4">
+                <li>Auto Complete</li>
+                <li>Part Number Normalization</li>
+                <li>Recent Search</li>
+                <li>Recently Ordered</li>
+                <li>Voice Search</li>
+            </ul>
+            <Callout type="info" emoji="💬">
+                "How quickly can your repeat buyers reorder?"
+            </Callout>
+        </div>
+
+        <div className="p-6 rounded-xl bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-800">
+            <div className="mb-3 text-orange-600 dark:text-orange-400"><Search size={32} /></div>
+            <h3 className="font-bold text-lg mb-1">The Exploring Buyer</h3>
+            <div className="italic text-sm opacity-80 mb-3">"Show me my options, I'm comparing"</div>
+            <p className="text-sm mb-2"><strong>What they care about:</strong> Options, alternatives, inspiration</p>
+            <p className="text-sm mb-1"><strong>Lead with:</strong></p>
+            <ul className="text-xs list-disc pl-4 space-y-1 opacity-80 mb-4">
+                <li>Faceted Search</li>
+                <li>Visual Filters</li>
+                <li>Recommendations</li>
+                <li>Related Searches</li>
+                <li>Trending Search</li>
+            </ul>
+            <Callout type="info" emoji="💬">
+                "How do buyers discover products they didn't know you carried?"
+            </Callout>
+        </div>
+
+        <div className="p-6 rounded-xl bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800">
+            <div className="mb-3 text-purple-600 dark:text-purple-400"><PenTool size={32} /></div>
+            <h3 className="font-bold text-lg mb-1">The Technical Buyer</h3>
+            <div className="italic text-sm opacity-80 mb-3">"I need the exact spec, the right part"</div>
+            <p className="text-sm mb-2"><strong>What they care about:</strong> Precision, specs, alternatives, compliance</p>
+            <p className="text-sm mb-1"><strong>Lead with:</strong></p>
+            <ul className="text-xs list-disc pl-4 space-y-1 opacity-80 mb-4">
+                <li>Semantic Search</li>
+                <li>Cross-Brand Equivalents</li>
+                <li>Part Number Normalization</li>
+                <li>Custom Products (Kitting)</li>
+                <li>Searchable Certifications</li>
+            </ul>
+            <Callout type="info" emoji="💬">
+                "How do you handle part number variations and cross-references?"
+            </Callout>
+        </div>
+    </div>
+
+    ### Internal Stakeholders
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
+        <div className="p-6 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800">
+            <div className="mb-3 text-red-600 dark:text-red-400"><Target size={32} /></div>
+            <h3 className="font-bold text-lg mb-1">The Merchandiser</h3>
+            <div className="italic text-sm opacity-80 mb-3">"I need to shape what buyers see"</div>
+            <p className="text-sm mb-2"><strong>What they care about:</strong> Control, visibility, content quality</p>
+            <p className="text-sm mb-1"><strong>Lead with:</strong></p>
+            <ul className="text-xs list-disc pl-4 space-y-1 opacity-80 mb-4">
+                <li>Curations</li>
+                <li>Search Dashboard</li>
+                <li>Query Behaviour Labeller</li>
+                <li>Search Sandbox</li>
+                <li>AI Enrichment Dashboard</li>
+            </ul>
+            <Callout type="info" emoji="💬">
+                "Who controls what buyers see in search results? How do you test changes?"
+            </Callout>
+        </div>
+
+        <div className="p-6 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800">
+            <div className="mb-3 text-blue-600 dark:text-blue-400"><TrendingUp size={32} /></div>
+            <h3 className="font-bold text-lg mb-1">The Business Leader</h3>
+            <div className="italic text-sm opacity-80 mb-3">"I need to see the ROI"</div>
+            <p className="text-sm mb-2"><strong>What they care about:</strong> Revenue, conversion, ROI</p>
+            <p className="text-sm mb-1"><strong>Lead with:</strong></p>
+            <ul className="text-xs list-disc pl-4 space-y-1 opacity-80 mb-4">
+                <li>Analytics</li>
+                <li>Search Dashboard</li>
+                <li>Recommendations (basket size)</li>
+            </ul>
+            <Callout type="info" emoji="💬">
+                "How do you measure search's impact on revenue?"
+            </Callout>
+        </div>
+
+        <div className="p-6 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800">
+            <div className="mb-3 text-emerald-600 dark:text-emerald-400"><Settings size={32} /></div>
+            <h3 className="font-bold text-lg mb-1">The IT/Ops Leader</h3>
+            <div className="italic text-sm opacity-80 mb-3">"I need it stable, secure, manageable"</div>
+            <p className="text-sm mb-2"><strong>What they care about:</strong> Stability, governance, testing</p>
+            <p className="text-sm mb-1"><strong>Lead with:</strong></p>
+            <ul className="text-xs list-disc pl-4 space-y-1 opacity-80 mb-4">
+                <li>Configuration Management</li>
+                <li>Search Sandbox</li>
+                <li>A/B Testing</li>
+                <li>AI Enrichment Dashboard</li>
+            </ul>
+            <Callout type="info" emoji="💬">
+                "How do you test and deploy search changes safely? Who approves AI content?"
+            </Callout>
+        </div>
+    </div>
+
+    ### Persona to Feature Mapping
+    <Mermaid chart={`
+    flowchart LR
+    RUSHED[Rushed Buyer] --> CORE[Core Search]
+    EXPLORING[Exploring Buyer] --> DISCOVERY[Discovery]
+    TECHNICAL[Technical Buyer] --> SMART[Smart Search]
+    MERCH[Merchandiser] --> CONTROL[Merchandising]
+    LEADER[Leader] --> ANALYTICS[Analytics]
+    IT[IT Ops] --> GOVERNANCE[Configuration]
+    style RUSHED fill:#00cccc
+    style EXPLORING fill:#ff9900
+    style TECHNICAL fill:#9933ff,color:#fff
+    style MERCH fill:#ff3333,color:#fff
+    style LEADER fill:#0066ff,color:#fff
+    style IT fill:#00cc66
+    `} />
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## Problems We Solve
+    Map client pain points to solutions.
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <Frown className="text-red-500" />
+                <h3 className="font-bold">"Buyers can't find products"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"Our catalog is huge, people get lost"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Core Search & Findability</p>
+            <p className="text-sm text-gray-500">Auto Complete, Faceted Search, Visual Filters, Universal Search</p>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <HelpCircle className="text-purple-500" />
+                <h3 className="font-bold">"Search doesn't understand us"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"Buyers use jargon, abbreviations, part numbers"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Smart Search & Relevance</p>
+            <p className="text-sm text-gray-500">Semantic Search, Intelligent Synonyms, Part Number Normalization</p>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <ArrowDownWideNarrow className="text-orange-500" />
+                <h3 className="font-bold">"Right products, wrong order"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"Good products are buried on page 5"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Smart Search & Relevance</p>
+            <p className="text-sm text-gray-500">Hybrid Search/ML Ranking, Multi-Layered Relevance, Curations</p>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <DollarSign className="text-green-500" />
+                <h3 className="font-bold">"Missing cross-sell opportunities"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"Buyers get what they searched, nothing more"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Discovery & Reordering</p>
+            <p className="text-sm text-gray-500">Recommendations, Related Searches, Cross-Brand Equivalents</p>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <Clock className="text-blue-500" />
+                <h3 className="font-bold">"Reordering is too slow"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"80% of orders are repeats, takes too long"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Discovery & Reordering</p>
+            <p className="text-sm text-gray-500">Recent Search, Recently Ordered, Auto Complete</p>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <Ban className="text-red-500" />
+                <h3 className="font-bold">"Zero results = lost sale"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"Dead ends send them to Amazon"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Recovery & Resilience</p>
+            <p className="text-sm text-gray-500">Zero Results Recovery, Fallback Search</p>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <Lock className="text-gray-500" />
+                <h3 className="font-bold">"Merchandisers have no control"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"IT owns search, business can't influence"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Merchandising & Control</p>
+            <p className="text-sm text-gray-500">Curations, Search Sandbox, Search Dashboard, AI Enrichment</p>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <div className="flex gap-3 mb-2">
+                <Eye className="text-blue-500" />
+                <h3 className="font-bold">"No visibility into search"</h3>
+            </div>
+            <div className="italic text-sm opacity-80 mb-2">"We don't know what's working"</div>
+            <p className="text-sm"><strong>Bucket:</strong> Analytics & Merchandising</p>
+            <p className="text-sm text-gray-500">Analytics, Search Dashboard, Query Behaviour Labeller</p>
+        </div>
+    </div>
+
+    ### Problem to Solution Flow
+    <Mermaid chart={`
+    flowchart LR
+    P1[Cant find] --> B1[Core]
+    P2[No understand] --> B2[Smart]
+    P3[Bad relevance] --> B2
+    P4[No cross sell] --> B3[Discovery]
+    P5[Slow reorder] --> B3
+    P6[Dead ends] --> B4[Recovery]
+    P7[No control] --> B5[Merchandising]
+    P8[No visibility] --> B6[Analytics]
+    `} />
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## Discovery Questions
+    Questions to uncover needs and qualify opportunities.
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+        <div className="p-4 border rounded-lg">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><Search size={20}/> Findability</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"How long does it take your average buyer to find what they need?"</li>
+                <li>"What's your site search usage rate?"</li>
+                <li>"How do buyers typically search — keywords, part numbers, descriptions?"</li>
+                <li>"How large is your catalog? How many SKUs?"</li>
+            </ul>
+        </div>
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><TrendingUp size={20}/> Understanding</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"What percentage of searches use part numbers vs. descriptions?"</li>
+                <li>"Do buyers use industry jargon your catalog doesn't?"</li>
+                <li>"What happens when someone searches for a brand name?"</li>
+                <li>"How do you handle abbreviations and misspellings?"</li>
+            </ul>
+        </div>
+
+        <div className="p-4 border rounded-lg">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><Target size={20}/> Relevance</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"Do your merchandisers feel they can influence what appears first?"</li>
+                <li>"How do you promote high-margin or strategic products?"</li>
+                <li>"Are the right products appearing at the top of results?"</li>
+                <li>"How do you handle seasonal or promotional content?"</li>
+            </ul>
+        </div>
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><DollarSign size={20}/> Cross-sell</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"What's your current attach rate or basket size?"</li>
+                <li>"How do you suggest related products today?"</li>
+                <li>"Do you show accessories, consumables, or frequently bought together?"</li>
+                <li>"What happens when the primary brand is out of stock?"</li>
+            </ul>
+        </div>
+
+        <div className="p-4 border rounded-lg">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><Clock size={20}/> Reordering</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"What percentage of your orders are repeat purchases?"</li>
+                <li>"How do repeat buyers currently reorder?"</li>
+                <li>"Do you surface purchase history in search?"</li>
+                <li>"How many clicks to reorder a previous item?"</li>
+            </ul>
+        </div>
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><Ban size={20}/> Zero Results</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"What's your zero-result rate?"</li>
+                <li>"What do buyers see when search returns nothing?"</li>
+                <li>"Where do those buyers go after hitting a dead end?"</li>
+                <li>"Do you track abandonment from zero results?"</li>
+            </ul>
+        </div>
+
+        <div className="p-4 border rounded-lg">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><Lock size={20}/> Control</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"Who makes changes to search today? IT or business?"</li>
+                <li>"How long does a search change take to implement?"</li>
+                <li>"Can merchandisers test changes before going live?"</li>
+                <li>"How do you handle campaigns and promotions in search?"</li>
+            </ul>
+        </div>
+        <div className="p-4 border rounded-lg bg-neutral-50 dark:bg-neutral-900">
+            <h3 className="font-bold mb-2 flex items-center gap-2"><Eye size={20}/> Visibility</h3>
+            <ul className="text-sm list-disc pl-4 space-y-1">
+                <li>"How do you measure search performance today?"</li>
+                <li>"Do you know your top searches? Your failed searches?"</li>
+                <li>"Can you see search-to-conversion rates?"</li>
+                <li>"How do you identify optimization opportunities?"</li>
+            </ul>
+        </div>
+    </div>
+
+    ### Qualifying Questions
+    <div className="p-6 bg-neutral-900 text-white rounded-xl grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+            <h4 className="text-cyan-400 font-bold mb-3">Data Readiness</h4>
+            <ul className="list-disc pl-5 space-y-2 text-sm opacity-90">
+                <li>"How detailed are your product descriptions?"</li>
+                <li>"Do you have structured attributes for most products?"</li>
+                <li>"Do you have search analytics or click data?"</li>
+                <li>"Can you connect user accounts to search behavior?"</li>
+            </ul>
+        </div>
+        <div>
+            <h4 className="text-cyan-400 font-bold mb-3">Capacity & Timeline</h4>
+            <ul className="list-disc pl-5 space-y-2 text-sm opacity-90">
+                <li>"Who will manage search day-to-day?"</li>
+                <li>"What's your timeline for this project?"</li>
+                <li>"What's your budget range?"</li>
+                <li>"Are there hard launch dates we need to hit?"</li>
+            </ul>
+        </div>
+    </div>
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ## Conversation Frameworks
+    How to structure discovery and sales conversations.
+
+    ### Sales Conversation Flow
+    <Mermaid chart={`
+    flowchart LR
+    D[DISCOVERY] --> S[SOLUTION]
+    S --> SC[SCOPING]
+    SC --> P[PROPOSAL]
+    style D fill:#00cccc
+    style S fill:#ffff00
+    style SC fill:#9933ff,color:#fff
+    style P fill:#ff3333,color:#fff
+    `} />
+
+    ### Example Conversations
+
+    <div className="space-y-6 my-8">
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+            <div className="bg-neutral-50 dark:bg-neutral-900 px-4 py-2 border-b border-neutral-200 dark:border-neutral-800 font-bold text-lg text-cyan-600">
+                Scenario: "Our search is broken"
+            </div>
+            <div className="p-6 space-y-4">
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "Our search is broken. Buyers complain they can't find things."
+                </div>
+                <div>
+                    <span className="font-bold text-cyan-600">You:</span> "That's a common pain point. Let me understand better — when buyers search, are they using part numbers, descriptions, or brand names mostly?"
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "Mix of everything. Part numbers, product names, sometimes just categories."
+                </div>
+                <div>
+                    <span className="font-bold text-cyan-600">You:</span> "And when they search for a part number with spaces or dashes, does it still find the right product?"
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "Actually, no. That's a big complaint."
+                </div>
+                <div>
+                    <span className="font-bold text-cyan-600">You:</span> "That's a common issue — Part Number Normalization solves it. 'ABC-123' and 'ABC123' would both match. What's your zero-result rate? Do you track when searches return nothing?"
+                </div>
+                <div className="mt-4 pt-4 border-t border-dashed border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500">
+                    <strong>Features surfaced:</strong> Part Number Normalization, Auto Complete, Zero Results Recovery
+                </div>
+            </div>
+        </div>
+
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+            <div className="bg-neutral-50 dark:bg-neutral-900 px-4 py-2 border-b border-neutral-200 dark:border-neutral-800 font-bold text-lg text-orange-500">
+                Scenario: "We want to increase basket size"
+            </div>
+            <div className="p-6 space-y-4">
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "We want to increase average order value. Cross-selling is weak."
+                </div>
+                <div>
+                    <span className="font-bold text-orange-500">You:</span> "What's your current attach rate for accessories and consumables?"
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "Low. Buyers find what they searched for and check out."
+                </div>
+                <div>
+                    <span className="font-bold text-orange-500">You:</span> "Do you show 'frequently bought together' or 'you may also need' anywhere?"
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "No, we don't have that capability."
+                </div>
+                <div>
+                    <span className="font-bold text-orange-500">You:</span> "A Recommendation Engine learns from purchase patterns and surfaces relevant add-ons. What about when a brand is out of stock — do you suggest alternatives?"
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "No, they just see out of stock."
+                </div>
+                <div>
+                    <span className="font-bold text-orange-500">You:</span> "That's a missed opportunity. Cross-Brand Equivalents can say 'This brand isn't available, but here's a compatible alternative.' Do you have cross-reference data?"
+                </div>
+                <div className="mt-4 pt-4 border-t border-dashed border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500">
+                    <strong>Features surfaced:</strong> Recommendation Engine, Cross-Brand Equivalents, Related Searches
+                </div>
+            </div>
+        </div>
+
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+            <div className="bg-neutral-50 dark:bg-neutral-900 px-4 py-2 border-b border-neutral-200 dark:border-neutral-800 font-bold text-lg text-red-500">
+                Scenario: "Our merchandisers are frustrated"
+            </div>
+            <div className="p-6 space-y-4">
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "Our merchandising team can't do anything with search. It's all IT."
+                </div>
+                <div>
+                    <span className="font-bold text-red-500">You:</span> "How long does it take to make a search change today?"
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "Weeks. We have to file a ticket and wait."
+                </div>
+                <div>
+                    <span className="font-bold text-red-500">You:</span> "So if you want to promote a seasonal item or run a campaign, you can't do it quickly?"
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "Exactly. By the time it's live, the promotion is over."
+                </div>
+                <div>
+                    <span className="font-bold text-red-500">You:</span> "Curations give merchandisers direct control — pin products, boost results, create promotional placements. All through a dashboard, no code. With a Search Sandbox, they can preview changes before going live."
+                </div>
+                <div>
+                    <span className="font-bold text-neutral-900 dark:text-neutral-100">Client:</span> "That would be a game-changer."
+                </div>
+                <div className="mt-4 pt-4 border-t border-dashed border-neutral-200 dark:border-neutral-800 text-sm text-neutral-500">
+                    <strong>Features surfaced:</strong> Curations, Search Sandbox, Configuration Management, Search Dashboard
+                </div>
+            </div>
+        </div>
+    </div>
+
+    ### Strategic Frameworks for Sales
+    
+    > [!TIP]
+    > **Data Remediation Strategies**: For a detailed breakdown of **Pay Now vs. Pay Later** and **AI Enrichment** strategies, refer to the [Implementation Guide](/implementation?tab=Remediation).
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Callout type="warning" emoji="💬">
+            **"Our data isn't ready"**
+            
+            Response: "That's where AI Enrichment helps. We can generate missing descriptions and attributes, with human review before publishing. Let's assess what you have and identify the fastest path forward."
+        </Callout>
+        <Callout type="warning" emoji="💬">
+            **"We don't have budget for everything"**
+
+            Response: "We don't have to do everything at once. We can start with high-impact, low-complexity features and add more over time. What are your must-haves for launch?"
+        </Callout>
+        <Callout type="warning" emoji="💬">
+            **"We need this live in 6 weeks"**
+
+            Response: "Tight timelines mean we focus on MVP for some features and polish later. Let's identify what must be perfect at launch vs. what can iterate."
+        </Callout>
+        <Callout type="warning" emoji="💬">
+            **"We don't have anyone to manage search"**
+
+            Response: "Two options: we invest more in self-service features with strong guardrails, or we include ongoing managed support. Which fits better with your model?"
+        </Callout>
+    </div>
+  </Tabs.Tab>
+
+</Tabs>
