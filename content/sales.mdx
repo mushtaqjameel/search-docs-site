@@ -1,5 +1,6 @@
 import { Tabs, Callout, Steps, Cards } from 'nextra/components'
 import Mermaid from '../components/Mermaid'
+import DiagramWithHelp from '../components/DiagramWithHelp'
 import { ShoppingCart, Building, PersonStanding, Search, PenTool, Target, TrendingUp, Settings, Frown, HelpCircle, ArrowDownWideNarrow, DollarSign, Clock, Ban, Lock, Eye, MessageSquare, AlertTriangle } from 'lucide-react'
 
 # Sales Playbook
@@ -344,6 +345,85 @@ Personas, problems, discovery questions, and conversation frameworks.
             </ul>
         </div>
     </div>
+
+    <DiagramWithHelp
+      title="Client Capability Assessment"
+      introduction="Use during discovery calls to quickly assess client readiness. Walk through data quality questions, then capacity, to determine the right engagement tier and set realistic expectations."
+      example={{
+        title: "HVAC Parts Distributor Discovery",
+        context: "Mid-market distributor, 80k SKUs, wants 'Amazon-like search'.",
+        steps: [
+          { action: "Product Descriptions?", outcome: "Partial - only 30% have good descriptions", result: "yellow" },
+          { action: "Structured Attributes?", outcome: "Inconsistent - some categories good, others messy", result: "yellow" },
+          { action: "Search/Click History?", outcome: "None - new platform, no data yet", result: "red" },
+          { action: "Team Capacity?", outcome: "Part-time - marketing lead has other duties", result: "yellow" }
+        ],
+        conclusion: "Mix of yellow + one red + medium capacity = Tier 3: Partnership. Need data remediation plan, weekly syncs, and shared responsibility for curation and synonym management."
+      }}
+    >
+      <Mermaid chart={`
+      flowchart TD
+      START([Discovery Call]) --> DATA{Data<br>Assessment}
+
+      subgraph DATA_CHECK["📊 DATA READINESS"]
+          DATA -->|Check| D1{Product<br>Descriptions?}
+          D1 -->|Rich, complete| D1_G[🟢]
+          D1 -->|Partial| D1_Y[🟡]
+          D1 -->|Missing/sparse| D1_R[🔴]
+
+          D1_G --> D2{Structured<br>Attributes?}
+          D1_Y --> D2
+          D1_R --> D2
+
+          D2 -->|Yes, normalized| D2_G[🟢]
+          D2 -->|Inconsistent| D2_Y[🟡]
+          D2 -->|No| D2_R[🔴]
+
+          D2_G --> D3{Search/Click<br>History?}
+          D2_Y --> D3
+          D2_R --> D3
+
+          D3 -->|Available| D3_G[🟢]
+          D3 -->|Some| D3_Y[🟡]
+          D3 -->|None| D3_R[🔴]
+      end
+
+      D3_G --> CAP
+      D3_Y --> CAP
+      D3_R --> CAP
+
+      subgraph CAP_CHECK["👥 CAPACITY CHECK"]
+          CAP{Team<br>Capacity?}
+          CAP -->|Dedicated person/team| CAP_H[HIGH]
+          CAP -->|Part-time, other duties| CAP_M[MEDIUM]
+          CAP -->|No one assigned| CAP_L[LOW]
+      end
+
+      CAP_H --> SCORE
+      CAP_M --> SCORE
+      CAP_L --> SCORE
+
+      subgraph OUTCOME["🎯 ENGAGEMENT MODEL"]
+          SCORE([Score Results]) --> RESULT{Profile?}
+          RESULT -->|Green data + High cap| T1[Tier 1: Self-Service<br>Train + hand off]
+          RESULT -->|Yellow data + Any cap| T2[Tier 2: Guided<br>Regular check-ins]
+          RESULT -->|Any data + Med cap| T3[Tier 3: Partnership<br>Shared ownership]
+          RESULT -->|Red data or Low cap| T4[Tier 4: Managed<br>We run it]
+      end
+
+      style DATA_CHECK fill:#E3F2FD,stroke:#2196F3
+      style CAP_CHECK fill:#F3E5F5,stroke:#9C27B0
+      style OUTCOME fill:#E8F5E9,stroke:#4CAF50
+      style T1 fill:#C8E6C9
+      style T2 fill:#BBDEFB
+      style T3 fill:#FFE0B2
+      style T4 fill:#FFCDD2
+      `} />
+    </DiagramWithHelp>
+
+    <Callout type="info" emoji="💡">
+        **Tip:** Count the colors from the data assessment. Mostly green = ready to go. Mix of yellow = remediation needed. Any red = address before committing scope.
+    </Callout>
   </Tabs.Tab>
 
   <Tabs.Tab>

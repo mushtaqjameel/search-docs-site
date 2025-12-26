@@ -1,4 +1,6 @@
 import { Tabs, Cards, Callout } from 'nextra/components'
+import Mermaid from '../components/Mermaid'
+import DiagramWithHelp from '../components/DiagramWithHelp'
 import { Check, X, AlertTriangle, Box, Brain, Lightbulb, Target, Shield, BarChart, Database, Users, Gem, User, Handshake, Clock, Calendar } from 'lucide-react'
 
 # Quick Reference
@@ -216,6 +218,75 @@ Cheat sheets and summaries at a glance.
     </div>
 </div>
 
+## Red Flags & Green Lights
+
+Quick visual cues for assessing client situations during discovery:
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+    <div className="p-5 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+        <h4 className="font-bold flex items-center gap-2 text-red-700 dark:text-red-300 mb-4"><AlertTriangle size={20} /> Red Flags — Downgrade Investment</h4>
+        <ul className="space-y-2 text-sm">
+            <li className="flex items-start gap-2">
+                <X size={16} className="text-red-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Missing critical data</strong> — "We don't have product descriptions"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <X size={16} className="text-red-500 mt-0.5 flex-shrink-0" />
+                <span><strong>No dedicated owner</strong> — "It'll be managed by whoever has time"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <X size={16} className="text-red-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Tight timeline</strong> — "We need this live in 3 weeks"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <X size={16} className="text-red-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Budget constraints</strong> — "We can't afford the higher tier"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <X size={16} className="text-red-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Unclear requirements</strong> — "We want it to work like Amazon"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <X size={16} className="text-red-500 mt-0.5 flex-shrink-0" />
+                <span><strong>One-off request</strong> — Custom feature unlikely to be reused</span>
+            </li>
+        </ul>
+    </div>
+    <div className="p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+        <h4 className="font-bold flex items-center gap-2 text-green-700 dark:text-green-300 mb-4"><Check size={20} /> Green Lights — Upgrade Investment</h4>
+        <ul className="space-y-2 text-sm">
+            <li className="flex items-start gap-2">
+                <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Rich, clean data</strong> — "We have detailed product catalogs"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Dedicated team</strong> — "Our merchandiser will own this full-time"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Flexible timeline</strong> — "We want to get this right, not fast"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Healthy budget</strong> — "Quality is the priority"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
+                <span><strong>Clear success metrics</strong> — "We measure conversion and time-to-find"</span>
+            </li>
+            <li className="flex items-start gap-2">
+                <Check size={16} className="text-green-500 mt-0.5 flex-shrink-0" />
+                <span><strong>First in vertical</strong> — Template for future clients</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<Callout type="info">
+**Using These Signals:** Count the red and green flags during discovery. More reds = lower investment ceiling. More greens = opportunity to invest more for better outcomes.
+</Callout>
+
 ## Glossary
 
 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -238,3 +309,158 @@ Cheat sheets and summaries at a glance.
         </dl>
     </div>
 </div>
+
+## Visual Decision Guides
+
+<DiagramWithHelp
+  title="Feature Safety Spectrum"
+  introduction="Shows where each feature falls on the autonomy spectrum. Use this to set client expectations about ongoing involvement and to plan support resources. Features on the left run themselves; features on the right need attention."
+  example={{
+    title: "Planning Support for Auto Parts Distributor",
+    context: "Client implementing 12 features, needs to understand ongoing requirements.",
+    steps: [
+      { action: "Safe features (5): Auto Complete, Recent, Part #, Sandbox, Facets", outcome: "No ongoing attention needed", result: "green" },
+      { action: "Monitored features (3): Semantic, Analytics, Zero Results", outcome: "Monthly review recommended", result: "yellow" },
+      { action: "Governed features (2): Curations, Synonyms", outcome: "Weekly review cycles, approval workflow", result: "yellow" },
+      { action: "Managed features (2): ML Ranking, Recommendations", outcome: "Dedicated oversight, model monitoring", result: "red" }
+    ],
+    conclusion: "Client needs: Part-time for monthly reviews, dedicated hours for governed features, and either internal expert or managed service for ML features."
+  }}
+>
+  <Mermaid chart={`
+  flowchart LR
+  subgraph SAFE["🟢 SAFE: SET AND FORGET"]
+      direction TB
+      S1[Auto Complete]
+      S2[Recent Search]
+      S3[Part Number Norm]
+      S4[Search Sandbox]
+      S5[Faceted Search]
+  end
+
+  subgraph MONITORED["🟡 MONITORED: PERIODIC CHECK"]
+      direction TB
+      M1[Semantic Search]
+      M2[Trending Search]
+      M3[Related Searches]
+      M4[Zero Results Recovery]
+      M5[Analytics]
+  end
+
+  subgraph GOVERNED["🟠 GOVERNED: ACTIVE OVERSIGHT"]
+      direction TB
+      G1[Curations]
+      G2[Intelligent Synonyms]
+      G3[Cross-Brand Equiv]
+      G4[AI Enrichment]
+  end
+
+  subgraph MANAGED["🔴 MANAGED: EXPERT REQUIRED"]
+      direction TB
+      R1[ML Ranking]
+      R2[Recommendations]
+      R3[Multi-Layer Relevance]
+  end
+
+  SAFE --> MONITORED --> GOVERNED --> MANAGED
+
+  style SAFE fill:#E8F5E9,stroke:#4CAF50
+  style MONITORED fill:#FFF9C4,stroke:#FFC107
+  style GOVERNED fill:#FFE0B2,stroke:#FF9800
+  style MANAGED fill:#FFCDD2,stroke:#F44336
+  `} />
+</DiagramWithHelp>
+
+<div className="grid grid-cols-1 md:grid-cols-4 gap-4 my-6 text-sm">
+    <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded border border-green-200 dark:border-green-800">
+        <strong className="text-green-700 dark:text-green-300">Safe</strong>
+        <p className="text-xs mt-1">Configure once, runs reliably. Low risk of negative impact.</p>
+    </div>
+    <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800">
+        <strong className="text-yellow-700 dark:text-yellow-300">Monitored</strong>
+        <p className="text-xs mt-1">Check weekly/monthly. May need tuning as patterns change.</p>
+    </div>
+    <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded border border-orange-200 dark:border-orange-800">
+        <strong className="text-orange-700 dark:text-orange-300">Governed</strong>
+        <p className="text-xs mt-1">Approval workflows. Human oversight on changes.</p>
+    </div>
+    <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border border-red-200 dark:border-red-800">
+        <strong className="text-red-700 dark:text-red-300">Managed</strong>
+        <p className="text-xs mt-1">Expert attention. Risk of degradation if unmonitored.</p>
+    </div>
+</div>
+
+<DiagramWithHelp
+  title="Post-Launch Support Model"
+  introduction="Shows the journey from go-live through stabilization to ongoing support. Use this to set expectations about what happens after launch and how support transitions based on the engagement tier."
+  example={{
+    title: "Tier 2 Client Post-Launch",
+    context: "Client launched with Guided tier, now transitioning to steady state.",
+    steps: [
+      { action: "Week 1-2: Stabilization", outcome: "Monitor closely, 3 minor issues found and fixed", result: "yellow" },
+      { action: "Week 3: Handoff planning", outcome: "Tier 2 = Weekly check-ins + dashboard access", result: "green" },
+      { action: "Ongoing cadence", outcome: "Monthly sync calls, optimization recommendations", result: "green" },
+      { action: "Escalation path", outcome: "Priority support channel for urgent issues", result: "green" }
+    ],
+    conclusion: "After stabilization, client moves to monthly sync model with priority support access. Budget 2-4 hours/month for ongoing optimization discussions."
+  }}
+>
+  <Mermaid chart={`
+  flowchart TD
+  subgraph LAUNCH["🚀 LAUNCH"]
+      L([Go Live])
+  end
+
+  L --> W1
+
+  subgraph WEEK1["📅 WEEK 1-2: STABILIZATION"]
+      W1[Monitor all features]
+      W1 --> W1_CHECK{Issues?}
+      W1_CHECK -->|Yes| W1_FIX[Hotfix + Tune]
+      W1_CHECK -->|No| W1_OK[Proceed]
+  end
+
+  W1_FIX --> HANDOFF
+  W1_OK --> HANDOFF
+
+  subgraph HANDOFF["🤝 HANDOFF"]
+      direction TB
+      H1{Support Tier?}
+
+      H1 -->|Tier 1| T1_HAND[Documentation<br>+ Training Session<br>+ Async Channel]
+
+      H1 -->|Tier 2| T2_HAND[Weekly Check-ins<br>+ Dashboard Access<br>+ Priority Support]
+
+      H1 -->|Tier 3| T3_HAND[Shared Ownership<br>+ Regular Reviews<br>+ Escalation Path]
+
+      H1 -->|Tier 4| T4_HAND[We Operate<br>+ Monthly Reports<br>+ SLA Monitoring]
+  end
+
+  subgraph ONGOING["📊 ONGOING"]
+      direction LR
+      T1_HAND --> ON1[Self-manage<br>Quarterly review]
+      T2_HAND --> ON2[Monthly sync<br>Optimization recs]
+      T3_HAND --> ON3[Bi-weekly sync<br>Shared roadmap]
+      T4_HAND --> ON4[Weekly reports<br>Full management]
+  end
+
+  style LAUNCH fill:#E3F2FD,stroke:#2196F3
+  style WEEK1 fill:#FFF9E6,stroke:#FF9800
+  style HANDOFF fill:#F3E5F5,stroke:#9C27B0
+  style ONGOING fill:#E8F5E9,stroke:#4CAF50
+  `} />
+</DiagramWithHelp>
+
+### Which Flowchart When?
+
+| Scenario | Use This | Location |
+| :--- | :--- | :--- |
+| Assessing data gaps for a feature | Data Readiness Decision Tree | [Strategy > Flowcharts](/strategy) |
+| Deciding if AI can fill gaps | AI Enrichment Decision Flow | [Strategy > Flowcharts](/strategy) |
+| Evaluating feature risk | Feature Risk Matrix | [Strategy > Flowcharts](/strategy) |
+| Planning implementation phases | Feature Unlock Paths | [Strategy > Flowcharts](/strategy) |
+| Scoping engagement level | Consultation Scoping Flow | [Strategy > Flowcharts](/strategy) |
+| Qualifying a prospect | Client Capability Assessment | [Sales > Discovery](/sales) |
+| Setting up AI review process | Human-in-the-Loop Workflow | [Implementation > Remediation](/implementation) |
+| Understanding feature autonomy | Feature Safety Spectrum | This page |
+| Planning post-launch support | Post-Launch Support Model | This page |
