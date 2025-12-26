@@ -8,6 +8,7 @@ export default {
         title: 'Sales & Discovery'
     },
     features: 'Feature Explorer',
+    'platform-capabilities': 'Platform Capabilities',
     sales: 'Sales Playbook',
     '###-impl': {
         type: 'separator',

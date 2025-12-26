@@ -145,6 +145,44 @@ const features = [
         }
     },
     {
+        id: 'imagesearch',
+        bucket: 'core',
+        title: 'Image Search',
+        pillars: { data: 'yellow', gov: 'yellow', safe: 'green' },
+        desc: 'Upload a photo to find visually similar products using computer vision.',
+        value: 'Field workers photograph unknown parts, maintenance techs replace worn components without labels, buyers match competitor products.',
+        dataRequired: 'Product Images (multiple angles preferred), Catalog',
+        implementation: 'Requires computer vision model and vector index. Can combine with keyword refinement.',
+        badge: 'POLISHED',
+        personas: ['Technical Buyer', 'Rushed Buyer'],
+        problemsSolved: ['Unknown parts', 'No part number', 'Visual matching'],
+        fullContent: {
+            whatItSolves: 'Buyers who encounter unknown parts, worn components without readable labels, or competitor products they want to match. Bypasses the need to know technical terminology or part numbers.',
+            keyValueProps: [
+                'Upload photo to find matching products',
+                'Computer vision matches shapes, colors, features',
+                'Combine image + keywords for refinement',
+                'Surface related parts and accessories',
+                'Mobile-optimized capture interface'
+            ],
+            useCases: [
+                'Technician photographs a broken valve and finds replacement without knowing manufacturer',
+                'Procurement uploads competitor catalog image to find equivalent products',
+                'Field workers identify unlabeled electrical components by photographing panel markings',
+                'Upload image of motor, see compatible belts, pulleys, and mounts as related parts',
+                'Combine image of mystery fitting with keyword "brass" to filter results'
+            ],
+            b2bContext: 'For industrial buyers, the part is often right in front of them but unidentifiable. Image search turns "I need one of these" into a successful product match. Particularly valuable for maintenance, repair, and replacement scenarios.',
+            otherRequirements: [
+                'Computer vision model for feature extraction',
+                'Vector index for image similarity matching',
+                'Mobile-optimized image capture interface',
+                'Hybrid query engine supporting image + text fusion'
+            ],
+            implementationNotes: 'Requires product image library with consistent quality. Multiple angles improve matching accuracy. Can bootstrap with existing catalog images, improve with user-submitted matches over time.'
+        }
+    },
+    {
         id: 'universal',
         bucket: 'core',
         title: 'Universal Search',
@@ -732,40 +770,16 @@ const features = [
             b2bContext: 'Analytics answers strategic questions: "What\'s the revenue impact of search?" "Which queries have high volume but low conversion?" "What would happen if we improved X?" ROI justification for search investment.',
             implementationNotes: 'Value increases over time as data accumulates. Start with basic metrics Day 1, add sophisticated analysis as behavioral data grows. Essential for proving ROI.'
         }
-    },
-    {
-        id: 'abtesting',
-        bucket: 'analytics',
-        title: 'A/B Testing',
-        pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' },
-        desc: 'Run controlled experiments to measure impact of search changes.',
-        value: 'Data-driven decisions. Know what actually improves conversion.',
-        dataRequired: 'Behavioral Data (sufficient traffic for significance)',
-        implementation: 'Requires traffic volume. Training needed for proper use.',
-        badge: 'POLISHED',
-        personas: ['Merchandiser', 'IT/Ops'],
-        problemsSolved: ["Can't measure impact"],
-        fullContent: {
-            whatItSolves: 'Opinion-based decisions. "I think this ranking is better" vs. "This ranking converts 15% better with statistical significance."',
-            keyValueProps: [
-                'Controlled experiments for search changes',
-                'Statistical significance calculation',
-                'Measure actual impact on conversion',
-                'Reduce risk of harmful changes'
-            ],
-            b2bContext: 'A/B testing turns search optimization from art to science. Instead of guessing, you know. "New ranking increased conversion by 12% with 95% confidence." Requires sufficient traffic volume for statistical significance.',
-            implementationNotes: 'Requires traffic volume for statistical significance. Training needed for proper experiment design. Consider starting with high-traffic queries. Day 60+ feature after analytics foundation is solid.'
-        }
     }
 ];
 
 const bucketInfo = {
-    core: { icon: Search, label: 'Core Search', color: '#00cccc', desc: 'Get to products fast — 7 features' },
+    core: { icon: Search, label: 'Core Search', color: '#00cccc', desc: 'Get to products fast — 8 features' },
     smart: { icon: Brain, label: 'Smart Search', color: '#9933ff', desc: 'AI that understands & ranks — 6 features' },
     discovery: { icon: Lightbulb, label: 'Discovery', color: '#ff9900', desc: 'Suggest & cross-sell — 7 features' },
     merchandising: { icon: Target, label: 'Merchandising', color: '#ff3333', desc: 'Business user control — 6 features' },
     recovery: { icon: Shield, label: 'Recovery', color: '#00cc66', desc: 'Never lose a sale — 2 features' },
-    analytics: { icon: BarChart, label: 'Analytics', color: '#0066ff', desc: 'Measure & optimize — 2 features' }
+    analytics: { icon: BarChart, label: 'Analytics', color: '#0066ff', desc: 'Measure & optimize — 1 feature' }
 };
 
 const pillarColors = {

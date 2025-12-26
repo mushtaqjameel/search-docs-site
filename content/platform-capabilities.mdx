@@ -1,0 +1,74 @@
+import PlatformCapabilities from '../components/PlatformCapabilities'
+
+# Platform Capabilities
+
+**6 foundational components** that power the search platform — the infrastructure behind all features.
+
+## Features vs Capabilities
+
+| Aspect | Search Features | Platform Capabilities |
+|--------|----------------|----------------------|
+| **User** | Buyers interact directly | Internal/technical teams |
+| **Visibility** | Customer-facing | Behind the scenes |
+| **Examples** | Auto Complete, Semantic Search | Analytics Engine, Ingestion Pipeline |
+| **Evaluation** | Feature-by-feature scoping | Included in platform |
+
+## The 6 Platform Capabilities
+
+<PlatformCapabilities />
+
+## How Capabilities Power Features
+
+```mermaid
+flowchart TD
+    subgraph CAPABILITIES["PLATFORM CAPABILITIES"]
+        direction TB
+        C1["Search Experience Framework"]
+        C2["Behavioral Analytics Engine"]
+        C3["Multi-Modal Ingestion Pipeline"]
+        C4["Generative Data Enrichment"]
+        C5["A/B Testing Framework"]
+        C6["Interleaving Testing"]
+    end
+
+    subgraph FEATURES["SEARCH FEATURES"]
+        direction TB
+        F1["30 Search Features"]
+    end
+
+    C1 --> F1
+    C2 --> F1
+    C3 --> F1
+    C4 --> F1
+    C5 -.->|"optimizes"| F1
+    C6 -.->|"compares"| F1
+
+    style C1 fill:#4ECDC4
+    style C2 fill:#9B59B6
+    style C3 fill:#E74C3C
+    style C4 fill:#F39C12
+    style C5 fill:#3498DB
+    style C6 fill:#27AE60
+```
+
+## Capability Dependencies
+
+| Capability | Enables These Features |
+|------------|----------------------|
+| **Search Experience Framework** | All UI-facing features (Auto Complete, Faceted Search, Visual Filters) |
+| **Behavioral Analytics Engine** | Trending Search, Related Searches, ML Ranking, Personalization |
+| **Multi-Modal Ingestion Pipeline** | Universal Search, Image Search, Document Search |
+| **Generative Data Enrichment** | Semantic Search (via rich descriptions), AI Enrichment Dashboard |
+| **A/B Testing Framework** | Analytics, Curations optimization, Ranking improvements |
+| **Interleaving Testing** | ML Ranking comparisons, Algorithm optimization |
+
+## When to Discuss Capabilities
+
+Capabilities typically come up in:
+
+1. **Technical Architecture Reviews** — Understanding the platform foundation
+2. **Data Integration Planning** — How to connect existing systems
+3. **Optimization Discussions** — How to measure and improve search
+4. **Enterprise Evaluations** — Security, scalability, and compliance requirements
+
+For client-facing feature discussions, focus on the [30 Search Features](/features) instead.
