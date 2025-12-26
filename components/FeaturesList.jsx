@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Search, Brain, Lightbulb, Target, Shield, BarChart, ChevronDown, ChevronUp, AlertTriangle, AlertCircle, CheckCircle, ExternalLink, Link2, Users, Zap, X } from 'lucide-react'
+import { Search, Brain, Lightbulb, Target, Shield, BarChart, ChevronDown, ChevronUp, AlertTriangle, AlertCircle, CheckCircle, ExternalLink, Link2, Users, Zap, X, Info } from 'lucide-react'
+import mermaid from 'mermaid'
 
 // Enriched Features Data with full content
 const features = [
@@ -813,6 +814,172 @@ const bucketInfo = {
     analytics: { icon: BarChart, label: 'Analytics', color: '#0066ff', desc: 'Measure & optimize — 1 feature' }
 };
 
+// Extended bucket details with mermaid charts and descriptions
+const bucketDetails = {
+    core: {
+        title: 'Core Search & Findability',
+        tagline: 'Get to products fast',
+        description: 'The fundamental ability to navigate a large catalog quickly and accurately. These features handle catalogs with 100K+ SKUs, support multiple input methods (type, click, speak, image), normalize messy part numbers and formats, and let buyers filter and refine results efficiently.',
+        whatItSolves: 'Buyers can\'t find products in your massive catalog. They search by part number and get zero results because of formatting differences. They don\'t know the right terminology.',
+        keyValueProps: [
+            'Handle catalogs with 100K+ SKUs',
+            'Support multiple input methods (type, click, speak, image)',
+            'Normalize messy part numbers and formats',
+            'Filter and refine results efficiently'
+        ],
+        chart: `flowchart TD
+    BUCKET["🔍 CORE SEARCH & FINDABILITY\\n<i>Get to products fast</i>"]
+    BUCKET --> F1["Auto Complete\\nPredictive suggestions"]
+    BUCKET --> F2["Faceted Search\\nFilter by attributes"]
+    BUCKET --> F3["Visual Filters\\nImage-based refinement"]
+    BUCKET --> F4["Part Number Normalization\\nHandle format variations"]
+    BUCKET --> F5["Voice Search\\nSpeak to search"]
+    BUCKET --> F6["Image Search\\nUpload photo to find"]
+    BUCKET --> F7["Universal Search\\nSearch across content"]
+    BUCKET --> F8["Searchable Certifications\\nFilter by compliance"]
+    style BUCKET fill:#00cccc,color:#000
+    style F1 fill:#e0fafa
+    style F2 fill:#e0fafa
+    style F3 fill:#e0fafa
+    style F4 fill:#e0fafa
+    style F5 fill:#e0fafa
+    style F6 fill:#e0fafa
+    style F7 fill:#e0fafa
+    style F8 fill:#e0fafa`
+    },
+    smart: {
+        title: 'AI Search & Relevance',
+        tagline: 'AI that understands and ranks',
+        description: 'Bridge the gap between what buyers type and what they mean. These features understand natural language queries, learn your industry\'s terminology, blend multiple relevance signals (behavior, text, business rules), and route queries to the right experience.',
+        whatItSolves: 'Search doesn\'t understand your buyers. They use industry jargon, abbreviations, or "how I describe it" language. The right products exist but are buried on page 5.',
+        keyValueProps: [
+            'Understand natural language queries',
+            'Learn your industry\'s terminology',
+            'Blend multiple relevance signals',
+            'Route queries to the right experience'
+        ],
+        chart: `flowchart TD
+    BUCKET["🧠 AI SEARCH & RELEVANCE\\n<i>AI that understands and ranks</i>"]
+    BUCKET --> F1["Semantic Search\\nUnderstand meaning"]
+    BUCKET --> F2["Intelligent Synonyms\\nLearn terminology"]
+    BUCKET --> F3["Intelligent Auto Complete\\nPersonalized suggestions"]
+    BUCKET --> F4["Hybrid Search / ML Ranking\\nBlend signals"]
+    BUCKET --> F5["Multi-Layered Relevance\\nComplex ranking"]
+    BUCKET --> F6["Semantic Intent Router\\nDetect buyer intent"]
+    style BUCKET fill:#9933ff,color:#fff
+    style F1 fill:#f3e8ff
+    style F2 fill:#f3e8ff
+    style F3 fill:#f3e8ff
+    style F4 fill:#f3e8ff
+    style F5 fill:#f3e8ff
+    style F6 fill:#f3e8ff`
+    },
+    discovery: {
+        title: 'Discovery & Reordering',
+        tagline: 'Suggest, cross-sell, speed up repeats',
+        description: 'Increase basket size with intelligent recommendations and speed up repeat purchasing (80% of B2B orders). Help buyers discover products they didn\'t know you carried and surface alternatives when primary brands are unavailable.',
+        whatItSolves: 'Missed cross-sell opportunities and slow reordering for repeat buyers. Buyers get what they searched for but nothing more. 80% of orders are repeats but take too long to place.',
+        keyValueProps: [
+            'Increase basket size with recommendations',
+            'Surface alternatives when primary brand is unavailable',
+            'Speed up repeat purchasing (80% of B2B orders)',
+            'Help buyers discover products they didn\'t know you carried'
+        ],
+        chart: `flowchart TD
+    BUCKET["💡 DISCOVERY & REORDERING\\n<i>Suggest, cross-sell, speed up repeats</i>"]
+    BUCKET --> DISCOVER["DISCOVERY"]
+    BUCKET --> REORDER["REORDERING"]
+    DISCOVER --> F1["Recommendation Engine\\nPersonalized suggestions"]
+    DISCOVER --> F2["Related Searches\\nAlternative paths"]
+    DISCOVER --> F3["Cross-Brand Equivalents\\nFind alternatives"]
+    DISCOVER --> F4["Trending Search\\nWhat's popular"]
+    DISCOVER --> F5["Custom Products\\nBuild bundles"]
+    DISCOVER --> F8["Complementary Products\\nOften bought together"]
+    REORDER --> F6["Recent Search\\nRepeat searches"]
+    REORDER --> F7["Recently Ordered\\nOne-click reorder"]
+    style BUCKET fill:#ff9900,color:#000
+    style DISCOVER fill:#fff5e6
+    style REORDER fill:#fff5e6
+    style F1 fill:#fff0cc
+    style F2 fill:#fff0cc
+    style F3 fill:#fff0cc
+    style F4 fill:#fff0cc
+    style F5 fill:#fff0cc
+    style F6 fill:#ffe6b3
+    style F7 fill:#ffe6b3
+    style F8 fill:#fff0cc`
+    },
+    merchandising: {
+        title: 'Merchandising & Control',
+        tagline: 'Business users shape results',
+        description: 'Give business users control over search without IT tickets. Merchandisers can control promotions and campaigns, test changes safely in sandbox before going live, get real-time visibility into performance, and maintain audit trails for all changes.',
+        whatItSolves: 'Business users are locked out of search. Marketing wants to promote a campaign but has to file an IT ticket and wait. No one knows what\'s working or why.',
+        keyValueProps: [
+            'Merchandisers control promotions and campaigns',
+            'Test changes safely in sandbox before going live',
+            'Real-time visibility into search performance',
+            'Audit trail and rollback for all changes'
+        ],
+        chart: `flowchart TD
+    BUCKET["🎯 MERCHANDISING & CONTROL\\n<i>Business users shape results</i>"]
+    BUCKET --> SHAPE["SHAPE RESULTS"]
+    BUCKET --> MONITOR["MONITOR & TEST"]
+    BUCKET --> ENRICH["ENRICH CONTENT"]
+    SHAPE --> F1["Curations\\nPin, boost, bury"]
+    SHAPE --> F2["Configuration Management\\nVersion control"]
+    MONITOR --> F3["Query Behaviour Labeller\\nUnderstand patterns"]
+    MONITOR --> F4["Search Sandbox\\nTest safely"]
+    MONITOR --> F5["Search Dashboard\\nReal-time visibility"]
+    ENRICH --> F6["AI Enrichment Dashboard\\nReview AI content"]
+    style BUCKET fill:#ff3333,color:#fff
+    style SHAPE fill:#ffe6e6
+    style MONITOR fill:#ffe6e6
+    style ENRICH fill:#ffe6e6
+    style F1 fill:#ffcccc
+    style F2 fill:#ffcccc
+    style F3 fill:#ffcccc
+    style F4 fill:#ffcccc
+    style F5 fill:#ffcccc
+    style F6 fill:#ffcccc`
+    },
+    recovery: {
+        title: 'Recovery & Resilience',
+        tagline: 'Never lose a sale',
+        description: 'Ensure every search returns useful results. When exact matches aren\'t found, provide intelligent suggestions and fallback strategies. Keep buyers engaged and never let them hit a dead end.',
+        whatItSolves: 'Dead-end searches that drive buyers to competitors. Zero results = lost sale. Buyers leave frustrated when search fails instead of getting helpful alternatives.',
+        keyValueProps: [
+            'Every search returns useful results',
+            'Suggestions when exact match isn\'t found',
+            'Fallback strategies when primary search fails',
+            'Keep buyers engaged, never frustrated'
+        ],
+        chart: `flowchart TD
+    BUCKET["🛡️ RECOVERY & RESILIENCE\\n<i>Never lose a sale</i>"]
+    BUCKET --> F1["Zero Results Recovery\\nAlways show something"]
+    BUCKET --> F2["Fallback Search\\nGraceful degradation"]
+    style BUCKET fill:#00cc66,color:#000
+    style F1 fill:#e6fff0
+    style F2 fill:#e6fff0`
+    },
+    analytics: {
+        title: 'Analytics & Optimization',
+        tagline: 'Measure, learn, improve',
+        description: 'Understand search performance with deep-dive analytics. Measure conversion impact of changes, identify opportunities, and make data-driven optimization decisions. Prove ROI on search investments.',
+        whatItSolves: 'No visibility into search performance. You can\'t improve what you can\'t measure. Teams don\'t know what\'s working or where to focus optimization efforts.',
+        keyValueProps: [
+            'Deep-dive analytics and reporting',
+            'Measure conversion impact of changes',
+            'Identify optimization opportunities',
+            'Prove ROI on search investments'
+        ],
+        chart: `flowchart TD
+    BUCKET["📊 ANALYTICS & OPTIMIZATION\\n<i>Measure, learn, improve</i>"]
+    BUCKET --> F1["Analytics\\nPerformance metrics & reports"]
+    style BUCKET fill:#0066ff,color:#fff
+    style F1 fill:#e6f0ff`
+    }
+};
+
 const pillarColors = {
     green: '#22c55e',
     yellow: '#eab308',
@@ -838,6 +1005,111 @@ const Alert = ({ type, text }) => {
         <div className={`mt-3 p-3 rounded-lg border text-sm flex gap-2 items-start ${colorClass}`}>
             <span className="mt-0.5">{icon}</span>
             <span>{text}</span>
+        </div>
+    );
+};
+
+// Mermaid Chart Component
+const MermaidChart = ({ chart, id }) => {
+    const containerRef = useRef(null);
+
+    useEffect(() => {
+        if (containerRef.current && chart) {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: 'base',
+                themeVariables: {
+                    fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+                    fontSize: '14px'
+                },
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                }
+            });
+
+            const renderChart = async () => {
+                try {
+                    containerRef.current.innerHTML = '';
+                    const { svg } = await mermaid.render(`mermaid-${id}`, chart);
+                    containerRef.current.innerHTML = svg;
+                } catch (error) {
+                    console.error('Mermaid rendering error:', error);
+                }
+            };
+
+            renderChart();
+        }
+    }, [chart, id]);
+
+    return <div ref={containerRef} className="mermaid-container overflow-x-auto" />;
+};
+
+// Bucket Overview Component
+const BucketOverview = ({ bucketKey }) => {
+    const details = bucketDetails[bucketKey];
+    const info = bucketInfo[bucketKey];
+    const Icon = info.icon;
+
+    if (!details) return null;
+
+    return (
+        <div className="bucket-overview mb-8 rounded-xl border-2 overflow-hidden" style={{ borderColor: info.color }}>
+            {/* Header */}
+            <div className="p-6" style={{ background: `linear-gradient(135deg, ${info.color}15, ${info.color}05)` }}>
+                <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 rounded-lg" style={{ background: info.color }}>
+                        <Icon size={24} className="text-white" />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-bold">{details.title}</h2>
+                        <p className="text-neutral-500 dark:text-neutral-400 italic">{details.tagline}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 p-6">
+                {/* Left: Description & Value Props */}
+                <div className="space-y-4">
+                    <div>
+                        <h3 className="font-bold text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2">
+                            <Info size={16} style={{ color: info.color }} /> What This Bucket Does
+                        </h3>
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                            {details.description}
+                        </p>
+                    </div>
+
+                    <div className="p-4 rounded-lg bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30">
+                        <h3 className="font-bold text-red-700 dark:text-red-300 mb-2 flex items-center gap-2">
+                            <AlertTriangle size={16} /> The Problem It Solves
+                        </h3>
+                        <p className="text-red-600 dark:text-red-400 text-sm">
+                            {details.whatItSolves}
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 className="font-bold text-neutral-700 dark:text-neutral-300 mb-2 flex items-center gap-2">
+                            <CheckCircle size={16} className="text-green-500" /> Key Value Props
+                        </h3>
+                        <ul className="space-y-1">
+                            {details.keyValueProps.map((prop, i) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                                    <CheckCircle size={14} className="text-green-500 mt-0.5 shrink-0" />
+                                    <span>{prop}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Right: Mermaid Chart */}
+                <div className="flex items-center justify-center p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg">
+                    <MermaidChart chart={details.chart} id={bucketKey} />
+                </div>
+            </div>
         </div>
     );
 };
@@ -937,6 +1209,11 @@ export default function FeaturesList() {
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
+
+            {/* Bucket Overview - show when a specific bucket is filtered */}
+            {filter !== 'all' && !search && (
+                <BucketOverview bucketKey={filter} />
+            )}
 
             {/* Grid */}
             <div className="features-grid">
