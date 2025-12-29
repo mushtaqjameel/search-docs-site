@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
 import { ClipboardList, ChevronDown, ChevronUp } from 'lucide-react'
 import Mermaid from './Mermaid'
+import { useToggle } from '../hooks'
 
 export default function DecisionQuadrants() {
-    const [showExample, setShowExample] = useState(false)
+    const [showExample, toggleExample] = useToggle(false)
 
     return (
         <div className="space-y-8">
@@ -140,7 +140,7 @@ flowchart LR
 
                 <div className="mt-6">
                     <button
-                        onClick={() => setShowExample(!showExample)}
+                        onClick={toggleExample}
                         className="flex items-center gap-2 font-bold text-indigo-700 dark:text-indigo-300 hover:underline"
                     >
                         {showExample ? <ChevronUp size={16} /> : <ChevronDown size={16} />}

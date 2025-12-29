@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
 import { Layers, Activity, Database, Sparkles, FlaskConical, GitCompare, ChevronDown, ChevronUp } from 'lucide-react'
 
 // Import data from JSON file (single source of truth)
 import capabilitiesData from '../data/capabilities.json'
+
+// Import shared hooks
+import { useExpandable } from '../hooks'
 
 // Map capability IDs to icons (icons can't be stored in JSON)
 const capabilityIcons = {
@@ -23,11 +25,7 @@ const capabilities = capabilitiesData.capabilities.map(cap => ({
 }))
 
 export default function PlatformCapabilities() {
-    const [expanded, setExpanded] = useState({})
-
-    const toggleExpand = (id) => {
-        setExpanded(prev => ({ ...prev, [id]: !prev[id] }))
-    }
+    const { expanded, toggle, isExpanded } = useExpandable()
 
     return (
         <div className="platform-capabilities">
@@ -42,13 +40,12 @@ export default function PlatformCapabilities() {
             <div className="capabilities-grid">
                 {capabilities.map(cap => {
                     const Icon = cap.icon
-                    const isExpanded = expanded[cap.id]
 
                     return (
                         <div
                             key={cap.id}
-                            className={`capability-card ${isExpanded ? 'expanded' : ''}`}
-                            onClick={() => toggleExpand(cap.id)}
+                            className={`capability-card ${isExpanded(cap.id) ? 'expanded' : ''}`}
+                            onClick={() => toggle(cap.id)}
                         >
                             <div className="capability-header">
                                 <div className="capability-icon" style={{ background: cap.color }}>
@@ -59,11 +56,11 @@ export default function PlatformCapabilities() {
                                     <p className="capability-tagline">{cap.tagline}</p>
                                 </div>
                                 <div className="capability-expand">
-                                    {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                                    {isExpanded(cap.id) ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                                 </div>
                             </div>
 
-                            {isExpanded && (
+                            {isExpanded(cap.id) && (
                                 <div className="capability-content">
                                     <p className="capability-desc">{cap.desc}</p>
 
