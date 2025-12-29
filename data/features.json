@@ -1,0 +1,1051 @@
+{
+  "features": [
+    {
+      "id": "autocomplete",
+      "bucket": "core",
+      "title": "Auto Complete",
+      "pillars": { "data": "green", "gov": "green", "safe": "green" },
+      "desc": "Predictive suggestions as buyers type, reducing keystrokes and guiding to products faster.",
+      "value": "Critical for part numbers, SKUs, and technical terms. Reduces typos and speeds up known-item search.",
+      "dataRequired": "Basic Catalog (titles, SKUs)",
+      "implementation": "Day 1 feature, works immediately with catalog data.",
+      "badge": "STANDARD",
+      "personas": ["Rushed Buyer", "Exploring Buyer"],
+      "problemsSolved": ["Can't find products", "Too slow"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "The fundamental friction of typing in a search box. Every keystroke is a chance for typos, especially with technical part numbers and SKUs.",
+        "keyValueProps": [
+          "Reduce keystrokes by 60-80% for known-item searches",
+          "Handle part number variations as users type",
+          "Show popular and trending suggestions",
+          "Guide users toward valid products before they hit Enter"
+        ],
+        "b2bContext": "In B2B, buyers often search for exact part numbers like \"ABC-123-XYZ\". Auto-complete that understands format variations (dashes, spaces, leading zeros) is critical. Unlike B2C where suggestions are about discovery, B2B auto-complete is about speed and accuracy.",
+        "implementationNotes": "Works immediately with basic catalog data. Can be enhanced with behavioral data over time to show personalized and trending suggestions. Low risk, high value Day 1 feature."
+      }
+    },
+    {
+      "id": "faceted",
+      "bucket": "core",
+      "title": "Faceted Search",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Dynamic filters based on product attributes (brand, size, material, voltage, etc.).",
+      "value": "Essential for large catalogs. Lets technical buyers narrow by specs. Shows category depth.",
+      "dataRequired": "Rich Catalog (structured attributes, consistent categorization)",
+      "implementation": "Quality depends on attribute consistency. May need data cleanup first.",
+      "badge": "STANDARD",
+      "personas": ["Exploring Buyer", "Technical Buyer"],
+      "problemsSolved": ["Can't find products", "Too many results"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Large catalogs (100K+ SKUs) where scrolling through results is impossible. Technical buyers who need to narrow by exact specifications.",
+        "keyValueProps": [
+          "Handle catalogs with 100K+ SKUs efficiently",
+          "Let technical buyers filter by exact specifications",
+          "Dynamic facets that change based on category context",
+          "Show category depth and available options"
+        ],
+        "b2bContext": "Unlike B2C filtering (color, size), B2B facets are technical: voltage, thread pitch, material grade, certification compliance. The quality of faceted search is directly tied to attribute data quality.",
+        "implementationNotes": "Quality depends entirely on attribute consistency. May need data cleanup first. Consider which attributes matter most per category."
+      }
+    },
+    {
+      "id": "visual",
+      "bucket": "core",
+      "title": "Visual Filters",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Image-based filter selection (color swatches, shape selectors, visual size comparison).",
+      "value": "Helpful for products where visual identification matters — fittings, connectors, finishes.",
+      "dataRequired": "Product Images + Mapped Attributes",
+      "implementation": "Requires image assets and attribute mapping. Consider for high-visual categories.",
+      "badge": "POLISHED",
+      "personas": ["Exploring Buyer"],
+      "problemsSolved": ["Can't find products", "Hard to narrow down"],
+      "phase": "day30",
+      "typicalInvestment": "POLISHED",
+      "importance": "nice",
+      "layer": "integration",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Products that are easier to identify visually than by spec. \"I know it when I see it\" scenarios.",
+        "keyValueProps": [
+          "Image-based selection for shape, color, style",
+          "Visual size comparison tools",
+          "Color swatches for finishes and materials",
+          "Reduce returns from misidentification"
+        ],
+        "b2bContext": "Particularly valuable for fittings, connectors, hardware where buyers might not know the technical name but can recognize the shape. Also useful for finish/color selection where text descriptions fail.",
+        "implementationNotes": "Requires quality product images and attribute mapping. Consider for high-visual categories first. Can use AI for image classification."
+      }
+    },
+    {
+      "id": "partnumber",
+      "bucket": "core",
+      "title": "Part Number Normalization",
+      "pillars": { "data": "green", "gov": "green", "safe": "green" },
+      "desc": "Acts as a sanitizer, stripping special characters and normalizing whitespace before the search executes. Ensures users never receive zero results simply because they missed a hyphen.",
+      "value": "Critical for industrial buyers who search by part numbers. Handles format variations across 50+ brands with no standard conventions. \"ABC-123\" = \"ABC123\" = \"ABC 123\".",
+      "dataRequired": "Catalog (SKUs, part numbers, manufacturer codes)",
+      "implementation": "Day 1 feature. Requires character normalization rules, unit equivalency mappings, fraction-to-decimal tables, and confidence scoring for fuzzy match ranking.",
+      "badge": "STANDARD",
+      "personas": ["Rushed Buyer", "Technical Buyer"],
+      "problemsSolved": ["Doesn't understand us", "Exact match fails", "Format chaos"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "industry",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Industrial buyers are notorious for inconsistent formatting. One might type \"X-100\", another \"X100\", and a third \"X 100\". This feature acts as a sanitizer, stripping special characters and normalizing whitespace before the search executes. It ensures that a user never receives zero results simply because they missed a hyphen.",
+        "whyItsHard": "There is no standard format. A single manufacturer might use \"DW-110\", \"DW110\", \"DW 110\", \"DW.110\", and \"110-DW\" interchangeably. Across 50+ brands, you have 50+ conventions—none documented, none consistent.",
+        "theBoundaryProblem": "We don't know where a part number starts and ends. When a user types \"254\": Beginning? → \"254-100\", \"254XL\". Middle? → \"ABC-254-D\". End? → \"DW-254\". Exact? → just \"254\". With natural language we have spaces and grammar. With part numbers, we have nothing—\"ABC123DEF\" could be one part or three. There's no way to know without checking every possibility.",
+        "theTradeoff": "Too strict and \"DW110\" returns nothing when the catalog has \"DW-110\". Too fuzzy and \"DW-110\" returns \"DW-1100\", \"DW-11\", \"DWS-110\"—wrong parts, returns, blame.",
+        "keyValueProps": [
+          "Handle dashes, spaces, prefixes, leading zeros across all format variations",
+          "Character normalization and substitution rules (O↔0, I↔1)",
+          "Unit equivalency mappings (in↔inch↔\", lb↔lbs↔#↔pound)",
+          "Fraction-to-decimal conversion tables",
+          "Manufacturer-specific formatting patterns",
+          "Confidence scoring for fuzzy match ranking"
+        ],
+        "useCases": [
+          "SKU Search: User types a messy SKU copied from an old invoice; system matches it to the clean SKU in the database",
+          "OCR Errors: OCR misreads \"BLM-205\" as \"BLM-2O5\" (zero vs letter O)—fuzzy match catches it",
+          "Legacy Numbers: Customer searches old manufacturer part number; system matches to renumbered SKU",
+          "Format Chaos: \"DW-110\", \"DW110\", \"DW 110\", \"DW.110\", and \"110-DW\" all return the same product"
+        ],
+        "b2bContext": "This is B2B table stakes. Industrial buyers search by part number 60%+ of the time. If \"ABC-123\" doesn't match because your catalog has \"ABC123\", you lose the sale. The challenge isn't just normalization—it's handling 50+ manufacturer conventions with no standard format, no documented rules, and no consistency. All three pillars green — no excuse not to have this Day 1.",
+        "otherRequirements": [
+          "Character normalization and substitution rules (O↔0, I↔1)",
+          "Unit equivalency mappings (in↔inch↔\", lb↔lbs↔#↔pound)",
+          "Fraction-to-decimal conversion tables",
+          "Manufacturer-specific formatting patterns",
+          "Confidence scoring for fuzzy match ranking"
+        ],
+        "implementationNotes": "Day 1 feature. Configure normalization rules based on your industry patterns. Test with your actual search logs to identify format variations buyers actually use. The boundary problem requires careful tuning—too strict loses sales, too fuzzy causes wrong-part returns and customer blame."
+      }
+    },
+    {
+      "id": "voice",
+      "bucket": "core",
+      "title": "Voice Search",
+      "pillars": { "data": "green", "gov": "green", "safe": "green" },
+      "desc": "Speak to search — voice input for hands-free or mobile scenarios.",
+      "value": "Useful for field workers, warehouse staff, or anyone with hands occupied.",
+      "dataRequired": "Basic Catalog",
+      "implementation": "Browser-based speech recognition. Consider accent/terminology training.",
+      "badge": "MVP",
+      "personas": ["Rushed Buyer"],
+      "problemsSolved": ["Hands busy", "Mobile use"],
+      "phase": "day1",
+      "typicalInvestment": "MVP",
+      "importance": "nice",
+      "layer": "integration",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Hands-occupied scenarios: warehouse workers with gloves, field technicians on ladders, mobile users.",
+        "keyValueProps": [
+          "Hands-free search input",
+          "Mobile-friendly experience",
+          "Accessibility compliance",
+          "Field worker productivity"
+        ],
+        "b2bContext": "More valuable in B2B than B2C because of field/warehouse scenarios. The challenge is industry jargon — \"three-quarter inch EMT\" needs to work, not just standard English.",
+        "implementationNotes": "Browser-based speech recognition works out of the box. Consider accent/terminology training for industry-specific terms. MVP approach: add voice as input method, improve accuracy over time."
+      }
+    },
+    {
+      "id": "imagesearch",
+      "bucket": "smart",
+      "title": "Image Search",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "green" },
+      "desc": "Upload a photo to find visually similar products using computer vision.",
+      "value": "Field workers photograph unknown parts, maintenance techs replace worn components without labels, buyers match competitor products.",
+      "dataRequired": "Product Images (multiple angles preferred), Catalog",
+      "implementation": "Requires computer vision model and vector index. Can combine with keyword refinement.",
+      "badge": "POLISHED",
+      "personas": ["Technical Buyer", "Rushed Buyer"],
+      "problemsSolved": ["Unknown parts", "No part number", "Visual matching"],
+      "phase": "day30",
+      "typicalInvestment": "POLISHED",
+      "importance": "important",
+      "layer": "integration",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Buyers who encounter unknown parts, worn components without readable labels, or competitor products they want to match. Bypasses the need to know technical terminology or part numbers.",
+        "keyValueProps": [
+          "Upload photo to find matching products",
+          "Computer vision matches shapes, colors, features",
+          "Combine image + keywords for refinement",
+          "Surface related parts and accessories",
+          "Mobile-optimized capture interface"
+        ],
+        "useCases": [
+          "Technician photographs a broken valve and finds replacement without knowing manufacturer",
+          "Procurement uploads competitor catalog image to find equivalent products",
+          "Field workers identify unlabeled electrical components by photographing panel markings",
+          "Upload image of motor, see compatible belts, pulleys, and mounts as related parts",
+          "Combine image of mystery fitting with keyword \"brass\" to filter results"
+        ],
+        "b2bContext": "For industrial buyers, the part is often right in front of them but unidentifiable. Image search turns \"I need one of these\" into a successful product match. Particularly valuable for maintenance, repair, and replacement scenarios.",
+        "otherRequirements": [
+          "Computer vision model for feature extraction",
+          "Vector index for image similarity matching",
+          "Mobile-optimized image capture interface",
+          "Hybrid query engine supporting image + text fusion"
+        ],
+        "implementationNotes": "Requires product image library with consistent quality. Multiple angles improve matching accuracy. Can bootstrap with existing catalog images, improve with user-submitted matches over time."
+      }
+    },
+    {
+      "id": "universal",
+      "bucket": "core",
+      "title": "Universal Search",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Search across multiple content types — products, documents, support articles, categories.",
+      "value": "Single search box for everything. Buyers find spec sheets, installation guides, and products together.",
+      "dataRequired": "Multiple Content Types (products, content, documents)",
+      "implementation": "Requires content indexing strategy. Consider result blending/ranking.",
+      "badge": "POLISHED",
+      "personas": ["All Buyers"],
+      "problemsSolved": ["Fragmented experience"],
+      "phase": "day30",
+      "typicalInvestment": "POLISHED",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "client",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Fragmented search experiences where buyers need different search boxes for products, documentation, and support.",
+        "keyValueProps": [
+          "Single search box for all content",
+          "Find spec sheets alongside products",
+          "Surface installation guides and manuals",
+          "Unified experience across content types"
+        ],
+        "b2bContext": "B2B buyers often need both the product AND the documentation. Universal search shows \"10HP Motor\" alongside its spec sheet, wiring diagram, and installation guide. The alternative is frustrated bouncing between different site sections.",
+        "implementationNotes": "Requires content indexing strategy across multiple sources. Consider how to blend and rank results from different content types. Federated search vs unified index decision."
+      }
+    },
+    {
+      "id": "certifications",
+      "bucket": "core",
+      "title": "Searchable Certifications",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "green" },
+      "desc": "Filter by technical certifications (UL, CSA, RoHS, HazLoc).",
+      "value": "Critical for compliance-driven industries. Buyers need to know it meets code.",
+      "dataRequired": "Rich Catalog (certification attributes)",
+      "implementation": "Requires structured data. Often buried in PDFs, needs extraction.",
+      "badge": "STANDARD",
+      "personas": ["Technical Buyer", "Compliance Buyer"],
+      "problemsSolved": ["Compliance requirements", "Regulatory filtering"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "industry",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Compliance requirements where buyers MUST filter by certification. \"Show me only UL-listed products\" or \"HazLoc rated for Class 1 Div 2\".",
+        "keyValueProps": [
+          "Filter by UL, CSA, RoHS, CE, HazLoc ratings",
+          "Compliance confidence for regulated industries",
+          "Reduce risk of non-compliant purchases",
+          "Support bid/quote requirements"
+        ],
+        "b2bContext": "In industries like electrical, HVAC, and industrial, certification compliance isn't optional — it's legally required. Buyers need to filter by certification to meet code. This data is often buried in PDFs and needs extraction.",
+        "implementationNotes": "The data challenge: certifications are often in PDF spec sheets, not structured attributes. May need AI extraction or manual enrichment. Critical for compliance-driven industries."
+      }
+    },
+    {
+      "id": "semantic",
+      "bucket": "smart",
+      "title": "Semantic Search",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Understand meaning, not just keywords. \"cordless drill\" matches \"battery-powered drill\".",
+      "value": "Bridges vocabulary gaps. Buyers use different terms than your catalog.",
+      "dataRequired": "Rich Catalog (detailed descriptions). Performance improves with better content.",
+      "implementation": "ELSER/BERT models. Quality tied directly to description richness.",
+      "badge": "POLISHED",
+      "personas": ["Exploring Buyer", "Technical Buyer"],
+      "problemsSolved": ["Doesn't understand us", "Wrong terms"],
+      "phase": "day60",
+      "typicalInvestment": "POLISHED",
+      "importance": "important",
+      "aiEnrichable": true,
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "alert": { "type": "warning", "text": "Sparse descriptions = gimmick feature. Rich descriptions = game-changer." },
+      "fullContent": {
+        "whatItSolves": "The vocabulary gap between how buyers search and how your catalog is written. \"Cordless drill\" should match \"battery-powered drill\".",
+        "keyValueProps": [
+          "Understand meaning, not just keyword matching",
+          "Bridge vocabulary gaps automatically",
+          "Handle industry jargon and natural language",
+          "Improve results without manual synonym lists"
+        ],
+        "b2bContext": "B2B catalogs are written by product managers using manufacturer terminology. Buyers use field terminology, abbreviations, or \"how I describe it\" language. Semantic search bridges this gap without endless synonym lists.",
+        "implementationNotes": "Uses ELSER/BERT models. Quality is DIRECTLY tied to description richness. With sparse descriptions (\"18V Drill\"), semantic search adds nothing. With rich descriptions (\"Heavy-duty cordless drill for concrete and masonry...\"), it transforms search."
+      }
+    },
+    {
+      "id": "synonyms",
+      "bucket": "smart",
+      "title": "Intelligent Synonyms",
+      "pillars": { "data": "yellow", "gov": "red", "safe": "yellow" },
+      "desc": "Learn and apply industry-specific terminology mappings. Auto-discovers synonyms from behavior.",
+      "value": "Every industry has jargon. \"saw blade\" vs \"circular blade\" vs \"cutting disc\".",
+      "dataRequired": "Behavioral Data (search logs, click patterns)",
+      "implementation": "Needs monitoring. Bad synonyms can hurt results. Governance required.",
+      "badge": "POLISHED",
+      "personas": ["All Buyers"],
+      "problemsSolved": ["Doesn't understand us", "Industry jargon"],
+      "phase": "day60",
+      "typicalInvestment": "POLISHED",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "industry",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Industry-specific terminology that semantic search alone can't handle. Every industry has its own jargon, abbreviations, and alternate names.",
+        "keyValueProps": [
+          "Auto-discover synonyms from search behavior",
+          "Industry-specific terminology mappings",
+          "Learn from what buyers actually click",
+          "Continuously improve over time"
+        ],
+        "b2bContext": "Electrical: \"wire nut\" = \"twist-on connector\" = \"marrette\". Industrial: \"angle grinder\" = \"disc grinder\" = \"side grinder\". These industry-specific mappings can't be guessed — they must be learned from your buyers' behavior.",
+        "implementationNotes": "Governance required: bad synonyms can hurt results badly (mapping \"drill\" to \"driver\" when they're different products). Needs monitoring and approval workflow. Consider human-in-the-loop for high-volume synonyms."
+      }
+    },
+    {
+      "id": "intelligentauto",
+      "bucket": "smart",
+      "title": "Intelligent Auto Complete",
+      "pillars": { "data": "yellow", "gov": "red", "safe": "yellow" },
+      "desc": "Context-aware, personalized suggestions based on user history and behavior patterns.",
+      "value": "Shows relevant suggestions first. Electrician sees electrical, plumber sees plumbing.",
+      "dataRequired": "Behavioral + User Data",
+      "implementation": "Builds over time. Cold start with catalog, improves with behavior.",
+      "badge": "POLISHED",
+      "personas": ["Rushed Buyer", "Exploring Buyer"],
+      "problemsSolved": ["Slow discovery", "Typing effort"],
+      "phase": "day60",
+      "typicalInvestment": "POLISHED",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Generic auto-complete shows the same suggestions to everyone. An electrician typing \"wire\" should see different suggestions than a plumber.",
+        "keyValueProps": [
+          "Personalized suggestions based on user history",
+          "Industry/trade-aware recommendations",
+          "Learn from what converts, not just what's searched",
+          "Context-aware (time of year, project type)"
+        ],
+        "b2bContext": "B2B buyers have specialties. An HVAC contractor searching \"motor\" wants blower motors, not drill motors. Intelligent auto-complete learns user context and shows relevant suggestions first.",
+        "implementationNotes": "Cold start with catalog data, improves with behavioral data over time. Needs governance because bad personalization is worse than none. Consider showing \"why\" alongside suggestions."
+      }
+    },
+    {
+      "id": "mlranking",
+      "bucket": "smart",
+      "title": "Hybrid Search / ML Ranking",
+      "pillars": { "data": "red", "gov": "red", "safe": "red" },
+      "desc": "Blend keyword + semantic + behavioral signals. Machine learning optimizes ranking.",
+      "value": "Best products rise to top based on what actually converts, not just text match.",
+      "dataRequired": "Behavioral + Transactional (90+ days ideal)",
+      "implementation": "Expert feature. Requires monitoring, testing, ongoing tuning.",
+      "badge": "PREMIUM",
+      "personas": ["All Buyers"],
+      "problemsSolved": ["Wrong relevance", "Buried results"],
+      "phase": "day90",
+      "typicalInvestment": "PREMIUM",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "specialized",
+      "alert": { "type": "danger", "text": "High Complexity: All three pillars are red. Consider managed support or phase for later." },
+      "fullContent": {
+        "whatItSolves": "Text matching alone doesn't know which products convert. The best result isn't always the closest keyword match — it's the one buyers actually buy.",
+        "keyValueProps": [
+          "Blend keyword, semantic, and behavioral signals",
+          "Learn from actual conversions, not just clicks",
+          "Automatically optimize ranking over time",
+          "Balance relevance with business objectives"
+        ],
+        "b2bContext": "For \"safety glasses\", keyword search might rank a discontinued model first. ML ranking learns that the current best-seller with 4.8 stars should rank higher. It optimizes for what actually converts.",
+        "implementationNotes": "Expert feature — all three pillars red. Requires 90+ days of behavioral data, ongoing monitoring, and tuning. Consider managed support or phase for post-launch. The ROI is real but so is the complexity."
+      }
+    },
+    {
+      "id": "relevancefunnel",
+      "bucket": "core",
+      "title": "Multi-Layered Relevance Funnel",
+      "pillars": { "data": "red", "gov": "red", "safe": "red" },
+      "desc": "Complex ranking strategies combining business rules, personalization, and ML.",
+      "value": "Ultimate control over what appears first — margin, inventory, strategic products.",
+      "dataRequired": "All data types",
+      "implementation": "Most complex feature. Requires expert configuration and ongoing management.",
+      "badge": "PREMIUM",
+      "personas": ["Merchandiser"],
+      "problemsSolved": ["Complex ranking needs"],
+      "phase": "day90",
+      "typicalInvestment": "PREMIUM",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "client",
+      "priority": "specialized",
+      "fullContent": {
+        "whatItSolves": "When simple relevance isn't enough. You need to balance text match, business rules (promote high-margin), inventory (hide out-of-stock), and personalization.",
+        "keyValueProps": [
+          "Layer multiple ranking strategies",
+          "Balance relevance with business objectives",
+          "Personalization at the ranking layer",
+          "Dynamic adjustment based on context"
+        ],
+        "b2bContext": "A distributor might want: (1) In-stock products first, (2) Private label boosted, (3) High-margin in top 3, (4) Relevance within those constraints. Multi-layered relevance makes this possible.",
+        "implementationNotes": "Most complex feature. Requires expert configuration, ongoing tuning, and deep understanding of business objectives. Usually a Day 60-90 feature after simpler ranking is stable."
+      }
+    },
+    {
+      "id": "intentrouter",
+      "bucket": "smart",
+      "title": "Semantic Intent Router",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Detect what the buyer actually wants — product, category, support, or navigation.",
+      "value": "\"Milwaukee\" → brand page. \"M18 drill\" → product. \"warranty\" → support.",
+      "dataRequired": "Rich Catalog + Behavioral patterns",
+      "implementation": "Configure intent rules and destinations. Train on common patterns.",
+      "badge": "POLISHED",
+      "personas": ["All Buyers"],
+      "problemsSolved": ["Misunderstood intent"],
+      "phase": "day30",
+      "typicalInvestment": "POLISHED",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Not all searches want product results. \"Milwaukee\" might want the brand page. \"Warranty\" wants support. \"How to wire a 3-way switch\" wants content.",
+        "keyValueProps": [
+          "Detect navigational vs transactional intent",
+          "Route to brand pages, categories, or support",
+          "Handle informational queries appropriately",
+          "Reduce frustration from wrong result types"
+        ],
+        "b2bContext": "\"Return policy\" shouldn't show products with \"return\" in the name. \"DeWalt 20V\" might want the product family page, not a random product. Intent routing sends queries to the right destination.",
+        "implementationNotes": "Configure intent rules based on common patterns. Start with obvious cases (brand names → brand pages, support terms → help), learn and expand over time."
+      }
+    },
+    {
+      "id": "recommendations",
+      "bucket": "discovery",
+      "title": "Recommendation Engine",
+      "pillars": { "data": "red", "gov": "red", "safe": "yellow" },
+      "desc": "Personalized product suggestions — \"frequently bought together\", \"you may also need\".",
+      "value": "Increase basket size. Surface accessories, consumables, related parts.",
+      "dataRequired": "Behavioral + Transactional + User",
+      "implementation": "Cold start challenge. Can bootstrap with rules, improves with behavior.",
+      "badge": "POLISHED",
+      "personas": ["Exploring Buyer", "Business Leader"],
+      "problemsSolved": ["Missing cross-sell"],
+      "phase": "day60",
+      "typicalInvestment": "POLISHED",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Missed cross-sell opportunities. When a buyer searches for a drill, they probably also need bits, batteries, and cases.",
+        "keyValueProps": [
+          "Increase average order value by 15-30%",
+          "Surface accessories and consumables automatically",
+          "Learn from purchase patterns over time",
+          "Reduce time to find related products"
+        ],
+        "b2bContext": "B2B recommendations are about job completion, not impulse buys. \"Bought this motor? You'll need mounting hardware, capacitors, and a VFD.\" Recommendations that understand project context outperform generic \"similar products\".",
+        "implementationNotes": "Cold start challenge: needs transaction history to work well. Can bootstrap with curated rules (\"if drill, show bits\"), then improve with behavioral data. Consider showing \"why\" to build trust."
+      }
+    },
+    {
+      "id": "related",
+      "bucket": "discovery",
+      "title": "Related Searches",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "green" },
+      "desc": "Suggest alternative query paths when buyers might be stuck or exploring.",
+      "value": "Help buyers discover they searched too narrowly or broadly.",
+      "dataRequired": "Behavioral Data (search sequences)",
+      "implementation": "Learns from search patterns. Safe, low-governance feature.",
+      "badge": "STANDARD",
+      "personas": ["Exploring Buyer"],
+      "problemsSolved": ["Stuck", "Need alternatives"],
+      "phase": "day30",
+      "typicalInvestment": "STANDARD",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Buyers who searched too narrowly, too broadly, or with the wrong terms. \"Did you mean?\" and \"People also searched for\" experiences.",
+        "keyValueProps": [
+          "Surface alternative query paths",
+          "Help buyers who are stuck or exploring",
+          "Learn from successful search sequences",
+          "Low risk, high value feature"
+        ],
+        "b2bContext": "When a buyer searches \"3/4 inch copper fitting\" and gets too many results, related searches might suggest \"3/4 copper elbow\", \"3/4 copper tee\", or \"3/4 compression fitting\" to narrow down.",
+        "implementationNotes": "Learns from search patterns automatically. Low governance risk — it suggests, doesn't change results. Safe Day 30 feature."
+      }
+    },
+    {
+      "id": "equivalents",
+      "bucket": "discovery",
+      "title": "Cross-Brand Equivalents",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Show alternative brands and substitutes. \"If you're looking for X, consider Y.\"",
+      "value": "Capture sales when primary brand is out of stock. Help price-conscious buyers.",
+      "dataRequired": "Relationship Data (cross-references, equivalents mapping)",
+      "implementation": "Requires relationship data. Can use AI to suggest, human to verify.",
+      "badge": "POLISHED",
+      "personas": ["Technical Buyer", "Exploring Buyer"],
+      "problemsSolved": ["Need alternatives", "Brand switching"],
+      "phase": "day1",
+      "typicalInvestment": "POLISHED",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "industry",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Brand loyalty meets stock reality. When the preferred brand is out of stock, show equivalent alternatives to capture the sale.",
+        "keyValueProps": [
+          "Show equivalent products across brands",
+          "Capture sales when preferred brand is OOS",
+          "Help price-conscious buyers find alternatives",
+          "Support brand-switching conversations"
+        ],
+        "b2bContext": "Industrial buyers often have brand preferences but need the part today. \"Milwaukee M18 out of stock? Here's the DeWalt 20V equivalent.\" Cross-brand equivalents keep the sale instead of losing to a competitor.",
+        "implementationNotes": "Requires relationship data (cross-reference tables). Can use AI to suggest equivalents, but needs human verification — wrong equivalents damage trust. Consider confidence scoring."
+      }
+    },
+    {
+      "id": "trending",
+      "bucket": "discovery",
+      "title": "Trending Search",
+      "pillars": { "data": "yellow", "gov": "green", "safe": "green" },
+      "desc": "Show what's popular now — trending searches, hot products.",
+      "value": "Social proof. Helps buyers see what others are buying. Market signals.",
+      "dataRequired": "Behavioral Data (recent search/purchase patterns)",
+      "implementation": "Low governance. Updates automatically based on behavior.",
+      "badge": "STANDARD",
+      "personas": ["Exploring Buyer", "Merchandiser"],
+      "problemsSolved": ["What's popular", "Market signals"],
+      "phase": "day30",
+      "typicalInvestment": "STANDARD",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Discovery for buyers who don't know what to search. \"What are others buying?\" Social proof and market signals.",
+        "keyValueProps": [
+          "Show trending searches and products",
+          "Social proof for uncertain buyers",
+          "Market signal visibility for merchandisers",
+          "Seasonal and event awareness"
+        ],
+        "b2bContext": "Trending in B2B is about market signals, not viral products. \"Searches for generator parts up 400% this week\" (hurricane season). Helps buyers see what peers are buying and helps merchandisers spot trends.",
+        "implementationNotes": "Low governance, updates automatically. Consider filtering sensitive searches from trending. Useful Day 30 feature after behavioral data accumulates."
+      }
+    },
+    {
+      "id": "kitting",
+      "bucket": "discovery",
+      "title": "Custom Products (Kitting)",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Build bundles and assemblies. Job kits, project packages, custom configurations.",
+      "value": "\"Everything you need for X job\" — increases order value, reduces buyer effort.",
+      "dataRequired": "Relationship Data (kit compositions, compatible products)",
+      "implementation": "Requires relationship mapping. Can be curated or rule-based.",
+      "badge": "POLISHED",
+      "personas": ["Technical Buyer", "Exploring Buyer"],
+      "problemsSolved": ["Complex requirements"],
+      "phase": "day30",
+      "typicalInvestment": "POLISHED",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "industry",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Complex purchasing where buyers need multiple related items. \"I'm wiring a 200A service panel — give me everything I need.\"",
+        "keyValueProps": [
+          "Pre-built job kits for common tasks",
+          "Dynamic bundle configuration",
+          "Reduce buyer effort on complex orders",
+          "Increase average order value significantly"
+        ],
+        "b2bContext": "Electricians don't want to add 47 items for a service panel job. Kitting lets them search \"200A residential service kit\" and get everything — panel, breakers, wire, connectors, grounding. Massive time saver.",
+        "implementationNotes": "Requires relationship mapping (what goes with what). Can be merchandiser-curated or rule-based. Start with high-value job kits, expand based on demand."
+      }
+    },
+    {
+      "id": "recent",
+      "bucket": "discovery",
+      "title": "Recent Search",
+      "pillars": { "data": "green", "gov": "green", "safe": "green" },
+      "desc": "Show user's recent searches for quick repeat access.",
+      "value": "Critical for B2B. Buyers research today, order tomorrow. Fast return path.",
+      "dataRequired": "User Data (session/account tracking)",
+      "implementation": "Day 1 feature. Simple, high value, no governance needed.",
+      "badge": "STANDARD",
+      "personas": ["Rushed Buyer"],
+      "problemsSolved": ["Repeat tasks", "Speed"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "The \"I looked at this yesterday\" problem. B2B buyers research and quote before ordering — they need to find what they looked at.",
+        "keyValueProps": [
+          "Instant access to recent searches",
+          "Support research-then-buy workflow",
+          "Reduce friction for returning buyers",
+          "All three pillars green — no risk"
+        ],
+        "b2bContext": "B2B buying is rarely one session. Buyers research, get quotes, check with job site, then order. Recent searches bridge sessions. All three pillars green — Day 1 feature with high value.",
+        "implementationNotes": "Day 1 feature. Simple session/account tracking. No governance risk. Consider showing across devices for logged-in users."
+      }
+    },
+    {
+      "id": "recentlyordered",
+      "bucket": "discovery",
+      "title": "Recently Ordered Section",
+      "pillars": { "data": "yellow", "gov": "green", "safe": "green" },
+      "desc": "One-click reorder from purchase history. \"Buy again\" functionality.",
+      "value": "80% of B2B orders are repeats. This is THE feature for efficiency.",
+      "dataRequired": "User + Transactional Data",
+      "implementation": "Requires order history integration. High value, relatively simple.",
+      "badge": "POLISHED",
+      "personas": ["Rushed Buyer"],
+      "problemsSolved": ["Reordering speed"],
+      "phase": "day1",
+      "typicalInvestment": "POLISHED",
+      "importance": "critical",
+      "layer": "integration",
+      "scope": "client",
+      "priority": "essential",
+      "alert": { "type": "success", "text": "B2B Gold: This feature alone can transform repeat purchase efficiency." },
+      "fullContent": {
+        "whatItSolves": "The #1 B2B use case: reordering what you bought before. 80% of B2B orders are repeats — this feature addresses the majority of orders.",
+        "keyValueProps": [
+          "One-click reorder from history",
+          "Order the exact same item again instantly",
+          "Address 80% of B2B orders (repeats)",
+          "Massive time savings for regular buyers"
+        ],
+        "b2bContext": "This is THE B2B feature. Contractors order the same wire, fittings, and supplies repeatedly. Every second spent re-finding products is wasted. Recently Ordered + one-click reorder = loyalty driver.",
+        "implementationNotes": "Requires order history integration. Consider showing frequency (\"You order this every 3 weeks\"), quantity suggestions, and easy re-order with quantity adjustment."
+      }
+    },
+    {
+      "id": "complementary",
+      "bucket": "discovery",
+      "title": "Complementary Products",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "green" },
+      "desc": "Surface products often bought together based on aggregate purchase patterns. \"Often Bought Together\" displays.",
+      "value": "Increase basket size by showing what other buyers purchased with this item. Data-driven cross-sell.",
+      "dataRequired": "Transactional Data (purchase history, co-occurrence patterns)",
+      "implementation": "Requires transaction history analysis. Can start with curated bundles, improve with behavioral data.",
+      "badge": "POLISHED",
+      "personas": ["Exploring Buyer", "Technical Buyer"],
+      "problemsSolved": ["Missing cross-sell", "Incomplete orders"],
+      "phase": "day30",
+      "typicalInvestment": "POLISHED",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Buyers often forget related items they need for a job. They buy the motor but forget the mounting hardware, capacitor, or VFD. This leads to incomplete orders, return trips, and frustrated customers.",
+        "keyValueProps": [
+          "Show \"Often Bought Together\" based on real purchase data",
+          "Increase average order value by 10-20%",
+          "Reduce incomplete orders and return trips",
+          "Surface accessories, consumables, and related parts automatically",
+          "Build bundles based on what actually sells together"
+        ],
+        "useCases": [
+          "Buyer views a motor → sees mounting hardware, capacitors, and VFDs that others purchased",
+          "Electrician adds wire → sees connectors, conduit, and boxes commonly bought together",
+          "HVAC tech orders a compressor → sees refrigerant, fittings, and gauges as complements",
+          "Plumber views a water heater → sees expansion tanks, connectors, and venting kits"
+        ],
+        "b2bContext": "Unlike Recommendation Engine (personalized to the user), Complementary Products shows what ALL buyers typically purchase together. It's aggregate intelligence: \"85% of buyers who purchased this motor also bought these mounting brackets.\" This is job-completion data, not personalization.",
+        "implementationNotes": "Requires transaction history to identify co-purchase patterns. Cold start with curated product relationships (merchandiser-defined bundles), then enhance with actual purchase data. Consider confidence thresholds — only show \"often bought together\" when the pattern is strong."
+      }
+    },
+    {
+      "id": "curations",
+      "bucket": "merchandising",
+      "title": "Curations",
+      "pillars": { "data": "green", "gov": "yellow", "safe": "yellow" },
+      "desc": "Pin, boost, bury, redirect — merchandiser control over search results.",
+      "value": "Promote high-margin items, feature seasonal products, manage campaigns.",
+      "dataRequired": "Basic Catalog",
+      "implementation": "Needs training. Can break things if misused. Requires governance.",
+      "badge": "POLISHED",
+      "personas": ["Merchandiser"],
+      "problemsSolved": ["Business control", "Promotions"],
+      "phase": "day1",
+      "typicalInvestment": "POLISHED",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Business users locked out of search results. Marketing wants to promote a campaign, but has to file an IT ticket and wait.",
+        "keyValueProps": [
+          "Pin products to specific positions",
+          "Boost or bury products in results",
+          "Redirect queries to landing pages",
+          "Schedule promotions and campaigns"
+        ],
+        "b2bContext": "Distributors run manufacturer promotions, seasonal campaigns, and clearance sales. Curations let merchandisers control what appears without touching code. But power = responsibility — governance is critical.",
+        "implementationNotes": "Needs training — curations can break relevance if misused. Governance workflow recommended. Start with redirects and pins, expand to boosts carefully."
+      }
+    },
+    {
+      "id": "config",
+      "bucket": "merchandising",
+      "title": "Configuration Management",
+      "pillars": { "data": "green", "gov": "yellow", "safe": "green" },
+      "desc": "Version control for search settings. Track changes, rollback, audit trail.",
+      "value": "Safety net for changes. Know who changed what, when. Easy recovery.",
+      "dataRequired": "None (platform tool)",
+      "implementation": "Platform capability. Essential for governance.",
+      "badge": "STANDARD",
+      "personas": ["Merchandiser", "IT/Ops"],
+      "problemsSolved": ["Change control", "Governance"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "The \"who changed what?\" problem. When search breaks, you need to know what changed and rollback quickly.",
+        "keyValueProps": [
+          "Version control for all search settings",
+          "Complete audit trail of changes",
+          "One-click rollback to previous state",
+          "Compare configurations side-by-side"
+        ],
+        "b2bContext": "Enterprise requirement: know who changed what, when. When search relevance tanks, you need to identify the culprit change and rollback in minutes, not hours.",
+        "implementationNotes": "Platform capability, not a feature to build. Essential foundation for governance. Enables safe experimentation because rollback is easy."
+      }
+    },
+    {
+      "id": "querylabeller",
+      "bucket": "merchandising",
+      "title": "Query Behaviour Labeller",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "green" },
+      "desc": "Classify and understand search patterns — navigational, transactional, informational.",
+      "value": "Know how buyers search to inform merchandising and content strategy.",
+      "dataRequired": "Behavioral Data",
+      "implementation": "Analytical tool. Informs other features and decisions.",
+      "badge": "STANDARD",
+      "personas": ["Merchandiser", "Analyst"],
+      "problemsSolved": ["Understanding patterns"],
+      "phase": "day30",
+      "typicalInvestment": "STANDARD",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Understanding what buyers actually want when they search. \"Milwaukee\" — are they looking for the brand page, a product, or information?",
+        "keyValueProps": [
+          "Classify queries by intent type",
+          "Understand search patterns at scale",
+          "Inform merchandising decisions",
+          "Identify content gaps"
+        ],
+        "b2bContext": "Helps answer strategic questions: \"What % of searches are for exact part numbers vs. product categories?\" \"What are buyers searching for that we don't carry?\" Informs both search tuning and inventory decisions.",
+        "implementationNotes": "Analytical tool that informs other features. Low risk, high insight. Requires behavioral data to accumulate first."
+      }
+    },
+    {
+      "id": "sandbox",
+      "bucket": "merchandising",
+      "title": "Search Sandbox",
+      "pillars": { "data": "green", "gov": "green", "safe": "green" },
+      "desc": "Test search changes safely before deploying to production.",
+      "value": "Experiment without risk. Try configurations, preview results.",
+      "dataRequired": "None (platform tool)",
+      "implementation": "Essential for safe operations. All three pillars green.",
+      "badge": "STANDARD",
+      "personas": ["Merchandiser", "IT/Ops"],
+      "problemsSolved": ["Testing", "Validation"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "integration",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Fear of breaking production. Teams avoid improving search because they can't test safely.",
+        "keyValueProps": [
+          "Test changes before going live",
+          "Preview results for any query",
+          "Compare sandbox vs production side-by-side",
+          "Safe experimentation environment"
+        ],
+        "b2bContext": "All three pillars green — no excuse not to have this. Enables confidence in making changes. Without sandbox, teams either never improve search or break production regularly.",
+        "implementationNotes": "Essential Day 1 infrastructure. Platform capability that enables all other improvement work. Critical for governance and confidence."
+      }
+    },
+    {
+      "id": "dashboard",
+      "bucket": "merchandising",
+      "title": "Search Dashboard",
+      "pillars": { "data": "yellow", "gov": "green", "safe": "green" },
+      "desc": "Real-time performance visibility — top searches, zero results, conversion metrics.",
+      "value": "Know what's working. Identify problems quickly. Data-driven decisions.",
+      "dataRequired": "Behavioral Data",
+      "implementation": "Builds over time as data accumulates. Essential for optimization.",
+      "badge": "STANDARD",
+      "personas": ["Merchandiser", "Business Leader"],
+      "problemsSolved": ["Real-time visibility", "Performance monitoring"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "integration",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Flying blind. Teams don't know what buyers are searching for, what's failing, or how search impacts revenue.",
+        "keyValueProps": [
+          "Real-time search performance metrics",
+          "Top searches and zero-result queries",
+          "Conversion and revenue attribution",
+          "Trend identification and alerts"
+        ],
+        "b2bContext": "You can't improve what you can't measure. Dashboard answers: \"What are our top searches?\" \"What has high search volume but low conversion?\" \"What are buyers searching for that returns zero results?\"",
+        "implementationNotes": "Builds value over time as behavioral data accumulates. Essential for data-driven optimization. Consider alerting for anomalies (zero-result spike, conversion drop)."
+      }
+    },
+    {
+      "id": "aienrichment",
+      "bucket": "merchandising",
+      "title": "AI Enrichment Dashboard",
+      "pillars": { "data": "green", "gov": "yellow", "safe": "green" },
+      "desc": "AI-powered content generation with human-in-the-loop approval. Generate rich descriptions, attributes, and cross-references at scale.",
+      "value": "Remove the data barrier. AI generates what's missing, your team reviews and approves. Features unlock in weeks, not months.",
+      "dataRequired": "Basic Catalog (titles, SKUs). AI generates the rest.",
+      "implementation": "Confidence-based workflow: high confidence auto-approves, medium requires review, low flagged for manual attention.",
+      "badge": "POLISHED",
+      "personas": ["Merchandiser", "IT/Ops"],
+      "problemsSolved": ["Content gaps", "Data quality", "Manual enrichment bottleneck"],
+      "phase": "day1",
+      "typicalInvestment": "POLISHED",
+      "importance": "important",
+      "layer": "integration",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "The barrier-to-entry problem. Features like Semantic Search need rich descriptions — you have vendor boilerplate. Faceted Search needs structured attributes — you have inconsistent fields with gaps. Cross-Brand Equivalents needs relationship data — you have a 3-year-old spreadsheet. Traditional answer: hire content writers, spend months cleaning up. Most clients stall here. This pipeline removes the barrier.",
+        "keyValueProps": [
+          "AI generates rich, application-focused descriptions from sparse vendor data",
+          "Extracts and infers structured attributes from existing text",
+          "Suggests cross-brand equivalents based on matching specifications",
+          "Confidence scoring: 90%+ auto-approve, 70-90% human review, <70% flagged",
+          "Bulk review interfaces with side-by-side comparison (original vs. generated)",
+          "Full audit trail tracking AI-generated vs. human-verified content"
+        ],
+        "useCases": [
+          "Fast-track Semantic Search: 50K SKUs with one-line descriptions → AI generates rich content for top 10K products → team approves over 2 weeks → Semantic Search launches",
+          "Attribute gap-fill: Fasteners have detailed specs, safety category has gaps → AI extracts/infers attributes → Faceted Search becomes consistent",
+          "Cross-reference bootstrapping: No relationship data → AI suggests equivalents based on specs → product team reviews → Cross-Brand Equivalents launches with curated data",
+          "Ongoing enrichment: New products enter weekly → pipeline auto-generates descriptions/attributes → queued for approval → data quality stays consistent"
+        ],
+        "b2bContext": "Industrial distributors often have 100K+ SKUs with inconsistent data quality. Manual remediation takes months. AI enrichment lets you generate what features need — descriptions, attributes, synonyms, cross-references — and keep humans in control through confidence-based approval workflows.",
+        "otherRequirements": [
+          "Edit-in-place capability to refine AI suggestions",
+          "Category-specific review workflows",
+          "Sampling configuration for high-confidence spot-checks",
+          "Integration with search index for automatic publishing of approved content"
+        ],
+        "implementationNotes": "Start with highest-traffic products where data gaps hurt most. Configure confidence thresholds based on category (technical products may need lower auto-approve threshold). Train reviewers on efficient bulk workflows. Track approval rates to tune AI over time."
+      }
+    },
+    {
+      "id": "zeroresults",
+      "bucket": "recovery",
+      "title": "Zero Results Recovery",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "green" },
+      "desc": "Always show something relevant — suggestions, related products, categories.",
+      "value": "Zero results = lost sale. Never dead-end the buyer.",
+      "dataRequired": "Rich Catalog (for intelligent suggestions)",
+      "implementation": "Configure fallback strategies. Test thoroughly.",
+      "badge": "STANDARD",
+      "personas": ["All Buyers"],
+      "problemsSolved": ["Dead ends", "Lost sales"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "critical",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "The worst search outcome: \"No results found.\" Every zero-result page is a potential lost sale and frustrated customer.",
+        "keyValueProps": [
+          "Never show empty results page",
+          "Suggest related products or categories",
+          "Did you mean? spelling corrections",
+          "Popular alternatives when exact match fails"
+        ],
+        "b2bContext": "Zero results in B2B often means the buyer goes to a competitor. Recovery strategies: spelling correction, category suggestions, popular products, \"call us\" CTA. Something is always better than nothing.",
+        "implementationNotes": "Configure fallback strategies in priority order. Test with actual zero-result queries from logs. Consider capturing zero-result queries for catalog gap analysis."
+      }
+    },
+    {
+      "id": "fallback",
+      "bucket": "recovery",
+      "title": "Fallback Search",
+      "pillars": { "data": "yellow", "gov": "green", "safe": "green" },
+      "desc": "Graceful degradation when primary search fails or returns poor results.",
+      "value": "Resilience. If semantic fails, fall back to keyword. Always return results.",
+      "dataRequired": "Rich Catalog",
+      "implementation": "Configure fallback chain. Automatic, low governance.",
+      "badge": "STANDARD",
+      "personas": ["All Buyers"],
+      "problemsSolved": ["No results", "Frustration"],
+      "phase": "day1",
+      "typicalInvestment": "STANDARD",
+      "importance": "important",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "Complex search strategies can fail. What happens when semantic search returns poor results? Fallback provides resilience.",
+        "keyValueProps": [
+          "Automatic fallback when primary search underperforms",
+          "Graceful degradation chain",
+          "Always return reasonable results",
+          "Resilience without manual intervention"
+        ],
+        "b2bContext": "If semantic search fails to understand a query, fall back to keyword. If keyword fails, fall back to category. The buyer should never experience a broken search.",
+        "implementationNotes": "Configure fallback chain: semantic → keyword → fuzzy → category → popular. Automatic, low governance. Logs fallback events for analysis."
+      }
+    },
+    {
+      "id": "analytics",
+      "bucket": "analytics",
+      "title": "Analytics",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "green" },
+      "desc": "Deep-dive search performance metrics, reports, and insights.",
+      "value": "Understand search health. Find opportunities. Prove ROI.",
+      "dataRequired": "Behavioral Data (accumulates over time)",
+      "implementation": "Value increases over time. Essential for optimization.",
+      "badge": "POLISHED",
+      "personas": ["Merchandiser", "Business Leader", "Analyst"],
+      "problemsSolved": ["No visibility", "Can't optimize"],
+      "phase": "day1",
+      "typicalInvestment": "POLISHED",
+      "importance": "critical",
+      "layer": "integration",
+      "scope": "universal",
+      "priority": "essential",
+      "fullContent": {
+        "whatItSolves": "You can't improve what you can't measure. Without analytics, search optimization is guesswork.",
+        "keyValueProps": [
+          "Search-to-conversion funnel analysis",
+          "Query performance breakdown",
+          "Revenue attribution to search",
+          "Trend analysis and forecasting"
+        ],
+        "b2bContext": "Analytics answers strategic questions: \"What's the revenue impact of search?\" \"Which queries have high volume but low conversion?\" \"What would happen if we improved X?\" ROI justification for search investment.",
+        "implementationNotes": "Value increases over time as data accumulates. Start with basic metrics Day 1, add sophisticated analysis as behavioral data grows. Essential for proving ROI."
+      }
+    },
+    {
+      "id": "abtesting",
+      "bucket": "analytics",
+      "title": "A/B Testing",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Controlled experiments for search changes. Test before committing.",
+      "value": "Data-driven decisions. Know what works before rolling out.",
+      "dataRequired": "Behavioral Data",
+      "implementation": "Requires traffic volume for statistical significance.",
+      "badge": "POLISHED",
+      "personas": ["Merchandiser", "Analyst"],
+      "problemsSolved": ["Guessing", "Risk of changes"],
+      "phase": "day60",
+      "typicalInvestment": "POLISHED",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "enhanced",
+      "fullContent": {
+        "whatItSolves": "Guessing whether changes will improve or hurt performance. A/B testing provides data-driven validation.",
+        "keyValueProps": [
+          "Test changes on a subset of traffic",
+          "Measure impact before full rollout",
+          "Statistical significance for confidence",
+          "Reduce risk of harmful changes"
+        ],
+        "b2bContext": "When you change ranking or add a feature, you want to know it helps before committing. A/B testing provides the evidence. Requires sufficient traffic volume for statistical significance.",
+        "implementationNotes": "Requires traffic volume for meaningful results. Start with high-impact, high-confidence tests. Build a testing culture over time."
+      }
+    },
+    {
+      "id": "interleaving",
+      "bucket": "analytics",
+      "title": "Interleaving",
+      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
+      "desc": "Compare ranking algorithms by interleaving results. More sensitive than A/B for relevance.",
+      "value": "Faster, more sensitive relevance testing than traditional A/B.",
+      "dataRequired": "Behavioral Data",
+      "implementation": "Advanced technique for mature search teams.",
+      "badge": "PREMIUM",
+      "personas": ["Analyst", "IT/Ops"],
+      "problemsSolved": ["Slow testing", "Insensitive metrics"],
+      "phase": "day90",
+      "typicalInvestment": "PREMIUM",
+      "importance": "nice",
+      "layer": "platform",
+      "scope": "universal",
+      "priority": "specialized",
+      "fullContent": {
+        "whatItSolves": "A/B testing for ranking changes requires massive traffic and time. Interleaving detects relevance differences faster by mixing results from two algorithms.",
+        "keyValueProps": [
+          "More sensitive than A/B for relevance testing",
+          "Faster time to statistical significance",
+          "Direct comparison of ranking algorithms",
+          "Requires less traffic than traditional A/B"
+        ],
+        "b2bContext": "When optimizing ranking, traditional A/B tests take weeks. Interleaving can detect winner in days by showing interleaved results and measuring which algorithm's results get clicked.",
+        "implementationNotes": "Advanced technique for teams that have mastered basic A/B testing. Requires sophisticated instrumentation. Usually a Day 90+ optimization for mature search programs."
+      }
+    }
+  ]
+}

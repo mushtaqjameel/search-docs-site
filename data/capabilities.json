@@ -1,0 +1,160 @@
+{
+  "capabilities": [
+    {
+      "id": "search-experience-framework",
+      "title": "Search Experience Framework",
+      "color": "#4ECDC4",
+      "tagline": "Unified SDK for consistent search experiences",
+      "desc": "A comprehensive SDK and component library that powers search interfaces across web, mobile, and embedded applications. Provides pre-built UI components, event tracking, and consistent behavior patterns.",
+      "keyFeatures": [
+        "Pre-built search UI components (search bar, results grid, facets, filters)",
+        "Event tracking and analytics integration out-of-the-box",
+        "Responsive design for web, tablet, and mobile",
+        "Accessibility compliance (WCAG 2.1 AA)",
+        "Theming and customization APIs",
+        "Session management and search history"
+      ],
+      "technicalDetails": [
+        "React/Vue/Angular component libraries",
+        "REST and GraphQL API support",
+        "WebSocket support for real-time updates",
+        "CDN-delivered assets for performance"
+      ],
+      "useCases": [
+        "Rapid deployment of search interfaces across multiple properties",
+        "Consistent user experience across B2B portals and customer-facing sites",
+        "White-label search for partner integrations"
+      ]
+    },
+    {
+      "id": "behavioral-analytics-engine",
+      "title": "Behavioral Analytics Engine",
+      "color": "#9B59B6",
+      "tagline": "Understand how buyers actually search",
+      "desc": "Captures and analyzes every search interaction—queries, clicks, add-to-carts, and purchases—to build a complete picture of buyer behavior. Powers personalization, trending, and optimization insights.",
+      "keyFeatures": [
+        "Real-time event streaming and aggregation",
+        "Query-to-conversion funnel analysis",
+        "Session replay and journey mapping",
+        "Anomaly detection and alerting",
+        "Cohort analysis and segmentation",
+        "Search quality scoring"
+      ],
+      "technicalDetails": [
+        "Event schema with 50+ tracked interactions",
+        "Sub-second latency for real-time dashboards",
+        "Data retention configurable (30 days to unlimited)",
+        "GDPR/CCPA compliant data handling"
+      ],
+      "useCases": [
+        "Identify high-volume queries with low conversion for optimization",
+        "Track seasonal patterns and emerging product trends",
+        "Measure ROI of search improvements"
+      ]
+    },
+    {
+      "id": "multi-modal-ingestion",
+      "title": "Multi-Modal Ingestion Pipeline",
+      "color": "#E74C3C",
+      "tagline": "Connect any data source to search",
+      "desc": "A flexible data pipeline that ingests product catalogs, documents, images, and behavioral data from any source. Handles incremental updates, full refreshes, and real-time streaming.",
+      "keyFeatures": [
+        "Connectors for ERP, PIM, DAM, and e-commerce platforms",
+        "Support for CSV, JSON, XML, and proprietary formats",
+        "Image and document processing (OCR, PDF extraction)",
+        "Incremental and delta sync capabilities",
+        "Data validation and quality scoring",
+        "Transformation and enrichment pipelines"
+      ],
+      "technicalDetails": [
+        "REST API, SFTP, S3, and database connectors",
+        "Webhook support for real-time updates",
+        "Scalable to millions of SKUs",
+        "Built-in retry and error handling"
+      ],
+      "useCases": [
+        "Sync catalog from SAP/Oracle/NetSuite nightly",
+        "Process spec sheets and extract searchable attributes",
+        "Real-time inventory updates from warehouse systems"
+      ]
+    },
+    {
+      "id": "generative-enrichment",
+      "title": "Generative Data Enrichment Pipeline",
+      "color": "#F39C12",
+      "tagline": "AI-powered content generation at scale",
+      "desc": "Uses large language models and computer vision to automatically generate missing product descriptions, extract attributes from images, and create searchable content from sparse data.",
+      "keyFeatures": [
+        "Auto-generate product descriptions from specs",
+        "Extract attributes from product images",
+        "Categorization and taxonomy mapping",
+        "Keyword and synonym generation",
+        "Quality scoring and confidence levels",
+        "Human-in-the-loop approval workflows"
+      ],
+      "technicalDetails": [
+        "GPT-4 and Claude integration for text generation",
+        "CLIP and custom vision models for image analysis",
+        "Batch processing for catalog-scale enrichment",
+        "Configurable approval thresholds"
+      ],
+      "useCases": [
+        "Enrich 100K sparse catalog entries with rich descriptions",
+        "Extract thread pitch and dimensions from fastener images",
+        "Generate SEO-friendly content for product pages"
+      ]
+    },
+    {
+      "id": "ab-testing",
+      "title": "A/B Testing Framework",
+      "color": "#3498DB",
+      "tagline": "Data-driven search optimization",
+      "desc": "Run controlled experiments to measure the impact of search changes—ranking algorithms, UI variations, synonym additions—with statistical rigor. Know what actually improves conversion.",
+      "keyFeatures": [
+        "Traffic splitting with configurable percentages",
+        "Statistical significance calculation",
+        "Multi-variant testing (A/B/C/D)",
+        "Automatic winner detection",
+        "Segment-based targeting",
+        "Revenue and conversion impact measurement"
+      ],
+      "technicalDetails": [
+        "Bayesian and frequentist statistical models",
+        "Minimum detectable effect calculations",
+        "Integration with analytics engine",
+        "Experiment scheduling and auto-rollout"
+      ],
+      "useCases": [
+        "Test new ranking algorithm against baseline",
+        "Compare two synonym configurations",
+        "Measure conversion lift from UI changes"
+      ]
+    },
+    {
+      "id": "interleaving-testing",
+      "title": "Interleaving Testing",
+      "color": "#27AE60",
+      "tagline": "Sensitive ranking comparison",
+      "desc": "A more sensitive alternative to A/B testing for ranking changes. Interleaves results from two ranking algorithms in a single result set and measures which results users prefer through clicks.",
+      "keyFeatures": [
+        "Team Draft and Balanced interleaving methods",
+        "Per-query comparison (not per-user)",
+        "Faster statistical convergence than A/B",
+        "Click preference measurement",
+        "Bias correction algorithms",
+        "Works with low traffic volumes"
+      ],
+      "technicalDetails": [
+        "Team Draft interleaving implementation",
+        "Balanced interleaving for fairness",
+        "Credit assignment algorithms",
+        "Integration with ranking pipeline"
+      ],
+      "useCases": [
+        "Compare ML ranking model versions",
+        "Test semantic vs keyword ranking blend",
+        "Evaluate personalization impact on relevance"
+      ]
+    }
+  ]
+}

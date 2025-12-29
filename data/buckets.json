@@ -1,0 +1,106 @@
+{
+  "buckets": {
+    "core": {
+      "id": "core",
+      "label": "Core Search",
+      "color": "#00cccc",
+      "desc": "Get to products fast — 8 features",
+      "title": "Core Search & Findability",
+      "tagline": "Get to products fast",
+      "description": "The fundamental ability to navigate a large catalog quickly and accurately. These features handle catalogs with 100K+ SKUs, support multiple input methods (type, click, speak, image), normalize messy part numbers and formats, and let buyers filter and refine results efficiently.",
+      "whatItSolves": "Buyers can't find products in your massive catalog. They search by part number and get zero results because of formatting differences. They don't know the right terminology.",
+      "keyValueProps": [
+        "Handle catalogs with 100K+ SKUs",
+        "Support multiple input methods (type, click, speak, image)",
+        "Normalize messy part numbers and formats",
+        "Filter and refine results efficiently"
+      ],
+      "chart": "flowchart TD\n    BUCKET[\"🔍 CORE SEARCH & FINDABILITY\\n<i>Get to products fast</i>\"]\n    BUCKET --> F1[\"Auto Complete\\nPredictive suggestions\"]\n    BUCKET --> F2[\"Faceted Search\\nFilter by attributes\"]\n    BUCKET --> F3[\"Visual Filters\\nImage-based refinement\"]\n    BUCKET --> F4[\"Part Number Normalization\\nHandle format variations\"]\n    BUCKET --> F5[\"Voice Search\\nSpeak to search\"]\n    BUCKET --> F6[\"Image Search\\nUpload photo to find\"]\n    BUCKET --> F7[\"Universal Search\\nSearch across content\"]\n    BUCKET --> F8[\"Searchable Certifications\\nFilter by compliance\"]\n    style BUCKET fill:#00cccc,color:#000\n    style F1 fill:#e0fafa\n    style F2 fill:#e0fafa\n    style F3 fill:#e0fafa\n    style F4 fill:#e0fafa\n    style F5 fill:#e0fafa\n    style F6 fill:#e0fafa\n    style F7 fill:#e0fafa\n    style F8 fill:#e0fafa"
+    },
+    "smart": {
+      "id": "smart",
+      "label": "AI Search",
+      "color": "#9933ff",
+      "desc": "AI that understands & ranks — 6 features",
+      "title": "AI Search & Relevance",
+      "tagline": "AI that understands and ranks",
+      "description": "Bridge the gap between what buyers type and what they mean. These features understand natural language queries, learn your industry's terminology, blend multiple relevance signals (behavior, text, business rules), and route queries to the right experience.",
+      "whatItSolves": "Search doesn't understand your buyers. They use industry jargon, abbreviations, or \"how I describe it\" language. The right products exist but are buried on page 5.",
+      "keyValueProps": [
+        "Understand natural language queries",
+        "Learn your industry's terminology",
+        "Blend multiple relevance signals",
+        "Route queries to the right experience"
+      ],
+      "chart": "flowchart TD\n    BUCKET[\"🧠 AI SEARCH & RELEVANCE\\n<i>AI that understands and ranks</i>\"]\n    BUCKET --> F1[\"Semantic Search\\nUnderstand meaning\"]\n    BUCKET --> F2[\"Intelligent Synonyms\\nLearn terminology\"]\n    BUCKET --> F3[\"Intelligent Auto Complete\\nPersonalized suggestions\"]\n    BUCKET --> F4[\"Hybrid Search / ML Ranking\\nBlend signals\"]\n    BUCKET --> F5[\"Multi-Layered Relevance\\nComplex ranking\"]\n    BUCKET --> F6[\"Semantic Intent Router\\nDetect buyer intent\"]\n    style BUCKET fill:#9933ff,color:#fff\n    style F1 fill:#f3e8ff\n    style F2 fill:#f3e8ff\n    style F3 fill:#f3e8ff\n    style F4 fill:#f3e8ff\n    style F5 fill:#f3e8ff\n    style F6 fill:#f3e8ff"
+    },
+    "discovery": {
+      "id": "discovery",
+      "label": "Discovery",
+      "color": "#ff9900",
+      "desc": "Suggest & cross-sell — 8 features",
+      "title": "Discovery & Reordering",
+      "tagline": "Suggest, cross-sell, speed up repeats",
+      "description": "Increase basket size with intelligent recommendations and speed up repeat purchasing (80% of B2B orders). Help buyers discover products they didn't know you carried and surface alternatives when primary brands are unavailable.",
+      "whatItSolves": "Missed cross-sell opportunities and slow reordering for repeat buyers. Buyers get what they searched for but nothing more. 80% of orders are repeats but take too long to place.",
+      "keyValueProps": [
+        "Increase basket size with recommendations",
+        "Surface alternatives when primary brand is unavailable",
+        "Speed up repeat purchasing (80% of B2B orders)",
+        "Help buyers discover products they didn't know you carried"
+      ],
+      "chart": "flowchart TD\n    BUCKET[\"💡 DISCOVERY & REORDERING\\n<i>Suggest, cross-sell, speed up repeats</i>\"]\n    BUCKET --> DISCOVER[\"DISCOVERY\"]\n    BUCKET --> REORDER[\"REORDERING\"]\n    DISCOVER --> F1[\"Recommendation Engine\\nPersonalized suggestions\"]\n    DISCOVER --> F2[\"Related Searches\\nAlternative paths\"]\n    DISCOVER --> F3[\"Cross-Brand Equivalents\\nFind alternatives\"]\n    DISCOVER --> F4[\"Trending Search\\nWhat's popular\"]\n    DISCOVER --> F5[\"Custom Products\\nBuild bundles\"]\n    DISCOVER --> F8[\"Complementary Products\\nOften bought together\"]\n    REORDER --> F6[\"Recent Search\\nRepeat searches\"]\n    REORDER --> F7[\"Recently Ordered\\nOne-click reorder\"]\n    style BUCKET fill:#ff9900,color:#000\n    style DISCOVER fill:#fff5e6\n    style REORDER fill:#fff5e6\n    style F1 fill:#fff0cc\n    style F2 fill:#fff0cc\n    style F3 fill:#fff0cc\n    style F4 fill:#fff0cc\n    style F5 fill:#fff0cc\n    style F6 fill:#ffe6b3\n    style F7 fill:#ffe6b3\n    style F8 fill:#fff0cc"
+    },
+    "merchandising": {
+      "id": "merchandising",
+      "label": "Merchandising",
+      "color": "#ff3333",
+      "desc": "Business user control — 6 features",
+      "title": "Merchandising & Control",
+      "tagline": "Business users shape results",
+      "description": "Give business users control over search without IT tickets. Merchandisers can control promotions and campaigns, test changes safely in sandbox before going live, get real-time visibility into performance, and maintain audit trails for all changes.",
+      "whatItSolves": "Business users are locked out of search. Marketing wants to promote a campaign but has to file an IT ticket and wait. No one knows what's working or why.",
+      "keyValueProps": [
+        "Merchandisers control promotions and campaigns",
+        "Test changes safely in sandbox before going live",
+        "Real-time visibility into search performance",
+        "Audit trail and rollback for all changes"
+      ],
+      "chart": "flowchart TD\n    BUCKET[\"🎯 MERCHANDISING & CONTROL\\n<i>Business users shape results</i>\"]\n    BUCKET --> SHAPE[\"SHAPE RESULTS\"]\n    BUCKET --> MONITOR[\"MONITOR & TEST\"]\n    BUCKET --> ENRICH[\"ENRICH CONTENT\"]\n    SHAPE --> F1[\"Curations\\nPin, boost, bury\"]\n    SHAPE --> F2[\"Configuration Management\\nVersion control\"]\n    MONITOR --> F3[\"Query Behaviour Labeller\\nUnderstand patterns\"]\n    MONITOR --> F4[\"Search Sandbox\\nTest safely\"]\n    MONITOR --> F5[\"Search Dashboard\\nReal-time visibility\"]\n    ENRICH --> F6[\"AI Enrichment Dashboard\\nReview AI content\"]\n    style BUCKET fill:#ff3333,color:#fff\n    style SHAPE fill:#ffe6e6\n    style MONITOR fill:#ffe6e6\n    style ENRICH fill:#ffe6e6\n    style F1 fill:#ffcccc\n    style F2 fill:#ffcccc\n    style F3 fill:#ffcccc\n    style F4 fill:#ffcccc\n    style F5 fill:#ffcccc\n    style F6 fill:#ffcccc"
+    },
+    "recovery": {
+      "id": "recovery",
+      "label": "Recovery",
+      "color": "#00cc66",
+      "desc": "Never lose a sale — 2 features",
+      "title": "Recovery & Resilience",
+      "tagline": "Never lose a sale",
+      "description": "Ensure every search returns useful results. When exact matches aren't found, provide intelligent suggestions and fallback strategies. Keep buyers engaged and never let them hit a dead end.",
+      "whatItSolves": "Dead-end searches that drive buyers to competitors. Zero results = lost sale. Buyers leave frustrated when search fails instead of getting helpful alternatives.",
+      "keyValueProps": [
+        "Every search returns useful results",
+        "Suggestions when exact match isn't found",
+        "Fallback strategies when primary search fails",
+        "Keep buyers engaged, never frustrated"
+      ],
+      "chart": "flowchart TD\n    BUCKET[\"🛡️ RECOVERY & RESILIENCE\\n<i>Never lose a sale</i>\"]\n    BUCKET --> F1[\"Zero Results Recovery\\nAlways show something\"]\n    BUCKET --> F2[\"Fallback Search\\nGraceful degradation\"]\n    style BUCKET fill:#00cc66,color:#000\n    style F1 fill:#e6fff0\n    style F2 fill:#e6fff0"
+    },
+    "analytics": {
+      "id": "analytics",
+      "label": "Analytics",
+      "color": "#0066ff",
+      "desc": "Measure & optimize — 1 feature",
+      "title": "Analytics & Optimization",
+      "tagline": "Measure, learn, improve",
+      "description": "Understand search performance with deep-dive analytics. Measure conversion impact of changes, identify opportunities, and make data-driven optimization decisions. Prove ROI on search investments.",
+      "whatItSolves": "No visibility into search performance. You can't improve what you can't measure. Teams don't know what's working or where to focus optimization efforts.",
+      "keyValueProps": [
+        "Deep-dive analytics and reporting",
+        "Measure conversion impact of changes",
+        "Identify optimization opportunities",
+        "Prove ROI on search investments"
+      ],
+      "chart": "flowchart TD\n    BUCKET[\"📊 ANALYTICS & OPTIMIZATION\\n<i>Measure, learn, improve</i>\"]\n    BUCKET --> F1[\"Analytics\\nPerformance metrics & reports\"]\n    style BUCKET fill:#0066ff,color:#fff\n    style F1 fill:#e6f0ff"
+    }
+  }
+}

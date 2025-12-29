@@ -7,66 +7,80 @@ import {
     AlertTriangle, CheckCircle, Clock, Cpu,
     Calendar, ChevronDown, ChevronUp,
     Brain, Lightbulb, Shield, BarChart, Search,
-    HelpCircle, BookOpen, Wrench, GraduationCap,
+    HelpCircle, Wrench, GraduationCap,
     DollarSign, MessageSquare, FlaskConical, Settings,
     FileSearch, Layers, X, Copy, Download, CheckCheck
 } from 'lucide-react'
 
-// Complete feature data from the site content
-// Estimation dimensions: layer (platform/integration), scope (universal/industry/client), priority (essential/enhanced/specialized)
-const FEATURES = [
-    // Core Search (8)
-    { id: 'autocomplete', title: 'Auto Complete', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Predictive suggestions as buyers type', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'faceted', title: 'Faceted Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'critical', desc: 'Dynamic filters based on product attributes', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'visual', title: 'Visual Filters', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'catalog_rich', importance: 'nice', desc: 'Image-based filter selection', layer: 'integration', scope: 'universal', priority: 'enhanced' },
-    { id: 'partnumber', title: 'Part Number Normalization', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Handles part number format variations', layer: 'platform', scope: 'industry', priority: 'essential' },
-    { id: 'voice', title: 'Voice Search', bucket: 'core', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'MVP', dataRequired: 'catalog', importance: 'nice', desc: 'Voice input for hands-free scenarios', layer: 'integration', scope: 'universal', priority: 'enhanced' },
-    { id: 'universal', title: 'Universal Search', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'content', importance: 'important', desc: 'Search across products, docs, articles', layer: 'platform', scope: 'client', priority: 'enhanced' },
-    { id: 'certifications', title: 'Searchable Certifications', bucket: 'core', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'facets', importance: 'important', desc: 'Filter by technical certifications', layer: 'platform', scope: 'industry', priority: 'essential' },
+// Import data from JSON files (single source of truth)
+import featuresData from '../data/features.json'
+import bucketsData from '../data/buckets.json'
 
-    // AI Search (6)
-    { id: 'imagesearch', title: 'Image Search', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'catalog_rich', importance: 'important', desc: 'Upload photo to find matching products', layer: 'integration', scope: 'universal', priority: 'enhanced' },
-    { id: 'semantic', title: 'Semantic Search', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'descriptions', importance: 'important', desc: 'Understand meaning, not just keywords', aiEnrichable: true, layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'synonyms', title: 'Intelligent Synonyms', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'important', desc: 'Learn industry-specific terminology', layer: 'platform', scope: 'industry', priority: 'enhanced' },
-    { id: 'intelligentauto', title: 'Intelligent Auto Complete', bucket: 'smart', pillars: { data: 'yellow', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral_user', importance: 'nice', desc: 'Context-aware personalized suggestions', layer: 'platform', scope: 'universal', priority: 'enhanced' },
-    { id: 'mlranking', title: 'ML Ranking', bucket: 'smart', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'behavioral_trans', importance: 'important', desc: 'Machine learning optimizes ranking', layer: 'platform', scope: 'universal', priority: 'specialized' },
-    { id: 'relevancefunnel', title: 'Multi-Layered Relevance', bucket: 'core', pillars: { data: 'red', gov: 'red', safe: 'red' }, phase: 'day90', typicalInvestment: 'PREMIUM', dataRequired: 'all', importance: 'nice', desc: 'Complex ranking with business rules', layer: 'platform', scope: 'client', priority: 'specialized' },
-    { id: 'intentrouter', title: 'Semantic Intent Router', bucket: 'smart', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'nice', desc: 'Detect what buyer actually wants', layer: 'platform', scope: 'universal', priority: 'enhanced' },
-
-    // Discovery (7)
-    { id: 'recommendations', title: 'Recommendation Engine', bucket: 'discovery', pillars: { data: 'red', gov: 'red', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral_trans_user', importance: 'critical', desc: 'Personalized product suggestions', layer: 'platform', scope: 'universal', priority: 'enhanced' },
-    { id: 'related', title: 'Related Searches', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'important', desc: 'Suggest alternative query paths', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'equivalents', title: 'Cross-Brand Equivalents', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'relationships', importance: 'important', desc: 'Show alternative brands/substitutes', layer: 'platform', scope: 'industry', priority: 'enhanced' },
-    { id: 'trending', title: 'Trending Search', bucket: 'discovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'nice', desc: 'Show what\'s popular now', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'kitting', title: 'Custom Products (Kitting)', bucket: 'discovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day30', typicalInvestment: 'POLISHED', dataRequired: 'relationships', importance: 'nice', desc: 'Build bundles and assemblies', layer: 'platform', scope: 'industry', priority: 'enhanced' },
-    { id: 'recent', title: 'Recent Search', bucket: 'discovery', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'user', importance: 'critical', desc: 'Show user\'s recent searches', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'recentlyordered', title: 'Recently Ordered', bucket: 'discovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'user_trans', importance: 'critical', desc: 'One-click reorder from history', layer: 'integration', scope: 'client', priority: 'essential' },
-
-    // Merchandising (6)
-    { id: 'curations', title: 'Curations', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'yellow' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'catalog', importance: 'critical', desc: 'Pin, boost, bury, redirect results', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'config', title: 'Configuration Management', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'none', importance: 'critical', desc: 'Version control for search settings', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'querylabeller', title: 'Query Behaviour Labeller', bucket: 'merchandising', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day30', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'nice', desc: 'Classify search patterns', layer: 'platform', scope: 'universal', priority: 'enhanced' },
-    { id: 'sandbox', title: 'Search Sandbox', bucket: 'merchandising', pillars: { data: 'green', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'none', importance: 'critical', desc: 'Test changes safely before deploy', layer: 'integration', scope: 'universal', priority: 'essential' },
-    { id: 'dashboard', title: 'Search Dashboard', bucket: 'merchandising', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'behavioral', importance: 'critical', desc: 'Real-time performance visibility', layer: 'integration', scope: 'universal', priority: 'essential' },
-    { id: 'aienrichment', title: 'AI Enrichment Dashboard', bucket: 'merchandising', pillars: { data: 'green', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'ai_content', importance: 'important', desc: 'Review and approve AI content', layer: 'integration', scope: 'universal', priority: 'essential' },
-
-    // Recovery (2)
-    { id: 'zeroresults', title: 'Zero Results Recovery', bucket: 'recovery', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'critical', desc: 'Never dead-end the buyer', layer: 'platform', scope: 'universal', priority: 'essential' },
-    { id: 'fallback', title: 'Fallback Search', bucket: 'recovery', pillars: { data: 'yellow', gov: 'green', safe: 'green' }, phase: 'day1', typicalInvestment: 'STANDARD', dataRequired: 'catalog', importance: 'important', desc: 'Graceful degradation when search fails', layer: 'platform', scope: 'universal', priority: 'essential' },
-
-    // Analytics (2)
-    { id: 'analytics', title: 'Analytics', bucket: 'analytics', pillars: { data: 'yellow', gov: 'yellow', safe: 'green' }, phase: 'day1', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'critical', desc: 'Deep search performance metrics', layer: 'integration', scope: 'universal', priority: 'essential' },
-    { id: 'abtesting', title: 'A/B Testing', bucket: 'analytics', pillars: { data: 'yellow', gov: 'yellow', safe: 'yellow' }, phase: 'day60', typicalInvestment: 'POLISHED', dataRequired: 'behavioral', importance: 'nice', desc: 'Controlled experiments for changes', layer: 'platform', scope: 'universal', priority: 'enhanced' },
-]
-
-const BUCKET_INFO = {
-    core: { icon: Search, label: 'Core Search', color: '#00cccc' },
-    smart: { icon: Brain, label: 'AI Search', color: '#9933ff' },
-    discovery: { icon: Lightbulb, label: 'Discovery', color: '#ff9900' },
-    merchandising: { icon: Target, label: 'Merchandising', color: '#ff3333' },
-    recovery: { icon: Shield, label: 'Recovery', color: '#00cc66' },
-    analytics: { icon: BarChart, label: 'Analytics', color: '#0066ff' },
+// Map dataRequired prose to short codes for scoring logic
+const dataRequiredMap = {
+    'Basic Catalog (titles, SKUs)': 'catalog',
+    'Rich Catalog (structured attributes, consistent categorization)': 'facets',
+    'Product Images + Mapped Attributes': 'catalog_rich',
+    'Catalog (SKUs, part numbers, manufacturer codes)': 'catalog',
+    'Basic Catalog': 'catalog',
+    'Product Images (multiple angles preferred), Catalog': 'catalog_rich',
+    'Multiple Content Types (products, content, documents)': 'content',
+    'Rich Catalog (certification attributes)': 'facets',
+    'Rich Catalog (detailed descriptions). Performance improves with better content.': 'descriptions',
+    'Behavioral Data (search logs, click patterns)': 'behavioral',
+    'Behavioral + User Data': 'behavioral_user',
+    'Behavioral + Transactional (90+ days ideal)': 'behavioral_trans',
+    'All data types': 'all',
+    'Rich Catalog + Behavioral patterns': 'behavioral',
+    'Behavioral + Transactional + User': 'behavioral_trans_user',
+    'Behavioral Data (search sequences)': 'behavioral',
+    'Relationship Data (cross-references, equivalents mapping)': 'relationships',
+    'Behavioral Data (recent search/purchase patterns)': 'behavioral',
+    'Relationship Data (kit compositions, compatible products)': 'relationships',
+    'User Data (session/account tracking)': 'user',
+    'User + Transactional Data': 'user_trans',
+    'Transactional Data (purchase history, co-occurrence patterns)': 'behavioral_trans',
+    'None (platform tool)': 'none',
+    'Behavioral Data': 'behavioral',
+    'Basic Catalog (titles, SKUs). AI generates the rest.': 'ai_content',
+    'Rich Catalog (for intelligent suggestions)': 'catalog',
+    'Rich Catalog': 'catalog',
+    'Behavioral Data (accumulates over time)': 'behavioral',
 }
+
+// Transform features from JSON to the format needed for scoring
+const FEATURES = featuresData.features.map(f => ({
+    id: f.id,
+    title: f.title,
+    bucket: f.bucket,
+    pillars: f.pillars,
+    phase: f.phase,
+    typicalInvestment: f.typicalInvestment || f.badge,
+    dataRequired: dataRequiredMap[f.dataRequired] || 'catalog',
+    importance: f.importance,
+    desc: f.desc,
+    layer: f.layer,
+    scope: f.scope,
+    priority: f.priority,
+    aiEnrichable: f.aiEnrichable
+}))
+
+// Build bucket info with icons
+const bucketIcons = {
+    core: Search,
+    smart: Brain,
+    discovery: Lightbulb,
+    merchandising: Target,
+    recovery: Shield,
+    analytics: BarChart
+}
+
+const BUCKET_INFO = Object.fromEntries(
+    Object.entries(bucketsData.buckets).map(([key, bucket]) => [
+        key,
+        { icon: bucketIcons[key], label: bucket.label, color: bucket.color }
+    ])
+)
 
 const INVESTMENT_COLORS = {
     MVP: 'bg-neutral-200 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300',
