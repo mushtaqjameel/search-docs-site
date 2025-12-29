@@ -7,6 +7,7 @@ import {
     Copy, Download, CheckCheck, Layers, Users, Target
 } from 'lucide-react'
 import { investmentColors } from '../../../constants/colors'
+import { getRecommendationClasses, getInvestmentClasses } from '../../../constants/recommendations'
 
 /**
  * Step 5: Results - Implementation scope output
@@ -292,30 +293,16 @@ function PhaseSection({ phase, label, features, icon: Icon, color, isExpanded, o
  */
 function ResultFeatureCard({ feature, bucketInfo }) {
     const BucketIcon = bucketInfo[feature.bucket]?.icon
-    const recColors = {
-        include: 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-900/10',
-        limited: 'border-yellow-200 dark:border-yellow-800 bg-yellow-50/50 dark:bg-yellow-900/10',
-        caution: 'border-orange-200 dark:border-orange-800 bg-orange-50/50 dark:bg-orange-900/10',
-        phase: 'border-neutral-200 dark:border-neutral-700 bg-neutral-50/50 dark:bg-neutral-800/50',
-        exclude: 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-900/10 opacity-60',
-    }
-
-    const INVESTMENT_COLORS = {
-        MVP: 'bg-neutral-200 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300',
-        STANDARD: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-        POLISHED: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300',
-        PREMIUM: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-    }
 
     return (
-        <div className={`p-4 rounded-lg border ${recColors[feature.recommendation]}`}>
+        <div className={`p-4 rounded-lg border ${getRecommendationClasses(feature.recommendation)}`}>
             <div className="flex justify-between items-start mb-2">
                 <div className="flex items-center gap-2">
                     {BucketIcon && <BucketIcon size={16} style={{ color: bucketInfo[feature.bucket]?.color }} />}
                     <span className="font-bold text-sm">{feature.title}</span>
                     {feature.priorityMatch && <span className="text-xs bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-1.5 py-0.5 rounded">Priority</span>}
                 </div>
-                <span className={`text-xs font-bold px-2 py-0.5 rounded ${INVESTMENT_COLORS[feature.investment]}`}>
+                <span className={`text-xs font-bold px-2 py-0.5 rounded ${getInvestmentClasses(feature.investment)}`}>
                     {feature.investment}
                 </span>
             </div>

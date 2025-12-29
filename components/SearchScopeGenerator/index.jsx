@@ -1,11 +1,15 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
-import { X, Brain, Lightbulb, Target, Shield, BarChart, Search } from 'lucide-react'
+import { X } from 'lucide-react'
 
 // Data imports
 import featuresData from '../../data/features.json'
 import bucketsData from '../../data/buckets.json'
+import dataRequiredMapData from '../../data/dataRequiredMap.json'
+
+// Constants
+import { bucketIcons } from '../../constants/bucketIcons'
 
 // Scoring utilities
 import { calculateScoringResults } from '../../utils/scoring'
@@ -20,37 +24,8 @@ import {
     StepResults
 } from './steps'
 
-// Map dataRequired prose to short codes for scoring logic
-const dataRequiredMap = {
-    'Basic Catalog (titles, SKUs)': 'catalog',
-    'Rich Catalog (structured attributes, consistent categorization)': 'facets',
-    'Product Images + Mapped Attributes': 'catalog_rich',
-    'Catalog (SKUs, part numbers, manufacturer codes)': 'catalog',
-    'Basic Catalog': 'catalog',
-    'Product Images (multiple angles preferred), Catalog': 'catalog_rich',
-    'Multiple Content Types (products, content, documents)': 'content',
-    'Rich Catalog (certification attributes)': 'facets',
-    'Rich Catalog (detailed descriptions). Performance improves with better content.': 'descriptions',
-    'Behavioral Data (search logs, click patterns)': 'behavioral',
-    'Behavioral + User Data': 'behavioral_user',
-    'Behavioral + Transactional (90+ days ideal)': 'behavioral_trans',
-    'All data types': 'all',
-    'Rich Catalog + Behavioral patterns': 'behavioral',
-    'Behavioral + Transactional + User': 'behavioral_trans_user',
-    'Behavioral Data (search sequences)': 'behavioral',
-    'Relationship Data (cross-references, equivalents mapping)': 'relationships',
-    'Behavioral Data (recent search/purchase patterns)': 'behavioral',
-    'Relationship Data (kit compositions, compatible products)': 'relationships',
-    'User Data (session/account tracking)': 'user',
-    'User + Transactional Data': 'user_trans',
-    'Transactional Data (purchase history, co-occurrence patterns)': 'behavioral_trans',
-    'None (platform tool)': 'none',
-    'Behavioral Data': 'behavioral',
-    'Basic Catalog (titles, SKUs). AI generates the rest.': 'ai_content',
-    'Rich Catalog (for intelligent suggestions)': 'catalog',
-    'Rich Catalog': 'catalog',
-    'Behavioral Data (accumulates over time)': 'behavioral',
-}
+// Extract the mappings from the JSON file
+const dataRequiredMap = dataRequiredMapData.mappings
 
 // Transform features from JSON to the format needed for scoring
 const FEATURES = featuresData.features.map(f => ({
@@ -70,15 +45,6 @@ const FEATURES = featuresData.features.map(f => ({
 }))
 
 // Build bucket info with icons
-const bucketIcons = {
-    core: Search,
-    smart: Brain,
-    discovery: Lightbulb,
-    merchandising: Target,
-    recovery: Shield,
-    analytics: BarChart
-}
-
 const BUCKET_INFO = Object.fromEntries(
     Object.entries(bucketsData.buckets).map(([key, bucket]) => [
         key,

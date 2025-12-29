@@ -1,0 +1,33 @@
+{
+  "description": "Maps prose data requirement strings to short codes for scoring logic",
+  "mappings": {
+    "Basic Catalog (titles, SKUs)": "catalog",
+    "Rich Catalog (structured attributes, consistent categorization)": "facets",
+    "Product Images + Mapped Attributes": "catalog_rich",
+    "Catalog (SKUs, part numbers, manufacturer codes)": "catalog",
+    "Basic Catalog": "catalog",
+    "Product Images (multiple angles preferred), Catalog": "catalog_rich",
+    "Multiple Content Types (products, content, documents)": "content",
+    "Rich Catalog (certification attributes)": "facets",
+    "Rich Catalog (detailed descriptions). Performance improves with better content.": "descriptions",
+    "Behavioral Data (search logs, click patterns)": "behavioral",
+    "Behavioral + User Data": "behavioral_user",
+    "Behavioral + Transactional (90+ days ideal)": "behavioral_trans",
+    "All data types": "all",
+    "Rich Catalog + Behavioral patterns": "behavioral",
+    "Behavioral + Transactional + User": "behavioral_trans_user",
+    "Behavioral Data (search sequences)": "behavioral",
+    "Relationship Data (cross-references, equivalents mapping)": "relationships",
+    "Behavioral Data (recent search/purchase patterns)": "behavioral",
+    "Relationship Data (kit compositions, compatible products)": "relationships",
+    "User Data (session/account tracking)": "user",
+    "User + Transactional Data": "user_trans",
+    "Transactional Data (purchase history, co-occurrence patterns)": "behavioral_trans",
+    "None (platform tool)": "none",
+    "Behavioral Data": "behavioral",
+    "Basic Catalog (titles, SKUs). AI generates the rest.": "ai_content",
+    "Rich Catalog (for intelligent suggestions)": "catalog",
+    "Rich Catalog": "catalog",
+    "Behavioral Data (accumulates over time)": "behavioral"
+  }
+}

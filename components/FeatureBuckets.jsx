@@ -1,14 +1,23 @@
-import { Search, Brain, Lightbulb, Target, Shield, BarChart } from 'lucide-react'
+'use client'
+
 import Link from 'next/link'
 
-const buckets = [
-    { id: 'core', icon: Search, label: 'Core Search', count: '8 features', bgColor: 'bg-cyan-100', iconColor: '#0891b2', desc: 'Get to products fast. Navigation, filtering, and discovery fundamentals.' },
-    { id: 'smart', icon: Brain, label: 'AI Search', count: '6 features', bgColor: 'bg-purple-100', iconColor: '#9333ea', desc: 'AI that understands intent and ranks results intelligently.' },
-    { id: 'discovery', icon: Lightbulb, label: 'Discovery', count: '7 features', bgColor: 'bg-amber-100', iconColor: '#d97706', desc: 'Cross-sell, recommend, and speed up repeat purchases.' },
-    { id: 'merchandising', icon: Target, label: 'Merchandising', count: '6 features', bgColor: 'bg-red-100', iconColor: '#dc2626', desc: 'Business users shape search results and monitor performance.' },
-    { id: 'recovery', icon: Shield, label: 'Recovery', count: '2 features', bgColor: 'bg-green-100', iconColor: '#16a34a', desc: 'Never dead-end a search. Always provide relevant results.' },
-    { id: 'analytics', icon: BarChart, label: 'Analytics', count: '2 features', bgColor: 'bg-blue-100', iconColor: '#2563eb', desc: 'Measure, learn, and continuously improve search performance.' }
-];
+// Import data from JSON file (single source of truth)
+import bucketsData from '../data/buckets.json'
+
+// Import shared constants
+import { bucketIcons, bucketBgClasses } from '../constants/bucketIcons'
+
+// Build buckets array from JSON data with icons
+const buckets = Object.entries(bucketsData.buckets).map(([key, bucket]) => ({
+    id: key,
+    icon: bucketIcons[key],
+    label: bucket.label,
+    count: bucket.desc.match(/\d+ features/)?.[0] || '',
+    bgColor: bucketBgClasses[key],
+    iconColor: bucket.color,
+    desc: bucket.tagline || bucket.description?.substring(0, 80) + '...'
+}))
 
 export default function FeatureBuckets() {
     return (
@@ -30,4 +39,3 @@ export default function FeatureBuckets() {
         </div>
     )
 }
-
