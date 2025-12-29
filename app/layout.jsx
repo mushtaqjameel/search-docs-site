@@ -12,6 +12,9 @@ export const metadata = {
 export default async function RootLayout({ children }) {
     const pageMap = await getPageMap()
 
+    // suppressHydrationWarning is required on html/body for Nextra's dark mode.
+    // The theme class is applied client-side from localStorage, causing a harmless
+    // mismatch with server-rendered HTML that React would otherwise warn about.
     return (
         <html lang="en" suppressHydrationWarning>
             <Head />
