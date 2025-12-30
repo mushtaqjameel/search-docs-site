@@ -3,13 +3,32 @@ import SearchScopeGenerator from '../components/SearchScopeGenerator'
 import DecisionQuadrants from '../components/DecisionQuadrants'
 import TaskClassifier from '../components/TaskClassifier'
 import StoryLevelAssessor from '../components/StoryLevelAssessor'
+import FeatureDecisionNavigator from '../components/FeatureDecisionNavigator'
 
 # Interactive Tools
 Scope generator, estimation tools, and strategic decision frameworks for search implementations.
 
-<Tabs items={['Scope Generator', 'Task Classifier', 'Story Level', 'Decision Quadrants']}>
+<Tabs items={['Scope Generator', 'Feature Navigator', 'Task Classifier', 'Story Level', 'Quadrant Reference']}>
   <Tabs.Tab>
     <SearchScopeGenerator />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## Feature Decision Navigator
+
+    Walk through all 4 strategic quadrants for a single feature decision. Perfect for quick scoping calls and feature-level trade-off discussions.
+
+    <FeatureDecisionNavigator />
+
+    ### The 4 Quadrants
+
+    | Quadrant | Question | Axes |
+    |----------|----------|------|
+    | **Build Decision** | Should we build it? | Importance × Data Quality |
+    | **Prioritization** | When to build it? | Value × Effort |
+    | **Delivery Approach** | How to build it? | Capacity × Data Quality |
+    | **Support Model** | How to support it? | Risk × Capacity |
+
+    See the [Quadrant Reference](/tools?tab=Quadrant+Reference) for detailed explanations of each quadrant.
   </Tabs.Tab>
   <Tabs.Tab>
     ## Task Classifier
@@ -46,9 +65,9 @@ Scope generator, estimation tools, and strategic decision frameworks for search 
     Learn more about the philosophy in the [Estimation Framework](/estimation) → Story Levels tab.
   </Tabs.Tab>
   <Tabs.Tab>
-    ## Decision Quadrants
+    ## Quadrant Reference
 
-    Quick reference for strategic decisions during scoping conversations.
+    Quick reference for strategic decisions during scoping conversations. Use the [Feature Navigator](/tools?tab=Feature+Navigator) for interactive analysis.
 
     <DecisionQuadrants />
   </Tabs.Tab>
