@@ -27,7 +27,107 @@ This means every task must be evaluated for **reusability** and separated into a
 <p className="text-sm">Instead of treating a feature as a single timeline ("6 months"), we bucket it across multiple levels of depth and maturity. This shifts the conversation from <strong>time spent</strong> to <strong>surface area covered</strong>. A cube beats a line every time when explaining why two similar-looking things are not the same.</p>
 </div>
 
-<Tabs items={['The 3 Dimensions', 'The Matrix', 'Example: Image Search', 'How to Use']}>
+<Tabs items={['Story Levels', 'The 3 Dimensions', 'The Matrix', 'Example: Image Search', 'How to Use']}>
+
+<Tabs.Tab>
+## The Three Story Levels
+
+All estimation follows the same structure — three levels of depth that determine **what we build** and **why we build it**.
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+<div className="p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border-2 border-green-300 dark:border-green-700">
+<div className="text-xs uppercase font-bold text-green-600 dark:text-green-400 mb-1">Level 1</div>
+<h4 className="font-bold text-green-800 dark:text-green-300 text-lg">Essential (Tooling)</h4>
+<p className="text-sm mt-2 text-green-700 dark:text-green-400 font-medium">Configure → Deploy → Evaluate → Monitor → Switch</p>
+<p className="text-xs mt-3 text-green-600 dark:text-green-500">Build strategy-agnostic tooling that makes all options configurable. No commitment to a specific approach yet.</p>
+</div>
+<div className="p-5 rounded-xl bg-yellow-50 dark:bg-yellow-900/20 border-2 border-yellow-300 dark:border-yellow-700">
+<div className="text-xs uppercase font-bold text-yellow-600 dark:text-yellow-400 mb-1">Level 2</div>
+<h4 className="font-bold text-yellow-800 dark:text-yellow-300 text-lg">Enhanced (Platform Spikes)</h4>
+<p className="text-sm mt-2 text-yellow-700 dark:text-yellow-400 font-medium">Understand technologies, build platform knowledge</p>
+<p className="text-xs mt-3 text-yellow-600 dark:text-yellow-500">Learn once, advise all clients. These become reusable platform capabilities.</p>
+</div>
+<div className="p-5 rounded-xl bg-red-50 dark:bg-red-900/20 border-2 border-red-300 dark:border-red-700">
+<div className="text-xs uppercase font-bold text-red-600 dark:text-red-400 mb-1">Level 3</div>
+<h4 className="font-bold text-red-800 dark:text-red-300 text-lg">Specialized (Context Spikes)</h4>
+<p className="text-sm mt-2 text-red-700 dark:text-red-400 font-medium">Industry and client-specific discovery</p>
+<p className="text-xs mt-3 text-red-600 dark:text-red-500">Does this help THIS vertical/client? What works for fasteners may not work for cabinet hardware.</p>
+</div>
+</div>
+
+### Why This Structure?
+
+<div className="space-y-4 my-6">
+<div className="flex gap-4 items-start p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+<div className="text-2xl font-bold text-green-600">1</div>
+<div>
+<h4 className="font-bold">Tooling First</h4>
+<p className="text-sm text-neutral-600 dark:text-neutral-400">Build the framework that supports any strategy before committing to one. Essential work enables flexibility — you can switch approaches without rebuilding foundations.</p>
+</div>
+</div>
+<div className="flex gap-4 items-start p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+<div className="text-2xl font-bold text-yellow-600">2</div>
+<div>
+<h4 className="font-bold">Spikes Before Features</h4>
+<p className="text-sm text-neutral-600 dark:text-neutral-400">Understand technologies before building features that depend on them. A platform spike on embeddings informs every feature that uses semantic search.</p>
+</div>
+</div>
+<div className="flex gap-4 items-start p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg">
+<div className="text-2xl font-bold text-red-600">3</div>
+<div>
+<h4 className="font-bold">Context Matters</h4>
+<p className="text-sm text-neutral-600 dark:text-neutral-400">Only after essential tooling and platform understanding do we invest in context-specific work. Industry knowledge becomes valuable IP, but only when we've earned the right to specialize.</p>
+</div>
+</div>
+</div>
+
+### Mapping to Priority Dimension
+
+The three story levels map directly to the **Priority** dimension in our 3D model:
+
+| Story Level | Priority | Focus | Investment Logic |
+|-------------|----------|-------|------------------|
+| **Essential (Tooling)** | Essential | Make it work, keep options open | Must build — feature doesn't function without it |
+| **Enhanced (Platform Spikes)** | Enhanced | Learn deeply, build reusable knowledge | Should build — multiplies value across clients |
+| **Specialized (Context Spikes)** | Specialized | Client/industry-specific discovery | Might build — only if validated for this context |
+
+<Callout type="info">
+**Key Insight:** Essential isn't about "simple" — it's about building the **switchable, configurable foundation** first. A well-built Essential layer lets you pivot strategies without rebuilding everything.
+</Callout>
+
+### Example: Semantic Search Through Story Levels
+
+<div className="overflow-x-auto my-6">
+| Task | Story Level | Why |
+|------|-------------|-----|
+| Embedding service with configurable models | **Essential (Tooling)** | Strategy-agnostic — can switch between OpenAI, CLIP, Cohere |
+| Query pipeline with A/B capability | **Essential (Tooling)** | Enables testing any approach without code changes |
+| Embedding model comparison spike | **Enhanced (Platform Spike)** | Learn once — "CLIP vs. OpenAI for product search" becomes platform knowledge |
+| Synonym extraction patterns | **Enhanced (Platform Spike)** | Technique applies to many clients once understood |
+| Fastener-specific fine-tuning | **Specialized (Context Spike)** | Only valuable for industrial distribution clients |
+| Cabinet hardware taxonomy mapping | **Specialized (Context Spike)** | Only valuable for this specific vertical |
+</div>
+
+### The Practical Test
+
+When classifying a task, ask:
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+<div className="p-4 rounded-lg border-2 border-green-300 dark:border-green-700 text-center">
+<div className="text-green-600 font-bold mb-2">Essential?</div>
+<p className="text-xs">"Does this enable multiple strategies without rebuilding?"</p>
+</div>
+<div className="p-4 rounded-lg border-2 border-yellow-300 dark:border-yellow-700 text-center">
+<div className="text-yellow-600 font-bold mb-2">Enhanced?</div>
+<p className="text-xs">"Will understanding this help future clients too?"</p>
+</div>
+<div className="p-4 rounded-lg border-2 border-red-300 dark:border-red-700 text-center">
+<div className="text-red-600 font-bold mb-2">Specialized?</div>
+<p className="text-xs">"Is this specific to this client's industry or context?"</p>
+</div>
+</div>
+
+</Tabs.Tab>
 
 <Tabs.Tab>
 ## The 3 Dimensions

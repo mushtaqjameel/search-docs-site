@@ -1,13 +1,49 @@
 import { Tabs } from 'nextra/components'
 import SearchScopeGenerator from '../components/SearchScopeGenerator'
 import DecisionQuadrants from '../components/DecisionQuadrants'
+import TaskClassifier from '../components/TaskClassifier'
+import StoryLevelAssessor from '../components/StoryLevelAssessor'
 
 # Interactive Tools
-Scope generator and strategic decision frameworks for search implementations.
+Scope generator, estimation tools, and strategic decision frameworks for search implementations.
 
-<Tabs items={['Scope Generator', 'Decision Quadrants']}>
+<Tabs items={['Scope Generator', 'Task Classifier', 'Story Level', 'Decision Quadrants']}>
   <Tabs.Tab>
     <SearchScopeGenerator />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## Task Classifier
+
+    Classify any task into the 3D estimation cube (Layer × Scope × Priority) to determine investment level, billing model, and reusability.
+
+    <TaskClassifier />
+
+    ### How to Use
+
+    1. **Enter a task description** — be specific about what you're building
+    2. **Select the Layer** — is this Platform (backend) or Integration (frontend) work?
+    3. **Select the Scope** — who can reuse this? Universal, Industry-specific, or Client-specific?
+    4. **Select the Priority** — Essential (must have), Enhanced (improves quality), or Specialized (research/POC)?
+    5. **Review results** — see investment justification, billing model, and recommendations
+
+    This tool implements the [Estimation Framework](/estimation) dimensions.
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ## Story Level Assessor
+
+    Determine if a task belongs to Essential (Tooling), Enhanced (Platform Spikes), or Specialized (Context Spikes) through guided questions.
+
+    <StoryLevelAssessor />
+
+    ### The Three Story Levels
+
+    | Level | Name | Focus |
+    |-------|------|-------|
+    | **1** | Essential (Tooling) | Strategy-agnostic infrastructure that enables flexibility |
+    | **2** | Enhanced (Platform Spikes) | Technology understanding that transfers to future clients |
+    | **3** | Specialized (Context Spikes) | Industry or client-specific discovery and customization |
+
+    Learn more about the philosophy in the [Estimation Framework](/estimation) → Story Levels tab.
   </Tabs.Tab>
   <Tabs.Tab>
     ## Decision Quadrants
