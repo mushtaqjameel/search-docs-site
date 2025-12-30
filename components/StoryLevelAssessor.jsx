@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Lightbulb, CheckCircle, ArrowRight, ArrowLeft, RotateCcw, Wrench, Zap, Microscope, AlertTriangle, Target, HelpCircle } from 'lucide-react'
+import { Lightbulb, CheckCircle, ArrowRight, ArrowLeft, RotateCcw, Wrench, Zap, Microscope, AlertTriangle, Target, HelpCircle, Copy, Check } from 'lucide-react'
 
 const QUESTIONS = [
     {
@@ -139,13 +139,20 @@ function determineLevel(answers) {
         }
     })
 
+    const total = scores.essential + scores.enhanced + scores.specialized
+
+    // Handle edge case where all scores are 0
+    if (total === 0) {
+        return { level: 'essential', scores, confidence: 0 }
+    }
+
     // Determine winner
     if (scores.essential >= scores.enhanced && scores.essential >= scores.specialized) {
-        return { level: 'essential', scores, confidence: scores.essential / (scores.essential + scores.enhanced + scores.specialized) }
+        return { level: 'essential', scores, confidence: scores.essential / total }
     } else if (scores.enhanced >= scores.essential && scores.enhanced >= scores.specialized) {
-        return { level: 'enhanced', scores, confidence: scores.enhanced / (scores.essential + scores.enhanced + scores.specialized) }
+        return { level: 'enhanced', scores, confidence: scores.enhanced / total }
     } else {
-        return { level: 'specialized', scores, confidence: scores.specialized / (scores.essential + scores.enhanced + scores.specialized) }
+        return { level: 'specialized', scores, confidence: scores.specialized / total }
     }
 }
 
@@ -182,6 +189,7 @@ export default function StoryLevelAssessor() {
     const [currentQuestion, setCurrentQuestion] = useState(-1) // -1 = task name entry
     const [answers, setAnswers] = useState({})
     const [showResults, setShowResults] = useState(false)
+    const [copied, setCopied] = useState(false)
 
     const reset = () => {
         setTaskName('')
@@ -217,6 +225,32 @@ export default function StoryLevelAssessor() {
 
     const result = showResults ? determineLevel(answers) : null
     const levelInfo = result ? STORY_LEVELS[result.level] : null
+
+    const copyResults = () => {
+        if (!result || !levelInfo) return
+        const text = `## Story Level Assessment: ${taskName}
+
+**Level:** ${levelInfo.label}
+**Confidence:** ${Math.round(result.confidence * 100)}%
+
+### Scores
+- Essential: ${result.scores.essential}
+- Enhanced: ${result.scores.enhanced}
+- Specialized: ${result.scores.specialized}
+
+### Description
+${levelInfo.description}
+
+### Focus
+${levelInfo.focus}
+
+### Guidance
+${levelInfo.guidance.map(g => `- ${g}`).join('\n')}
+`
+        navigator.clipboard.writeText(text)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+    }
 
     const colorClasses = {
         green: {
@@ -303,10 +337,21 @@ export default function StoryLevelAssessor() {
                 {/* Results */}
                 {showResults && levelInfo && (
                     <div className="space-y-6">
-                        {/* Task Summary */}
+                        {/* Task Summary with Copy Button */}
                         <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800">
-                            <div className="text-sm text-indigo-600 dark:text-indigo-400 font-medium mb-1">Task</div>
-                            <div className="font-bold text-lg">{taskName}</div>
+                            <div className="flex items-start justify-between">
+                                <div>
+                                    <div className="text-sm text-indigo-600 dark:text-indigo-400 font-medium mb-1">Task</div>
+                                    <div className="font-bold text-lg">{taskName}</div>
+                                </div>
+                                <button
+                                    onClick={copyResults}
+                                    className="p-2 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 rounded-lg transition-colors"
+                                    title="Copy results"
+                                >
+                                    {copied ? <Check size={18} /> : <Copy size={18} />}
+                                </button>
+                            </div>
                         </div>
 
                         {/* Level Result */}

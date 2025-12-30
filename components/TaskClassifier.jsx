@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Layers, Users, Clock, Box, ArrowRight, ArrowLeft, CheckCircle, RotateCcw, Lightbulb, DollarSign, Target } from 'lucide-react'
+import { Layers, Box, ArrowRight, ArrowLeft, RotateCcw, Lightbulb, DollarSign, Target, Users, Copy, Check } from 'lucide-react'
 
 const LAYERS = [
     {
@@ -152,36 +152,45 @@ function getResults(layer, scope, priority) {
 
 function OptionCard({ option, active, onClick, showDetails = true }) {
     const colorClasses = {
-        purple: 'border-purple-300 bg-purple-50 dark:bg-purple-900/20',
-        cyan: 'border-cyan-300 bg-cyan-50 dark:bg-cyan-900/20',
-        green: 'border-green-300 bg-green-50 dark:bg-green-900/20',
-        yellow: 'border-yellow-300 bg-yellow-50 dark:bg-yellow-900/20',
-        red: 'border-red-300 bg-red-50 dark:bg-red-900/20'
+        purple: {
+            active: 'border-purple-500 bg-purple-50 dark:bg-purple-900/20',
+            text: 'text-purple-800 dark:text-purple-300'
+        },
+        cyan: {
+            active: 'border-cyan-500 bg-cyan-50 dark:bg-cyan-900/20',
+            text: 'text-cyan-800 dark:text-cyan-300'
+        },
+        green: {
+            active: 'border-green-500 bg-green-50 dark:bg-green-900/20',
+            text: 'text-green-800 dark:text-green-300'
+        },
+        yellow: {
+            active: 'border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20',
+            text: 'text-yellow-800 dark:text-yellow-300'
+        },
+        red: {
+            active: 'border-red-500 bg-red-50 dark:bg-red-900/20',
+            text: 'text-red-800 dark:text-red-300'
+        }
     }
 
-    const textClasses = {
-        purple: 'text-purple-800 dark:text-purple-300',
-        cyan: 'text-cyan-800 dark:text-cyan-300',
-        green: 'text-green-800 dark:text-green-300',
-        yellow: 'text-yellow-800 dark:text-yellow-300',
-        red: 'text-red-800 dark:text-red-300'
-    }
+    const colors = colorClasses[option.color]
 
     return (
         <button
             onClick={onClick}
             className={`p-5 text-left border-2 rounded-xl transition-all w-full ${
                 active
-                    ? `${colorClasses[option.color]} border-${option.color}-500`
+                    ? colors.active
                     : 'border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 bg-white dark:bg-neutral-800'
             }`}
         >
-            <div className={`font-bold text-lg mb-1 flex items-center gap-2 ${active ? textClasses[option.color] : ''}`}>
+            <div className={`font-bold text-lg mb-1 flex items-center gap-2 ${active ? colors.text : ''}`}>
                 {option.icon && <span className="shrink-0">{option.icon}</span>}
                 {option.label}
             </div>
             {option.storyLevel && (
-                <div className={`text-xs font-bold uppercase mb-2 ${active ? textClasses[option.color] : 'opacity-60'}`}>
+                <div className={`text-xs font-bold uppercase mb-2 ${active ? colors.text : 'opacity-60'}`}>
                     {option.storyLevel}
                 </div>
             )}
@@ -222,6 +231,8 @@ export default function TaskClassifier() {
 
     const results = layer && scope && priority ? getResults(layer, scope, priority) : null
 
+    const [copied, setCopied] = useState(false)
+
     const stepTitles = [
         'What task are you classifying?',
         'Layer: What TYPE of work is this?',
@@ -231,9 +242,34 @@ export default function TaskClassifier() {
     ]
 
     const riskColors = {
-        low: 'bg-green-100 text-green-800 border-green-300',
-        medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-        high: 'bg-red-100 text-red-800 border-red-300'
+        low: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-300 dark:border-green-700',
+        medium: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border-yellow-300 dark:border-yellow-700',
+        high: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border-red-300 dark:border-red-700'
+    }
+
+    const copyResults = () => {
+        if (!results) return
+        const text = `## Task Classification: ${taskName}
+
+**Layer:** ${layer}
+**Scope:** ${scope}
+**Priority:** ${priority}
+
+### Investment Level
+${results.investment}
+
+### Billing Model
+${results.billing}
+
+### Reusability
+${results.reusability}
+
+### Recommendation
+${results.recommendation}
+`
+        navigator.clipboard.writeText(text)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
     }
 
     return (
@@ -332,22 +368,33 @@ export default function TaskClassifier() {
                 {/* Step 4: Results */}
                 {step === 4 && results && (
                     <div className="space-y-6">
-                        {/* Task Summary */}
+                        {/* Task Summary with Copy Button */}
                         <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-200 dark:border-indigo-800">
-                            <div className="text-sm text-indigo-600 dark:text-indigo-400 font-medium mb-1">Task</div>
-                            <div className="font-bold text-lg">{taskName || 'Untitled Task'}</div>
+                            <div className="flex items-start justify-between">
+                                <div>
+                                    <div className="text-sm text-indigo-600 dark:text-indigo-400 font-medium mb-1">Task</div>
+                                    <div className="font-bold text-lg">{taskName || 'Untitled Task'}</div>
+                                </div>
+                                <button
+                                    onClick={copyResults}
+                                    className="p-2 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 rounded-lg transition-colors"
+                                    title="Copy results"
+                                >
+                                    {copied ? <Check size={18} /> : <Copy size={18} />}
+                                </button>
+                            </div>
                         </div>
 
                         {/* Cube Cell */}
                         <div className="grid grid-cols-3 gap-3">
-                            <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 text-center">
+                            <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-700 text-center">
                                 <div className="text-xs uppercase font-bold text-purple-600 mb-1">Layer</div>
                                 <div className="font-bold text-purple-800 dark:text-purple-300 capitalize">{layer}</div>
                             </div>
                             <div className={`p-3 rounded-lg border text-center ${
-                                scope === 'universal' ? 'bg-green-50 dark:bg-green-900/20 border-green-200' :
-                                scope === 'industry' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200' :
-                                'bg-red-50 dark:bg-red-900/20 border-red-200'
+                                scope === 'universal' ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700' :
+                                scope === 'industry' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-700' :
+                                'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700'
                             }`}>
                                 <div className={`text-xs uppercase font-bold mb-1 ${
                                     scope === 'universal' ? 'text-green-600' :
@@ -361,9 +408,9 @@ export default function TaskClassifier() {
                                 }`}>{scope}</div>
                             </div>
                             <div className={`p-3 rounded-lg border text-center ${
-                                priority === 'essential' ? 'bg-green-50 dark:bg-green-900/20 border-green-200' :
-                                priority === 'enhanced' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200' :
-                                'bg-red-50 dark:bg-red-900/20 border-red-200'
+                                priority === 'essential' ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700' :
+                                priority === 'enhanced' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-700' :
+                                'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700'
                             }`}>
                                 <div className={`text-xs uppercase font-bold mb-1 ${
                                     priority === 'essential' ? 'text-green-600' :
