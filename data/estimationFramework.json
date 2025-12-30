@@ -1,0 +1,290 @@
+{
+  "storyLevels": {
+    "essential": {
+      "id": "essential",
+      "label": "Essential (Tooling)",
+      "level": "Level 1",
+      "color": "green",
+      "icon": "Wrench",
+      "description": "Build strategy-agnostic tooling that makes all options configurable.",
+      "focus": "Configure → Deploy → Evaluate → Monitor → Switch",
+      "guidance": [
+        "This is foundational work. Build it well, document it thoroughly.",
+        "Focus on flexibility — support multiple strategies without rebuilding.",
+        "This enables everything else. Don't cut corners here.",
+        "Other teams and clients will depend on this being solid."
+      ],
+      "examples": [
+        "Embedding service with configurable models",
+        "Query pipeline with A/B capability",
+        "Search API with feature flags",
+        "Monitoring and metrics infrastructure"
+      ],
+      "investmentLogic": "Must build — feature doesn't function without it"
+    },
+    "enhanced": {
+      "id": "enhanced",
+      "label": "Enhanced (Platform Spikes)",
+      "level": "Level 2",
+      "color": "yellow",
+      "icon": "Zap",
+      "description": "Understand technologies, build platform knowledge. Learn once, advise all clients.",
+      "focus": "Research → Document → Abstract → Share",
+      "guidance": [
+        "This builds platform intelligence. Time-box it, document findings.",
+        "The goal is understanding that transfers to future work.",
+        "Create artifacts: comparison docs, decision matrices, best practices.",
+        "Even if we don't ship a feature, the learning is valuable."
+      ],
+      "examples": [
+        "Embedding model comparison spike",
+        "Synonym extraction patterns research",
+        "Performance benchmarking across approaches",
+        "Integration pattern documentation"
+      ],
+      "investmentLogic": "Should build — multiplies value across clients"
+    },
+    "specialized": {
+      "id": "specialized",
+      "label": "Specialized (Context Spikes)",
+      "level": "Level 3",
+      "color": "red",
+      "icon": "Microscope",
+      "description": "Industry and client-specific discovery. What works for fasteners may not work for cabinet hardware.",
+      "focus": "Validate → Scope → Build (if validated) → Document edge cases",
+      "guidance": [
+        "Validate before committing. Run a POC.",
+        "This is the riskiest category — highest chance of waste.",
+        "Get explicit sign-off before significant investment.",
+        "If it works, document heavily — it becomes industry IP."
+      ],
+      "examples": [
+        "Fastener-specific fine-tuning",
+        "Industry taxonomy mapping",
+        "Client-specific workflow integration",
+        "Domain-specific ML model training"
+      ],
+      "investmentLogic": "Might build — only if validated for this context"
+    }
+  },
+  "dimensions": {
+    "layer": {
+      "id": "layer",
+      "label": "Layer",
+      "question": "What TYPE of work is this?",
+      "options": [
+        {
+          "value": "platform",
+          "label": "Platform",
+          "color": "purple",
+          "description": "Backend services, APIs, models, pipelines, data processing",
+          "examples": "Embedding service, ES index, search API, product pipeline"
+        },
+        {
+          "value": "integration",
+          "label": "Integration",
+          "color": "cyan",
+          "description": "Frontend components, UI wiring, client-facing touchpoints",
+          "examples": "Upload UI, results display, camera capture, filters"
+        }
+      ]
+    },
+    "scope": {
+      "id": "scope",
+      "label": "Scope",
+      "question": "WHO can reuse this?",
+      "options": [
+        {
+          "value": "universal",
+          "label": "Universal",
+          "color": "green",
+          "description": "Works for any client in any industry",
+          "reusability": "Build once, use everywhere",
+          "examples": "CLIP embedding, ES KNN, basic similarity"
+        },
+        {
+          "value": "industry",
+          "label": "Industry-Specific",
+          "color": "yellow",
+          "description": "Works for any client in the SAME industry",
+          "reusability": "Build for first client, becomes platform IP",
+          "examples": "Thread pitch detection, fastener OCR, wood grain matching"
+        },
+        {
+          "value": "client",
+          "label": "Client-Specific",
+          "color": "red",
+          "description": "Only works for THIS client",
+          "reusability": "Billable per client",
+          "examples": "Config values, UI wiring, custom workflows"
+        }
+      ]
+    },
+    "priority": {
+      "id": "priority",
+      "label": "Priority",
+      "question": "WHEN do we build this?",
+      "options": [
+        {
+          "value": "essential",
+          "label": "Essential (Tooling)",
+          "storyLevel": "Level 1",
+          "color": "green",
+          "description": "Must exist for the feature to function at all",
+          "focus": "Configure → Deploy → Evaluate → Monitor → Switch",
+          "investment": "Must build — feature doesn't function without it"
+        },
+        {
+          "value": "enhanced",
+          "label": "Enhanced (Platform Spikes)",
+          "storyLevel": "Level 2",
+          "color": "yellow",
+          "description": "Improves quality, UX, operations, analytics",
+          "focus": "Understand technologies, build platform knowledge",
+          "investment": "Should build — multiplies value across clients"
+        },
+        {
+          "value": "specialized",
+          "label": "Specialized (Context Spikes)",
+          "storyLevel": "Level 3",
+          "color": "red",
+          "description": "Complex, requires POC/research, may not build",
+          "focus": "Industry and client-specific discovery",
+          "investment": "Might build — only if validated for this context"
+        }
+      ]
+    }
+  },
+  "investmentMatrix": {
+    "universal-essential": {
+      "investment": "HIGH",
+      "label": "Core infrastructure. This is foundational platform work.",
+      "billing": "Platform investment (not client-billable)",
+      "reusability": "Every client benefits. Build it right once."
+    },
+    "universal-enhanced": {
+      "investment": "MEDIUM-HIGH",
+      "label": "Improves platform quality for all clients.",
+      "billing": "Platform investment, prioritize by impact",
+      "reusability": "All clients benefit when activated."
+    },
+    "universal-specialized": {
+      "investment": "CONDITIONAL",
+      "label": "High potential value but requires POC validation.",
+      "billing": "Platform R&D, time-boxed POC",
+      "reusability": "If proven, becomes platform differentiator.",
+      "riskLevel": "medium"
+    },
+    "industry-essential": {
+      "investment": "HIGH",
+      "label": "Market differentiator for this vertical.",
+      "billing": "Shared: first client pays premium, future clients get discount",
+      "reusability": "Becomes platform IP for this industry."
+    },
+    "industry-enhanced": {
+      "investment": "MEDIUM",
+      "label": "Valuable addition for industry clients.",
+      "billing": "Partially billable to first client, platform for future",
+      "reusability": "Industry knowledge that transfers to similar clients."
+    },
+    "industry-specialized": {
+      "investment": "LOW-MEDIUM",
+      "label": "Only build with clear demand and validation.",
+      "billing": "POC funded by interested client",
+      "reusability": "Niche — may only help a few clients in vertical.",
+      "riskLevel": "high"
+    },
+    "client-essential": {
+      "investment": "CLIENT-FUNDED",
+      "label": "Required for this client's launch.",
+      "billing": "100% billable to client",
+      "reusability": "None — this is integration/config work."
+    },
+    "client-enhanced": {
+      "investment": "CLIENT-FUNDED",
+      "label": "Nice-to-have for this client.",
+      "billing": "Billable, scope carefully",
+      "reusability": "None — client-specific polish."
+    },
+    "client-specialized": {
+      "investment": "QUESTION IT",
+      "label": "Why are we building specialized work for one client?",
+      "billing": "Billable only if client insists and pays premium",
+      "reusability": "Zero — likely throwaway work.",
+      "riskLevel": "high"
+    }
+  },
+  "layerRecommendations": {
+    "platform": {
+      "universal": "Platform work with universal scope is the highest leverage. Invest in quality and documentation.",
+      "industry": "Platform work for an industry becomes IP. Ensure it's abstracted enough to reuse.",
+      "client": "Platform work for a single client is unusual. Consider if this should be integration instead."
+    },
+    "integration": {
+      "universal": "Reusable UI components are valuable. Build with configuration in mind.",
+      "industry": "Industry-specific UI can be templatized. Look for patterns.",
+      "client": "Client integration work. Keep scope tight, don't over-engineer."
+    }
+  },
+  "storyLevelQuestions": [
+    {
+      "id": "strategy_agnostic",
+      "question": "Can this work be used with multiple strategies or approaches?",
+      "description": "Does building this enable flexibility, or does it commit us to a specific path?",
+      "options": [
+        { "value": "yes", "label": "Yes — it's strategy-agnostic", "score": { "essential": 2, "enhanced": 0, "specialized": 0 } },
+        { "value": "partial", "label": "Partially — works for most approaches", "score": { "essential": 1, "enhanced": 1, "specialized": 0 } },
+        { "value": "no", "label": "No — it commits to a specific strategy", "score": { "essential": 0, "enhanced": 0, "specialized": 2 } }
+      ]
+    },
+    {
+      "id": "rebuild_required",
+      "question": "If we change our approach later, would we need to rebuild this?",
+      "description": "Think about pivoting to a different technology or vendor.",
+      "options": [
+        { "value": "no", "label": "No — it supports switching", "score": { "essential": 2, "enhanced": 0, "specialized": 0 } },
+        { "value": "minor", "label": "Minor changes needed", "score": { "essential": 1, "enhanced": 1, "specialized": 0 } },
+        { "value": "yes", "label": "Yes — significant rebuild required", "score": { "essential": 0, "enhanced": 1, "specialized": 1 } }
+      ]
+    },
+    {
+      "id": "future_clients",
+      "question": "Will understanding this help future clients?",
+      "description": "Is this learning transferable, or specific to this situation?",
+      "options": [
+        { "value": "all", "label": "Yes — all future clients benefit", "score": { "essential": 1, "enhanced": 2, "specialized": 0 } },
+        { "value": "industry", "label": "Same industry clients benefit", "score": { "essential": 0, "enhanced": 1, "specialized": 1 } },
+        { "value": "this_only", "label": "Only this client benefits", "score": { "essential": 0, "enhanced": 0, "specialized": 2 } }
+      ]
+    },
+    {
+      "id": "feature_dependency",
+      "question": "Does the feature work without this?",
+      "description": "Is this required for basic functionality, or an enhancement?",
+      "options": [
+        { "value": "no", "label": "No — feature doesn't work without it", "score": { "essential": 2, "enhanced": 0, "specialized": 0 } },
+        { "value": "limited", "label": "Limited functionality without it", "score": { "essential": 1, "enhanced": 1, "specialized": 0 } },
+        { "value": "yes", "label": "Yes — feature works, this improves it", "score": { "essential": 0, "enhanced": 1, "specialized": 1 } }
+      ]
+    },
+    {
+      "id": "poc_required",
+      "question": "Does this require a POC or research phase?",
+      "description": "Is the outcome predictable, or do we need to validate first?",
+      "options": [
+        { "value": "no", "label": "No — well-understood, predictable", "score": { "essential": 2, "enhanced": 0, "specialized": 0 } },
+        { "value": "some", "label": "Some unknowns, but manageable", "score": { "essential": 0, "enhanced": 2, "specialized": 0 } },
+        { "value": "yes", "label": "Yes — significant research needed", "score": { "essential": 0, "enhanced": 0, "specialized": 2 } }
+      ]
+    },
+    {
+      "id": "industry_specific",
+      "question": "Is this specific to an industry vertical?",
+      "description": "Does it require domain expertise or industry knowledge?",
+      "options": [
+        { "value": "no", "label": "No — works across industries", "score": { "essential": 1, "enhanced": 1, "specialized": 0 } },
+        { "value": "yes", "label": "Yes — requires industry expertise", "score": { "essential": 0, "enhanced": 0, "specialized": 2 } }
+      ]
+    }
+  ]
+}

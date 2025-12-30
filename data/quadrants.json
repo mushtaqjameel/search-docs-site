@@ -1,0 +1,156 @@
+{
+  "quadrants": {
+    "buildDecision": {
+      "id": "buildDecision",
+      "title": "Build Decision",
+      "question": "Should we build this feature?",
+      "xAxis": { "key": "data", "label": "Data Quality", "low": "Poor", "high": "Rich" },
+      "yAxis": { "key": "importance", "label": "Importance", "low": "Low", "high": "High" },
+      "results": {
+        "high-rich": { "position": "INVEST HEAVILY", "color": "green", "action": "Perfect conditions — invest fully for maximum impact" },
+        "high-poor": { "position": "FIX DATA FIRST", "color": "yellow", "action": "Feature matters but data is blocking — fix data first" },
+        "low-rich": { "position": "OPPORTUNISTIC", "color": "blue", "action": "Data supports it but not critical — quick win if budget allows" },
+        "low-poor": { "position": "SKIP", "color": "red", "action": "Not important and data won't support it — remove from scope" }
+      },
+      "mermaidLabels": {
+        "quadrant1": "INVEST HEAVILY",
+        "quadrant2": "FIX DATA FIRST",
+        "quadrant3": "SKIP",
+        "quadrant4": "OPPORTUNISTIC"
+      }
+    },
+    "prioritization": {
+      "id": "prioritization",
+      "title": "Prioritization",
+      "question": "When should we build this feature?",
+      "xAxis": { "key": "effort", "label": "Effort", "low": "Low", "high": "High" },
+      "yAxis": { "key": "value", "label": "Value", "low": "Low", "high": "High" },
+      "results": {
+        "high-low": { "position": "QUICK WINS", "color": "green", "action": "Maximum ROI — should be in every engagement" },
+        "high-high": { "position": "STRATEGIC", "color": "blue", "action": "Worth it but requires investment — phase if needed" },
+        "low-low": { "position": "FILL-INS", "color": "yellow", "action": "Nice to have — add to polish phase" },
+        "low-high": { "position": "AVOID", "color": "red", "action": "Poor ROI — only if client insists and pays" }
+      },
+      "mermaidLabels": {
+        "quadrant1": "STRATEGIC",
+        "quadrant2": "QUICK WINS",
+        "quadrant3": "FILL-INS",
+        "quadrant4": "AVOID"
+      }
+    },
+    "deliveryApproach": {
+      "id": "deliveryApproach",
+      "title": "Delivery Approach",
+      "question": "How should we build this feature?",
+      "xAxis": { "key": "data", "label": "Data Quality", "low": "Poor", "high": "Rich" },
+      "yAxis": { "key": "capacity", "label": "Capacity", "low": "Low", "high": "High" },
+      "results": {
+        "high-rich": { "position": "EMPOWER", "color": "green", "action": "Give them tools — they tune it themselves" },
+        "low-rich": { "position": "AUTOMATE", "color": "blue", "action": "Build full self-service — they can't help manually" },
+        "high-poor": { "position": "ITERATE", "color": "yellow", "action": "Ship fast, they fill gaps — upgrade when data improves" },
+        "low-poor": { "position": "DANGER ZONE", "color": "red", "action": "Nothing works here — fix data first or consider Managed Service" }
+      },
+      "mermaidLabels": {
+        "quadrant1": "EMPOWER",
+        "quadrant2": "ITERATE",
+        "quadrant3": "DANGER ZONE",
+        "quadrant4": "AUTOMATE"
+      }
+    },
+    "supportModel": {
+      "id": "supportModel",
+      "title": "Support Model",
+      "question": "How should we support this feature?",
+      "xAxis": { "key": "capacity", "label": "Capacity", "low": "Low", "high": "High" },
+      "yAxis": { "key": "risk", "label": "Risk", "low": "Low", "high": "High" },
+      "results": {
+        "high-high": { "position": "GUIDED", "color": "blue", "action": "Tier 3 — Monthly check-ins, consultation hours" },
+        "high-low": { "position": "MANAGED", "color": "red", "action": "Tier 4 — We manage for them, retainer model" },
+        "low-high": { "position": "HANDS-OFF", "color": "green", "action": "Tier 1 — Standard support, they own it" },
+        "low-low": { "position": "SELF-SERVE", "color": "yellow", "action": "Tier 2 — Strong docs, guardrails, quarterly reviews" }
+      },
+      "mermaidLabels": {
+        "quadrant1": "GUIDED",
+        "quadrant2": "MANAGED",
+        "quadrant3": "SELF-SERVE",
+        "quadrant4": "HANDS-OFF"
+      }
+    }
+  },
+  "supportTiers": [
+    {
+      "position": "MANAGED",
+      "tier": 4,
+      "tierName": "Tier 4",
+      "color": "red",
+      "condition": "High Risk + Low Capacity",
+      "meaning": "They can't operate safely",
+      "action": "We manage for them, retainer model"
+    },
+    {
+      "position": "GUIDED",
+      "tier": 3,
+      "tierName": "Tier 3",
+      "color": "blue",
+      "condition": "High Risk + High Capacity",
+      "meaning": "Risky but they're capable",
+      "action": "Monthly check-ins, consultation hours"
+    },
+    {
+      "position": "SELF-SERVE",
+      "tier": 2,
+      "tierName": "Tier 2",
+      "color": "yellow",
+      "condition": "Low Risk + Low Capacity",
+      "meaning": "Safe but they need help",
+      "action": "Strong docs, guardrails, quarterly reviews"
+    },
+    {
+      "position": "HANDS-OFF",
+      "tier": 1,
+      "tierName": "Tier 1",
+      "color": "green",
+      "condition": "Low Risk + High Capacity",
+      "meaning": "Safe and capable",
+      "action": "Standard support, they own it"
+    }
+  ],
+  "sequence": ["buildDecision", "prioritization", "deliveryApproach", "supportModel"],
+  "sequenceDescriptions": {
+    "buildDecision": "Should we build it?",
+    "prioritization": "Build it when?",
+    "deliveryApproach": "How to build it?",
+    "supportModel": "How to support it?"
+  },
+  "exampleWalkthrough": {
+    "title": "Semantic Search",
+    "context": "Client with sparse product data and no dedicated search team wants Semantic Search.",
+    "steps": [
+      {
+        "quadrant": "buildDecision",
+        "inputs": { "importance": "high", "data": "poor" },
+        "result": "FIX DATA FIRST",
+        "note": "need AI Enrichment"
+      },
+      {
+        "quadrant": "prioritization",
+        "inputs": { "value": "high", "effort": "high" },
+        "result": "STRATEGIC",
+        "note": "plan carefully"
+      },
+      {
+        "quadrant": "deliveryApproach",
+        "inputs": { "capacity": "low", "data": "rich" },
+        "result": "AUTOMATE",
+        "note": "invest in self-service (after enrichment)"
+      },
+      {
+        "quadrant": "supportModel",
+        "inputs": { "risk": "low", "capacity": "low" },
+        "result": "SELF-SERVE",
+        "note": "Tier 2 support"
+      }
+    ],
+    "conclusion": "Invest in AI Enrichment first. Then build Polished Semantic Search with strong self-service UX. Include Tier 2 support (quarterly reviews)."
+  }
+}

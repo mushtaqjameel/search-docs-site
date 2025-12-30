@@ -1,59 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { Compass, ArrowRight, ArrowLeft, RotateCcw, Copy, Check, AlertTriangle, CheckCircle, XCircle, Clock, Zap } from 'lucide-react'
+import { Compass, AlertTriangle, CheckCircle, XCircle, Clock, Zap } from 'lucide-react'
+import { semanticColors } from '../constants/colors'
+import { useCopyToClipboard } from '../hooks'
+import { WizardHeader, WizardProgress, WizardStepLabels, WizardNav, WizardResultHeader } from './shared/WizardShell'
+import quadrantsData from '../data/quadrants.json'
 
-// Quadrant definitions
-const QUADRANTS = {
-    buildDecision: {
-        title: 'Build Decision',
-        question: 'Should we build this feature?',
-        xAxis: { label: 'Data Quality', low: 'Poor', high: 'Rich' },
-        yAxis: { label: 'Importance', low: 'Low', high: 'High' },
-        results: {
-            'high-rich': { position: 'INVEST HEAVILY', color: 'green', action: 'Perfect conditions — invest fully for maximum impact' },
-            'high-poor': { position: 'FIX DATA FIRST', color: 'yellow', action: 'Feature matters but data is blocking — fix data first' },
-            'low-rich': { position: 'OPPORTUNISTIC', color: 'blue', action: 'Data supports it but not critical — quick win if budget allows' },
-            'low-poor': { position: 'SKIP', color: 'red', action: 'Not important and data won\'t support it — remove from scope' }
-        }
-    },
-    prioritization: {
-        title: 'Prioritization',
-        question: 'When should we build this feature?',
-        xAxis: { label: 'Effort', low: 'Low', high: 'High' },
-        yAxis: { label: 'Value', low: 'Low', high: 'High' },
-        results: {
-            'high-low': { position: 'QUICK WINS', color: 'green', action: 'Maximum ROI — should be in every engagement' },
-            'high-high': { position: 'STRATEGIC', color: 'blue', action: 'Worth it but requires investment — phase if needed' },
-            'low-low': { position: 'FILL-INS', color: 'yellow', action: 'Nice to have — add to polish phase' },
-            'low-high': { position: 'AVOID', color: 'red', action: 'Poor ROI — only if client insists and pays' }
-        }
-    },
-    deliveryApproach: {
-        title: 'Delivery Approach',
-        question: 'How should we build this feature?',
-        xAxis: { label: 'Data Quality', low: 'Poor', high: 'Rich' },
-        yAxis: { label: 'Capacity', low: 'Low', high: 'High' },
-        results: {
-            'high-rich': { position: 'EMPOWER', color: 'green', action: 'Give them tools — they tune it themselves' },
-            'low-rich': { position: 'AUTOMATE', color: 'blue', action: 'Build full self-service — they can\'t help manually' },
-            'high-poor': { position: 'ITERATE', color: 'yellow', action: 'Ship fast, they fill gaps — upgrade when data improves' },
-            'low-poor': { position: 'DANGER ZONE', color: 'red', action: 'Nothing works here — fix data first or consider Managed Service' }
-        }
-    },
-    supportModel: {
-        title: 'Support Model',
-        question: 'How should we support this feature?',
-        xAxis: { label: 'Capacity', low: 'Low', high: 'High' },
-        yAxis: { label: 'Risk', low: 'Low', high: 'High' },
-        results: {
-            'high-high': { position: 'GUIDED', color: 'blue', action: 'Tier 3 — Monthly check-ins, consultation hours' },
-            'high-low': { position: 'MANAGED', color: 'red', action: 'Tier 4 — We manage for them, retainer model' },
-            'low-high': { position: 'HANDS-OFF', color: 'green', action: 'Tier 1 — Standard support, they own it' },
-            'low-low': { position: 'SELF-SERVE', color: 'yellow', action: 'Tier 2 — Strong docs, guardrails, quarterly reviews' }
-        }
-    }
-}
+// Get quadrant definitions from centralized data
+const { quadrants: QUADRANTS } = quadrantsData
 
 const STEPS = [
     { id: 'feature', title: 'Feature' },
@@ -64,20 +19,20 @@ const STEPS = [
     { id: 'results', title: 'Results' }
 ]
 
-function RatingButton({ label, value, selected, onClick, color = 'indigo' }) {
-    const colorClasses = {
-        indigo: selected ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300' : '',
-        green: selected ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' : '',
-        yellow: selected ? 'border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300' : '',
-        red: selected ? 'border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300' : ''
-    }
+const RESULT_ICONS = {
+    green: <CheckCircle size={20} />,
+    yellow: <Clock size={20} />,
+    blue: <Zap size={20} />,
+    red: <AlertTriangle size={20} />
+}
 
+function RatingButton({ label, value, selected, onClick }) {
     return (
         <button
             onClick={() => onClick(value)}
             className={`flex-1 p-4 border-2 rounded-lg font-medium transition-all ${
                 selected
-                    ? colorClasses[color]
+                    ? `${semanticColors.indigo.borderActive} ${semanticColors.indigo.bg} ${semanticColors.indigo.text}`
                     : 'border-neutral-200 dark:border-neutral-700 hover:border-neutral-400'
             }`}
         >
@@ -86,31 +41,20 @@ function RatingButton({ label, value, selected, onClick, color = 'indigo' }) {
     )
 }
 
-function QuadrantResult({ quadrant, xValue, yValue }) {
-    const q = QUADRANTS[quadrant]
+function QuadrantResult({ quadrantId, xValue, yValue }) {
+    const q = QUADRANTS[quadrantId]
+    if (!q) return null
+
     const key = `${yValue}-${xValue}`
     const result = q.results[key]
-
     if (!result) return null
 
-    const colorClasses = {
-        green: 'bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700 text-green-800 dark:text-green-300',
-        yellow: 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-300 dark:border-yellow-700 text-yellow-800 dark:text-yellow-300',
-        blue: 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-700 text-blue-800 dark:text-blue-300',
-        red: 'bg-red-50 dark:bg-red-900/20 border-red-300 dark:border-red-700 text-red-800 dark:text-red-300'
-    }
-
-    const icons = {
-        green: <CheckCircle size={20} />,
-        yellow: <Clock size={20} />,
-        blue: <Zap size={20} />,
-        red: <AlertTriangle size={20} />
-    }
+    const colors = semanticColors[result.color] || semanticColors.neutral
 
     return (
-        <div className={`p-4 rounded-lg border-2 ${colorClasses[result.color]}`}>
+        <div className={`p-4 rounded-lg border-2 ${colors.bg} ${colors.border} ${colors.text}`}>
             <div className="flex items-center gap-2 mb-2">
-                {icons[result.color]}
+                {RESULT_ICONS[result.color]}
                 <span className="font-bold">{q.title}</span>
             </div>
             <div className="text-lg font-bold mb-1">{result.position}</div>
@@ -131,7 +75,7 @@ export default function FeatureDecisionNavigator() {
     const [value, setValue] = useState(null)
     const [capacity, setCapacity] = useState(null)
     const [risk, setRisk] = useState(null)
-    const [copied, setCopied] = useState(false)
+    const { copied, copy } = useCopyToClipboard()
 
     const reset = () => {
         setStep(0)
@@ -155,22 +99,12 @@ export default function FeatureDecisionNavigator() {
         }
     }
 
-    const getResults = () => {
-        return {
-            buildDecision: { x: dataQuality, y: importance },
-            prioritization: { x: effort, y: value },
-            deliveryApproach: { x: dataQuality, y: capacity },
-            supportModel: { x: capacity, y: risk }
-        }
-    }
-
     const getSynthesis = () => {
-        const results = getResults()
         const warnings = []
         const recommendations = []
 
         // Analyze build decision
-        const buildKey = `${results.buildDecision.y}-${results.buildDecision.x}`
+        const buildKey = `${importance}-${dataQuality}`
         if (buildKey === 'low-poor') {
             warnings.push('This feature should likely be removed from scope')
         } else if (buildKey === 'high-poor') {
@@ -178,7 +112,7 @@ export default function FeatureDecisionNavigator() {
         }
 
         // Analyze prioritization
-        const prioKey = `${results.prioritization.y}-${results.prioritization.x}`
+        const prioKey = `${value}-${effort}`
         if (prioKey === 'high-low') {
             recommendations.push('This is a quick win — prioritize early')
         } else if (prioKey === 'low-high') {
@@ -186,7 +120,7 @@ export default function FeatureDecisionNavigator() {
         }
 
         // Analyze delivery
-        const deliveryKey = `${results.deliveryApproach.y}-${results.deliveryApproach.x}`
+        const deliveryKey = `${capacity}-${dataQuality}`
         if (deliveryKey === 'low-poor') {
             warnings.push('Danger zone — both data and capacity are low')
         } else if (deliveryKey === 'low-rich') {
@@ -194,7 +128,7 @@ export default function FeatureDecisionNavigator() {
         }
 
         // Analyze support
-        const supportKey = `${results.supportModel.y}-${results.supportModel.x}`
+        const supportKey = `${risk}-${capacity}`
         if (supportKey === 'high-low') {
             recommendations.push('Budget for Managed Service (Tier 4)')
         }
@@ -203,13 +137,16 @@ export default function FeatureDecisionNavigator() {
     }
 
     const copyResults = () => {
-        const results = getResults()
-        const synthesis = getSynthesis()
+        const getResult = (quadrantId, x, y) => {
+            const key = `${y}-${x}`
+            return QUADRANTS[quadrantId]?.results?.[key]
+        }
 
-        const buildResult = QUADRANTS.buildDecision.results[`${results.buildDecision.y}-${results.buildDecision.x}`]
-        const prioResult = QUADRANTS.prioritization.results[`${results.prioritization.y}-${results.prioritization.x}`]
-        const deliveryResult = QUADRANTS.deliveryApproach.results[`${results.deliveryApproach.y}-${results.deliveryApproach.x}`]
-        const supportResult = QUADRANTS.supportModel.results[`${results.supportModel.y}-${results.supportModel.x}`]
+        const buildResult = getResult('buildDecision', dataQuality, importance)
+        const prioResult = getResult('prioritization', effort, value)
+        const deliveryResult = getResult('deliveryApproach', dataQuality, capacity)
+        const supportResult = getResult('supportModel', capacity, risk)
+        const synthesis = getSynthesis()
 
         const text = `## Feature Decision: ${featureName}
 
@@ -217,10 +154,10 @@ export default function FeatureDecisionNavigator() {
 
 | Quadrant | Position | Action |
 |----------|----------|--------|
-| Build Decision | ${buildResult?.position} | ${buildResult?.action} |
-| Prioritization | ${prioResult?.position} | ${prioResult?.action} |
-| Delivery Approach | ${deliveryResult?.position} | ${deliveryResult?.action} |
-| Support Model | ${supportResult?.position} | ${supportResult?.action} |
+| Build Decision | ${buildResult?.position || 'N/A'} | ${buildResult?.action || 'N/A'} |
+| Prioritization | ${prioResult?.position || 'N/A'} | ${prioResult?.action || 'N/A'} |
+| Delivery Approach | ${deliveryResult?.position || 'N/A'} | ${deliveryResult?.action || 'N/A'} |
+| Support Model | ${supportResult?.position || 'N/A'} | ${supportResult?.action || 'N/A'} |
 
 ### Inputs
 - Importance: ${importance}
@@ -233,57 +170,23 @@ export default function FeatureDecisionNavigator() {
 ${synthesis.warnings.length > 0 ? `### Warnings\n${synthesis.warnings.map(w => `- ${w}`).join('\n')}\n` : ''}
 ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recommendations.map(r => `- ${r}`).join('\n')}` : ''}
 `
-        navigator.clipboard.writeText(text)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
+        copy(text)
     }
 
     return (
         <div className="border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden">
-            {/* Header */}
-            <div className="bg-neutral-100 dark:bg-neutral-800 p-4 border-b border-neutral-200 dark:border-neutral-700">
-                <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <Compass className="text-purple-600" size={24} />
-                        <h3 className="font-bold text-lg">Feature Decision Navigator</h3>
-                    </div>
-                    {step > 0 && (
-                        <button
-                            onClick={reset}
-                            className="text-sm text-neutral-500 hover:text-neutral-700 flex items-center gap-1"
-                        >
-                            <RotateCcw size={14} /> Start Over
-                        </button>
-                    )}
-                </div>
-                <p className="text-sm text-neutral-500 mt-1">Walk through all 4 strategic quadrants for a feature decision</p>
-            </div>
+            <WizardHeader
+                icon={Compass}
+                iconColor="text-purple-600"
+                title="Feature Decision Navigator"
+                subtitle="Walk through all 4 strategic quadrants for a feature decision"
+                onReset={reset}
+                showReset={step > 0}
+            />
 
-            {/* Progress */}
-            <div className="flex border-b border-neutral-200 dark:border-neutral-700">
-                {STEPS.map((s, i) => (
-                    <div
-                        key={s.id}
-                        className={`flex-1 h-1 ${i <= step ? 'bg-purple-500' : 'bg-neutral-200 dark:bg-neutral-700'}`}
-                    />
-                ))}
-            </div>
+            <WizardProgress currentStep={step} totalSteps={STEPS.length} color="bg-purple-500" />
+            <WizardStepLabels steps={STEPS} currentStep={step} color="text-purple-600 dark:text-purple-400" />
 
-            {/* Step Labels */}
-            <div className="flex border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50 overflow-x-auto">
-                {STEPS.map((s, i) => (
-                    <div
-                        key={s.id}
-                        className={`flex-1 min-w-[80px] px-2 py-2 text-center text-xs font-medium ${
-                            i === step ? 'text-purple-600 dark:text-purple-400' : 'text-neutral-400'
-                        }`}
-                    >
-                        {s.title}
-                    </div>
-                ))}
-            </div>
-
-            {/* Content */}
             <div className="p-6">
                 {/* Step 0: Feature Name */}
                 {step === 0 && (
@@ -306,8 +209,8 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                 {step === 1 && (
                     <div className="space-y-6">
                         <div>
-                            <h4 className="text-lg font-bold mb-1">Quadrant 1: Build Decision</h4>
-                            <p className="text-sm text-neutral-500 mb-4">Should we build "{featureName}"?</p>
+                            <h4 className="text-lg font-bold mb-1">Quadrant 1: {QUADRANTS.buildDecision.title}</h4>
+                            <p className="text-sm text-neutral-500 mb-4">{QUADRANTS.buildDecision.question}</p>
                         </div>
 
                         <div>
@@ -327,7 +230,7 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                         </div>
 
                         {importance && dataQuality && (
-                            <QuadrantResult quadrant="buildDecision" xValue={dataQuality} yValue={importance} />
+                            <QuadrantResult quadrantId="buildDecision" xValue={dataQuality} yValue={importance} />
                         )}
                     </div>
                 )}
@@ -336,8 +239,8 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                 {step === 2 && (
                     <div className="space-y-6">
                         <div>
-                            <h4 className="text-lg font-bold mb-1">Quadrant 2: Prioritization</h4>
-                            <p className="text-sm text-neutral-500 mb-4">When should we build "{featureName}"?</p>
+                            <h4 className="text-lg font-bold mb-1">Quadrant 2: {QUADRANTS.prioritization.title}</h4>
+                            <p className="text-sm text-neutral-500 mb-4">{QUADRANTS.prioritization.question}</p>
                         </div>
 
                         <div>
@@ -357,7 +260,7 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                         </div>
 
                         {effort && value && (
-                            <QuadrantResult quadrant="prioritization" xValue={effort} yValue={value} />
+                            <QuadrantResult quadrantId="prioritization" xValue={effort} yValue={value} />
                         )}
                     </div>
                 )}
@@ -366,8 +269,8 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                 {step === 3 && (
                     <div className="space-y-6">
                         <div>
-                            <h4 className="text-lg font-bold mb-1">Quadrant 3: Delivery Approach</h4>
-                            <p className="text-sm text-neutral-500 mb-4">How should we build "{featureName}"?</p>
+                            <h4 className="text-lg font-bold mb-1">Quadrant 3: {QUADRANTS.deliveryApproach.title}</h4>
+                            <p className="text-sm text-neutral-500 mb-4">{QUADRANTS.deliveryApproach.question}</p>
                         </div>
 
                         <div>
@@ -380,7 +283,7 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                         </div>
 
                         {capacity && dataQuality && (
-                            <QuadrantResult quadrant="deliveryApproach" xValue={dataQuality} yValue={capacity} />
+                            <QuadrantResult quadrantId="deliveryApproach" xValue={dataQuality} yValue={capacity} />
                         )}
                     </div>
                 )}
@@ -389,8 +292,8 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                 {step === 4 && (
                     <div className="space-y-6">
                         <div>
-                            <h4 className="text-lg font-bold mb-1">Quadrant 4: Support Model</h4>
-                            <p className="text-sm text-neutral-500 mb-4">How should we support "{featureName}"?</p>
+                            <h4 className="text-lg font-bold mb-1">Quadrant 4: {QUADRANTS.supportModel.title}</h4>
+                            <p className="text-sm text-neutral-500 mb-4">{QUADRANTS.supportModel.question}</p>
                         </div>
 
                         <div>
@@ -403,7 +306,7 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                         </div>
 
                         {risk && capacity && (
-                            <QuadrantResult quadrant="supportModel" xValue={capacity} yValue={risk} />
+                            <QuadrantResult quadrantId="supportModel" xValue={capacity} yValue={risk} />
                         )}
                     </div>
                 )}
@@ -411,25 +314,18 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                 {/* Step 5: Results */}
                 {step === 5 && (
                     <div className="space-y-6">
-                        <div className="flex items-start justify-between">
-                            <div>
-                                <h4 className="text-lg font-bold mb-1">Decision Summary</h4>
-                                <p className="text-sm text-neutral-500">Complete quadrant analysis for "{featureName}"</p>
-                            </div>
-                            <button
-                                onClick={copyResults}
-                                className="p-2 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/40 rounded-lg transition-colors"
-                                title="Copy results"
-                            >
-                                {copied ? <Check size={18} /> : <Copy size={18} />}
-                            </button>
-                        </div>
+                        <WizardResultHeader
+                            label="Feature"
+                            value={featureName}
+                            onCopy={copyResults}
+                            copied={copied}
+                        />
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <QuadrantResult quadrant="buildDecision" xValue={dataQuality} yValue={importance} />
-                            <QuadrantResult quadrant="prioritization" xValue={effort} yValue={value} />
-                            <QuadrantResult quadrant="deliveryApproach" xValue={dataQuality} yValue={capacity} />
-                            <QuadrantResult quadrant="supportModel" xValue={capacity} yValue={risk} />
+                            <QuadrantResult quadrantId="buildDecision" xValue={dataQuality} yValue={importance} />
+                            <QuadrantResult quadrantId="prioritization" xValue={effort} yValue={value} />
+                            <QuadrantResult quadrantId="deliveryApproach" xValue={dataQuality} yValue={capacity} />
+                            <QuadrantResult quadrantId="supportModel" xValue={capacity} yValue={risk} />
                         </div>
 
                         {/* Synthesis */}
@@ -438,14 +334,14 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                             return (
                                 <>
                                     {warnings.length > 0 && (
-                                        <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-lg">
-                                            <div className="flex items-center gap-2 font-bold text-red-800 dark:text-red-300 mb-2">
+                                        <div className={`p-4 rounded-lg border ${semanticColors.red.combined}`}>
+                                            <div className="flex items-center gap-2 font-bold mb-2">
                                                 <AlertTriangle size={18} />
                                                 Warnings
                                             </div>
                                             <ul className="space-y-1">
                                                 {warnings.map((w, i) => (
-                                                    <li key={i} className="text-sm text-red-700 dark:text-red-400 flex items-start gap-2">
+                                                    <li key={i} className="text-sm flex items-start gap-2">
                                                         <XCircle size={14} className="shrink-0 mt-0.5" />
                                                         {w}
                                                     </li>
@@ -455,14 +351,14 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                                     )}
 
                                     {recommendations.length > 0 && (
-                                        <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-lg">
-                                            <div className="flex items-center gap-2 font-bold text-green-800 dark:text-green-300 mb-2">
+                                        <div className={`p-4 rounded-lg border ${semanticColors.green.combined}`}>
+                                            <div className="flex items-center gap-2 font-bold mb-2">
                                                 <CheckCircle size={18} />
                                                 Recommendations
                                             </div>
                                             <ul className="space-y-1">
                                                 {recommendations.map((r, i) => (
-                                                    <li key={i} className="text-sm text-green-700 dark:text-green-400 flex items-start gap-2">
+                                                    <li key={i} className="text-sm flex items-start gap-2">
                                                         <CheckCircle size={14} className="shrink-0 mt-0.5" />
                                                         {r}
                                                     </li>
@@ -472,8 +368,8 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                                     )}
 
                                     {warnings.length === 0 && recommendations.length === 0 && (
-                                        <div className="p-4 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg">
-                                            <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                                        <div className={`p-4 rounded-lg border ${semanticColors.neutral.combined}`}>
+                                            <p className="text-sm">
                                                 This feature has a balanced profile. Review the individual quadrant results above to inform your decision.
                                             </p>
                                         </div>
@@ -497,36 +393,16 @@ ${synthesis.recommendations.length > 0 ? `### Recommendations\n${synthesis.recom
                     </div>
                 )}
 
-                {/* Navigation */}
-                <div className="mt-6 flex justify-between">
-                    {step > 0 ? (
-                        <button
-                            onClick={() => setStep(step - 1)}
-                            className="px-4 py-2 border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-lg font-medium flex items-center gap-2"
-                        >
-                            <ArrowLeft size={16} /> Back
-                        </button>
-                    ) : <div />}
-
-                    {step < 5 && (
-                        <button
-                            onClick={() => setStep(step + 1)}
-                            disabled={!canProceed()}
-                            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-neutral-300 disabled:cursor-not-allowed text-white rounded-lg font-medium flex items-center gap-2"
-                        >
-                            Continue <ArrowRight size={16} />
-                        </button>
-                    )}
-
-                    {step === 5 && (
-                        <button
-                            onClick={reset}
-                            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium flex items-center gap-2"
-                        >
-                            Evaluate Another Feature <ArrowRight size={16} />
-                        </button>
-                    )}
-                </div>
+                <WizardNav
+                    onBack={step > 0 ? () => setStep(step - 1) : null}
+                    onNext={step < 5 ? () => setStep(step + 1) : null}
+                    onFinish={step === 5 ? reset : null}
+                    canGoBack={step > 0}
+                    canProceed={canProceed()}
+                    isLastStep={step === 5}
+                    finishLabel="Evaluate Another Feature"
+                    color="bg-purple-600 hover:bg-purple-700"
+                />
             </div>
         </div>
     )
