@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { FEATURE_COUNT, BUCKET_COUNT } from '../lib/counts'
 
 export default function Hero() {
     return (
@@ -8,7 +9,7 @@ export default function Hero() {
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
                 Everything you need to sell, scope, and implement B2B search solutions.<br />
-                <span className="font-semibold text-gray-900 dark:text-gray-200">31 features. 6 buckets. Endless possibilities.</span>
+                <span className="font-semibold text-gray-900 dark:text-gray-200">{FEATURE_COUNT} features. {BUCKET_COUNT} buckets. Endless possibilities.</span>
             </p>
             <div className="flex gap-4 justify-center">
                 <Link href="/features" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/20">
