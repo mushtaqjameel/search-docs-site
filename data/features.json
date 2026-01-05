@@ -986,66 +986,6 @@
         "b2bContext": "Analytics answers strategic questions: \"What's the revenue impact of search?\" \"Which queries have high volume but low conversion?\" \"What would happen if we improved X?\" ROI justification for search investment.",
         "implementationNotes": "Value increases over time as data accumulates. Start with basic metrics Day 1, add sophisticated analysis as behavioral data grows. Essential for proving ROI."
       }
-    },
-    {
-      "id": "abtesting",
-      "bucket": "analytics",
-      "title": "A/B Testing",
-      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
-      "desc": "Controlled experiments for search changes. Test before committing.",
-      "value": "Data-driven decisions. Know what works before rolling out.",
-      "dataRequired": "Behavioral Data",
-      "implementation": "Requires traffic volume for statistical significance.",
-      "badge": "POLISHED",
-      "personas": ["Merchandiser", "Analyst"],
-      "problemsSolved": ["Guessing", "Risk of changes"],
-      "phase": "day60",
-      "typicalInvestment": "POLISHED",
-      "importance": "nice",
-      "layer": "platform",
-      "scope": "universal",
-      "priority": "enhanced",
-      "fullContent": {
-        "whatItSolves": "Guessing whether changes will improve or hurt performance. A/B testing provides data-driven validation.",
-        "keyValueProps": [
-          "Test changes on a subset of traffic",
-          "Measure impact before full rollout",
-          "Statistical significance for confidence",
-          "Reduce risk of harmful changes"
-        ],
-        "b2bContext": "When you change ranking or add a feature, you want to know it helps before committing. A/B testing provides the evidence. Requires sufficient traffic volume for statistical significance.",
-        "implementationNotes": "Requires traffic volume for meaningful results. Start with high-impact, high-confidence tests. Build a testing culture over time."
-      }
-    },
-    {
-      "id": "interleaving",
-      "bucket": "analytics",
-      "title": "Interleaving",
-      "pillars": { "data": "yellow", "gov": "yellow", "safe": "yellow" },
-      "desc": "Compare ranking algorithms by interleaving results. More sensitive than A/B for relevance.",
-      "value": "Faster, more sensitive relevance testing than traditional A/B.",
-      "dataRequired": "Behavioral Data",
-      "implementation": "Advanced technique for mature search teams.",
-      "badge": "PREMIUM",
-      "personas": ["Analyst", "IT/Ops"],
-      "problemsSolved": ["Slow testing", "Insensitive metrics"],
-      "phase": "day90",
-      "typicalInvestment": "PREMIUM",
-      "importance": "nice",
-      "layer": "platform",
-      "scope": "universal",
-      "priority": "specialized",
-      "fullContent": {
-        "whatItSolves": "A/B testing for ranking changes requires massive traffic and time. Interleaving detects relevance differences faster by mixing results from two algorithms.",
-        "keyValueProps": [
-          "More sensitive than A/B for relevance testing",
-          "Faster time to statistical significance",
-          "Direct comparison of ranking algorithms",
-          "Requires less traffic than traditional A/B"
-        ],
-        "b2bContext": "When optimizing ranking, traditional A/B tests take weeks. Interleaving can detect winner in days by showing interleaved results and measuring which algorithm's results get clicked.",
-        "implementationNotes": "Advanced technique for teams that have mastered basic A/B testing. Requires sophisticated instrumentation. Usually a Day 90+ optimization for mature search programs."
-      }
     }
   ]
 }

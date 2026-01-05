@@ -1,7 +1,7 @@
 import { Tabs, Cards, Callout } from 'nextra/components'
 import Mermaid from '../components/Mermaid'
 import DiagramWithHelp from '../components/DiagramWithHelp'
-import { Check, X, AlertTriangle, Box, Brain, Lightbulb, Target, Shield, BarChart, Database, Users, Gem, User, Handshake, Clock, Calendar } from 'lucide-react'
+import { Check, X, AlertTriangle, Box, Brain, Lightbulb, Target, Shield, BarChart, Database, Users, Gem, User, Handshake, Clock, Calendar, Settings } from 'lucide-react'
 
 # Quick Reference
 Cheat sheets and summaries at a glance.
@@ -34,7 +34,7 @@ Cheat sheets and summaries at a glance.
                 <span className="text-xs opacity-75">Never dead-end</span>
             </div>
             <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded border-l-4 border-blue-500">
-                <strong>Analytics</strong> — 2 features<br/>
+                <strong>Analytics</strong> — 1 feature<br/>
                 <span className="text-xs opacity-75">Measure & optimize</span>
             </div>
         </div>
@@ -145,6 +145,21 @@ Cheat sheets and summaries at a glance.
         </div>
     </div>
 
+    {/* Platform Capabilities */}
+    <div className="p-4 border rounded-xl bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800">
+        <h3 className="font-bold mb-3 flex items-center gap-2"><Settings size={18} /> Platform Capabilities</h3>
+        <div className="space-y-2 text-sm">
+            <p className="text-xs opacity-75 mb-3">Infrastructure that powers all features</p>
+            <div>Search Experience Framework</div>
+            <div>Behavioral Analytics Engine</div>
+            <div>Multi-Modal Ingestion</div>
+            <div>Generative Data Enrichment</div>
+            <div>A/B Testing Framework</div>
+            <div>Interleaving Testing</div>
+        </div>
+        <a href="/platform-capabilities" className="text-xs text-blue-600 dark:text-blue-400 mt-3 block">View details →</a>
+    </div>
+
 </div>
 
 ## Complete Feature Matrix
@@ -179,7 +194,10 @@ Cheat sheets and summaries at a glance.
 | **Zero Results Recovery** | 🟩 Recovery | 🟡 | 🟡 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
 | **Fallback Search** | 🟩 Recovery | 🟡 | 🟢 | 🟢 | ✅ | <span className="px-1 bg-green-100 text-green-800 rounded text-xs font-bold">STD</span> |
 | **Analytics** | 🟦 Analytics | 🟡 | 🟡 | 🟢 | ✅ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
-| **A/B Testing** | 🟦 Analytics | 🟡 | 🟡 | 🟡 | ❌ | <span className="px-1 bg-cyan-100 text-cyan-800 rounded text-xs font-bold">POL</span> |
+
+<Callout type="info" emoji="⚙️">
+**Looking for A/B Testing or Interleaving?** These are [Platform Capabilities](/platform-capabilities), not features. Platform capabilities are foundational infrastructure that powers features across all buckets.
+</Callout>
 
 <div className="flex gap-4 text-xs mt-4 text-gray-500">
     <span>🟢 Green = Simple</span>
